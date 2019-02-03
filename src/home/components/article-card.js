@@ -7,7 +7,7 @@ export default class ArticleCard extends Component {
 	handleArticleCardPressed () {
 		alert('something pressed');
 		const { navigation } = this.props;
-		navigation.navigate('NewEvent');
+		navigation.navigate('Home');
 	}
 
 	render () {

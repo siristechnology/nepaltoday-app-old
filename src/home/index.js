@@ -19,11 +19,10 @@ class HomeScreen extends React.Component {
 				<Content>
 					<View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
 						<ArticleCard article={article1} key={article1._id} />
-						<ArticleCard article={article1} key={article1._id} onPress={this.handleArticleCardPressed.bind(this)} />
-						<ArticleCard article={article1} key={article1._id} onPress={this.handleArticleCardPressed.bind(this)} />
-						<ArticleCard article={article1} key={article1._id} onPress={this.handleArticleCardPressed.bind(this)} />
-						<ArticleCard article={article1} key={article1._id} onPress={this.handleArticleCardPressed.bind(this)} />
-						<ArticleCard article={article1} key={article1._id} onPress={this.handleArticleCardPressed.bind(this)} />
+						<ArticleCard article={article1} key={article1._id} />
+						<ArticleCard article={article1} key={article1._id} />
+						<ArticleCard article={article1} key={article1._id} />
+						<ArticleCard article={article1} key={article1._id} />
 					</View>
 				</Content>
 			</Container>
