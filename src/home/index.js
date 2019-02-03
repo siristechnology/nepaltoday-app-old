@@ -18,11 +18,10 @@ class HomeScreen extends React.Component {
 			<Container>
 				<Content>
 					<View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
-						<ArticleCard article={article1} key={article1._id} />
-						<ArticleCard article={article1} key={article1._id} />
-						<ArticleCard article={article1} key={article1._id} />
-						<ArticleCard article={article1} key={article1._id} />
-						<ArticleCard article={article1} key={article1._id} />
+						<ArticleCard article={article1} key={article1._id} navigation={this.props.navigation} />
+						<ArticleCard article={article1} key={article1._id} navigation={this.props.navigation} />
+						<ArticleCard article={article1} key={article1._id} navigation={this.props.navigation} />
+						<ArticleCard article={article1} key={article1._id} navigation={this.props.navigation} />
 					</View>
 				</Content>
 			</Container>

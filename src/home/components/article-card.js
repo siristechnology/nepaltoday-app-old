@@ -5,9 +5,8 @@ import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Ic
 export default class ArticleCard extends Component {
 
 	handleArticleCardPressed () {
-		alert('something pressed');
 		const { navigation } = this.props;
-		navigation.navigate('Home');
+		navigation.navigate('Article');
 	}
 
 	render () {
@@ -24,7 +23,7 @@ export default class ArticleCard extends Component {
 						</Body>
 					</Left>
 				</CardItem>
-				<CardItem onPress={this.handleArticleCardPressed.bind(this)} >
+				<CardItem button onPress={this.handleArticleCardPressed.bind(this)} >
 					<Body>
 						<Image source={{ uri: article.topImageUrl }} style={{ height: 200, width: 200, flex: 1 }} />
 						<Text>
