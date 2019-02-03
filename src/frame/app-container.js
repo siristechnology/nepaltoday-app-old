@@ -4,9 +4,10 @@ import ArticleScreen from '../article/index.js';
 
 const AppNavigator = createStackNavigator({
 	Home: { screen: HomeScreen },
-	Article: { screen: ArticleScreen}
+	Article: { screen: ArticleScreen }
 }, {
-	initialRouteName: 'Home',
-});
+		headerMode: 'none',
+		initialRouteName: 'Home',
+	});
 
 export default createAppContainer(AppNavigator);

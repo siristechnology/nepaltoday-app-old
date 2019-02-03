@@ -1,12 +1,17 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View } from "react-native";
+import { Container, Content, Header, Left, Text } from 'native-base';
 
 class HomeScreen extends React.Component {
 	render () {
 		return (
-			<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-				<Text>Home Screen</Text>
-			</View>
+			<Container>
+				<Content>
+					<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+						<Text>Home Screen</Text>
+					</View>
+				</Content>
+			</Container>
 		);
 	}
 }
