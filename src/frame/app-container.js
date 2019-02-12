@@ -1,9 +1,9 @@
 import { createStackNavigator, createAppContainer } from "react-navigation";
-import HomeScreen from '../home/index.js';
+import Home from '../home/index.js';
 import ArticleScreen from '../article/index.js';
 
 const AppNavigator = createStackNavigator({
-	Home: { screen: HomeScreen },
+	Home: { screen: Home },
 	Article: { screen: ArticleScreen }
 }, {
 		headerMode: 'none',

@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from "react-redux";
 import { Image } from 'react-native';
 import { Container, Header, Content, Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body } from 'native-base';
+import actionCreators from '../ducks/actions.js';
 
-export default class ArticleCard extends Component {
+class ArticleCard extends Component {
 
 	handleArticleCardPressed () {
 		const { navigation } = this.props;
 		navigation.navigate('Article');
+
+		this.props.actions.startToOpenArticle();
 	}
 
 	render () {
@@ -18,7 +23,7 @@ export default class ArticleCard extends Component {
 					<Left>
 						<Thumbnail source={{ uri: article.topImageUrl }} />
 						<Body>
-							<Text>NativeBase</Text>
+							<Text>{article.title}</Text>
 							<Text note>April 15, 2016</Text>
 						</Body>
 					</Left>
@@ -27,8 +32,8 @@ export default class ArticleCard extends Component {
 					<Body>
 						<Image source={{ uri: article.topImageUrl }} style={{ height: 200, width: 200, flex: 1 }} />
 						<Text>
-							विराटनगर — प्रदेश १ मा हिउँदे अधिवेशन आइतबार सुरु हुँदैछ । दिउँसो ३ वजे सुरु हुने अधिवेशन प्रदेश प्रमुखले पठाएको पत्र पढेर प्रारम्भ हुनेछ । पहिलो दिनको बैठकमा प्रदेश सभामा प्रतिनिधित्व गर्ने दलका नेताहरूले बोल्ने कार्यसूची तयार भएको छ ।
-								</Text>
+							{article.shortDescription}
+						</Text>
 					</Body>
 				</CardItem>
 				<CardItem>
@@ -43,3 +48,14 @@ export default class ArticleCard extends Component {
 		);
 	}
 }
+
+function mapStateToProps (state) {
+	return {
+	};
+}
+
+function mapDispatchToProps (dispatch) {
+	return { actions: bindActionCreators(actionCreators, dispatch) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleCard)

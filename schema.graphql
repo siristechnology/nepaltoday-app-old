@@ -1,0 +1,28 @@
+
+type DummyBecauseOfRelayBug {
+  id: ID
+}
+
+type Article {
+	_id: String!,
+    title: String!,
+    url: String!,
+	shortDescription: String,
+	content: String
+}
+
+type ArticleInput {
+    title: String!,
+    url: String!,
+	shortDescription: String,
+	content: String
+}
+
+type Source {
+	name: String,
+	url: String
+}
+
+type Query {
+    getArticles: [Article]!
+}

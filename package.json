@@ -5,21 +5,34 @@
 	"scripts": {
 		"start": "node node_modules/react-native/local-cli/cli.js start",
 		"a": "react-native run-android",
+		"refresh": "adb shell input keyevent 46 46",
+		"relay": "relay-compiler --src ./src --schema ./schema.graphql --extensions js jsx",
+		"reset": "react-native start --reset-cache",
 		"test": "jest"
 	},
 	"dependencies": {
 		"appcenter": "1.12.0",
 		"appcenter-analytics": "1.12.0",
 		"appcenter-crashes": "1.12.0",
+		"graphql": "^14.1.1",
 		"native-base": "2.11.0",
 		"react": "16.6.3",
 		"react-native": "0.58.3",
 		"react-native-gesture-handler": "^1.0.15",
-		"react-navigation": "3.1.2"
+		"react-navigation": "3.1.2",
+		"react-redux": "^6.0.0",
+		"react-relay": "^2.0.0",
+		"redux": "^4.0.1",
+		"redux-logger": "^3.0.6",
+		"redux-saga": "^1.0.1",
+		"relay-compiler": "^2.0.0"
 	},
 	"devDependencies": {
 		"babel-core": "^7.0.0-bridge.0",
 		"babel-jest": "24.0.0",
+		"babel-plugin-relay": "^2.0.0",
+		"babel-preset-react-app": "^7.0.1",
+		"babel-preset-react-native": "^4.0.1",
 		"jest": "24.0.0",
 		"metro-react-native-babel-preset": "0.51.1",
 		"react-test-renderer": "16.6.3"
