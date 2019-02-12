@@ -1,9 +1,9 @@
 import types from "./types.js";
 
-const startToOpenArticle = (event) => {
-    return { type: types.OPEN_ARTICLE_START, event };
+const startToOpenArticle = (article) => {
+	return { type: types.OPEN_ARTICLE_START, article };
 }
 
 export default {
-    startToOpenArticle
+	startToOpenArticle
 }

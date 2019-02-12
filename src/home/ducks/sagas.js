@@ -6,10 +6,10 @@ import types from './types.js';
 
 
 const watchOpenArticle = function* watchOpenArticle () {
-	yield takeEvery(types.OPEN_ARTICLE_START, function* (input) {
+	// yield takeEvery(types.OPEN_ARTICLE_START, function* (input) {
 
-		// make api call
-	});
+	// use it to make call to get article detail
+	// });
 }
 
 const homeSaga = function* homeSaga () {

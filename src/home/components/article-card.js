@@ -8,10 +8,10 @@ import actionCreators from '../ducks/actions.js';
 class ArticleCard extends Component {
 
 	handleArticleCardPressed () {
-		const { navigation } = this.props;
-		navigation.navigate('Article');
+		this.props.actions.startToOpenArticle(this.props.article);
 
-		this.props.actions.startToOpenArticle();
+		const { navigation } = this.props;
+		navigation.navigate('Article', { article: this.props.article });
 	}
 
 	render () {
@@ -21,7 +21,7 @@ class ArticleCard extends Component {
 			<Card style={{ flex: 0 }}>
 				<CardItem>
 					<Left>
-						<Thumbnail source={{ uri: article.topImageUrl }} />
+						<Thumbnail source={{ uri: article.imageLink }} />
 						<Body>
 							<Text>{article.title}</Text>
 							<Text note>April 15, 2016</Text>
@@ -30,7 +30,7 @@ class ArticleCard extends Component {
 				</CardItem>
 				<CardItem button onPress={this.handleArticleCardPressed.bind(this)} >
 					<Body>
-						<Image source={{ uri: article.topImageUrl }} style={{ height: 200, width: 200, flex: 1 }} />
+						<Image source={{ uri: article.imageLink }} style={{ height: 200, width: 200, flex: 1 }} />
 						<Text>
 							{article.shortDescription}
 						</Text>

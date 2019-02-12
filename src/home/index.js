@@ -1,6 +1,6 @@
 import React from "react";
 import { View } from "react-native";
-import { QueryRenderer, graphql} from 'react-relay';
+import { QueryRenderer, graphql } from 'react-relay';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
 import { Container, Content, Header, Left, Text } from 'native-base';
@@ -11,23 +11,19 @@ import actionCreators from './ducks/actions'
 class Home extends React.Component {
 
 	render () {
-		const article1 = {
-			_id: '1',
-			title: 'Hot New News',
-			shortDescription: 'article short description',
-			url: 'https://www.kantipurdaily.com/',
-			topImageUrl: 'https://assets-cdn.kantipurdaily.com/uploads/source/news/kantipur/2018/miscellaneous/university-03122018022011-240x158.jpg'
-		};
-
 		return (
 			<QueryRenderer
 				environment={environment}
 				query={graphql`
 					query homeQuery{
 							getArticles{
+								_id
 								title
 								shortDescription
 								content
+								link
+								imageLink
+								source
 							}
 						}
 					`}
@@ -64,7 +60,7 @@ function mapStateToProps (state) {
 }
 
 function mapDispatchToProps (dispatch) {
-	return { actions: bindActionCreators(actionCreators, dispatch) }
+	return { actions: bindActionCreators(actionCreators, dispatch) };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
