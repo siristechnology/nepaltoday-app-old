@@ -6,21 +6,18 @@ type DummyBecauseOfRelayBug {
 type Article {
 	_id: String!,
     title: String!,
+	link: String!,
 	shortDescription: String,
 	content: String,
-	link: String,
 	imageLink: String,
-	source: String
-}
-
-type ArticleInput {
-    title: String!,
-    url: String!,
-	shortDescription: String,
-	content: String
+	source: String,
+	publishedDate: String,
+	createdDate: String,
+	modifiedDate: String
 }
 
 type Source {
+	_id: String!,
 	name: String,
 	url: String
 }

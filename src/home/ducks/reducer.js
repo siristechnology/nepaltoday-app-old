@@ -1,7 +1,7 @@
-import types from "./types.js";
+import types from './types.js';
 
 export const initialState = {
-	loginStatus: "uninitiated",
+	loginStatus: 'uninitiated',
 	article: {}
 };
 

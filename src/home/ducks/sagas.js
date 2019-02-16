@@ -1,9 +1,7 @@
 import { put, takeEvery, all, call, select } from "redux-saga/effects";
-import { commitMutation, graphql } from 'react-relay';
-
-import environment from '../../environment.js';
-import types from './types.js';
-
+// import { commitMutation, graphql } from 'react-relay';
+// import environment from '../../environment.js';
+// import types from './types.js';
 
 const watchOpenArticle = function* watchOpenArticle () {
 	// yield takeEvery(types.OPEN_ARTICLE_START, function* (input) {
@@ -17,6 +15,5 @@ const homeSaga = function* homeSaga () {
 		watchOpenArticle()
 	]);
 };
-
 
 export default homeSaga;

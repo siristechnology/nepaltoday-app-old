@@ -1,0 +1,31 @@
+{
+	"env": {
+		"es6": true,
+		"node": true
+	},
+	"extends": "standard",
+	"globals": {
+		"Atomics": "readable",
+		"SharedArrayBuffer": "readable"
+	},
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 2018,
+		"sourceType": "module"
+	},
+	"plugins": [
+		"react"
+	],
+	"rules": {
+		"semi": "off",
+		"indent": [
+			"error",
+			"tab"
+		],
+		"no-tabs": "off",
+		"eol-last": "off",
+		"generator-star-spacing": "off"
+	}
+}
