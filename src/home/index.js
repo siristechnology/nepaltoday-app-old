@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { RefreshControl } from "react-native";
 import { QueryRenderer, graphql } from 'react-relay';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
@@ -7,8 +7,22 @@ import { Container, Content, Header, Left, Text } from 'native-base';
 import ArticleCard from './components/article-card';
 import environment from '../environment';
 import actionCreators from './ducks/actions'
+import { FlatList } from 'react-native';
 
 class Home extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			refreshing: false,
+		};
+	}
+
+	handleRefresh () {
+		this.setState({ refreshing: true });
+		setTimeout(() => {
+			this.setState({ refreshing: false });
+		}, 500);
+	}
 
 	render () {
 		return (
@@ -35,17 +49,25 @@ class Home extends React.Component {
 					else if (!!error) {
 						alert('error:' + JSON.stringify(error));
 					}
+
 					return (
 						<Container>
-							<Content>
-								<View style={{ flex: 1, flexDirection: 'column', justifyContent: 'flex-start' }}>
-									{
-										props.getArticles.map((article, index) => (
-											<ArticleCard article={article} key={article._id} actions={this.props.actions} navigation={this.props.navigation} />
-										))
-									}
-								</View>
-							</Content>
+							<FlatList data={props.getArticles}
+								keyExtractor={item => item._id}
+								renderItem={({ item }) => {
+									return <ArticleCard article={item}
+										key={item._id}
+										actions={this.props.actions}
+										navigation={this.props.navigation} />
+								}}
+								refreshControl={
+									<RefreshControl
+										colors={["#9Bd35A", "#689F38"]}
+										refreshing={this.state.refreshing}
+										onRefresh={this.handleRefresh.bind(this)}
+									/>
+								}
+							/>
 						</Container>
 					);
 				}}
