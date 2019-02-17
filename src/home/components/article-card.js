@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from "react-redux";
-import { Image } from 'react-native';
+import { Image,  Dimensions } from "react-native";
 import { Card, CardItem, Thumbnail, Text, Button, Left, Body } from 'native-base';
 import actionCreators from '../ducks/actions.js';
 
@@ -16,12 +16,15 @@ class ArticleCard extends Component {
 
 	render () {
 		const { article } = this.props;
+		let dimensions = Dimensions.get("window");
+    	let imageHeight = Math.round((dimensions.width * 9) / 16);
+    	let imageWidth = dimensions.width;
 
 		return (
 			<Card transparent style={{ flex: 0 }}>
 				<CardItem button onPress={this.handleArticleCardPressed.bind(this)} >
 					<Body>
-						<Image source={{ uri: article.imageLink }} style={{ height: 200, width: 200, flex: 1 }} />
+						<Image source={{ uri: article.imageLink }} style={{flex:0, height: imageHeight, width: imageWidth}} resizeMode="contain" />
 						<Text>{article.title}</Text>
 						<Text>{article.shortDescription}</Text>
 					</Body>
