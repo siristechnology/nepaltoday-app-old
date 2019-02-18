@@ -1,19 +1,18 @@
-import React from "react";
-import { RefreshControl } from "react-native";
+import React from 'react';
+import { FlatList, RefreshControl } from 'react-native';
 import { QueryRenderer, graphql } from 'react-relay';
 import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 import { Container, Content, Header, Left, Text } from 'native-base';
 import ArticleCard from './components/article-card';
 import environment from '../environment';
 import actionCreators from './ducks/actions'
-import { FlatList } from 'react-native';
 
 class Home extends React.Component {
-	constructor(props) {
+	constructor (props) {
 		super(props);
 		this.state = {
-			refreshing: false,
+			refreshing: false
 		};
 	}
 
@@ -62,7 +61,7 @@ class Home extends React.Component {
 								}}
 								refreshControl={
 									<RefreshControl
-										colors={["#9Bd35A", "#689F38"]}
+										colors={['#9Bd35A', '#689F38']}
 										refreshing={this.state.refreshing}
 										onRefresh={this.handleRefresh.bind(this)}
 									/>

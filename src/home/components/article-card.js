@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { bindActionCreators } from 'redux';
-import { connect } from "react-redux";
-import { Image, Dimensions } from "react-native";
+import { connect } from 'react-redux';
+import { Image, Dimensions } from 'react-native';
 import { Card, CardItem, Thumbnail, Text, Button, Left, Body } from 'native-base';
 import actionCreators from '../ducks/actions.js';
 
-class ArticleCard extends Component {
-
+class ArticleCard extends React.Component {
 	handleArticleCardPressed () {
 		this.props.actions.startToOpenArticle(this.props.article);
 
@@ -16,20 +15,21 @@ class ArticleCard extends Component {
 
 	render () {
 		const { article } = this.props;
-		let dimensions = Dimensions.get("window");
+		let dimensions = Dimensions.get('window');
 		let imageHeight = Math.round((dimensions.width * 9) / 16);
 		let imageWidth = dimensions.width;
 
 		return (
 			<Card transparent style={{ flex: 0 }}>
-				<CardItem button onPress={this.handleArticleCardPressed.bind(this)} >
+				<CardItem button onPress={this.handleArticleCardPressed.bind(this)}>
 					<Body>
-						<Image source={{ uri: article.imageLink }} style={{ flex: 0, height: imageHeight, width: imageWidth }} resizeMode="contain" />
-						<Text>{article.title}</Text>
+						<Image source={{ uri: article.imageLink }} resizeMode="contain"
+							style={{ flex: 0, height: imageHeight, width: imageWidth }} />
+						<Text style={{ fontSize: 25 }}>{article.title}</Text>
 						<Text>{article.shortDescription}</Text>
 					</Body>
 				</CardItem>
-				<CardItem>
+				<CardItem style={{ paddingBottom: 0, marginBottom: 0 }}>
 					<Left>
 						<Button transparent textStyle={{ color: '#87838B' }}>
 							<Thumbnail source={{ uri: article.imageLink }} style={{ width: 20, height: 20, borderRadius: 20 / 2 }} />

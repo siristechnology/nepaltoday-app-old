@@ -26,6 +26,7 @@
 		],
 		"no-tabs": "off",
 		"eol-last": "off",
-		"generator-star-spacing": "off"
+		"generator-star-spacing": "off",
+		"quotes": "warn"
 	}
 }
