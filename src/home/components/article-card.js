@@ -24,8 +24,8 @@ class ArticleCard extends React.Component {
 				<CardItem button onPress={this.handleArticleCardPressed.bind(this)}>
 					<Body>
 						<Image source={{ uri: article.imageLink }} resizeMode="contain"
-							style={{ flex: 0, height: imageHeight, width: imageWidth }} />
-						<Text style={{ fontSize: 25 }}>{article.title}</Text>
+							style={{ flex: 0, height: imageHeight, width: imageWidth,alignSelf:"center" }} />
+						<Text style={{ fontSize: 22 }}>{article.title}</Text>
 						<Text>{article.shortDescription}</Text>
 					</Body>
 				</CardItem>
