@@ -5,10 +5,35 @@ import {
 	RecordSource,
 	Store,
 } from 'relay-runtime';
+import RelayQueryResponseCache from 'relay-runtime/lib/RelayQueryResponseCache';
 import global from '../global';
 
-async function fetchQuery (operation, variables) {
+const cacheTtl = 5 * 60 * 1000; // 5 minutes
+const cache = new RelayQueryResponseCache({ size: 1000, ttl: cacheTtl });
+
+async function fetchQuery (
+	operation,
+	variables,
+	cacheConfig,
+) {
+	const queryID = operation.text;
+	const isMutation = operation.operationKind === 'mutation';
+	const isQuery = operation.operationKind === 'query';
+	const forceFetch = cacheConfig && cacheConfig.force;
 	// const userContext = await AsyncStorage.getItem('userContext');
+
+	// Try to get data from cache on queries
+	const fromCache = cache.get(queryID, variables);
+	if (
+		isQuery &&
+		fromCache !== null &&
+		!forceFetch
+	) {
+		alert('serving from cache')
+		return fromCache;
+	}
+
+	// Otherwise, fetch data from server
 	return fetch(global.nepalTodayServer, {
 		method: 'POST',
 		headers: {
@@ -21,6 +46,18 @@ async function fetchQuery (operation, variables) {
 		}),
 	}).then(response => {
 		return response.json();
+	}).then(json => {
+		// Update cache on queries
+		if (isQuery && json) {
+			cache.set(queryID, variables, json);
+		}
+		// Clear cache on mutations
+		if (isMutation) {
+			alert('cache being cleared')
+			cache.clear();
+		}
+
+		return json;
 	});
 }
 

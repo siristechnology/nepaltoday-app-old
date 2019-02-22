@@ -22,7 +22,10 @@
 		"semi": "off",
 		"indent": [
 			"error",
-			"tab"
+			"tab",
+			{
+				"indentSwitchCase": true
+			}
 		],
 		"no-tabs": "off",
 		"eol-last": "off",
