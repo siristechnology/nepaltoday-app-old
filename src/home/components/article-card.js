@@ -20,7 +20,8 @@ class ArticleCard extends React.Component {
 
 		return (
 			<Card transparent style={{ flex: 0 }}>
-				<CardItem button onPress={this.handleArticleCardPressed.bind(this)}>
+				<CardItem button onPress={this.handleArticleCardPressed.bind(this)}
+					style={{ paddingTop: 20, paddingBottom: 4 }}>
 					<Body>
 						<Image source={{ uri: article.imageLink }} resizeMode="cover"
 							style={{ flex: 0, height: 200, width: imageWidth, alignSelf: 'center' }} />
@@ -28,8 +29,8 @@ class ArticleCard extends React.Component {
 						<Text>{article.shortDescription}</Text>
 					</Body>
 				</CardItem>
-				<CardItem style={{ paddingBottom: 0, marginBottom: 0 }}>
-					<Left>
+				<CardItem style={{ paddingTop: 0, paddingBottom: 0, marginBottom: 0 }}>
+					<Left >
 						<Button transparent textStyle={{ color: '#87838B' }}>
 							<Thumbnail source={{ uri: article.imageLink }} style={{ width: 20, height: 20, borderRadius: 20 / 2 }} />
 							<Text note>2 hours ago</Text>
