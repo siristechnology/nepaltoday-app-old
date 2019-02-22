@@ -44,8 +44,7 @@ class Home extends React.Component {
 				render={({ error, props }) => {
 					if (!props) {
 						return <Text>Loading...</Text>;
-					}
-					else if (!!error) {
+					} else if (error) {
 						alert('error:' + JSON.stringify(error));
 					}
 
