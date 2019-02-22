@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Container, Content, Header, Left, Text } from 'native-base';
 import ArticleCard from './components/article-card';
+import SplashScreen from './components/splash-screen';
 import environment from '../environment';
 import actionCreators from './ducks/actions'
 
@@ -43,7 +44,7 @@ class Home extends React.Component {
 
 				render={({ error, props }) => {
 					if (!props) {
-						return <Text>Loading...</Text>;
+						return <SplashScreen/>
 					} else if (error) {
 						alert('error:' + JSON.stringify(error));
 					}
