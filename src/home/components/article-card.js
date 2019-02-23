@@ -33,7 +33,7 @@ class ArticleCard extends React.Component {
 		const relativeTime = moment(Number(article.publishedDate || article.modifiedDate)).startOf('hour').fromNow()
 
 		return (
-			<Card transparent style={{ flex: 0 }}>
+			<Card transparent style={{ flex: 0, borderBottomWidth: 0.4 }}>
 				<CardItem button onPress={this.handleArticleCardPressed.bind(this)}
 					style={{ paddingTop: 20, paddingBottom: 4 }}>
 					<Body>
@@ -41,7 +41,7 @@ class ArticleCard extends React.Component {
 							style={[styles.image, { width: imageWidth }]} />
 						<View style={{ flex: 1, flexDirection: 'row', alignItems: 'baseline', marginTop: 6, marginBottom: 12 }}>
 							<Thumbnail source={{ uri: article.source.logoLink }} style={{ width: 20, height: 20, borderRadius: 20 / 2, marginRight: 4 }} />
-							<Text style={{ paddingRight: 10 }}>{article.source.name}</Text>
+							<Text style={styles.newsSource}>{article.source.name}</Text>
 						</View>
 						<Text style={{ fontSize: 22 }}>{article.title}</Text>
 						<Text>{article.shortDescription}</Text>
@@ -64,8 +64,13 @@ const styles = StyleSheet.create({
 		flex: 0,
 		height: 200,
 		alignSelf: 'center',
-		borderRadius: 6,
+		borderRadius: 8,
 		borderWidth: 0.5
+	},
+	newsSource: {
+		color: '#737373',
+		fontSize: 16,
+		paddingRight: 10
 	}
 });
 

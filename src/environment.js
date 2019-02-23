@@ -29,7 +29,7 @@ async function fetchQuery (
 		fromCache !== null &&
 		!forceFetch
 	) {
-		alert('serving from cache')
+		console.log('serving from cache')
 		return fromCache;
 	}
 
@@ -53,7 +53,7 @@ async function fetchQuery (
 		}
 		// Clear cache on mutations
 		if (isMutation) {
-			alert('cache being cleared')
+			console.log('cache being cleared')
 			cache.clear();
 		}
 

@@ -8,6 +8,7 @@ export default (variables = variable) => {
 			shadowOpacity: null,
 			shadowRadius: null,
 			elevation: null,
+			borderWidth: 0,
 		},
 		marginVertical: 5,
 		marginHorizontal: 2,
