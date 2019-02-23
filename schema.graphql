@@ -6,22 +6,29 @@ type DummyBecauseOfRelayBug {
 type Article {
 	_id: String!,
     title: String!,
-	link: String!,
 	shortDescription: String,
 	content: String,
+	link: String,
 	imageLink: String,
-	source: String,
+	source: Source,
 	publishedDate: String,
 	createdDate: String,
 	modifiedDate: String
 }
 
+input ArticleCriteria {
+	lastArticleId: String,
+	lastQueryDate: String
+}
+
 type Source {
 	_id: String!,
 	name: String,
-	url: String
+	url: String,
+	link: String,
+	logoLink: String,
 }
 
 type Query {
-    getArticles: [Article]!
+    getArticles(criteria: ArticleCriteria): [Article]!
 }

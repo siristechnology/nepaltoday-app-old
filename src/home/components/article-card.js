@@ -2,8 +2,9 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Image, Dimensions, StyleSheet } from 'react-native';
-import { Card, CardItem, Thumbnail, Text, Button, Left, Body } from 'native-base';
+import { Card, CardItem, Thumbnail, Text, Left, Body, View } from 'native-base';
 import actionCreators from '../ducks/actions.js';
+import moment from 'moment'
 
 class ArticleCard extends React.Component {
 	handleArticleCardPressed () {
@@ -18,29 +19,53 @@ class ArticleCard extends React.Component {
 		let dimensions = Dimensions.get('window');
 		let imageWidth = dimensions.width * 0.94;
 
+		moment.updateLocale('en', {
+			relativeTime: {
+				past: '%s ago',
+				m: 'a min',
+				mm: '%d mins',
+				h: 'an hr',
+				hh: '%d hrs',
+			}
+		});
+		const relativeTime = moment(Number(article.publishedDate || article.modifiedDate)).startOf('hour').fromNow()
+
 		return (
 			<Card transparent style={{ flex: 0 }}>
 				<CardItem button onPress={this.handleArticleCardPressed.bind(this)}
 					style={{ paddingTop: 20, paddingBottom: 4 }}>
 					<Body>
 						<Image source={{ uri: article.imageLink }} resizeMode="cover"
-							style={{ flex: 0, height: 200, width: imageWidth, alignSelf: 'center' }} />
+							style={[styles.image, { width: imageWidth }]} />
+						<View style={{ flex: 1, flexDirection: 'row', alignItems: 'baseline', marginTop: 6, marginBottom: 12 }}>
+							<Thumbnail source={{ uri: article.source.logoLink }} style={{ width: 20, height: 20, borderRadius: 20 / 2, marginRight: 4 }} />
+							<Text style={{ paddingRight: 10 }}>{article.source.name}</Text>
+						</View>
 						<Text style={{ fontSize: 22 }}>{article.title}</Text>
 						<Text>{article.shortDescription}</Text>
 					</Body>
 				</CardItem>
-				<CardItem style={{ paddingTop: 0, paddingBottom: 0, marginBottom: 0 }}>
+				<CardItem style={{ paddingTop: 0, paddingBottom: 4, marginBottom: 0 }}>
 					<Left >
-						<Button transparent textStyle={{ color: '#87838B' }}>
-							<Thumbnail source={{ uri: article.imageLink }} style={{ width: 20, height: 20, borderRadius: 20 / 2 }} />
-							<Text note>2 hours ago</Text>
-						</Button>
+						<View style={{ flex: 1, flexDirection: 'row', alignItems: 'baseline' }}>
+							<Text note >{relativeTime}</Text>
+						</View>
 					</Left>
 				</CardItem>
 			</Card>
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	image: {
+		flex: 0,
+		height: 200,
+		alignSelf: 'center',
+		borderRadius: 6,
+		borderWidth: 0.5
+	}
+});
 
 function mapStateToProps () {
 	return {

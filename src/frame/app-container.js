@@ -1,4 +1,4 @@
-import { createStackNavigator, createAppContainer } from "react-navigation";
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Home from '../home/index.js';
 import ArticleScreen from '../article/index.js';
 
