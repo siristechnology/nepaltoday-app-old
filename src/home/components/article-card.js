@@ -2,8 +2,9 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Image, Dimensions, StyleSheet } from 'react-native';
-import { Card, CardItem, Thumbnail, Text, Button, Left, Body } from 'native-base';
+import { Card, CardItem, Thumbnail, Text, Left, Body, View } from 'native-base';
 import actionCreators from '../ducks/actions.js';
+import moment from 'moment'
 
 class ArticleCard extends React.Component {
 	handleArticleCardPressed () {
@@ -17,6 +18,7 @@ class ArticleCard extends React.Component {
 		const { article } = this.props;
 		let dimensions = Dimensions.get('window');
 		let imageWidth = dimensions.width * 0.94;
+		const relativeTime = moment(Number(article.publishedDate || article.modifiedDate)).startOf('hour').fromNow()
 
 		return (
 			<Card transparent style={{ flex: 0 }}>
@@ -29,12 +31,13 @@ class ArticleCard extends React.Component {
 						<Text>{article.shortDescription}</Text>
 					</Body>
 				</CardItem>
-				<CardItem style={{ paddingTop: 0, paddingBottom: 0, marginBottom: 0 }}>
+				<CardItem style={{ paddingTop: 0, paddingBottom: 4, marginBottom: 0 }}>
 					<Left >
-						<Button transparent textStyle={{ color: '#87838B' }}>
-							<Thumbnail source={{ uri: article.imageLink }} style={{ width: 20, height: 20, borderRadius: 20 / 2 }} />
-							<Text note>2 hours ago</Text>
-						</Button>
+						<View style={{ flex: 1, flexDirection: 'row', alignItems: 'baseline' }}>
+							<Thumbnail source={{ uri: article.source.logoLink }} style={{ width: 20, height: 20, borderRadius: 20 / 2, marginRight: 10 }} />
+							<Text style={{ paddingRight: 10 }}>{article.source.name}</Text>
+							<Text note >{relativeTime}</Text>
+						</View>
 					</Left>
 				</CardItem>
 			</Card>

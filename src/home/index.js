@@ -37,7 +37,13 @@ class Home extends React.Component {
 								content
 								link
 								imageLink
-								source
+								publishedDate
+								modifiedDate
+								source {
+									_id
+									name
+									logoLink
+								}
 							}
 						}
 					`}
