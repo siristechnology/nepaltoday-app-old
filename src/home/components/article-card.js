@@ -18,6 +18,16 @@ class ArticleCard extends React.Component {
 		const { article } = this.props;
 		let dimensions = Dimensions.get('window');
 		let imageWidth = dimensions.width * 0.94;
+
+		moment.updateLocale('en', {
+			relativeTime: {
+				past: '%s ago',
+				m: 'a min',
+				mm: '%d mins',
+				h: 'an hr',
+				hh: '%d hrs',
+			}
+		});
 		const relativeTime = moment(Number(article.publishedDate || article.modifiedDate)).startOf('hour').fromNow()
 
 		return (
@@ -27,6 +37,10 @@ class ArticleCard extends React.Component {
 					<Body>
 						<Image source={{ uri: article.imageLink }} resizeMode="cover"
 							style={[styles.image, { width: imageWidth }]} />
+						<View style={{ flex: 1, flexDirection: 'row', alignItems: 'baseline', marginTop: 6, marginBottom: 12 }}>
+							<Thumbnail source={{ uri: article.source.logoLink }} style={{ width: 20, height: 20, borderRadius: 20 / 2, marginRight: 4 }} />
+							<Text style={{ paddingRight: 10 }}>{article.source.name}</Text>
+						</View>
 						<Text style={{ fontSize: 22 }}>{article.title}</Text>
 						<Text>{article.shortDescription}</Text>
 					</Body>
@@ -34,8 +48,6 @@ class ArticleCard extends React.Component {
 				<CardItem style={{ paddingTop: 0, paddingBottom: 4, marginBottom: 0 }}>
 					<Left >
 						<View style={{ flex: 1, flexDirection: 'row', alignItems: 'baseline' }}>
-							<Thumbnail source={{ uri: article.source.logoLink }} style={{ width: 20, height: 20, borderRadius: 20 / 2, marginRight: 10 }} />
-							<Text style={{ paddingRight: 10 }}>{article.source.name}</Text>
 							<Text note >{relativeTime}</Text>
 						</View>
 					</Left>
