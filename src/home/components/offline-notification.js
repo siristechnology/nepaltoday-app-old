@@ -5,9 +5,9 @@ const { width } = Dimensions.get('window');
 
 function MiniOfflineSign() {
   return (
-    <View style={styles.offlineContainer}>
-      <Text style={styles.offlineText}>No Internet Connection</Text>
-    </View>
+	<View style={styles.offlineContainer}>
+		<Text style={styles.offlineText}>कृपया इन्टरनेट जाँच गर्नुहोस्</Text>
+	</View>
   );
 }
 
@@ -43,15 +43,13 @@ class OfflineNotice extends PureComponent {
 const styles = StyleSheet.create({
   offlineContainer: {
     backgroundColor: '#b52424',
-    height: 30,
+	height: 30,
+	flexDirection: 'row',
     justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
+	alignItems: 'center',
     width,
-    position: 'absolute',
-    top: 30
   },
-  offlineText: { color: '#fff' }
+  offlineText: { color: 'white' }
 });
 
 export default OfflineNotice;

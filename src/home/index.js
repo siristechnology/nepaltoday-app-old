@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { Container, Content, Header, Left, Text } from 'native-base';
 import ArticleCard from './components/article-card';
 import SplashScreen from './components/splash-screen';
+import OfflineNotice from './components/offline-notification';
 import environment from '../environment';
 import actionCreators from './ducks/actions'
 
@@ -57,6 +58,7 @@ class Home extends React.Component {
 
 					return (
 						<Container>
+							<OfflineNotice></OfflineNotice>
 							<FlatList data={props.getArticles}
 								keyExtractor={item => item._id}
 								renderItem={({ item }) => {
