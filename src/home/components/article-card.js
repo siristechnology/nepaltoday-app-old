@@ -24,7 +24,7 @@ class ArticleCard extends React.Component {
 					style={{ paddingTop: 20, paddingBottom: 4 }}>
 					<Body>
 						<Image source={{ uri: article.imageLink }} resizeMode="cover"
-							style={{ flex: 0, height: 200, width: imageWidth, alignSelf: 'center' }} />
+							style={[styles.image, { width: imageWidth }]} />
 						<Text style={{ fontSize: 22 }}>{article.title}</Text>
 						<Text>{article.shortDescription}</Text>
 					</Body>
@@ -41,6 +41,16 @@ class ArticleCard extends React.Component {
 		);
 	}
 }
+
+const styles = StyleSheet.create({
+	image: {
+		flex: 0,
+		height: 200,
+		alignSelf: 'center',
+		borderRadius: 6,
+		borderWidth: 0.5
+	}
+});
 
 function mapStateToProps () {
 	return {

@@ -24,12 +24,16 @@
 			"error",
 			"tab",
 			{
-				"indentSwitchCase": true
+				"SwitchCase": 1
 			}
 		],
 		"no-tabs": "off",
 		"eol-last": "off",
 		"generator-star-spacing": "off",
-		"quotes": "warn"
+		"quotes": "warn",
+		"react/jsx-uses-vars": [
+			2
+		],
+		"comma-dangle": "off"
 	}
 }

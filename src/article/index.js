@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import { WebView } from "react-native";
+import React from 'react';
+import { connect } from 'react-redux';
+import { WebView } from 'react-native';
 
 class ArticleScreen extends React.Component {
 	render () {
@@ -10,7 +10,7 @@ class ArticleScreen extends React.Component {
 		return (
 			<WebView
 				source={{ uri: article.link }}
-				style={{ flex: 1, alignItems: "center", justifyContent: "center", marginTop: 20 }}
+				style={{ flex: 1, alignItems: 'center', justifyContent: 'center', marginTop: 20 }}
 			/>
 		);
 	}
