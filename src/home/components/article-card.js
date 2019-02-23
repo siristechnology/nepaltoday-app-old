@@ -21,11 +21,13 @@ class ArticleCard extends React.Component {
 
 		moment.updateLocale('en', {
 			relativeTime: {
-				past: '%s ago',
-				m: 'a min',
-				mm: '%d mins',
-				h: 'an hr',
-				hh: '%d hrs',
+				past: '%s अघि',
+				m: '1 मिनेट',
+				mm: '%d मिनेट',
+				h: '1 घण्टा',
+				hh: '%d घण्टा',
+				d: '1 दिन',
+				dd: '%d दिन'
 			}
 		});
 		const relativeTime = moment(Number(article.publishedDate || article.modifiedDate)).startOf('hour').fromNow()

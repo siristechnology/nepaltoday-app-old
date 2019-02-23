@@ -51,14 +51,14 @@ class Home extends React.Component {
 
 				render={({ error, props }) => {
 					if (!props) {
-						return <SplashScreen/>
+						return <SplashScreen />
 					} else if (error) {
 						alert('error:' + JSON.stringify(error));
 					}
 
 					return (
 						<Container>
-							<OfflineNotice></OfflineNotice>
+							<OfflineNotice />
 							<FlatList data={props.getArticles}
 								keyExtractor={item => item._id}
 								renderItem={({ item }) => {
