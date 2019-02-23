@@ -3,7 +3,7 @@
 [![Build status](https://build.appcenter.ms/v0.1/apps/dcdc5d16-bf47-4a9a-bec9-a4d30faa77a3/branches/ms-appcenter-integration/badge)](https://appcenter.ms)
 
 # latest image
-![image](/assets/images/screenshot.png)
+<img src="assets/images/screenshot.png" alt="drawing" height="400" />
 
 ## Tips
 * Run `yarn relay` to compile graphql in relay. [It needs to be compiled before running the app]
