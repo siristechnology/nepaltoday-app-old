@@ -37,7 +37,7 @@ class ArticleCard extends React.PureComponent {
 		return (
 			<Card transparent style={{ flex: 0, borderBottomWidth: 0.4 }}>
 				<CardItem button onPress={this.handleArticleCardPressed.bind(this)}
-					style={{ paddingTop: 20, paddingBottom: 4 }}>
+					style={{ paddingTop: 20, paddingBottom: 4 }} activeOpacity={1}>
 					<Body>
 						<Image source={{ uri: article.imageLink }} resizeMode="cover"
 							style={[styles.image, { width: imageWidth }]} />
