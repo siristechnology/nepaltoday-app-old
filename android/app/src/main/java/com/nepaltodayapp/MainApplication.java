@@ -1,4 +1,4 @@
-package com.nepaltodayapp;
+package com.siristechnology.nepaltodayapp;
 
 import android.app.Application;
 

@@ -3,13 +3,15 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Image, Dimensions, StyleSheet } from 'react-native';
 import { Card, CardItem, Thumbnail, Text, Left, Body, View } from 'native-base';
+import Analytics from 'appcenter-analytics'
 import actionCreators from '../ducks/actions.js';
 import moment from 'moment'
 
-class ArticleCard extends React.Component {
+class ArticleCard extends React.PureComponent {
 	handleArticleCardPressed () {
 		this.props.actions.startToOpenArticle(this.props.article);
 
+		Analytics.trackEvent('Article link click');
 		const { navigation } = this.props;
 		navigation.navigate('Article', { article: this.props.article });
 	}

@@ -1,4 +1,4 @@
-package com.nepaltodayapp;
+package com.siristechnology.nepaltodayapp;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;

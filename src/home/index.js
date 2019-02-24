@@ -3,19 +3,28 @@ import { FlatList, RefreshControl } from 'react-native';
 import { QueryRenderer, graphql } from 'react-relay';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Container, Content, Header, Left, Text } from 'native-base';
+import { Container } from 'native-base';
+import Analytics from 'appcenter-analytics'
 import ArticleCard from './components/article-card';
 import SplashScreen from './components/splash-screen';
 import OfflineNotice from './components/offline-notification';
 import environment from '../environment';
 import actionCreators from './ducks/actions'
 
-class Home extends React.Component {
+class Home extends React.PureComponent {
 	constructor (props) {
 		super(props);
 		this.state = {
 			refreshing: false
 		};
+	}
+
+	componentDidMount () {
+		Analytics.trackEvent('Home page load');
+	}
+
+	componentDidUpdate () {
+		Analytics.trackEvent('Home page refresh');
 	}
 
 	handleRefresh () {
