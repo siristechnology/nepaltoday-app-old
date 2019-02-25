@@ -57,4 +57,4 @@ buck-out/
 appcenter-config.json
 android/app/release/*
 android/app/debug/*
-__generated__/
+

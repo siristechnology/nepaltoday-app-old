@@ -15,7 +15,7 @@ class Home extends React.PureComponent {
 	constructor (props) {
 		super(props);
 		this.state = {
-			refreshing: false
+			isUpdated: false
 		};
 	}
 
@@ -28,16 +28,14 @@ class Home extends React.PureComponent {
 	}
 
 	handleRefresh () {
-		this.setState({ refreshing: true });
-		setTimeout(() => {
-			this.setState({ refreshing: false });
-		}, 500);
+		this.setState({ isUpdated: !this.state.isUpdated });
 	}
 
 	render () {
 		return (
 			<QueryRenderer
 				environment={environment}
+				variables={{ isUpdated: this.state.isUpdated }}
 				query={graphql`
 					query homeQuery{
 							getArticles{
@@ -70,6 +68,7 @@ class Home extends React.PureComponent {
 							<OfflineNotice />
 							<FlatList data={props.getArticles}
 								keyExtractor={item => item._id}
+								extraData={this.state}
 								renderItem={({ item }) => {
 									return <ArticleCard article={item}
 										key={item._id}
@@ -79,7 +78,6 @@ class Home extends React.PureComponent {
 								refreshControl={
 									<RefreshControl
 										colors={['#9Bd35A', '#689F38']}
-										refreshing={this.state.refreshing}
 										onRefresh={this.handleRefresh.bind(this)}
 									/>
 								}

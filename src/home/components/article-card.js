@@ -64,8 +64,8 @@ class ArticleCard extends React.PureComponent {
 const styles = StyleSheet.create({
 	image: {
 		flex: 0,
+		top: 0,
 		height: 200,
-		alignSelf: 'center',
 		borderRadius: 8,
 		borderWidth: 0.5
 	},

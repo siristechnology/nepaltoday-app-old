@@ -8,7 +8,7 @@ import {
 import RelayQueryResponseCache from 'relay-runtime/lib/RelayQueryResponseCache';
 import global from '../global';
 
-const cacheTtl = 5 * 60 * 1000; // 5 minutes
+const cacheTtl = 30 * 1000; // if someone refreshes in 30 seconds, they will get content from cache for now
 const cache = new RelayQueryResponseCache({ size: 1000, ttl: cacheTtl });
 
 async function fetchQuery (
