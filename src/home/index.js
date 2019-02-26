@@ -42,6 +42,7 @@ class Home extends React.PureComponent {
 	}
 
 	handleRefresh () {
+		Analytics.trackEvent('Pull down refresh');
 		this.setState({ isUpdated: !this.state.isUpdated });
 	}
 

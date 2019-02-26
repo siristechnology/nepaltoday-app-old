@@ -1,7 +1,7 @@
 import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Image, Dimensions, StyleSheet } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
 import { Card, CardItem, Thumbnail, Text, Left, Body, View } from 'native-base';
 import Analytics from 'appcenter-analytics'
 import actionCreators from '../ducks/actions.js';
@@ -18,8 +18,6 @@ class ArticleCard extends React.PureComponent {
 
 	render () {
 		const { article } = this.props;
-		let dimensions = Dimensions.get('window');
-		let imageWidth = dimensions.width * 0.94;
 
 		moment.updateLocale('en', {
 			relativeTime: {
