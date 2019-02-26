@@ -37,10 +37,11 @@ class ArticleCard extends React.PureComponent {
 		return (
 			<Card transparent style={{ flex: 0, borderBottomWidth: 0.4 }}>
 				<CardItem button onPress={this.handleArticleCardPressed.bind(this)}
-					style={{ paddingTop: 20, paddingBottom: 4 }} activeOpacity={1}>
+					style={{ paddingTop: 12, paddingLeft: 10, paddingRight: 10, paddingBottom: 4 }} activeOpacity={1}>
 					<Body>
-						<Image source={{ uri: article.imageLink }} resizeMode="cover"
-							style={[styles.image, { width: imageWidth }]} />
+						<View style={styles.imageContainer}>
+							<Image source={{ uri: article.imageLink }} resizeMethod='scale' style={styles.image} />
+						</View>
 						<View style={{ flex: 1, flexDirection: 'row', alignItems: 'baseline', marginTop: 6, marginBottom: 12 }}>
 							<Thumbnail source={{ uri: article.source.logoLink }} style={{ width: 20, height: 20, borderRadius: 20 / 2, marginRight: 4 }} />
 							<Text style={styles.newsSource}>{article.source.name}</Text>
@@ -62,11 +63,16 @@ class ArticleCard extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
+	imageContainer: {
+		flex: 1,
+		flexDirection: 'row',
+		alignItems: 'stretch'
+	},
 	image: {
-		flex: 0,
-		top: 0,
-		alignSelf: 'center',
+		flex: 1,
 		height: 200,
+		top: 0,
+		alignSelf: 'auto',
 		borderRadius: 8,
 		borderWidth: 0.5
 	},
