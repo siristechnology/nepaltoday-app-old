@@ -64,7 +64,11 @@ const styles = StyleSheet.create({
 	imageContainer: {
 		flex: 1,
 		flexDirection: 'row',
-		alignItems: 'stretch'
+		alignItems: 'stretch',
+		backgroundColor: 'rgba(27,31,35,.05)',
+		elevation: 1,
+		margin: 2,
+		borderRadius: 8
 	},
 	image: {
 		flex: 1,
