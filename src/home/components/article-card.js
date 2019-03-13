@@ -33,7 +33,7 @@ class ArticleCard extends React.PureComponent {
 		const relativeTime = moment(Number(article.publishedDate || article.modifiedDate)).startOf('hour').fromNow()
 
 		return (
-			<Card transparent style={{ flex: 0, borderBottomWidth: 0.4 }}>
+			<Card transparent style={{ flex: 1, borderBottomWidth: 0.4 }}>
 				<CardItem button onPress={this.handleArticleCardPressed.bind(this)}
 					style={{ paddingTop: 12, paddingLeft: 10, paddingRight: 10, paddingBottom: 4 }} activeOpacity={1}>
 					<Body>
@@ -44,8 +44,10 @@ class ArticleCard extends React.PureComponent {
 							<Thumbnail source={{ uri: article.source.logoLink }} style={{ width: 20, height: 20, borderRadius: 20 / 2, marginRight: 4 }} />
 							<Text style={styles.newsSource}>{article.source.name}</Text>
 						</View>
-						<Text style={{ fontSize: 22 }}>{article.title}</Text>
-						<Text>{article.shortDescription}</Text>
+						<View style={{ flex: 1, justifyContent: 'flex-start' }}>
+							<Text style={{ fontSize: 19, includeFontPadding: true }}>{article.title}</Text>
+							<Text>{article.shortDescription}</Text>
+						</View>
 					</Body>
 				</CardItem>
 				<CardItem style={{ paddingTop: 0, paddingBottom: 4, marginBottom: 0 }}>
@@ -74,7 +76,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 		height: 200,
 		top: 0,
-		alignSelf: 'auto',
 		borderRadius: 8,
 		borderWidth: 0.5
 	},
