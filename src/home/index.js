@@ -11,6 +11,7 @@ import actionCreators from './ducks/actions'
 import ArticleCard from './components/article-card'
 import SplashScreen from './components/splash-screen'
 import OfflineNotice from './components/offline-notification'
+import ButtonNavigation from './components/bottom-navigation'
 
 class Home extends React.PureComponent {
 	constructor (props) {
@@ -108,6 +109,7 @@ class Home extends React.PureComponent {
 									/>
 								}
 							/>
+							<ButtonNavigation />
 						</Container>
 					)
 				}}

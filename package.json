@@ -19,6 +19,7 @@
     "native-base": "2.11.0",
     "react": "16.6.3",
     "react-native": "0.58.3",
+    "react-native-elements": "^1.1.0",
     "react-native-gesture-handler": "^1.0.15",
     "react-navigation": "3.1.2",
     "react-redux": "^6.0.0",
@@ -26,7 +27,8 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.1",
-    "relay-compiler": "^2.0.0"
+    "relay-compiler": "^2.0.0",
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
     "babel-core": "^7.0.0-bridge.0",
