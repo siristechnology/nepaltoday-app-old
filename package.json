@@ -46,6 +46,15 @@
 		"react-test-renderer": "16.6.3"
 	},
 	"jest": {
-		"preset": "react-native"
+		"preset": "react-native",
+		"transform": {
+			"^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+		},
+		"transformIgnorePatterns": [
+			"!node_modules/react-runtime"
+		],
+		"testPathIgnorePatterns": [
+			"<rootDir>/node_modules/"
+		]
 	}
 }
