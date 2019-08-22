@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import styled from 'styled-components/native'
-import colors from '../../../config/colors'
 import { Footer, FooterTab, Button, Text, Icon } from 'native-base'
-export default class ButtonNavigation extends Component {
+export default class BottomNavigation extends Component {
 	render () {
 		return (
 			<Footer>
