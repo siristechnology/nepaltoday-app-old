@@ -7,7 +7,7 @@ export default class ButtonNavigation extends Component {
 		return (
 			<Footer>
 				<FooterTab>
-					<Button vertical>
+					<Button vertical active>
 						<Icon ios="ios-menu" name="home" />
 						<Text>Home</Text>
 					</Button>
@@ -15,7 +15,7 @@ export default class ButtonNavigation extends Component {
 						<Icon name="newspaper" type="FontAwesome5" />
 						<Text>Headlines</Text>
 					</Button>
-					<Button vertical active>
+					<Button vertical>
 						<Icon active ios="twitter" android="twitter" type="FontAwesome" />
 						<Text>Twitter</Text>
 					</Button>
