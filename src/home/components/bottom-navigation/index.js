@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import { withNavigation } from 'react-navigation'
 import { Footer, FooterTab, Button, Text, Icon } from 'native-base'
-export default class BottomNavigation extends Component {
+
+class BottomNavigation extends Component {
 	render () {
+		const { navigate } = this.props.navigation
 		return (
 			<Footer>
 				<FooterTab>
-					<Button vertical active>
+					<Button vertical active onPress={() => navigate('Home')}>
 						<Icon ios="ios-menu" name="home" />
 						<Text>Home</Text>
 					</Button>
@@ -13,7 +16,7 @@ export default class BottomNavigation extends Component {
 						<Icon name="newspaper" type="FontAwesome5" />
 						<Text>Headlines</Text>
 					</Button>
-					<Button vertical>
+					<Button vertical onPress={() => navigate('Twitter')}>
 						<Icon active ios="twitter" android="twitter" type="FontAwesome" />
 						<Text>Twitter</Text>
 					</Button>
@@ -22,3 +25,5 @@ export default class BottomNavigation extends Component {
 		)
 	}
 }
+
+export default withNavigation(BottomNavigation)

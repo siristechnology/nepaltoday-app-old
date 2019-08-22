@@ -4,12 +4,13 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Analytics from 'appcenter-analytics'
 import { Image, StyleSheet } from 'react-native'
+import Swipeable from 'react-native-gesture-handler/Swipeable'
 import { Card, CardItem, Thumbnail, Text, Left, Body, View } from 'native-base'
 
 import actionCreators from '../ducks/actions.js'
 
 class ArticleCard extends React.PureComponent {
-	handleArticleCardPressed () {
+	handleArticleCardPressed() {
 		this.props.actions.startToOpenArticle(this.props.article)
 
 		Analytics.trackEvent('Article link click')
@@ -17,7 +18,15 @@ class ArticleCard extends React.PureComponent {
 		navigation.navigate('Article', { article: this.props.article })
 	}
 
-	render () {
+	_renderLeftActions = (progress, dragX) => {
+		return (
+			<View>
+				<Text>After draged</Text>
+			</View>
+		)
+	}
+
+	render() {
 		const { article } = this.props
 
 		moment.updateLocale('en', {
@@ -39,57 +48,63 @@ class ArticleCard extends React.PureComponent {
 
 		return (
 			<Card transparent style={{ flex: 1, borderBottomWidth: 0.4 }}>
-				<CardItem
-					button
-					onPress={this.handleArticleCardPressed.bind(this)}
-					style={{
-						paddingTop: 12,
-						paddingLeft: 10,
-						paddingRight: 10,
-						paddingBottom: 4
-					}}
-					activeOpacity={1}
-				>
-					<Body>
-						<View style={styles.imageContainer}>
-							<Image
-								source={{ uri: article.imageLink }}
-								resizeMethod="scale"
-								style={styles.image}
-							/>
-						</View>
+				<Swipeable renderLeftActions={this._renderLeftActions}>
+					<CardItem
+						button
+						onPress={this.handleArticleCardPressed.bind(this)}
+						style={{
+							paddingTop: 12,
+							paddingLeft: 10,
+							paddingRight: 10,
+							paddingBottom: 4
+						}}
+						activeOpacity={1}
+					>
+						<Body>
+							<View style={styles.imageContainer}>
+								<Image
+									source={{ uri: article.imageLink }}
+									resizeMethod="scale"
+									style={styles.image}
+								/>
+							</View>
+							<View
+								style={{
+									flex: 1,
+									flexDirection: 'row',
+									alignItems: 'baseline',
+									marginTop: 6,
+									marginBottom: 12
+								}}
+							>
+								<Thumbnail
+									source={{ uri: article.source.logoLink }}
+									style={{
+										width: 20,
+										height: 20,
+										borderRadius: 20 / 2,
+										marginRight: 4
+									}}
+								/>
+								<Text style={styles.newsSource}>{article.source.name}</Text>
+							</View>
+							<View style={{ flex: 1, justifyContent: 'flex-start' }}>
+								<Text style={{ fontSize: 19, includeFontPadding: true }}>
+									{article.title}
+								</Text>
+								<Text>{article.shortDescription}</Text>
+							</View>
+						</Body>
+					</CardItem>
+				</Swipeable>
+				<CardItem style={{ paddingTop: 0, paddingBottom: 4, marginBottom: 0 }}>
+					<Left>
 						<View
 							style={{
 								flex: 1,
 								flexDirection: 'row',
-								alignItems: 'baseline',
-								marginTop: 6,
-								marginBottom: 12
+								alignItems: 'baseline'
 							}}
-						>
-							<Thumbnail
-								source={{ uri: article.source.logoLink }}
-								style={{
-									width: 20,
-									height: 20,
-									borderRadius: 20 / 2,
-									marginRight: 4
-								}}
-							/>
-							<Text style={styles.newsSource}>{article.source.name}</Text>
-						</View>
-						<View style={{ flex: 1, justifyContent: 'flex-start' }}>
-							<Text style={{ fontSize: 19, includeFontPadding: true }}>
-								{article.title}
-							</Text>
-							<Text>{article.shortDescription}</Text>
-						</View>
-					</Body>
-				</CardItem>
-				<CardItem style={{ paddingTop: 0, paddingBottom: 4, marginBottom: 0 }}>
-					<Left>
-						<View
-							style={{ flex: 1, flexDirection: 'row', alignItems: 'baseline' }}
 						>
 							<Text note>{relativeTime}</Text>
 						</View>
@@ -124,11 +139,11 @@ const styles = StyleSheet.create({
 	}
 })
 
-function mapStateToProps () {
+function mapStateToProps() {
 	return {}
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
 	return { actions: bindActionCreators(actionCreators, dispatch) }
 }
 

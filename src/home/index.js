@@ -1,17 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Container } from 'native-base'
 import { bindActionCreators } from 'redux'
 import Analytics from 'appcenter-analytics'
 import { QueryRenderer, graphql } from 'react-relay'
 import { FlatList, RefreshControl, AppState } from 'react-native'
 
 import environment from '../environment'
+import AppLayout from '../frame/AppLayout'
 import actionCreators from './ducks/actions'
 import ArticleCard from './components/article-card'
 import SplashScreen from './components/splash-screen'
 import OfflineNotice from './components/offline-notification'
-import ButtonNavigation from './components/bottom-navigation'
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
 
 class Home extends React.PureComponent {
 	constructor (props) {
@@ -54,7 +54,46 @@ class Home extends React.PureComponent {
 		this.setState({ isUpdated: !this.state.isUpdated })
 	}
 
+	onSwipeUp (gestureState) {
+		console.log('=====================up=============')
+	}
+
+	onSwipeDown (gestureState) {
+		console.log('=====================down=============')
+	}
+
+	onSwipeLeft (gestureState) {
+		console.log('=====================left=============')
+	}
+
+	onSwipeRight (gestureState) {
+		console.log('=====================right============')
+	}
+
+	onSwipe (gestureName, gestureState) {
+		const { SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections
+		switch (gestureName) {
+			case SWIPE_UP:
+				console.log('=====================--up============')
+				break
+			case SWIPE_DOWN:
+				console.log('=====================--down============')
+				break
+			case SWIPE_LEFT:
+				console.log('====================--left=============')
+				break
+			case SWIPE_RIGHT:
+				console.log('=====================--right============')
+				break
+		}
+	}
+
 	render () {
+		console.log('props here in home ===========', this.props)
+		const config = {
+			velocityThreshold: 0.3,
+			directionalOffsetThreshold: 80
+		}
 		return (
 			<QueryRenderer
 				environment={environment}
@@ -86,31 +125,43 @@ class Home extends React.PureComponent {
 					}
 
 					return (
-						<Container>
+						<AppLayout>
 							<OfflineNotice />
-							<FlatList
-								data={props.getArticles}
-								keyExtractor={item => item._id}
-								extraData={this.state}
-								renderItem={({ item }) => {
-									return (
-										<ArticleCard
-											article={item}
-											key={item._id}
-											actions={this.props.actions}
-											navigation={this.props.navigation}
-										/>
-									)
+							<GestureRecognizer
+								onSwipe={(direction, state) => this.onSwipe(direction, state)}
+								onSwipeUp={state => this.onSwipeUp(state)}
+								onSwipeDown={state => this.onSwipeDown(state)}
+								onSwipeLeft={state => this.onSwipeLeft(state)}
+								onSwipeRight={state => this.onSwipeRight(state)}
+								config={config}
+								style={{
+									flex: 1,
+									backgroundColor: '#EEE'
 								}}
-								refreshControl={
-									<RefreshControl
-										colors={['#9Bd35A', '#689F38']}
-										onRefresh={this.handleRefresh.bind(this)}
-									/>
-								}
-							/>
-							<ButtonNavigation />
-						</Container>
+							>
+								<FlatList
+									data={props.getArticles}
+									keyExtractor={item => item._id}
+									extraData={this.state}
+									renderItem={({ item }) => {
+										return (
+											<ArticleCard
+												article={item}
+												key={item._id}
+												actions={this.props.actions}
+												navigation={this.props.navigation}
+											/>
+										)
+									}}
+									refreshControl={
+										<RefreshControl
+											colors={['#9Bd35A', '#689F38']}
+											onRefresh={this.handleRefresh.bind(this)}
+										/>
+									}
+								/>
+							</GestureRecognizer>
+						</AppLayout>
 					)
 				}}
 			/>
