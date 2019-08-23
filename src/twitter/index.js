@@ -1,8 +1,10 @@
 import React from 'react'
 import { View, Text, List } from 'native-base'
+import { QueryRenderer, graphql } from 'react-relay'
 import AppLayout from '../frame/AppLayout'
 import styled from 'styled-components'
 import TwitterCard from './TwitterCard'
+import environment from '../environment'
 
 const demo = [
 	{
@@ -90,13 +92,28 @@ const demo = [
 class TwitterComponent extends React.PureComponent {
 	render () {
 		return (
-			<AppLayout>
-				<List>
-					{demo.map(tweet => (
-						<TwitterCard key={tweet.id} tweet={tweet} />
-					))}
-				</List>
-			</AppLayout>
+			<QueryRenderer
+				environment={environment}
+				query={graphql`
+					query twitterQuery {
+						getTweets {
+							_id
+							handle
+						}
+					}
+				`}
+				render={({ error, props }) => {
+					return (
+						<AppLayout>
+							<List>
+								{demo.map(tweet => (
+									<TwitterCard key={tweet.id} tweet={tweet} />
+								))}
+							</List>
+						</AppLayout>
+					)
+				}}
+			/>
 		)
 	}
 }

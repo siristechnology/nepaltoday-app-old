@@ -1,34 +1,47 @@
-
 type DummyBecauseOfRelayBug {
   id: ID
 }
 
 type Article {
-	_id: String!,
-    title: String!,
-	shortDescription: String,
-	content: String,
-	link: String,
-	imageLink: String,
-	source: Source,
-	publishedDate: String,
-	createdDate: String,
-	modifiedDate: String
+  _id: String!
+  title: String!
+  shortDescription: String
+  content: String
+  link: String
+  imageLink: String
+  source: Source
+  publishedDate: String
+  createdDate: String
+  modifiedDate: String
 }
 
 input ArticleCriteria {
-	lastArticleId: String,
-	lastQueryDate: String
+  lastArticleId: String
+  lastQueryDate: String
 }
 
 type Source {
-	_id: String!,
-	name: String,
-	url: String,
-	link: String,
-	logoLink: String,
+  _id: String!
+  name: String
+  url: String
+  link: String
+  logoLink: String
+}
+
+type Tweet {
+  _id: String!
+  handle: String
+  name: String
+  category: String
+  weight: String
+}
+
+input TweetCriteria {
+  lastTweetId: String
+  lastQueryDate: String
 }
 
 type Query {
-    getArticles(criteria: ArticleCriteria): [Article]!
+  getArticles(criteria: ArticleCriteria): [Article]!
+  getTweets(criteria: TweetCriteria): [Tweet]!
 }
