@@ -1,10 +1,10 @@
 import React from 'react'
-import { View, Text, List } from 'native-base'
+import { FlatList } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
-import AppLayout from '../frame/AppLayout'
-import styled from 'styled-components'
+
 import TwitterCard from './TwitterCard'
 import environment from '../environment'
+import AppLayout from '../frame/AppLayout'
 
 const demo = [
 	{
@@ -105,11 +105,21 @@ class TwitterComponent extends React.PureComponent {
 				render={({ error, props }) => {
 					return (
 						<AppLayout>
-							<List>
-								{demo.map(tweet => (
-									<TwitterCard key={tweet.id} tweet={tweet} />
-								))}
-							</List>
+							<FlatList
+								data={demo}
+								keyExtractor={item => item.id}
+								extraData={this.state}
+								renderItem={({ item }) => {
+									return (
+										<TwitterCard
+											tweet={item}
+											key={item.id}
+											actions={this.props.actions}
+											navigation={this.props.navigation}
+										/>
+									)
+								}}
+							/>
 						</AppLayout>
 					)
 				}}
@@ -118,7 +128,3 @@ class TwitterComponent extends React.PureComponent {
 	}
 }
 export default TwitterComponent
-
-const StyledView = styled(View)`
-	background: #eee;
-`

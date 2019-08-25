@@ -89,7 +89,6 @@ class Home extends React.PureComponent {
 	}
 
 	render () {
-		console.log('props here in home ===========', this.props)
 		const config = {
 			velocityThreshold: 0.3,
 			directionalOffsetThreshold: 80
