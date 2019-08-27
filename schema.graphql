@@ -28,12 +28,20 @@ type Source {
   logoLink: String
 }
 
-type Tweet {
-  _id: String!
-  handle: String
-  name: String
-  category: String
-  weight: String
+type TwitterHandle{
+	_id:String!,
+	name:String,
+	handle:String,
+	category: String,
+	weight: String,
+}
+
+type Tweet{
+	_id:String!,
+	text:String,
+	twitterHandle:TwitterHandle,
+	createdDate: String,
+	modifiedDate: String
 }
 
 input TweetCriteria {

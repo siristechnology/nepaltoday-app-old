@@ -117,8 +117,6 @@ class Home extends React.PureComponent {
 					}
 				`}
 				render={({ error, props }) => {
-					console.log('props here==============================', props)
-					console.log('error here==============================', error)
 					if (!props) {
 						return <SplashScreen />
 					} else if (error) {

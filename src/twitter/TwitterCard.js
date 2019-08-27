@@ -17,10 +17,10 @@ class TwitterCard extends React.PureComponent {
 				</Left>
 				<Body>
 					<NameWrapper>
-						<Text style={{ paddingRight: 8 }}>{tweet.name}</Text>
-						<MutedText>{tweet.handle}</MutedText>
+						<Text style={{ paddingRight: 8 }}>{tweet.twitterHandle.name}</Text>
+						<MutedText>{tweet.twitterHandle.handle}</MutedText>
 					</NameWrapper>
-					<Text note>{tweet.body}</Text>
+					<Text note>{tweet.text}</Text>
 				</Body>
 			</ListItem>
 		)
