@@ -4,7 +4,11 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
 
 trigger:
-  - master
+    - master
+
+pr:
+    - master
+	- releases/*
 
 pool:
   vmImage: 'macos-latest'
