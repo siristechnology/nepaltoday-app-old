@@ -1,6 +1,7 @@
 # Nepal Today App
 
 [![Build status](https://build.appcenter.ms/v0.1/apps/dcdc5d16-bf47-4a9a-bec9-a4d30faa77a3/branches/master/badge)](https://appcenter.ms)
+[![Build Status](https://dev.azure.com/siristechnology/siristechnology/_apis/build/status/NepalToday-App?branchName=master)](https://dev.azure.com/siristechnology/siristechnology/_build/latest?definitionId=1&branchName=master)
 
 ### [Download from Google Play Store](https://play.google.com/store/apps/details?id=com.siristechnology.nepaltodayapp)
 
