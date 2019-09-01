@@ -1,0 +1,18 @@
+const colors = {
+	BG_WHITE: '#FCFCFC',
+	BLACK: '#000000',
+	ERROR: '#FF0000',
+	FACEBOOK: '#3B5998',
+	GOOGLE: '#EA4335',
+	GREY: '#D8D8D8',
+	GREY_PREFLOGIC: '#F4F6F7',
+	LIGHTEN_BLACK: '#666666',
+	LINK: '#00AED6',
+	LINKEDIN: '#0077B5',
+	PRIMARY: '#1E4382',
+	PURPLE: '#7e38b6',
+	SUCCESS: '#00D592',
+	TWITTER_SAT: '#00b9ff',
+	WHITE: '#FFFFFF'
+}
+export default colors
