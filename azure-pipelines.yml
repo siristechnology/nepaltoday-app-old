@@ -7,25 +7,25 @@ trigger:
     - master
 
 pr:
-	- master
-	- releases/*
+    - master
+    - releases/*
 
 pool:
   vmImage: 'macos-latest'
 
 steps:
-    - task: NodeTool@0
-            inputs:
-              versionSpec: '10.x'
-            displayName: 'Install Node.js'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '10.x'
+    displayName: 'Install Node.js'
 
-          - script: |
-              npm install
-              npm run build --if-present
-              npm run test --if-present
-            displayName: 'npm install & build'
+  - script: |
+      npm install
+      npm run build --if-present
+      npm run test --if-present
+    displayName: 'npm install & build'
 
-    - task: Gradle@2
+  - task: Gradle@2
     inputs:
       workingDirectory: './android'
       gradleWrapperFile: './android/gradlew'
