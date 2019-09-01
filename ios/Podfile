@@ -13,6 +13,8 @@ target 'nepaltodayapp' do
   
 
   platform :ios, '9.0'
+  pod 'appcenter', :path => '../node_modules/appcenter'
+
   target 'nepaltodayappTests' do
     inherit! :search_paths
     # Pods for testing
