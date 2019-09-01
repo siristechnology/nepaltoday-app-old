@@ -7,7 +7,7 @@ trigger:
     - master
 
 pr:
-    - master
+	- master
 	- releases/*
 
 pool:
