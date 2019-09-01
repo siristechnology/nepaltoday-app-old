@@ -21,6 +21,7 @@ steps:
 
   - script: |
       yarn
+      yarn test
     displayName: 'Yarn install & build'
 
   - task: Gradle@2
