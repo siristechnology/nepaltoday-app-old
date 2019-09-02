@@ -104,6 +104,7 @@ android {
         versionCode 9
         versionName "0.0.9"
     }
+
     splits {
         abi {
             reset()
