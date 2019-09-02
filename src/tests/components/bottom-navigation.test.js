@@ -5,5 +5,6 @@ import renderer from 'react-test-renderer'
 import BottomNavigation from '../../home/components/bottom-navigation/index'
 
 it('bottom navigation renders properly', () => {
-	renderer.create(<BottomNavigation />)
+	const navigation = { navigate: jest.fn(), state: {} }
+	renderer.create(<BottomNavigation navigation={navigation} />)
 })

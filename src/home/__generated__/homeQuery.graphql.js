@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 1e940389995fa87389d7f62777d8da76
+ * @relayHash 08d937354dea229303a4b2ef1022b0f2
  */
 
 /* eslint-disable */
@@ -20,6 +20,7 @@ export type homeQueryResponse = {|
     +imageLink: ?string,
     +publishedDate: ?string,
     +modifiedDate: ?string,
+    +category: ?string,
     +source: ?{|
       +_id: string,
       +name: ?string,
@@ -45,6 +46,7 @@ query homeQuery {
     imageLink
     publishedDate
     modifiedDate
+    category
     source {
       _id
       name
@@ -123,6 +125,13 @@ v1 = [
         "storageKey": null
       },
       {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "category",
+        "args": null,
+        "storageKey": null
+      },
+      {
         "kind": "LinkedField",
         "alias": null,
         "name": "source",
@@ -171,11 +180,11 @@ return {
     "operationKind": "query",
     "name": "homeQuery",
     "id": null,
-    "text": "query homeQuery {\n  getArticles {\n    _id\n    title\n    shortDescription\n    content\n    link\n    imageLink\n    publishedDate\n    modifiedDate\n    source {\n      _id\n      name\n      logoLink\n    }\n  }\n}\n",
+    "text": "query homeQuery {\n  getArticles {\n    _id\n    title\n    shortDescription\n    content\n    link\n    imageLink\n    publishedDate\n    modifiedDate\n    category\n    source {\n      _id\n      name\n      logoLink\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'c2224c0a3751376dc87012975c4c9437';
+(node/*: any*/).hash = '53762f57b0d27f4275061ae69a122bd1';
 module.exports = node;
