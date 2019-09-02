@@ -6,6 +6,7 @@ type Article {
   _id: String!
   title: String!
   shortDescription: String
+  category: String
   content: String
   link: String
   imageLink: String
@@ -28,20 +29,20 @@ type Source {
   logoLink: String
 }
 
-type TwitterHandle{
-	_id:String!,
-	name:String,
-	handle:String,
-	category: String,
-	weight: String,
+type TwitterHandle {
+  _id: String!
+  name: String
+  handle: String
+  category: String
+  weight: String
 }
 
-type Tweet{
-	_id:String!,
-	text:String,
-	twitterHandle:TwitterHandle,
-	createdDate: String,
-	modifiedDate: String
+type Tweet {
+  _id: String!
+  text: String
+  twitterHandle: TwitterHandle
+  createdDate: String
+  modifiedDate: String
 }
 
 input TweetCriteria {
