@@ -7,6 +7,8 @@ import { Image, StyleSheet } from 'react-native'
 import { Card, CardItem, Thumbnail, Text, Left, Body, View } from 'native-base'
 
 import actionCreators from '../ducks/actions.js'
+import { getRelativeTime } from '../../helper/time.js'
+import { ImageContainer } from '../../style.js'
 
 class ArticleCard extends React.PureComponent {
 	handleArticleCardPressed () {
@@ -20,23 +22,9 @@ class ArticleCard extends React.PureComponent {
 
 	render () {
 		const { article } = this.props
-
-		moment.updateLocale('en', {
-			relativeTime: {
-				past: '%s अघि',
-				m: '1 मिनेट',
-				mm: '%d मिनेट',
-				h: '1 घण्टा',
-				hh: '%d घण्टा',
-				d: '1 दिन',
-				dd: '%d दिन'
-			}
-		})
-		const relativeTime = moment(
-			Number(article.publishedDate || article.modifiedDate)
+		const relativeTime = getRelativeTime(
+			article.publishedDate || article.modifiedDate
 		)
-			.startOf('hour')
-			.fromNow()
 
 		return (
 			<Card transparent style={{ flex: 1, borderBottomWidth: 0.4 }}>
@@ -52,13 +40,13 @@ class ArticleCard extends React.PureComponent {
 					activeOpacity={1}
 				>
 					<Body>
-						<View style={styles.imageContainer}>
+						<ImageContainer>
 							<Image
 								source={{ uri: article.imageLink }}
 								resizeMethod="scale"
 								style={styles.image}
 							/>
-						</View>
+						</ImageContainer>
 						<View
 							style={{
 								flex: 1,
@@ -106,15 +94,6 @@ class ArticleCard extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
-	imageContainer: {
-		flex: 1,
-		flexDirection: 'row',
-		alignItems: 'stretch',
-		backgroundColor: 'rgba(27,31,35,.05)',
-		elevation: 1,
-		margin: 2,
-		borderRadius: 8
-	},
 	image: {
 		flex: 1,
 		height: 200,

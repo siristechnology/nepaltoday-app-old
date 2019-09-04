@@ -13,6 +13,9 @@ import {
 	View
 } from 'native-base'
 import { Image, StyleSheet } from 'react-native'
+import { getRelativeTime } from '../../helper/time'
+import { MutedText } from '../../styled'
+import { ImageContainer } from '../../style'
 
 const ArticleDetailScreen = props => {
 	console.log('props here', props)
@@ -22,7 +25,6 @@ const ArticleDetailScreen = props => {
 				params: {
 					article: {
 						title,
-						shortDescription,
 						content,
 						link,
 						imageLink,
@@ -33,6 +35,7 @@ const ArticleDetailScreen = props => {
 			}
 		}
 	} = props
+	const relativTime = getRelativeTime(publishedDate)
 	console.log('image link', imageLink)
 	return (
 		<Content>
@@ -48,13 +51,14 @@ const ArticleDetailScreen = props => {
 				<CardItem cardBody>
 					<Body>
 						<Text style={styles.title}>{title}</Text>
-						<View style={styles.imageContainer}>
+						<MutedText>{relativTime}</MutedText>
+						<ImageContainer>
 							<Image
 								source={{ uri: imageLink || logoLink }}
 								resizeMethod="scale"
 								style={styles.image}
 							/>
-						</View>
+						</ImageContainer>
 						<Text style={styles.content}>{content}</Text>
 					</Body>
 				</CardItem>
@@ -86,6 +90,7 @@ const styles = StyleSheet.create({
 	title: {
 		fontWeight: '900'
 	},
+
 	content: {
 		fontWeight: '400',
 		fontSize: 12,
