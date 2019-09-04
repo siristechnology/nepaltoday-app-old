@@ -14,7 +14,8 @@ class ArticleCard extends React.PureComponent {
 
 		Analytics.trackEvent('Article link click')
 		const { navigation } = this.props
-		navigation.navigate('Article', { article: this.props.article })
+		// navigation.navigate('Article', { article: this.props.article })
+		navigation.navigate('ArticleDetail', { article: this.props.article })
 	}
 
 	render () {

@@ -54,10 +54,10 @@ class Home extends React.PureComponent {
 	}
 
 	render () {
-		const config = {
-			velocityThreshold: 0.3,
-			directionalOffsetThreshold: 80
-		}
+		// const config = {
+		// 	velocityThreshold: 0.3,
+		// 	directionalOffsetThreshold: 80
+		// }
 		return (
 			<QueryRenderer
 				environment={environment}
@@ -83,7 +83,7 @@ class Home extends React.PureComponent {
           }
         `}
 				render={({ error, props }) => {
-					console.log('props here', props)
+					// console.log('props here', props)
 					if (!props) {
 						return <SplashScreen />
 					} else if (error) {
