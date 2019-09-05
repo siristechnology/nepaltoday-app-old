@@ -4,13 +4,15 @@ import Home from '../home/index.js'
 import TwitterScreen from '../twitter/index'
 import ArticleScreen from '../article/index.js'
 import ArticleDetailScreen from '../home/components/article-detail.screen.js'
+import { HeadlineScreen } from '../screens/index'
 
 const AppNavigator = createStackNavigator(
 	{
 		Home: { screen: Home },
+		Twitter: { screen: TwitterScreen },
 		Article: { screen: ArticleScreen },
-		ArticleDetail: { screen: ArticleDetailScreen },
-		Twitter: { screen: TwitterScreen }
+		Headline: { screen: HeadlineScreen },
+		ArticleDetail: { screen: ArticleDetailScreen }
 	},
 	{
 		headerMode: 'none',

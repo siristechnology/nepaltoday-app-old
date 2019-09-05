@@ -13,12 +13,19 @@ class BottomNavigation extends Component {
         <FooterTab>
           <Button
             vertical
-            active
             onPress={() => navigate('Home')}
             active={this.getIfActive('Home')}
           >
             <Icon ios="ios-menu" name="home" />
             <Text>Home</Text>
+          </Button>
+          <Button
+            vertical
+            onPress={() => navigate('Headline')}
+            active={this.getIfActive('Headline')}
+          >
+            <Icon name="newspaper" type="FontAwesome5" />
+            <Text>Headlines</Text>
           </Button>
           <Button
             vertical
