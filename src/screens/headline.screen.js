@@ -1,5 +1,6 @@
 import React from 'react'
-import { FlatList, Spinner } from 'native-base'
+import { Spinner } from 'native-base'
+import { FlatList } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
 
 import environment from '../environment'
