@@ -19,7 +19,6 @@
     "native-base": "2.11.0",
     "react": "16.6.3",
     "react-native": "0.58.3",
-    "react-native-elements": "^1.1.0",
     "react-native-swiper": "^1.5.14",
     "react-navigation": "3.1.2",
     "react-redux": "^6.0.0",

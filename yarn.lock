@@ -2063,7 +2063,7 @@ collection-visit@^1.0.0:
     map-visit "^1.0.0"
     object-visit "^1.0.0"
 
-color-convert@^1.8.2, color-convert@^1.9.0, color-convert@^1.9.1:
+color-convert@^1.8.2, color-convert@^1.9.0:
   version "1.9.3"
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.9.3.tgz#bb71850690e1f136567de629d2d5471deda4c1e8"
   dependencies:
@@ -2073,7 +2073,7 @@ color-name@1.1.3, color-name@^1.0.0:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.3.tgz#a7d0558bd89c42f795dd42328f740831ca53bc25"
 
-color-string@^1.4.0, color-string@^1.5.2:
+color-string@^1.4.0:
   version "1.5.3"
   resolved "https://registry.yarnpkg.com/color-string/-/color-string-1.5.3.tgz#c9bbc5f01b58b5492f3d6857459cb6590ce204cc"
   dependencies:
@@ -2083,14 +2083,6 @@ color-string@^1.4.0, color-string@^1.5.2:
 color-support@^1.1.3:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/color-support/-/color-support-1.1.3.tgz#93834379a1cc9a0c61f82f52f0d04322251bd5a2"
-
-color@^3.1.0:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/color/-/color-3.1.2.tgz#68148e7f85d41ad7649c5fa8c8106f098d229e10"
-  integrity sha512-vXTJhHebByxZn3lDvDJYw4lR5+uB3vuoHsuYA5AKuxRVn5wzzIfQKGLBmgdVRHKTJYeK5rvJcHnrd0Li49CFpg==
-  dependencies:
-    color-convert "^1.9.1"
-    color-string "^1.5.2"
 
 color@~1.0.3:
   version "1.0.3"
@@ -2315,11 +2307,6 @@ deep-extend@^0.6.0:
 deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
-
-deepmerge@^3.1.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-3.3.0.tgz#d3c47fd6f3a93d517b14426b0628a17b0125f5f7"
-  integrity sha512-GRQOafGHwMHpjPx9iCvTgpu9NojZ49q794EEL94JVEw6VaeA8XTUyBKvAkOOjBX9oJNiV6G3P+T+tihFjo2TqA==
 
 default-require-extensions@^2.0.0:
   version "2.0.0"
@@ -3299,7 +3286,7 @@ hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
 
-hoist-non-react-statics@^3.0.1, hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.2.1:
+hoist-non-react-statics@^3.0.1, hoist-non-react-statics@^3.2.1:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
   dependencies:
@@ -5312,11 +5299,6 @@ onetime@^2.0.0:
   dependencies:
     mimic-fn "^1.0.0"
 
-opencollective-postinstall@^2.0.0:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.2.tgz#5657f1bede69b6e33a45939b061eb53d3c6c3a89"
-  integrity sha512-pVOEP16TrAO2/fjej1IdOyupJY8KDUM1CvsaScRbw6oddvpQoOfGk4ywha0HKKVAD6RkW4x6Q+tNBwhf3Bgpuw==
-
 opn@^3.0.2:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/opn/-/opn-3.0.3.tgz#b6d99e7399f78d65c3baaffef1fb288e9b85243a"
@@ -5792,19 +5774,6 @@ react-native-easy-grid@0.2.0:
   dependencies:
     lodash "^4.11.1"
 
-react-native-elements@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-elements/-/react-native-elements-1.1.0.tgz#f99bcda4459a886f3ab4591c684c099d37aedf2b"
-  integrity sha512-n1eOL0kUdlH01zX7bn1p7qhYXn7kquqxYQ0oWlxoAck9t5Db/KeK5ViOsAk8seYSvAG6Pe7OxgzRFnMfFhng0Q==
-  dependencies:
-    color "^3.1.0"
-    deepmerge "^3.1.0"
-    hoist-non-react-statics "^3.1.0"
-    opencollective-postinstall "^2.0.0"
-    prop-types "^15.5.8"
-    react-native-ratings "^6.3.0"
-    react-native-status-bar-height "^2.2.0"
-
 react-native-gesture-handler@~1.0.14:
   version "1.0.15"
   resolved "https://registry.yarnpkg.com/react-native-gesture-handler/-/react-native-gesture-handler-1.0.15.tgz#7e0d0a457820a3c9325a3d492daaed14400508a6"
@@ -5824,14 +5793,6 @@ react-native-keyboard-aware-scroll-view@0.8.0:
     prop-types "^15.6.2"
     react-native-iphone-x-helper "^1.0.3"
 
-react-native-ratings@^6.3.0:
-  version "6.3.1"
-  resolved "https://registry.yarnpkg.com/react-native-ratings/-/react-native-ratings-6.3.1.tgz#4e4bd87f376423dc62c933f570fc1932c78adaa4"
-  integrity sha512-+WEtk4wPvnoN5YbfWcmyM4LpKOlvkrFlpQe0KrqeWBAOkN6OXOZYBtiCh97dCIb8Ovpm7goOEcTf3T1MGCi2LA==
-  dependencies:
-    lodash "^4.17.4"
-    prop-types "^15.5.10"
-
 react-native-safe-area-view@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.12.0.tgz#5c312f087300ecf82e8541c3eac25d560e147f22"
@@ -5841,11 +5802,6 @@ react-native-safe-area-view@^0.12.0:
 "react-native-screens@^1.0.0 || ^1.0.0-alpha":
   version "1.0.0-alpha.22"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-1.0.0-alpha.22.tgz#7a120377b52aa9bbb94d0b8541a014026be9289b"
-
-react-native-status-bar-height@^2.2.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-status-bar-height/-/react-native-status-bar-height-2.4.0.tgz#de8cee4bb733a196167210d2d0bc1fa10acba3e3"
-  integrity sha512-pWvZFlyIHiuxLugLioq97vXiaGSovFXEyxt76wQtbq0gxv4dGXMPqYow46UmpwOgeJpBhqL1E0EKxnfJRrFz5w==
 
 react-native-swiper@^1.5.14:
   version "1.5.14"
