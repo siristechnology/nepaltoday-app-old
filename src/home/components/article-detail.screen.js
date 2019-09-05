@@ -1,21 +1,17 @@
 import React from 'react'
 import {
-	Content,
-	Card,
-	CardItem,
-	Thumbnail,
-	Text,
-	Button,
-	Icon,
-	Left,
 	Body,
-	Right,
-	View
+	Card,
+	Text,
+	Left,
+	Content,
+	CardItem,
+	Thumbnail
 } from 'native-base'
-import { Image, StyleSheet } from 'react-native'
-import { getRelativeTime } from '../../helper/time'
 import { MutedText } from '../../styled'
 import { ImageContainer } from '../../style'
+import { Image, StyleSheet } from 'react-native'
+import { getRelativeTime } from '../../helper/time'
 
 const ArticleDetailScreen = props => {
 	console.log('props here', props)
@@ -26,7 +22,7 @@ const ArticleDetailScreen = props => {
 					article: {
 						title,
 						content,
-						link,
+						// link,
 						imageLink,
 						publishedDate,
 						source: { name, logoLink }
