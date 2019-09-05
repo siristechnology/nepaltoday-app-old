@@ -6,7 +6,8 @@ import {
 	Left,
 	Content,
 	CardItem,
-	Thumbnail
+	Thumbnail,
+	View
 } from 'native-base'
 import { MutedText } from '../../styled'
 import { ImageContainer } from '../../style'
@@ -32,7 +33,18 @@ const ArticleDetailScreen = props => {
 		}
 	} = props
 	const relativTime = getRelativeTime(publishedDate)
-	console.log('image link', imageLink)
+
+	const renderContent = () => {
+		return (
+			content &&
+      content.split('\n').map((text, index) => (
+      	<Text style={styles.content} key={index}>
+      		{text}
+      	</Text>
+      ))
+		)
+	}
+
 	return (
 		<Content>
 			<Card style={styles.root}>
@@ -55,7 +67,7 @@ const ArticleDetailScreen = props => {
 								style={styles.image}
 							/>
 						</ImageContainer>
-						<Text style={styles.content}>{content}</Text>
+						<View style={styles.contentWrapper}>{renderContent()}</View>
 					</Body>
 				</CardItem>
 			</Card>
@@ -86,11 +98,14 @@ const styles = StyleSheet.create({
 	title: {
 		fontWeight: '900'
 	},
+	contentWrapper: {
+		textAlign: 'justify'
+	},
 
 	content: {
 		fontWeight: '400',
 		fontSize: 12,
-		textAlign: 'justify'
+		marginTop: 8
 	}
 })
 
