@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, ListItem, Body, Left, Thumbnail, Right, View } from 'native-base'
+import { Text, ListItem, Body, Left, Thumbnail, View } from 'native-base'
 import styled from 'styled-components/native'
 import { MutedText } from '../styled'
 
@@ -29,12 +29,12 @@ class TwitterCard extends React.PureComponent {
 export default TwitterCard
 
 const StyledThumbnail = styled(Thumbnail)`
-	width: 40px;
-	height: 40px;
-	margin-top: 0;
+  width: 40px;
+  height: 40px;
+  margin-top: 0;
 `
 const NameWrapper = styled(View)`
-	display: flex;
-	flex-direction: row;
-	align-items: center;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `

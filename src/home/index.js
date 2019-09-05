@@ -13,56 +13,56 @@ import SplashScreen from './components/splash-screen'
 import OfflineNotice from './components/offline-notification'
 
 class Home extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isUpdated: false,
-      appState: AppState.currentState
-    }
-  }
+	constructor (props) {
+		super(props)
+		this.state = {
+			isUpdated: false,
+			appState: AppState.currentState
+		}
+	}
 
-  componentDidMount() {
-    Analytics.trackEvent('Home page load')
-    AppState.addEventListener('change', this._handleAppStateChange.bind(this))
-  }
+	componentDidMount () {
+		Analytics.trackEvent('Home page load')
+		AppState.addEventListener('change', this._handleAppStateChange.bind(this))
+	}
 
-  componentDidUpdate() {
-    Analytics.trackEvent('Home page refresh')
-  }
+	componentDidUpdate () {
+		Analytics.trackEvent('Home page refresh')
+	}
 
-  componentWillUnmount() {
-    AppState.removeEventListener(
-      'change',
-      this._handleAppStateChange.bind(this)
-    )
-  }
+	componentWillUnmount () {
+		AppState.removeEventListener(
+			'change',
+			this._handleAppStateChange.bind(this)
+		)
+	}
 
-  _handleAppStateChange(nextAppState) {
-    if (
-      this.state.appState.match(/inactive|background/) &&
+	_handleAppStateChange (nextAppState) {
+		if (
+			this.state.appState.match(/inactive|background/) &&
       nextAppState === 'active'
-    ) {
-      console.log('App has come to the foreground!')
-      this.handleRefresh()
-    }
-    this.setState({ appState: nextAppState })
-  }
+		) {
+			console.log('App has come to the foreground!')
+			this.handleRefresh()
+		}
+		this.setState({ appState: nextAppState })
+	}
 
-  handleRefresh() {
-    Analytics.trackEvent('Pull down refresh')
-    this.setState({ isUpdated: !this.state.isUpdated })
-  }
+	handleRefresh () {
+		Analytics.trackEvent('Pull down refresh')
+		this.setState({ isUpdated: !this.state.isUpdated })
+	}
 
-  render() {
-    const config = {
-      velocityThreshold: 0.3,
-      directionalOffsetThreshold: 80
-    }
-    return (
-      <QueryRenderer
-        environment={environment}
-        variables={{ isUpdated: this.state.isUpdated }}
-        query={graphql`
+	render () {
+		// const config = {
+		// 	velocityThreshold: 0.3,
+		// 	directionalOffsetThreshold: 80
+		// }
+		return (
+			<QueryRenderer
+				environment={environment}
+				variables={{ isUpdated: this.state.isUpdated }}
+				query={graphql`
           query homeQuery {
             getArticles {
               _id
@@ -82,56 +82,56 @@ class Home extends React.PureComponent {
             }
           }
         `}
-        render={({ error, props }) => {
-          console.log('props here', props)
-          if (!props) {
-            return <SplashScreen />
-          } else if (error) {
-            console.log('error:' + JSON.stringify(error))
-          }
+				render={({ error, props }) => {
+					// console.log('props here', props)
+					if (!props) {
+						return <SplashScreen />
+					} else if (error) {
+						console.log('error:' + JSON.stringify(error))
+					}
 
-          return (
-            <AppLayout>
-              <OfflineNotice />
+					return (
+						<AppLayout>
+							<OfflineNotice />
 
-              <FlatList
-                data={props.getArticles}
-                keyExtractor={item => item._id}
-                extraData={this.state}
-                renderItem={({ item }) => {
-                  return (
-                    <ArticleCard
-                      article={item}
-                      key={item._id}
-                      actions={this.props.actions}
-                      navigation={this.props.navigation}
-                    />
-                  )
-                }}
-                refreshControl={
-                  <RefreshControl
-                    colors={['#9Bd35A', '#689F38']}
-                    onRefresh={this.handleRefresh.bind(this)}
-                  />
-                }
-              />
-            </AppLayout>
-          )
-        }}
-      />
-    )
-  }
+							<FlatList
+								data={props.getArticles}
+								keyExtractor={item => item._id}
+								extraData={this.state}
+								renderItem={({ item }) => {
+									return (
+										<ArticleCard
+											article={item}
+											key={item._id}
+											actions={this.props.actions}
+											navigation={this.props.navigation}
+										/>
+									)
+								}}
+								refreshControl={
+									<RefreshControl
+										colors={['#9Bd35A', '#689F38']}
+										onRefresh={this.handleRefresh.bind(this)}
+									/>
+								}
+							/>
+						</AppLayout>
+					)
+				}}
+			/>
+		)
+	}
 }
 
-function mapStateToProps(state) {
-  return {}
+function mapStateToProps (state) {
+	return {}
 }
 
-function mapDispatchToProps(dispatch) {
-  return { actions: bindActionCreators(actionCreators, dispatch) }
+function mapDispatchToProps (dispatch) {
+	return { actions: bindActionCreators(actionCreators, dispatch) }
 }
 
 export default connect(
-  mapStateToProps,
-  mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )(Home)
