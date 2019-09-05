@@ -34,7 +34,7 @@ class TwitterComponent extends React.PureComponent {
 							</View>
 						)
 					} else if (error) {
-						alert('error:' + JSON.stringify(error))
+						console.log('error:' + JSON.stringify(error))
 					}
 					return (
 						<AppLayout>
