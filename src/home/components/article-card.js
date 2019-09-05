@@ -1,14 +1,13 @@
 import React from 'react'
-import moment from 'moment'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Analytics from 'appcenter-analytics'
 import { Image, StyleSheet } from 'react-native'
 import { Card, CardItem, Thumbnail, Text, Left, Body, View } from 'native-base'
 
+import { ImageContainer } from '../../style.js'
 import actionCreators from '../ducks/actions.js'
 import { getRelativeTime } from '../../helper/time.js'
-import { ImageContainer } from '../../style.js'
 
 class ArticleCard extends React.PureComponent {
 	handleArticleCardPressed () {
