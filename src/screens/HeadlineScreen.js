@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spinner, Header, Tabs, Tab, Container } from 'native-base'
+import { Spinner, Header, Tabs, Tab, Container, View, Text } from 'native-base'
 import { FlatList } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
 
@@ -8,12 +8,22 @@ import AppLayout from '../frame/AppLayout'
 import ArticleCard from '../home/components/article-card'
 
 const renderQuery = ({ error, props }) => {
+	if (!props) {
+		return (
+			<View>
+				<Text>Headlines splash screen here</Text>
+			</View>
+		)
+	} else if (error) {
+		console.log('error:' + JSON.stringify(error))
+	}
 	const renderTab = () => {
 		const tabs = [
 			...new Set(props.getArticles.map(article => article.category))
 		]
+
 		if (tabs) {
-			tabs.map(tab => {
+			return tabs.map(tab => {
 				const dataArr = props.getArticles.filter(a => a.category === tab)
 				if (dataArr.length <= 0) {
 					return <Text>Not available</Text>
@@ -60,30 +70,30 @@ const renderQuery = ({ error, props }) => {
 }
 
 class HeadlineScreen extends React.PureComponent {
-	render () {
+	render() {
 		return (
 			<QueryRenderer
 				environment={environment}
 				query={graphql`
-          query headlineQuery {
-            getArticles {
-              _id
-              title
-              shortDescription
-              content
-              link
-              imageLink
-              publishedDate
-              modifiedDate
-              category
-              source {
-                _id
-                name
-                logoLink
-              }
-            }
-          }
-        `}
+					query headlineScreenQuery {
+						getArticles {
+							_id
+							title
+							shortDescription
+							content
+							link
+							imageLink
+							publishedDate
+							modifiedDate
+							category
+							source {
+								_id
+								name
+								logoLink
+							}
+						}
+					}
+				`}
 				render={renderQuery}
 			/>
 		)

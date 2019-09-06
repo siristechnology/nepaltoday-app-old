@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash b2516971480d87032aab7ff3d32b3080
+ * @relayHash af636a55743e708d2630ac2ce35dc774
  */
 
 /* eslint-disable */
@@ -9,8 +9,8 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type headlineQueryVariables = {||};
-export type headlineQueryResponse = {|
+export type headlineScreenQueryVariables = {||};
+export type headlineScreenQueryResponse = {|
   +getArticles: $ReadOnlyArray<?{|
     +_id: string,
     +title: string,
@@ -28,15 +28,15 @@ export type headlineQueryResponse = {|
     |},
   |}>
 |};
-export type headlineQuery = {|
-  variables: headlineQueryVariables,
-  response: headlineQueryResponse,
+export type headlineScreenQuery = {|
+  variables: headlineScreenQueryVariables,
+  response: headlineScreenQueryResponse,
 |};
 */
 
 
 /*
-query headlineQuery {
+query headlineScreenQuery {
   getArticles {
     _id
     title
@@ -164,7 +164,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "headlineQuery",
+    "name": "headlineScreenQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -172,19 +172,19 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "headlineQuery",
+    "name": "headlineScreenQuery",
     "argumentDefinitions": [],
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "query",
-    "name": "headlineQuery",
+    "name": "headlineScreenQuery",
     "id": null,
-    "text": "query headlineQuery {\n  getArticles {\n    _id\n    title\n    shortDescription\n    content\n    link\n    imageLink\n    publishedDate\n    modifiedDate\n    category\n    source {\n      _id\n      name\n      logoLink\n    }\n  }\n}\n",
+    "text": "query headlineScreenQuery {\n  getArticles {\n    _id\n    title\n    shortDescription\n    content\n    link\n    imageLink\n    publishedDate\n    modifiedDate\n    category\n    source {\n      _id\n      name\n      logoLink\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'b28d46dadbebc8c66d8ad2b5065253fd';
+(node/*: any*/).hash = 'd324c8587b0513e8e5a81e667783c973';
 module.exports = node;
