@@ -1,7 +1,17 @@
 import React from 'react'
-import { Spinner, Header, Tabs, Tab, Container, View, Text } from 'native-base'
+import {
+	Spinner,
+	Header,
+	Tabs,
+	Tab,
+	Container,
+	View,
+	Text,
+	ScrollableTab
+} from 'native-base'
 import { FlatList } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
+import { StyleSheet } from 'react-native'
 
 import environment from '../environment'
 import AppLayout from '../frame/AppLayout'
@@ -57,8 +67,8 @@ const renderQuery = ({ error, props }) => {
 			<AppLayout>
 				{props && props.getArticles.length > 0 ? (
 					<Container>
-						<Header hasTabs />
-						<Tabs>{renderTab()}</Tabs>
+						<Header hasTabs style={styles.header} />
+						<Tabs renderTabBar={() => <ScrollableTab />}>{renderTab()}</Tabs>
 					</Container>
 				) : null}
 			</AppLayout>
@@ -99,3 +109,9 @@ class HeadlineScreen extends React.PureComponent {
 }
 
 export default HeadlineScreen
+
+const styles = StyleSheet.create({
+	header: {
+		height: 10
+	}
+})
