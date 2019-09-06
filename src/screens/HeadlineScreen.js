@@ -30,24 +30,22 @@ const renderQuery = ({ error, props }) => {
 				}
 
 				return (
-					<Tabs>
-						<Tab heading={`${tab}`}>
-							<FlatList
-								data={dataArr}
-								keyExtractor={item => item._id}
-								renderItem={({ item }) => {
-									return (
-										<ArticleCard
-											article={item}
-											key={item._id}
-											actions={() => {}}
-											navigation={{}}
-										/>
-									)
-								}}
-							/>
-						</Tab>
-					</Tabs>
+					<Tab heading={`${tab}`}>
+						<FlatList
+							data={dataArr}
+							keyExtractor={item => item._id}
+							renderItem={({ item }) => {
+								return (
+									<ArticleCard
+										article={item}
+										key={item._id}
+										actions={() => {}}
+										navigation={{}}
+									/>
+								)
+							}}
+						/>
+					</Tab>
 				)
 			})
 		}
@@ -60,7 +58,7 @@ const renderQuery = ({ error, props }) => {
 				{props && props.getArticles.length > 0 ? (
 					<Container>
 						<Header hasTabs />
-						{renderTab()}
+						<Tabs>{renderTab()}</Tabs>
 					</Container>
 				) : null}
 			</AppLayout>
