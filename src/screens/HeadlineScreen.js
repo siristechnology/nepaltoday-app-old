@@ -5,7 +5,6 @@ import {
 	Tabs,
 	Tab,
 	Container,
-	View,
 	Text,
 	ScrollableTab
 } from 'native-base'
@@ -16,14 +15,11 @@ import { StyleSheet } from 'react-native'
 import environment from '../environment'
 import AppLayout from '../frame/AppLayout'
 import ArticleCard from '../home/components/article-card'
+import { getLocalName } from '../helper/text'
 
 const renderQuery = ({ error, props }) => {
 	if (!props) {
-		return (
-			<View>
-				<Text>Headlines splash screen here</Text>
-			</View>
-		)
+		return <Spinner />
 	} else if (error) {
 		console.log('error:' + JSON.stringify(error))
 	}
@@ -39,8 +35,10 @@ const renderQuery = ({ error, props }) => {
 					return <Text>Not available</Text>
 				}
 
+				const tabName = getLocalName(tab)
+
 				return (
-					<Tab heading={`${tab}`} key={idx}>
+					<Tab heading={`${tabName}`} key={idx}>
 						<FlatList
 							data={dataArr}
 							keyExtractor={item => item._id}
