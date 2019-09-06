@@ -33,14 +33,14 @@ const renderQuery = ({ error, props }) => {
 		]
 
 		if (tabs) {
-			return tabs.map(tab => {
+			return tabs.map((tab, idx) => {
 				const dataArr = props.getArticles.filter(a => a.category === tab)
 				if (dataArr.length <= 0) {
 					return <Text>Not available</Text>
 				}
 
 				return (
-					<Tab heading={`${tab}`}>
+					<Tab heading={`${tab}`} key={idx}>
 						<FlatList
 							data={dataArr}
 							keyExtractor={item => item._id}
