@@ -13,7 +13,7 @@ import SplashScreen from './components/splash-screen'
 import OfflineNotice from './components/offline-notification'
 
 class Home extends React.PureComponent {
-	constructor (props) {
+	constructor(props) {
 		super(props)
 		this.state = {
 			isUpdated: false,
@@ -21,26 +21,26 @@ class Home extends React.PureComponent {
 		}
 	}
 
-	componentDidMount () {
+	componentDidMount() {
 		Analytics.trackEvent('Home page load')
 		AppState.addEventListener('change', this._handleAppStateChange.bind(this))
 	}
 
-	componentDidUpdate () {
+	componentDidUpdate() {
 		Analytics.trackEvent('Home page refresh')
 	}
 
-	componentWillUnmount () {
+	componentWillUnmount() {
 		AppState.removeEventListener(
 			'change',
 			this._handleAppStateChange.bind(this)
 		)
 	}
 
-	_handleAppStateChange (nextAppState) {
+	_handleAppStateChange(nextAppState) {
 		if (
 			this.state.appState.match(/inactive|background/) &&
-      nextAppState === 'active'
+			nextAppState === 'active'
 		) {
 			console.log('App has come to the foreground!')
 			this.handleRefresh()
@@ -48,42 +48,37 @@ class Home extends React.PureComponent {
 		this.setState({ appState: nextAppState })
 	}
 
-	handleRefresh () {
+	handleRefresh() {
 		Analytics.trackEvent('Pull down refresh')
 		this.setState({ isUpdated: !this.state.isUpdated })
 	}
 
-	render () {
-		// const config = {
-		// 	velocityThreshold: 0.3,
-		// 	directionalOffsetThreshold: 80
-		// }
+	render() {
 		return (
 			<QueryRenderer
 				environment={environment}
 				variables={{ isUpdated: this.state.isUpdated }}
 				query={graphql`
-          query homeQuery {
-            getArticles {
-              _id
-              title
-              shortDescription
-              content
-              link
-              imageLink
-              publishedDate
-              modifiedDate
-              category
-              source {
-                _id
-                name
-                logoLink
-              }
-            }
-          }
-        `}
+					query homeQuery {
+						getArticles {
+							_id
+							title
+							shortDescription
+							content
+							link
+							imageLink
+							publishedDate
+							modifiedDate
+							category
+							source {
+								_id
+								name
+								logoLink
+							}
+						}
+					}
+				`}
 				render={({ error, props }) => {
-					// console.log('props here', props)
 					if (!props) {
 						return <SplashScreen />
 					} else if (error) {
@@ -123,11 +118,11 @@ class Home extends React.PureComponent {
 	}
 }
 
-function mapStateToProps (state) {
+function mapStateToProps(state) {
 	return {}
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
 	return { actions: bindActionCreators(actionCreators, dispatch) }
 }
 
