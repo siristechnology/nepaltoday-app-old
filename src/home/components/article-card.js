@@ -10,7 +10,7 @@ import actionCreators from '../ducks/actions.js'
 import { getRelativeTime } from '../../helper/time.js'
 
 class ArticleCard extends React.PureComponent {
-	handleArticleCardPressed () {
+	handleArticleCardPressed() {
 		this.props.actions.startToOpenArticle(this.props.article)
 
 		Analytics.trackEvent('Article link click')
@@ -19,7 +19,7 @@ class ArticleCard extends React.PureComponent {
 		navigation.navigate('ArticleDetail', { article: this.props.article })
 	}
 
-	render () {
+	render() {
 		const { article } = this.props
 		const relativeTime = getRelativeTime(
 			article.publishedDate || article.modifiedDate
@@ -67,10 +67,8 @@ class ArticleCard extends React.PureComponent {
 							<Text style={styles.newsSource}>{article.source.name}</Text>
 						</View>
 						<View style={{ flex: 1, justifyContent: 'flex-start' }}>
-							<Text style={{ fontSize: 19, includeFontPadding: true }}>
-								{article.title}
-							</Text>
-							<Text>{article.shortDescription}</Text>
+							<Text style={styles.title}>{article.title}</Text>
+							<Text style={styles.content}>{article.shortDescription}</Text>
 						</View>
 					</Body>
 				</CardItem>
@@ -100,6 +98,14 @@ const styles = StyleSheet.create({
 		borderRadius: 8,
 		borderWidth: 0.5
 	},
+	title: {
+		fontWeight: '900'
+	},
+	content: {
+		fontWeight: '400',
+		fontSize: 12,
+		marginTop: 8
+	},
 	newsSource: {
 		color: '#737373',
 		fontSize: 16,
@@ -107,11 +113,11 @@ const styles = StyleSheet.create({
 	}
 })
 
-function mapStateToProps () {
+function mapStateToProps() {
 	return {}
 }
 
-function mapDispatchToProps (dispatch) {
+function mapDispatchToProps(dispatch) {
 	return { actions: bindActionCreators(actionCreators, dispatch) }
 }
 
