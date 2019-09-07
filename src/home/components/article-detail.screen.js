@@ -37,11 +37,11 @@ const ArticleDetailScreen = props => {
 	const renderContent = () => {
 		return (
 			content &&
-      content.split('\n').map((text, index) => (
-      	<Text style={styles.content} key={index}>
-      		{text}
-      	</Text>
-      ))
+			content.split('\n').map((text, index) => (
+				<Text style={styles.content} key={index}>
+					{text}
+				</Text>
+			))
 		)
 	}
 

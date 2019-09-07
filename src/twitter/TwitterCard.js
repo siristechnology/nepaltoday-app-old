@@ -4,7 +4,7 @@ import styled from 'styled-components/native'
 import { MutedText } from '../styled'
 
 class TwitterCard extends React.PureComponent {
-	render () {
+	render() {
 		const { tweet } = this.props
 		return (
 			<ListItem avatar>
@@ -29,12 +29,12 @@ class TwitterCard extends React.PureComponent {
 export default TwitterCard
 
 const StyledThumbnail = styled(Thumbnail)`
-  width: 40px;
-  height: 40px;
-  margin-top: 0;
+	width: 40px;
+	height: 40px;
+	margin-top: 0;
 `
 const NameWrapper = styled(View)`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 `

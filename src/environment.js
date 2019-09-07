@@ -1,69 +1,58 @@
 // import { AsyncStorage } from "react-native";
-import {
-	Environment,
-	Network,
-	RecordSource,
-	Store,
-} from 'relay-runtime';
-import RelayQueryResponseCache from 'relay-runtime/lib/RelayQueryResponseCache';
-import global from '../global';
+import { Environment, Network, RecordSource, Store } from 'relay-runtime'
+import RelayQueryResponseCache from 'relay-runtime/lib/RelayQueryResponseCache'
+import global from '../global'
 
-const cacheTtl = 30 * 1000; // if someone refreshes in 30 seconds, they will get content from cache for now
-const cache = new RelayQueryResponseCache({ size: 1000, ttl: cacheTtl });
+const cacheTtl = 30 * 1000 // if someone refreshes in 30 seconds, they will get content from cache for now
+const cache = new RelayQueryResponseCache({ size: 1000, ttl: cacheTtl })
 
-async function fetchQuery (
-	operation,
-	variables,
-	cacheConfig,
-) {
-	const queryID = operation.text;
-	const isMutation = operation.operationKind === 'mutation';
-	const isQuery = operation.operationKind === 'query';
-	const forceFetch = cacheConfig && cacheConfig.force;
+async function fetchQuery(operation, variables, cacheConfig) {
+	const queryID = operation.text
+	const isMutation = operation.operationKind === 'mutation'
+	const isQuery = operation.operationKind === 'query'
+	const forceFetch = cacheConfig && cacheConfig.force
 	// const userContext = await AsyncStorage.getItem('userContext');
 
 	// Try to get data from cache on queries
-	const fromCache = cache.get(queryID, variables);
-	if (
-		isQuery &&
-		fromCache !== null &&
-		!forceFetch
-	) {
+	const fromCache = cache.get(queryID, variables)
+	if (isQuery && fromCache !== null && !forceFetch) {
 		console.log('serving from cache')
-		return fromCache;
+		return fromCache
 	}
 
 	// Otherwise, fetch data from server
 	return fetch(global.nepalTodayServer, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json',
+			'Content-Type': 'application/json'
 			// 'Authorization': 'Bearer ' + JSON.parse(userContext).token
 		},
 		body: JSON.stringify({
 			query: operation.text,
-			variables,
-		}),
-	}).then(response => {
-		return response.json();
-	}).then(json => {
-		// Update cache on queries
-		if (isQuery && json) {
-			cache.set(queryID, variables, json);
-		}
-		// Clear cache on mutations
-		if (isMutation) {
-			console.log('cache being cleared')
-			cache.clear();
-		}
+			variables
+		})
+	})
+		.then(response => {
+			return response.json()
+		})
+		.then(json => {
+			// Update cache on queries
+			if (isQuery && json) {
+				cache.set(queryID, variables, json)
+			}
+			// Clear cache on mutations
+			if (isMutation) {
+				console.log('cache being cleared')
+				cache.clear()
+			}
 
-		return json;
-	});
+			return json
+		})
 }
 
 const environment = new Environment({
 	network: Network.create(fetchQuery),
-	store: new Store(new RecordSource()),
-});
+	store: new Store(new RecordSource())
+})
 
-export default environment;
+export default environment

@@ -8,24 +8,24 @@ import AppLayout from '../frame/AppLayout'
 import { View, Text } from 'native-base'
 
 class TwitterComponent extends React.PureComponent {
-	render () {
+	render() {
 		return (
 			<QueryRenderer
 				environment={environment}
 				query={graphql`
-          query twitterQuery {
-            getTweets {
-              _id
-              text
-              twitterHandle {
-                _id
-                name
-                handle
-                category
-              }
-            }
-          }
-        `}
+					query twitterQuery {
+						getTweets {
+							_id
+							text
+							twitterHandle {
+								_id
+								name
+								handle
+								category
+							}
+						}
+					}
+				`}
 				render={({ error, props }) => {
 					if (!props) {
 						return (

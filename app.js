@@ -1,30 +1,28 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { StatusBar } from 'react-native'
-import { Provider } from "react-redux";
-import { StyleProvider } from "native-base";
-import AppContainer from './src/frame/app-container';
-import getTheme from "./src/native-base-theme/components";
-import variables from "./src/native-base-theme/variables/platform";
-import { store } from "./src/store";
+import { Provider } from 'react-redux'
+import { StyleProvider } from 'native-base'
+import AppContainer from './src/frame/app-container'
+import getTheme from './src/native-base-theme/components'
+import variables from './src/native-base-theme/variables/platform'
+import { store } from './src/store'
 
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
 	constructor() {
-		super();
+		super()
 		this.state = {
 			isLoading: true
-		};
+		}
 	}
 
-	render () {
-		//TODO: Need a splash screen while app is loading
+	render() {
 		return (
 			<StyleProvider style={getTheme(variables)}>
 				<Provider store={store}>
-					<StatusBar barStyle='light-content' />
+					<StatusBar barStyle="light-content" />
 					<AppContainer />
 				</Provider>
 			</StyleProvider>
-		);
+		)
 	}
 }

@@ -8,11 +8,11 @@ export const MutedText = styled(Text)`
 `
 
 export const ImageContainer = styled(View)`
-  flex-grow: 1;
-  flex-direction: row;
-  align-items: stretch;
-  background-color: rgba(27, 31, 35, 0.05);
-  elevation: 1px;
-  margin: 2px;
-  border-radius: 8px;
+	flex-grow: 1;
+	flex-direction: row;
+	align-items: stretch;
+	background-color: rgba(27, 31, 35, 0.05);
+	elevation: 1px;
+	margin: 2px;
+	border-radius: 8px;
 `
