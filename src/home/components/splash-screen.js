@@ -1,20 +1,16 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 
 export default class SplashScreen extends React.Component {
-	render () {
-		const viewStyles = [styles.container, { backgroundColor: 'skyblue' }];
+	render() {
+		const viewStyles = [styles.container, { backgroundColor: 'skyblue' }]
 
 		return (
 			<View style={viewStyles}>
-				<Text style={styles.heading}>
-					नेपाल आज
-				</Text>
-				<Text style={styles.wait}>
-					कृपया पर्खनुहोस्
-				</Text>
+				<Text style={styles.heading}>नेपाल आज</Text>
+				<Text style={styles.wait}>कृपया पर्खनुहोस्</Text>
 			</View>
-		);
+		)
 	}
 }
 
@@ -36,4 +32,4 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		margin: 10
 	}
-});
+})

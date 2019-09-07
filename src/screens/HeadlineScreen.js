@@ -8,9 +8,8 @@ import {
 	Text,
 	ScrollableTab
 } from 'native-base'
-import { FlatList } from 'react-native'
+import { FlatList, StyleSheet } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
-import { StyleSheet } from 'react-native'
 
 import environment from '../environment'
 import AppLayout from '../frame/AppLayout'

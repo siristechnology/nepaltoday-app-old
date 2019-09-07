@@ -5,7 +5,7 @@ export const initialState = {
 	article: {}
 }
 
-export default function reducer (state = initialState, action) {
+export default function reducer(state = initialState, action) {
 	switch (action.type) {
 		case types.OPEN_ARTICLE_START: {
 			return { ...state, article: { ...state.article } }
