@@ -54,6 +54,7 @@ class Home extends React.PureComponent {
 	}
 
 	render() {
+		console.log('Printing inside render of home')
 		return (
 			<QueryRenderer
 				environment={environment}
