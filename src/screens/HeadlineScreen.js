@@ -6,9 +6,7 @@ import {
 	Header,
 	Spinner,
 	Container,
-	ScrollableTab,
-	Toast,
-	Button
+	ScrollableTab
 } from 'native-base'
 import { FlatList, StyleSheet } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
@@ -24,6 +22,7 @@ class HeadlineScreen extends React.PureComponent {
 			return <Spinner />
 		} else if (error) {
 			console.log('error:' + JSON.stringify(error))
+			throw new Error(`Error occured here ${JSON.stringify(error)}`)
 		}
 		const renderTab = () => {
 			const tabs = [
