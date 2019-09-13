@@ -6,7 +6,7 @@ import AppContainer from './src/frame/app-container'
 import getTheme from './src/native-base-theme/components'
 import variables from './src/native-base-theme/variables/platform'
 import { store } from './src/store'
-import ErrorBoundary from './src/error'
+import ErrorBoundary from './src/error/error-boundry'
 
 export default class App extends Component {
 	constructor() {
