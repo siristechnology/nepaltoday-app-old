@@ -67,7 +67,9 @@ const ArticleDetailScreen = props => {
 								style={styles.image}
 							/>
 						</ImageContainer>
-						<View style={styles.contentWrapper}>{renderContent()}</View>
+						<View style={styles.contentWrapper}>
+							{renderContent()}
+						</View>
 					</Body>
 				</CardItem>
 			</Card>

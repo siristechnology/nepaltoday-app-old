@@ -64,15 +64,21 @@ class ArticleCard extends React.PureComponent {
 									marginRight: 4
 								}}
 							/>
-							<Text style={styles.newsSource}>{article.source.name}</Text>
+							<Text style={styles.newsSource}>
+								{article.source.name}
+							</Text>
 						</View>
 						<View style={{ flex: 1, justifyContent: 'flex-start' }}>
 							<Text style={styles.title}>{article.title}</Text>
-							<Text style={styles.content}>{article.shortDescription}</Text>
+							<Text style={styles.content}>
+								{article.shortDescription}
+							</Text>
 						</View>
 					</Body>
 				</CardItem>
-				<CardItem style={{ paddingTop: 0, paddingBottom: 4, marginBottom: 0 }}>
+				<CardItem
+					style={{ paddingTop: 0, paddingBottom: 4, marginBottom: 0 }}
+				>
 					<Left>
 						<View
 							style={{
