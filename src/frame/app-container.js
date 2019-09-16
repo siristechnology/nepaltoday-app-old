@@ -1,22 +1,18 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 
-import Home from '../home/index.js'
-import TwitterScreen from '../twitter/index'
 import ArticleScreen from '../article/index.js'
+import BottomTabs from '../home/components/bottom-navigation'
 import ArticleDetailScreen from '../home/components/article-detail.screen.js'
-import HeadlineScreen from '../screens/headline.screen'
 
 const AppNavigator = createStackNavigator(
 	{
-		Home: { screen: Home },
-		Twitter: { screen: TwitterScreen },
+		Tab: { screen: BottomTabs },
 		Article: { screen: ArticleScreen },
-		Headline: { screen: HeadlineScreen },
 		ArticleDetail: { screen: ArticleDetailScreen }
 	},
 	{
 		headerMode: 'none',
-		initialRouteName: 'Home'
+		initialRouteName: 'Tab'
 	}
 )
 

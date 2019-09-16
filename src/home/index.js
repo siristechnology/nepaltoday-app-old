@@ -6,7 +6,7 @@ import { QueryRenderer, graphql } from 'react-relay'
 import { FlatList, RefreshControl, AppState } from 'react-native'
 
 import environment from '../environment'
-import AppLayout from '../frame/AppLayout'
+import AppLayout from '../frame/app-layout'
 import actionCreators from './ducks/actions'
 import ArticleCard from './components/article-card'
 import SplashScreen from './components/splash-screen'

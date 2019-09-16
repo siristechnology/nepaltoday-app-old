@@ -4,7 +4,7 @@ import { QueryRenderer, graphql } from 'react-relay'
 
 import TwitterCard from './TwitterCard'
 import environment from '../environment'
-import AppLayout from '../frame/AppLayout'
+import AppLayout from '../frame/app-layout'
 import { View, Text } from 'native-base'
 
 class TwitterComponent extends React.PureComponent {
