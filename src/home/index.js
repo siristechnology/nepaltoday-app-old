@@ -23,7 +23,10 @@ class Home extends React.PureComponent {
 
 	componentDidMount() {
 		Analytics.trackEvent('Home page load')
-		AppState.addEventListener('change', this._handleAppStateChange.bind(this))
+		AppState.addEventListener(
+			'change',
+			this._handleAppStateChange.bind(this)
+		)
 	}
 
 	componentDidUpdate() {
@@ -106,7 +109,9 @@ class Home extends React.PureComponent {
 								refreshControl={
 									<RefreshControl
 										colors={['#9Bd35A', '#689F38']}
-										onRefresh={this.handleRefresh.bind(this)}
+										onRefresh={this.handleRefresh.bind(
+											this
+										)}
 									/>
 								}
 							/>

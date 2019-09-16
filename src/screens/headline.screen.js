@@ -31,7 +31,9 @@ class HeadlineScreen extends React.PureComponent {
 
 			if (tabs) {
 				return tabs.map((tab, idx) => {
-					const dataArr = props.getArticles.filter(a => a.category === tab)
+					const dataArr = props.getArticles.filter(
+						a => a.category === tab
+					)
 					if (dataArr.length <= 0) {
 						return <Text>Not available</Text>
 					}
@@ -67,7 +69,9 @@ class HeadlineScreen extends React.PureComponent {
 					{props && props.getArticles.length > 0 ? (
 						<Container>
 							<Header hasTabs style={styles.header} />
-							<Tabs renderTabBar={() => <ScrollableTab />}>{renderTab()}</Tabs>
+							<Tabs renderTabBar={() => <ScrollableTab />}>
+								{renderTab()}
+							</Tabs>
 						</Container>
 					) : null}
 				</AppLayout>

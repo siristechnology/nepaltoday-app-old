@@ -31,7 +31,9 @@ const BottomTabs = createBottomTabNavigator(
 						<Button
 							vertical
 							active={props.navigation.state.index === 1}
-							onPress={() => props.navigation.navigate('Headline')}
+							onPress={() =>
+								props.navigation.navigate('Headline')
+							}
 						>
 							<Icon name="newspaper" type="FontAwesome5" />
 							<NBText>Headlines</NBText>
@@ -41,7 +43,12 @@ const BottomTabs = createBottomTabNavigator(
 							active={props.navigation.state.index === 2}
 							onPress={() => props.navigation.navigate('Twitter')}
 						>
-							<Icon active ios="twitter" android="twitter" type="FontAwesome" />
+							<Icon
+								active
+								ios="twitter"
+								android="twitter"
+								type="FontAwesome"
+							/>
 							<Text>Twitter</Text>
 						</Button>
 					</FooterTab>
