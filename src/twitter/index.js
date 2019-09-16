@@ -2,11 +2,10 @@ import React from 'react'
 import { FlatList } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
 
+import { Spinner } from 'native-base'
 import TwitterCard from './TwitterCard'
 import environment from '../environment'
 import AppLayout from '../frame/AppLayout'
-import { View, Text, Spinner } from 'native-base'
-
 class TwitterComponent extends React.PureComponent {
 	render() {
 		return (
