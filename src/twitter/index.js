@@ -5,7 +5,8 @@ import { QueryRenderer, graphql } from 'react-relay'
 import { Spinner } from 'native-base'
 import TwitterCard from './TwitterCard'
 import environment from '../environment'
-import AppLayout from '../frame/AppLayout'
+import AppLayout from '../frame/app-layout'
+
 class TwitterComponent extends React.PureComponent {
 	render() {
 		return (
