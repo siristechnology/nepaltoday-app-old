@@ -96,7 +96,8 @@ const styles = StyleSheet.create({
 		borderWidth: 0.5
 	},
 	title: {
-		fontWeight: '900'
+		fontWeight: '900',
+		fontSize: 20
 	},
 	contentWrapper: {
 		textAlign: 'justify'
@@ -104,7 +105,8 @@ const styles = StyleSheet.create({
 
 	content: {
 		fontWeight: '400',
-		fontSize: 12,
+		textAlign: 'justify',
+		fontSize: 18,
 		marginTop: 8
 	}
 })
