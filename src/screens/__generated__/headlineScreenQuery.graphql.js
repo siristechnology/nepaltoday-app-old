@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 31d8a1526a87db3cd9253218a5e20b35
+ * @relayHash af636a55743e708d2630ac2ce35dc774
  */
 
 /* eslint-disable */
@@ -9,8 +9,8 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type HeadlineScreenQueryVariables = {||};
-export type HeadlineScreenQueryResponse = {|
+export type headlineScreenQueryVariables = {||};
+export type headlineScreenQueryResponse = {|
   +getArticles: $ReadOnlyArray<?{|
     +_id: string,
     +title: string,
@@ -28,15 +28,15 @@ export type HeadlineScreenQueryResponse = {|
     |},
   |}>
 |};
-export type HeadlineScreenQuery = {|
-  variables: HeadlineScreenQueryVariables,
-  response: HeadlineScreenQueryResponse,
+export type headlineScreenQuery = {|
+  variables: headlineScreenQueryVariables,
+  response: headlineScreenQueryResponse,
 |};
 */
 
 
 /*
-query HeadlineScreenQuery {
+query headlineScreenQuery {
   getArticles {
     _id
     title
@@ -164,7 +164,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "HeadlineScreenQuery",
+    "name": "headlineScreenQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -172,19 +172,19 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "HeadlineScreenQuery",
+    "name": "headlineScreenQuery",
     "argumentDefinitions": [],
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "query",
-    "name": "HeadlineScreenQuery",
+    "name": "headlineScreenQuery",
     "id": null,
-    "text": "query HeadlineScreenQuery {\n  getArticles {\n    _id\n    title\n    shortDescription\n    content\n    link\n    imageLink\n    publishedDate\n    modifiedDate\n    category\n    source {\n      _id\n      name\n      logoLink\n    }\n  }\n}\n",
+    "text": "query headlineScreenQuery {\n  getArticles {\n    _id\n    title\n    shortDescription\n    content\n    link\n    imageLink\n    publishedDate\n    modifiedDate\n    category\n    source {\n      _id\n      name\n      logoLink\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '41b85a791df3f2f4330a3277f021be7b';
+(node/*: any*/).hash = 'd324c8587b0513e8e5a81e667783c973';
 module.exports = node;

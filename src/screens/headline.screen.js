@@ -80,7 +80,7 @@ class HeadlineScreen extends React.PureComponent {
 			<QueryRenderer
 				environment={environment}
 				query={graphql`
-					query HeadlineScreenQuery {
+					query headlineScreenQuery {
 						getArticles {
 							_id
 							title

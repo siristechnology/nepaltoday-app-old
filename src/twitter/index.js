@@ -17,6 +17,10 @@ class TwitterComponent extends React.PureComponent {
 						getTweets {
 							_id
 							text
+							name
+							profileImage
+							description
+							createdAt
 							twitterHandle {
 								_id
 								name
@@ -27,6 +31,7 @@ class TwitterComponent extends React.PureComponent {
 					}
 				`}
 				render={({ error, props }) => {
+					console.log('twitter props here', props)
 					if (!props) {
 						return (
 							<View>
