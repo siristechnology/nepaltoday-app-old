@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash d22baffbe28141f8cddf875b3ff53457
+ * @relayHash 6432e80a1341f1e84b9d95791b72531f
  */
 
 /* eslint-disable */
@@ -14,6 +14,10 @@ export type twitterQueryResponse = {|
   +getTweets: $ReadOnlyArray<?{|
     +_id: string,
     +text: ?string,
+    +name: ?string,
+    +profileImage: ?string,
+    +description: ?string,
+    +createdAt: ?string,
     +twitterHandle: ?{|
       +_id: string,
       +name: ?string,
@@ -34,6 +38,10 @@ query twitterQuery {
   getTweets {
     _id
     text
+    name
+    profileImage
+    description
+    createdAt
     twitterHandle {
       _id
       name
@@ -52,7 +60,14 @@ var v0 = {
   "args": null,
   "storageKey": null
 },
-v1 = [
+v1 = {
+  "kind": "ScalarField",
+  "alias": null,
+  "name": "name",
+  "args": null,
+  "storageKey": null
+},
+v2 = [
   {
     "kind": "LinkedField",
     "alias": null,
@@ -70,6 +85,28 @@ v1 = [
         "args": null,
         "storageKey": null
       },
+      (v1/*: any*/),
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "profileImage",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "description",
+        "args": null,
+        "storageKey": null
+      },
+      {
+        "kind": "ScalarField",
+        "alias": null,
+        "name": "createdAt",
+        "args": null,
+        "storageKey": null
+      },
       {
         "kind": "LinkedField",
         "alias": null,
@@ -80,13 +117,7 @@ v1 = [
         "plural": false,
         "selections": [
           (v0/*: any*/),
-          {
-            "kind": "ScalarField",
-            "alias": null,
-            "name": "name",
-            "args": null,
-            "storageKey": null
-          },
+          (v1/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
@@ -114,23 +145,23 @@ return {
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
-    "selections": (v1/*: any*/)
+    "selections": (v2/*: any*/)
   },
   "operation": {
     "kind": "Operation",
     "name": "twitterQuery",
     "argumentDefinitions": [],
-    "selections": (v1/*: any*/)
+    "selections": (v2/*: any*/)
   },
   "params": {
     "operationKind": "query",
     "name": "twitterQuery",
     "id": null,
-    "text": "query twitterQuery {\n  getTweets {\n    _id\n    text\n    twitterHandle {\n      _id\n      name\n      handle\n      category\n    }\n  }\n}\n",
+    "text": "query twitterQuery {\n  getTweets {\n    _id\n    text\n    name\n    profileImage\n    description\n    createdAt\n    twitterHandle {\n      _id\n      name\n      handle\n      category\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '986834ef7725826f12e2341bc3afd2e9';
+(node/*: any*/).hash = 'ec328975b8c748937c4687aae23b54c8';
 module.exports = node;
