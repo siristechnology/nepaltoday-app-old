@@ -5,7 +5,7 @@ import { QueryRenderer, graphql } from 'react-relay'
 import TwitterCard from './TwitterCard'
 import environment from '../environment'
 import AppLayout from '../frame/AppLayout'
-import { View, Text } from 'native-base'
+import { View, Text, Spinner } from 'native-base'
 
 class TwitterComponent extends React.PureComponent {
 	render() {
@@ -33,11 +33,7 @@ class TwitterComponent extends React.PureComponent {
 				render={({ error, props }) => {
 					console.log('twitter props here', props)
 					if (!props) {
-						return (
-							<View>
-								<Text>Twitter splash screen here</Text>
-							</View>
-						)
+						return <Spinner />
 					} else if (error) {
 						console.log('error:' + JSON.stringify(error))
 					}
