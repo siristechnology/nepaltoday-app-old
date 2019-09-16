@@ -99,11 +99,13 @@ const styles = StyleSheet.create({
 		borderWidth: 0.5
 	},
 	title: {
-		fontWeight: '900'
+		fontWeight: '900',
+		fontSize: 20
 	},
 	content: {
 		fontWeight: '400',
-		fontSize: 12,
+		textAlign: 'justify',
+		fontSize: 16,
 		marginTop: 8
 	},
 	newsSource: {
