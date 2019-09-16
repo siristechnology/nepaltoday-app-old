@@ -1,11 +1,11 @@
 import React from 'react'
 import {
-	Spinner,
-	Header,
-	Tabs,
 	Tab,
-	Container,
+	Tabs,
 	Text,
+	Header,
+	Spinner,
+	Container,
 	ScrollableTab
 } from 'native-base'
 import { FlatList, StyleSheet } from 'react-native'
@@ -22,6 +22,7 @@ class HeadlineScreen extends React.PureComponent {
 			return <Spinner />
 		} else if (error) {
 			console.log('error:' + JSON.stringify(error))
+			throw new Error(`Error occured here ${JSON.stringify(error)}`)
 		}
 		const renderTab = () => {
 			const tabs = [
@@ -79,7 +80,7 @@ class HeadlineScreen extends React.PureComponent {
 			<QueryRenderer
 				environment={environment}
 				query={graphql`
-					query headlineScreenQuery {
+					query HeadlineScreenQuery {
 						getArticles {
 							_id
 							title

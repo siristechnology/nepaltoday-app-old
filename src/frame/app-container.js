@@ -4,7 +4,7 @@ import Home from '../home/index.js'
 import TwitterScreen from '../twitter/index'
 import ArticleScreen from '../article/index.js'
 import ArticleDetailScreen from '../home/components/article-detail.screen.js'
-import HeadlineScreen from '../screens/HeadlineScreen'
+import HeadlineScreen from '../screens/headline.screen'
 
 const AppNavigator = createStackNavigator(
 	{
