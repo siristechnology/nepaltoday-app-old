@@ -7,15 +7,19 @@ import {
 	Content,
 	CardItem,
 	Thumbnail,
-	View
+	View,
+	Button,
+	Icon,
+	Right
 } from 'native-base'
 import { MutedText } from '../../styled'
 import { ImageContainer } from '../../style'
 import { Image, StyleSheet } from 'react-native'
 import { getRelativeTime } from '../../helper/time'
+import { np } from '../../lang/np'
 
 const ArticleDetailScreen = props => {
-	console.log('props here', props)
+	const { READ_MORE } = np.public
 	const {
 		navigation: {
 			state: {
@@ -23,7 +27,7 @@ const ArticleDetailScreen = props => {
 					article: {
 						title,
 						content,
-						// link,
+						link,
 						imageLink,
 						publishedDate,
 						source: { name, logoLink }
@@ -33,6 +37,11 @@ const ArticleDetailScreen = props => {
 		}
 	} = props
 	const relativTime = getRelativeTime(publishedDate)
+
+	const handleLinkClick = () => {
+		const { navigation } = props
+		navigation.navigate('Article', { link })
+	}
 
 	const renderContent = () => {
 		return (
@@ -67,9 +76,17 @@ const ArticleDetailScreen = props => {
 								style={styles.image}
 							/>
 						</ImageContainer>
-						<View style={styles.contentWrapper}>{renderContent()}</View>
+						<View style={styles.contentWrapper}>
+							{renderContent()}
+						</View>
 					</Body>
 				</CardItem>
+				<Right>
+					<Button rounded primary iconRight onPress={handleLinkClick}>
+						<Text>{READ_MORE}</Text>
+						<Icon name="arrow-forward" />
+					</Button>
+				</Right>
 			</Card>
 		</Content>
 	)
