@@ -20,6 +20,16 @@
 	},
 	"plugins": ["react", "prettier"],
 	"rules": {
+		"prettier/prettier": [
+			"error",
+			{
+				"tabWidth": 4,
+				"useTabs": true,
+				"singleQuote": true,
+				"semi": false,
+				"printWidth": 120
+			}
+		],
 		"semi": "off",
 		"indent": [
 			"error",

@@ -12,7 +12,7 @@ import { FlatList, StyleSheet } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
 
 import environment from '../environment'
-import AppLayout from '../frame/AppLayout'
+import AppLayout from '../frame/app-layout'
 import ArticleCard from '../home/components/article-card'
 import { getLocalName } from '../helper/text'
 
