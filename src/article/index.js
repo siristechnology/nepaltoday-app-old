@@ -1,15 +1,15 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { WebView } from 'react-native'
+import { WebView } from 'react-native-webview'
 
 class ArticleScreen extends React.Component {
 	render() {
 		const { navigation } = this.props
-		const article = navigation.getParam('article')
+		const link = navigation.getParam('link')
 
 		return (
 			<WebView
-				source={{ uri: article.link }}
+				source={{ uri: link }}
 				style={{
 					flex: 1,
 					alignItems: 'center',

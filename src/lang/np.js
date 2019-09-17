@@ -7,5 +7,8 @@ export const np = {
 		OPINION: 'बिचार',
 		SOCIAL: 'समाज ',
 		SPORTS: 'खेलकुद'
+	},
+	public: {
+		READ_MORE: 'पूरा पढ्नुस'
 	}
 }
