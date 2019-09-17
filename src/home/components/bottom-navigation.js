@@ -1,5 +1,4 @@
 import React from 'react'
-import { Text } from 'react-native'
 import { createBottomTabNavigator } from 'react-navigation'
 import { Footer, FooterTab, Button, Icon, Text as NBText } from 'native-base'
 
@@ -31,7 +30,9 @@ const BottomTabs = createBottomTabNavigator(
 						<Button
 							vertical
 							active={props.navigation.state.index === 1}
-							onPress={() => props.navigation.navigate('Headline')}
+							onPress={() =>
+								props.navigation.navigate('Headline')
+							}
 						>
 							<Icon name="newspaper" type="FontAwesome5" />
 							<NBText>Headlines</NBText>
@@ -41,8 +42,12 @@ const BottomTabs = createBottomTabNavigator(
 							active={props.navigation.state.index === 2}
 							onPress={() => props.navigation.navigate('Twitter')}
 						>
-							<Icon active ios="twitter" android="twitter" type="FontAwesome" />
-							<Text>Twitter</Text>
+							<Icon
+								ios="twitter"
+								android="twitter"
+								type="FontAwesome"
+							/>
+							<NBText>Twitter</NBText>
 						</Button>
 					</FooterTab>
 				</Footer>
