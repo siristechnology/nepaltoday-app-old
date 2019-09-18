@@ -15,7 +15,17 @@ import environment from '../environment'
 import AppLayout from '../frame/app-layout'
 import ArticleCard from '../home/components/article-card'
 import { getLocalName } from '../helper/text'
+import { en } from '../lang/en'
 
+const {
+	POLITICS,
+	NEWS,
+	ENTERTAINMENT,
+	BUSINESS,
+	OPINION,
+	SOCIAL,
+	SPORTS
+} = en.menu
 class HeadlineScreen extends React.PureComponent {
 	renderQuery = ({ error, props }) => {
 		if (!props) {
@@ -26,12 +36,23 @@ class HeadlineScreen extends React.PureComponent {
 		}
 		const renderTab = () => {
 			const tabs = [
-				...new Set(props.getArticles.map(article => article.category))
+				NEWS,
+				POLITICS,
+				ENTERTAINMENT,
+				BUSINESS,
+				OPINION,
+				SOCIAL,
+				SPORTS
 			]
+			// const tabs = [
+			// 	...new Set(props.getArticles.map(article => article.category))
+			// ]
 
 			if (tabs) {
 				return tabs.map((tab, idx) => {
-					const dataArr = props.getArticles.filter(a => a.category === tab)
+					const dataArr = props.getArticles.filter(
+						a => a.category === tab
+					)
 					if (dataArr.length <= 0) {
 						return <Text>Not available</Text>
 					}
@@ -67,7 +88,9 @@ class HeadlineScreen extends React.PureComponent {
 					{props && props.getArticles.length > 0 ? (
 						<Container>
 							<Header hasTabs style={styles.header} />
-							<Tabs renderTabBar={() => <ScrollableTab />}>{renderTab()}</Tabs>
+							<Tabs renderTabBar={() => <ScrollableTab />}>
+								{renderTab()}
+							</Tabs>
 						</Container>
 					) : null}
 				</AppLayout>
