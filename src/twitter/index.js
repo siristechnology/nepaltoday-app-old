@@ -20,7 +20,7 @@ class TwitterComponent extends React.PureComponent {
 							name
 							profileImage
 							description
-							createdAt
+							publishedDate
 							twitterHandle {
 								_id
 								name
