@@ -16,6 +16,13 @@ target 'nepaltodayapp' do
 
 
 
+
+  pod 'appcenter-analytics', :path => '../node_modules/appcenter-analytics'
+
+  pod 'appcenter-crashes', :path => '../node_modules/appcenter-crashes'
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
   target 'nepaltodayappTests' do
     inherit! :search_paths
     # Pods for testing
