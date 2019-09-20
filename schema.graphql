@@ -41,6 +41,7 @@ type Tweet {
 	_id: String!
 	text: String
 	twitterHandle: TwitterHandle
+	publishedDate: String
 	createdAt: String
 	name: String
 	profileImage: String

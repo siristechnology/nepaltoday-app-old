@@ -7,7 +7,8 @@ import { getRelativeTime } from '../helper/time'
 class TwitterCard extends React.PureComponent {
 	render() {
 		const { tweet } = this.props
-		const relativeTime = getRelativeTime(tweet.createdAt || new Date())
+		console.log('time here ============', tweet.publishedDate)
+		const relativeTime = getRelativeTime(tweet.publishedDate || new Date())
 		return (
 			<ListItem avatar>
 				<StyledThumbnail
@@ -21,7 +22,9 @@ class TwitterCard extends React.PureComponent {
 					<NameWrapper>
 						<Name>{tweet.twitterHandle.name}</Name>
 						<MutedText>{tweet.twitterHandle.handle}</MutedText>
-						<MutedText style={{ marginLeft: 8 }}>{relativeTime}</MutedText>
+						<MutedText style={{ marginLeft: 8 }}>
+							{relativeTime}
+						</MutedText>
 					</NameWrapper>
 					<Tweet>{tweet.text}</Tweet>
 				</Body>
