@@ -5,17 +5,16 @@ import Analytics from 'appcenter-analytics'
 import { Image, StyleSheet } from 'react-native'
 import { Card, CardItem, Thumbnail, Text, Left, Body, View } from 'native-base'
 
-import { ImageContainer } from '../../style.js'
+import { ImageContainer } from '../style'
 import actionCreators from '../ducks/actions.js'
-import { getRelativeTime } from '../../helper/time.js'
+import { getRelativeTime } from '../helper/time'
 
-class ArticleCard extends React.PureComponent {
+class CardComponent extends React.PureComponent {
 	handleArticleCardPressed() {
 		this.props.actions.startToOpenArticle(this.props.article)
 
 		Analytics.trackEvent('Article link click')
 		const { navigation } = this.props
-		// navigation.navigate('Article', { article: this.props.article })
 		navigation.navigate('ArticleDetail', { article: this.props.article })
 	}
 
@@ -64,15 +63,21 @@ class ArticleCard extends React.PureComponent {
 									marginRight: 4
 								}}
 							/>
-							<Text style={styles.newsSource}>{article.source.name}</Text>
+							<Text style={styles.newsSource}>
+								{article.source.name}
+							</Text>
 						</View>
 						<View style={{ flex: 1, justifyContent: 'flex-start' }}>
 							<Text style={styles.title}>{article.title}</Text>
-							<Text style={styles.content}>{article.shortDescription}</Text>
+							<Text style={styles.content}>
+								{article.shortDescription}
+							</Text>
 						</View>
 					</Body>
 				</CardItem>
-				<CardItem style={{ paddingTop: 0, paddingBottom: 4, marginBottom: 0 }}>
+				<CardItem
+					style={{ paddingTop: 0, paddingBottom: 4, marginBottom: 0 }}
+				>
 					<Left>
 						<View
 							style={{
@@ -123,7 +128,7 @@ function mapDispatchToProps(dispatch) {
 	return { actions: bindActionCreators(actionCreators, dispatch) }
 }
 
-export default connect(
+export const ArticleCard = connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(ArticleCard)
+)(CardComponent)

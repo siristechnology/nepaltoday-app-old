@@ -6,7 +6,9 @@ const { width } = Dimensions.get('window')
 function MiniOfflineSign() {
 	return (
 		<View style={styles.offlineContainer}>
-			<Text style={styles.offlineText}>कृपया इन्टरनेट जाँच गर्नुहोस्</Text>
+			<Text style={styles.offlineText}>
+				कृपया इन्टरनेट जाँच गर्नुहोस्
+			</Text>
 		</View>
 	)
 }
@@ -58,4 +60,4 @@ const styles = StyleSheet.create({
 	offlineText: { color: 'white' }
 })
 
-export default OfflineNotice
+export { OfflineNotice }

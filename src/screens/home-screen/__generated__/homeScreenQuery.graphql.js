@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 08d937354dea229303a4b2ef1022b0f2
+ * @relayHash 5f662456480aab80e1066791afd62369
  */
 
 /* eslint-disable */
@@ -9,8 +9,8 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type homeQueryVariables = {||};
-export type homeQueryResponse = {|
+export type homeScreenQueryVariables = {||};
+export type homeScreenQueryResponse = {|
   +getArticles: $ReadOnlyArray<?{|
     +_id: string,
     +title: string,
@@ -28,15 +28,15 @@ export type homeQueryResponse = {|
     |},
   |}>
 |};
-export type homeQuery = {|
-  variables: homeQueryVariables,
-  response: homeQueryResponse,
+export type homeScreenQuery = {|
+  variables: homeScreenQueryVariables,
+  response: homeScreenQueryResponse,
 |};
 */
 
 
 /*
-query homeQuery {
+query homeScreenQuery {
   getArticles {
     _id
     title
@@ -164,7 +164,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "homeQuery",
+    "name": "homeScreenQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -172,19 +172,19 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "homeQuery",
+    "name": "homeScreenQuery",
     "argumentDefinitions": [],
     "selections": (v1/*: any*/)
   },
   "params": {
     "operationKind": "query",
-    "name": "homeQuery",
+    "name": "homeScreenQuery",
     "id": null,
-    "text": "query homeQuery {\n  getArticles {\n    _id\n    title\n    shortDescription\n    content\n    link\n    imageLink\n    publishedDate\n    modifiedDate\n    category\n    source {\n      _id\n      name\n      logoLink\n    }\n  }\n}\n",
+    "text": "query homeScreenQuery {\n  getArticles {\n    _id\n    title\n    shortDescription\n    content\n    link\n    imageLink\n    publishedDate\n    modifiedDate\n    category\n    source {\n      _id\n      name\n      logoLink\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '53762f57b0d27f4275061ae69a122bd1';
+(node/*: any*/).hash = '07c33419d36a5183f797d2bfa88c9a36';
 module.exports = node;

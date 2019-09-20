@@ -5,12 +5,11 @@ import Analytics from 'appcenter-analytics'
 import { QueryRenderer, graphql } from 'react-relay'
 import { FlatList, RefreshControl, AppState } from 'react-native'
 
-import environment from '../environment'
-import AppLayout from '../frame/app-layout'
-import actionCreators from './ducks/actions'
-import ArticleCard from './components/article-card'
-import SplashScreen from './components/splash-screen'
-import OfflineNotice from './components/offline-notification'
+import environment from '../../environment'
+import AppLayout from '../../frame/app-layout'
+import actionCreators from '../../ducks/actions'
+
+import { ArticleCard, SplashScreen, OfflineNotice } from '../../components'
 
 class Home extends React.PureComponent {
 	constructor(props) {
@@ -23,7 +22,10 @@ class Home extends React.PureComponent {
 
 	componentDidMount() {
 		Analytics.trackEvent('Home page load')
-		AppState.addEventListener('change', this._handleAppStateChange.bind(this))
+		AppState.addEventListener(
+			'change',
+			this._handleAppStateChange.bind(this)
+		)
 	}
 
 	componentDidUpdate() {
@@ -59,7 +61,7 @@ class Home extends React.PureComponent {
 				environment={environment}
 				variables={{ isUpdated: this.state.isUpdated }}
 				query={graphql`
-					query homeQuery {
+					query homeScreenQuery {
 						getArticles {
 							_id
 							title
@@ -106,7 +108,9 @@ class Home extends React.PureComponent {
 								refreshControl={
 									<RefreshControl
 										colors={['#9Bd35A', '#689F38']}
-										onRefresh={this.handleRefresh.bind(this)}
+										onRefresh={this.handleRefresh.bind(
+											this
+										)}
 									/>
 								}
 							/>

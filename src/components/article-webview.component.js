@@ -1,8 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import { WebView } from 'react-native-webview'
 
-class ArticleScreen extends React.Component {
+export class ArticleWebviewComponent extends React.Component {
 	render() {
 		const { navigation } = this.props
 		const link = navigation.getParam('link')
@@ -20,18 +19,3 @@ class ArticleScreen extends React.Component {
 		)
 	}
 }
-
-function mapStateToProps(state) {
-	return {
-		article: state.article
-	}
-}
-
-function mapDispatchToProps(dispatch) {
-	return {}
-}
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(ArticleScreen)

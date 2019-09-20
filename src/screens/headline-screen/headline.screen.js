@@ -11,11 +11,11 @@ import {
 import { FlatList, StyleSheet } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
 
-import environment from '../environment'
-import AppLayout from '../frame/app-layout'
-import ArticleCard from '../home/components/article-card'
-import { getLocalName } from '../helper/text'
-import { en } from '../lang/en'
+import { en } from '../../lang/en'
+import environment from '../../environment'
+import AppLayout from '../../frame/app-layout'
+import { ArticleCard } from '../../components'
+import { getLocalName } from '../../helper/text'
 
 const {
 	POLITICS,
@@ -44,9 +44,6 @@ class HeadlineScreen extends React.PureComponent {
 				SOCIAL,
 				SPORTS
 			]
-			// const tabs = [
-			// 	...new Set(props.getArticles.map(article => article.category))
-			// ]
 
 			if (tabs) {
 				return tabs.map((tab, idx) => {
