@@ -1,24 +1,25 @@
 import React from 'react'
 import {
 	Body,
-	Card,
 	Text,
 	Left,
+	Icon,
+	Card,
+	View,
+	Right,
+	Button,
 	Content,
 	CardItem,
-	Thumbnail,
-	View,
-	Button,
-	Icon,
-	Right
+	Thumbnail
 } from 'native-base'
-import { MutedText } from '../../styled'
-import { ImageContainer } from '../../style'
 import { Image, StyleSheet } from 'react-native'
-import { getRelativeTime } from '../../helper/time'
-import { np } from '../../lang/np'
 
-const ArticleDetailScreen = props => {
+import { np } from '../lang/np'
+import { MutedText } from '../styled'
+import { ImageContainer } from '../style'
+import { getRelativeTime } from '../helper/time'
+
+export const ArticleDetail = props => {
 	const { READ_MORE } = np.public
 	const {
 		navigation: {
@@ -127,5 +128,3 @@ const styles = StyleSheet.create({
 		marginTop: 8
 	}
 })
-
-export default ArticleDetailScreen

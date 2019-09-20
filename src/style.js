@@ -2,9 +2,9 @@ import styled from 'styled-components/native'
 import { View, Text } from 'native-base'
 
 export const MutedText = styled(Text)`
-	font-weight: 200,
-		font-size: 10,
-		color: '#00000050'
+	font-weight: 200;
+	font-size: 10;
+	color: #00000050;
 `
 
 export const ImageContainer = styled(View)`

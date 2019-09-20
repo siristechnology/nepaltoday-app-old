@@ -2,11 +2,11 @@ import React from 'react'
 import { createBottomTabNavigator } from 'react-navigation'
 import { Footer, FooterTab, Button, Icon, Text as NBText } from 'native-base'
 
-import HomeScreen from '../index'
-import TwitterScreen from '../../twitter'
-import HeadlineScreen from '../../screens/headline.screen'
+import HomeScreen from '../home-screen/home.screen'
+import TwitterScreen from '../twitter-screen/twitter.screen'
+import HeadlineScreen from '../headline-screen/headline.screen'
 
-const BottomTabs = createBottomTabNavigator(
+export const BottomTabScreen = createBottomTabNavigator(
 	{
 		Home: { screen: HomeScreen },
 		Headline: { screen: HeadlineScreen },
@@ -55,5 +55,3 @@ const BottomTabs = createBottomTabNavigator(
 		}
 	}
 )
-
-export default BottomTabs
