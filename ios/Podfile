@@ -13,10 +13,8 @@ target 'nepaltodayapp' do
   
 
   platform :ios, '9.0'
-  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
 
-  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
 
   target 'nepaltodayappTests' do
     inherit! :search_paths
