@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 
-export default class SplashScreen extends React.Component {
+export class SplashScreen extends React.Component {
 	render() {
 		const viewStyles = [styles.container, { backgroundColor: 'skyblue' }]
 

@@ -1,13 +1,13 @@
 import React from 'react'
-import { Text, ListItem, Body, Thumbnail, View } from 'native-base'
 import styled from 'styled-components/native'
+import { Text, ListItem, Body, Thumbnail, View } from 'native-base'
+
 import { MutedText } from '../styled'
 import { getRelativeTime } from '../helper/time'
 
-class TwitterCard extends React.PureComponent {
+export class TwitterCard extends React.PureComponent {
 	render() {
 		const { tweet } = this.props
-		console.log('time here ============', tweet.publishedDate)
 		const relativeTime = getRelativeTime(tweet.publishedDate || new Date())
 		return (
 			<ListItem avatar>
@@ -32,7 +32,6 @@ class TwitterCard extends React.PureComponent {
 		)
 	}
 }
-export default TwitterCard
 
 const Name = styled(Text)`
 	padding-right: 8px;
