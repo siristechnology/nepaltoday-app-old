@@ -4,7 +4,11 @@
 		"node": true,
 		"jest": true
 	},
-	"extends": ["standard", "plugin:prettier/recommended"],
+	"extends": [
+		"standard",
+		"plugin:prettier/recommended",
+		"@react-native-community"
+	],
 	"globals": {
 		"Atomics": "readonly",
 		"SharedArrayBuffer": "readonly",
