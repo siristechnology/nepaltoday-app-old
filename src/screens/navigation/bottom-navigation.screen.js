@@ -22,31 +22,22 @@ export const BottomTabScreen = createBottomTabNavigator(
 						<Button
 							vertical
 							active={props.navigation.state.index === 0}
-							onPress={() => props.navigation.navigate('Home')}
-						>
-							<Icon ios="ios-menu" name="home" />
+							onPress={() => props.navigation.navigate('Home')}>
+							<Icon ios='ios-menu' name='home' />
 							<NBText>Home</NBText>
 						</Button>
 						<Button
 							vertical
 							active={props.navigation.state.index === 1}
-							onPress={() =>
-								props.navigation.navigate('Headline')
-							}
-						>
-							<Icon name="newspaper" type="FontAwesome5" />
+							onPress={() => props.navigation.navigate('Headline')}>
+							<Icon name='newspaper' type='FontAwesome5' />
 							<NBText>Headlines</NBText>
 						</Button>
 						<Button
 							vertical
 							active={props.navigation.state.index === 2}
-							onPress={() => props.navigation.navigate('Twitter')}
-						>
-							<Icon
-								ios="twitter"
-								android="twitter"
-								type="FontAwesome"
-							/>
+							onPress={() => props.navigation.navigate('Twitter')}>
+							<Icon ios='twitter' android='twitter' type='FontAwesome' />
 							<NBText>Twitter</NBText>
 						</Button>
 					</FooterTab>

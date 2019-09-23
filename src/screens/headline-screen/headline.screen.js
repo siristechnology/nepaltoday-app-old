@@ -1,13 +1,5 @@
 import React from 'react'
-import {
-	Tab,
-	Tabs,
-	Text,
-	Header,
-	Spinner,
-	Container,
-	ScrollableTab
-} from 'native-base'
+import { Tab, Tabs, Text, Header, Spinner, Container, ScrollableTab } from 'native-base'
 import { FlatList, StyleSheet } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
 
@@ -17,15 +9,7 @@ import AppLayout from '../../frame/app-layout'
 import { ArticleCard } from '../../components'
 import { getLocalName } from '../../helper/text'
 
-const {
-	POLITICS,
-	NEWS,
-	ENTERTAINMENT,
-	BUSINESS,
-	OPINION,
-	SOCIAL,
-	SPORTS
-} = en.menu
+const { POLITICS, NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 class HeadlineScreen extends React.PureComponent {
 	renderQuery = ({ error, props }) => {
 		if (!props) {
@@ -35,21 +19,11 @@ class HeadlineScreen extends React.PureComponent {
 			throw new Error(`Error occured here ${JSON.stringify(error)}`)
 		}
 		const renderTab = () => {
-			const tabs = [
-				NEWS,
-				POLITICS,
-				ENTERTAINMENT,
-				BUSINESS,
-				OPINION,
-				SOCIAL,
-				SPORTS
-			]
+			const tabs = [NEWS, POLITICS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS]
 
 			if (tabs) {
 				return tabs.map((tab, idx) => {
-					const dataArr = props.getArticles.filter(
-						a => a.category === tab
-					)
+					const dataArr = props.getArticles.filter(a => a.category === tab)
 					if (dataArr.length <= 0) {
 						return <Text>Not available</Text>
 					}
@@ -85,15 +59,13 @@ class HeadlineScreen extends React.PureComponent {
 					{props && props.getArticles.length > 0 ? (
 						<Container>
 							<Header hasTabs style={styles.header} />
-							<Tabs renderTabBar={() => <ScrollableTab />}>
-								{renderTab()}
-							</Tabs>
+							<Tabs renderTabBar={() => <ScrollableTab />}>{renderTab()}</Tabs>
 						</Container>
 					) : null}
 				</AppLayout>
 			)
 		}
-		return <Spinner color="blue" />
+		return <Spinner color='blue' />
 	}
 	render() {
 		return (

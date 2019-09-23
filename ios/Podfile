@@ -16,7 +16,14 @@ target 'nepaltodayapp' do
   pod 'react-native-webview', :path => '../node_modules/react-native-webview'
 
 
+
+
+
+
+
   pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  pod 'RNReanimated', :path => '../node_modules/react-native-reanimated'
 
   target 'nepaltodayappTests' do
     inherit! :search_paths
