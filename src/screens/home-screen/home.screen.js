@@ -9,7 +9,7 @@ import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
 import actionCreators from '../../ducks/actions'
 
-import { ArticleCard, SplashScreen, OfflineNotice } from '../../components'
+import { ArticleCard, SplashScreen } from '../../components'
 
 class Home extends React.PureComponent {
 	constructor(props) {
@@ -89,8 +89,6 @@ class Home extends React.PureComponent {
 
 					return (
 						<AppLayout>
-							<OfflineNotice />
-
 							<FlatList
 								data={props.getArticles}
 								keyExtractor={item => item._id}
