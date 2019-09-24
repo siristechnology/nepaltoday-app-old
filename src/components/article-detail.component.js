@@ -13,87 +13,94 @@ import {
 	Thumbnail,
 } from 'native-base'
 import { Image, StyleSheet } from 'react-native'
+import { HeaderBackButton } from 'react-navigation'
 
 import { np } from '../lang/np'
 import { MutedText } from '../styled'
 import { ImageContainer } from '../style'
 import { getRelativeTime } from '../helper/time'
 
-class ArticleDetail extends React.PureComponent {
-	render() {
-		const { READ_MORE } = np.public
-		const {
-			navigation: {
-				state: {
-					params: {
-						article: {
-							title,
-							content,
-							link,
-							imageLink,
-							publishedDate,
-							source: { name, logoLink },
-						},
-					},
+const ArticleDetail = ({ navigation }) => {
+	const { READ_MORE, BACK } = np.public
+	const {
+		state: {
+			params: {
+				article: {
+					title,
+					content,
+					link,
+					imageLink,
+					publishedDate,
+					source: { name, logoLink },
 				},
 			},
-		} = this.props
-		const renderContent = () => {
-			return (
-				content &&
-				content.split('\n').map((text, index) => (
-					<Text style={styles.content} key={index}>
-						{text}
-					</Text>
-				))
-			)
-		}
-		const handleLinkClick = () => {
-			const { navigation } = this.props
-			navigation.navigate('Article', { link })
-		}
-		const relativTime = getRelativeTime(publishedDate)
+		},
+	} = navigation
+	const relativTime = getRelativeTime(publishedDate)
+
+	const handleLinkClick = () => {
+		navigation.navigate('Article', { link })
+	}
+
+	const renderContent = () => {
 		return (
-			<Content>
-				<Card style={styles.root}>
-					<CardItem>
-						<Left>
-							<Thumbnail source={{ uri: logoLink }} size={24} />
-							<Body>
-								<Text>{name}</Text>
-							</Body>
-						</Left>
-					</CardItem>
-					<CardItem cardBody>
-						<Body>
-							<Text style={styles.title}>{title}</Text>
-							<MutedText>{relativTime}</MutedText>
-							<ImageContainer>
-								<Image
-									source={{ uri: imageLink || logoLink }}
-									resizeMethod="scale"
-									style={styles.image}
-								/>
-							</ImageContainer>
-							<View style={styles.contentWrapper}>
-								{renderContent()}
-							</View>
-						</Body>
-					</CardItem>
-					<Right>
-						<Button
-							rounded
-							primary
-							iconRight
-							onPress={handleLinkClick}>
-							<Text>{READ_MORE}</Text>
-							<Icon name="arrow-forward" />
-						</Button>
-					</Right>
-				</Card>
-			</Content>
+			content &&
+			content.split('\n').map((text, index) => (
+				<Text style={styles.content} key={index}>
+					{text}
+				</Text>
+			))
 		)
 	}
+	const navigateBack = () => {
+		navigation.goBack()
+	}
+
+	return (
+		<Content>
+			<View style={styles.iconWrapper}>
+				<Icon
+					onPress={navigateBack}
+					type="AntDesign"
+					name="back"
+					style={styles.icon}
+				/>
+				<Text>{BACK}</Text>
+			</View>
+			<Card style={styles.root}>
+				<CardItem>
+					<Left>
+						<Thumbnail source={{ uri: logoLink }} size={24} />
+						<Body>
+							<Text>{name}</Text>
+						</Body>
+					</Left>
+				</CardItem>
+				<CardItem cardBody>
+					<Body>
+						<Text style={styles.title}>{title}</Text>
+						<MutedText>{relativTime}</MutedText>
+						<ImageContainer>
+							<Image
+								source={{ uri: imageLink || logoLink }}
+								resizeMethod="scale"
+								style={styles.image}
+							/>
+						</ImageContainer>
+						<View style={styles.contentWrapper}>
+							{renderContent()}
+						</View>
+					</Body>
+				</CardItem>
+				<Right>
+					<Button rounded primary iconRight onPress={handleLinkClick}>
+						<Text>{READ_MORE}</Text>
+						<Icon name="arrow-forward" />
+					</Button>
+				</Right>
+			</Card>
+		</Content>
+	)
 }
 
 export { ArticleDetail }
@@ -131,5 +138,16 @@ const styles = StyleSheet.create({
 		textAlign: 'justify',
 		fontSize: 18,
 		marginTop: 8,
+	},
+	icon: {
+		padding: 8,
+		fontSize: 16,
+	},
+	iconWrapper: {
+		backgroundColor: '#eee',
+		display: 'flex',
+		flexDirection: 'row',
+		flexWrap: 'nowrap',
+		alignItems: 'center',
 	},
 })
