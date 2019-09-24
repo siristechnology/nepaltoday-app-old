@@ -71,5 +71,10 @@
     "testPathIgnorePatterns": [
       "<rootDir>/node_modules/"
     ]
+  },
+  "rnpm": {
+    "android": {
+      "mainFilePath": "src/main/java/com/nepaltodayapp/MainApplication.java"
+    }
   }
 }
