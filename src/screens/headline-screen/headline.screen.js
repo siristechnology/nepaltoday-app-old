@@ -6,7 +6,7 @@ import {
 	Header,
 	Spinner,
 	Container,
-	ScrollableTab
+	ScrollableTab,
 } from 'native-base'
 import { FlatList, StyleSheet } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
@@ -24,8 +24,9 @@ const {
 	BUSINESS,
 	OPINION,
 	SOCIAL,
-	SPORTS
+	SPORTS,
 } = en.menu
+
 class HeadlineScreen extends React.PureComponent {
 	renderQuery = ({ error, props }) => {
 		if (!props) {
@@ -34,49 +35,54 @@ class HeadlineScreen extends React.PureComponent {
 			console.log('error:' + JSON.stringify(error))
 			throw new Error(`Error occured here ${JSON.stringify(error)}`)
 		}
+
 		const renderTab = () => {
-			const tabs = [
+			const tabNames = [
 				NEWS,
 				POLITICS,
 				ENTERTAINMENT,
 				BUSINESS,
 				OPINION,
 				SOCIAL,
-				SPORTS
+				SPORTS,
 			]
 
-			if (tabs) {
-				return tabs.map((tab, idx) => {
-					const dataArr = props.getArticles.filter(
-						a => a.category === tab
-					)
-					if (dataArr.length <= 0) {
-						return <Text>Not available</Text>
-					}
+			return tabNames.map((tabname, idx) => {
+				const localTabName = getLocalName(tabname)
 
-					const tabName = getLocalName(tab)
+				const dataArr = props.getArticles.filter(
+					a => a.category === tabname,
+				)
 
+				if (dataArr.length <= 0) {
 					return (
-						<Tab heading={`${tabName}`} key={idx}>
-							<FlatList
-								data={dataArr}
-								keyExtractor={item => item._id}
-								renderItem={({ item }) => {
-									return (
-										<ArticleCard
-											article={item}
-											key={item._id}
-											actions={() => {}}
-											navigation={this.props.navigation}
-										/>
-									)
-								}}
-							/>
+						<Tab heading={localTabName} key={idx}>
+							<Text>Not available</Text>
 						</Tab>
 					)
-				})
-			}
+				}
+
+				return (
+					<Tab heading={localTabName} key={idx}>
+						<FlatList
+							data={dataArr}
+							keyExtractor={item => item._id}
+							renderItem={({ item }) => {
+								return (
+									<ArticleCard
+										article={item}
+										key={item._id}
+										actions={() => {}}
+										navigation={this.props.navigation}
+									/>
+								)
+							}}
+						/>
+					</Tab>
+				)
+			})
 		}
+
 		if (error) {
 			return <Text>{error.message}</Text>
 		} else if (props) {
@@ -95,6 +101,7 @@ class HeadlineScreen extends React.PureComponent {
 		}
 		return <Spinner color="blue" />
 	}
+
 	render() {
 		return (
 			<QueryRenderer
@@ -129,6 +136,6 @@ export default HeadlineScreen
 
 const styles = StyleSheet.create({
 	header: {
-		height: 10
-	}
+		height: 10,
+	},
 })

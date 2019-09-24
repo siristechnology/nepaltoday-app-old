@@ -4,7 +4,11 @@
 		"node": true,
 		"jest": true
 	},
-	"extends": ["standard", "plugin:prettier/recommended"],
+	"extends": [
+		"standard",
+		"plugin:prettier/recommended",
+		"@react-native-community"
+	],
 	"globals": {
 		"Atomics": "readonly",
 		"SharedArrayBuffer": "readonly",
@@ -27,7 +31,7 @@
 				"useTabs": true,
 				"singleQuote": true,
 				"semi": false,
-				"printWidth": 120
+				"printWidth": 150
 			}
 		],
 		"semi": "off",
