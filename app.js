@@ -7,13 +7,17 @@ import getTheme from './src/native-base-theme/components'
 import variables from './src/native-base-theme/variables/platform'
 import { store } from './src/store'
 import ErrorBoundary from './src/error/error-boundry'
+import SplashScreen from 'react-native-splash-screen'
 
 export default class App extends Component {
 	constructor() {
 		super()
 		this.state = {
-			isLoading: true
+			isLoading: true,
 		}
+	}
+	componentDidMount = () => {
+		SplashScreen.hide()
 	}
 
 	render() {

@@ -10,6 +10,7 @@ import AppLayout from '../../frame/app-layout'
 import actionCreators from '../../ducks/actions'
 
 import { ArticleCard, SplashScreen } from '../../components'
+import { Spinner } from 'native-base'
 
 class Home extends React.PureComponent {
 	constructor(props) {
@@ -82,7 +83,7 @@ class Home extends React.PureComponent {
 				`}
 				render={({ error, props }) => {
 					if (!props) {
-						return <SplashScreen />
+						return <Spinner />
 					} else if (error) {
 						console.log('error:' + JSON.stringify(error))
 					}
