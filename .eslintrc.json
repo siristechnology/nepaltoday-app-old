@@ -31,7 +31,7 @@
 				"useTabs": true,
 				"singleQuote": true,
 				"semi": false,
-				"printWidth": 120
+				"printWidth": 150
 			}
 		],
 		"semi": "off",
