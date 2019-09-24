@@ -1252,6 +1252,11 @@
     eslint-plugin-react-native "3.6.0"
     prettier "1.16.4"
 
+"@react-native-community/netinfo@4.2.2":
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-4.2.2.tgz#15035730a230e743b2e5429f2bbd75b0851a4b98"
+  integrity sha512-ktMlUCYn+vKL8PQH/e6Vpoygvn3gU+Ibc1uD7m+pYhQwiKHD7eqCRAkR1Xt5vc2L3Xy3N1z0tMXlxzK4IKbYyQ==
+
 "@react-navigation/core@3.0.3":
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.0.3.tgz#2c88f0553656fba04ff84a50711c35618bec1a72"
@@ -1498,6 +1503,11 @@ acorn@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.0.0.tgz#26b8d1cd9a9b700350b71c0905546f64d1284e7a"
   integrity sha512-PaF/MduxijYYt7unVGRuds1vBC9bFxbNf+VWqhOClfdgy7RlVkQqt610ig1/yxTgsDIfW1cWDel5EBbOy3jdtQ==
+
+add@2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+  integrity sha1-JI8Kn25aUo7yKV2+7DBTITCuIjU=
 
 ajv@^6.10.0, ajv@^6.10.2, ajv@^6.5.5:
   version "6.10.2"
@@ -8490,3 +8500,8 @@ yargs@^9.0.0:
     which-module "^2.0.0"
     y18n "^3.2.1"
     yargs-parser "^7.0.0"
+
+yarn@1.17.3:
+  version "1.17.3"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.17.3.tgz#60e0b77d079eb78e753bb616f7592b51b6a9adce"
+  integrity sha512-CgA8o7nRZaQvmeF/WBx2FC7f9W/0X59T2IaLYqgMo6637wfp5mMEsM3YXoJtKUspnpmDJKl/gGFhnqS+sON7hA==

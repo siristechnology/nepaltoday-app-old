@@ -6,7 +6,7 @@ import {
 	Header,
 	Spinner,
 	Container,
-	ScrollableTab
+	ScrollableTab,
 } from 'native-base'
 import { FlatList, StyleSheet } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
@@ -24,7 +24,7 @@ const {
 	BUSINESS,
 	OPINION,
 	SOCIAL,
-	SPORTS
+	SPORTS,
 } = en.menu
 class HeadlineScreen extends React.PureComponent {
 	renderQuery = ({ error, props }) => {
@@ -42,13 +42,13 @@ class HeadlineScreen extends React.PureComponent {
 				BUSINESS,
 				OPINION,
 				SOCIAL,
-				SPORTS
+				SPORTS,
 			]
 
 			if (tabs) {
 				return tabs.map((tab, idx) => {
 					const dataArr = props.getArticles.filter(
-						a => a.category === tab
+						a => a.category === tab,
 					)
 					if (dataArr.length <= 0) {
 						return <Text>Not available</Text>
@@ -129,6 +129,6 @@ export default HeadlineScreen
 
 const styles = StyleSheet.create({
 	header: {
-		height: 10
-	}
+		height: 10,
+	},
 })

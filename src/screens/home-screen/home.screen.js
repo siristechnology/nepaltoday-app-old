@@ -16,7 +16,7 @@ class Home extends React.PureComponent {
 		super(props)
 		this.state = {
 			isUpdated: false,
-			appState: AppState.currentState
+			appState: AppState.currentState,
 		}
 	}
 
@@ -24,7 +24,7 @@ class Home extends React.PureComponent {
 		Analytics.trackEvent('Home page load')
 		AppState.addEventListener(
 			'change',
-			this._handleAppStateChange.bind(this)
+			this._handleAppStateChange.bind(this),
 		)
 	}
 
@@ -35,7 +35,7 @@ class Home extends React.PureComponent {
 	componentWillUnmount() {
 		AppState.removeEventListener(
 			'change',
-			this._handleAppStateChange.bind(this)
+			this._handleAppStateChange.bind(this),
 		)
 	}
 
@@ -107,7 +107,7 @@ class Home extends React.PureComponent {
 									<RefreshControl
 										colors={['#9Bd35A', '#689F38']}
 										onRefresh={this.handleRefresh.bind(
-											this
+											this,
 										)}
 									/>
 								}
@@ -130,5 +130,5 @@ function mapDispatchToProps(dispatch) {
 
 export default connect(
 	mapStateToProps,
-	mapDispatchToProps
+	mapDispatchToProps,
 )(Home)
