@@ -10,37 +10,35 @@ import {
 	Button,
 	Content,
 	CardItem,
-	Thumbnail
+	Thumbnail,
 } from 'native-base'
 import { Image, StyleSheet } from 'react-native'
+import { HeaderBackButton } from 'react-navigation'
 
 import { np } from '../lang/np'
 import { MutedText } from '../styled'
 import { ImageContainer } from '../style'
 import { getRelativeTime } from '../helper/time'
 
-export const ArticleDetail = props => {
-	const { READ_MORE } = np.public
+const ArticleDetail = ({ navigation }) => {
+	const { READ_MORE, BACK } = np.public
 	const {
-		navigation: {
-			state: {
-				params: {
-					article: {
-						title,
-						content,
-						link,
-						imageLink,
-						publishedDate,
-						source: { name, logoLink }
-					}
-				}
-			}
-		}
-	} = props
+		state: {
+			params: {
+				article: {
+					title,
+					content,
+					link,
+					imageLink,
+					publishedDate,
+					source: { name, logoLink },
+				},
+			},
+		},
+	} = navigation
 	const relativTime = getRelativeTime(publishedDate)
 
 	const handleLinkClick = () => {
-		const { navigation } = props
 		navigation.navigate('Article', { link })
 	}
 
@@ -54,9 +52,21 @@ export const ArticleDetail = props => {
 			))
 		)
 	}
+	const navigateBack = () => {
+		navigation.goBack()
+	}
 
 	return (
 		<Content>
+			<View style={styles.iconWrapper}>
+				<Icon
+					onPress={navigateBack}
+					type="AntDesign"
+					name="back"
+					style={styles.icon}
+				/>
+				<Text>{BACK}</Text>
+			</View>
 			<Card style={styles.root}>
 				<CardItem>
 					<Left>
@@ -93,9 +103,11 @@ export const ArticleDetail = props => {
 	)
 }
 
+export { ArticleDetail }
+
 const styles = StyleSheet.create({
 	root: {
-		padding: 8
+		padding: 8,
 	},
 	imageContainer: {
 		flex: 1,
@@ -104,27 +116,38 @@ const styles = StyleSheet.create({
 		backgroundColor: 'rgba(27,31,35,.05)',
 		elevation: 1,
 		margin: 2,
-		borderRadius: 8
+		borderRadius: 8,
 	},
 	image: {
 		flex: 1,
 		height: 200,
 		top: 0,
 		borderRadius: 8,
-		borderWidth: 0.5
+		borderWidth: 0.5,
 	},
 	title: {
 		fontWeight: '900',
-		fontSize: 20
+		fontSize: 20,
 	},
 	contentWrapper: {
-		textAlign: 'justify'
+		textAlign: 'justify',
 	},
 
 	content: {
 		fontWeight: '400',
 		textAlign: 'justify',
 		fontSize: 18,
-		marginTop: 8
-	}
+		marginTop: 8,
+	},
+	icon: {
+		padding: 8,
+		fontSize: 16,
+	},
+	iconWrapper: {
+		backgroundColor: '#eee',
+		display: 'flex',
+		flexDirection: 'row',
+		flexWrap: 'nowrap',
+		alignItems: 'center',
+	},
 })

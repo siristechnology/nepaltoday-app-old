@@ -5,11 +5,11 @@ import Analytics from 'appcenter-analytics'
 import { QueryRenderer, graphql } from 'react-relay'
 import { FlatList, RefreshControl, AppState } from 'react-native'
 
+import { Spinner } from 'native-base'
 import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
+import { ArticleCard } from '../../components'
 import actionCreators from '../../ducks/actions'
-
-import { ArticleCard, SplashScreen } from '../../components'
 
 class Home extends React.PureComponent {
 	constructor(props) {
@@ -82,7 +82,7 @@ class Home extends React.PureComponent {
 				`}
 				render={({ error, props }) => {
 					if (!props) {
-						return <SplashScreen />
+						return <Spinner />
 					} else if (error) {
 						console.log('error:' + JSON.stringify(error))
 					}
