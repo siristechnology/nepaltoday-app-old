@@ -1,5 +1,6 @@
 import styled from 'styled-components/native'
 import { View, Text } from 'native-base'
+import { Dimentions } from 'react-native'
 
 export const MutedText = styled(Text)`
 	font-weight: 200;
@@ -8,7 +9,7 @@ export const MutedText = styled(Text)`
 `
 
 export const ImageContainer = styled(View)`
-	flex-grow: 1;
+	flex: 1;
 	flex-direction: row;
 	align-items: stretch;
 	background-color: rgba(27, 31, 35, 0.05);
