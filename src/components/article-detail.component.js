@@ -2,7 +2,6 @@ import React from 'react'
 import {
 	Body,
 	Text,
-	Left,
 	Icon,
 	Card,
 	View,
@@ -13,7 +12,6 @@ import {
 	Thumbnail,
 } from 'native-base'
 import { Image, StyleSheet } from 'react-native'
-import { HeaderBackButton } from 'react-navigation'
 
 import { np } from '../lang/np'
 import { MutedText } from '../styled'
@@ -68,25 +66,25 @@ const ArticleDetail = ({ navigation }) => {
 				<Text>{BACK}</Text>
 			</View>
 			<Card style={styles.root}>
-				<CardItem>
-					<Left>
-						<Thumbnail source={{ uri: logoLink }} size={24} />
-						<Body>
-							<Text>{name}</Text>
-						</Body>
-					</Left>
-				</CardItem>
 				<CardItem cardBody>
 					<Body>
 						<Text style={styles.title}>{title}</Text>
 						<MutedText>{relativTime}</MutedText>
-						<ImageContainer>
-							<Image
-								source={{ uri: imageLink || logoLink }}
-								resizeMethod="scale"
-								style={styles.image}
-							/>
-						</ImageContainer>
+						<View style={styles.imgWithLogo}>
+							<ImageContainer>
+								<Image
+									source={{ uri: imageLink || logoLink }}
+									resizeMethod="scale"
+									style={styles.image}
+								/>
+							</ImageContainer>
+							<View style={styles.logoWrapper}>
+								<Thumbnail
+									source={{ uri: logoLink }}
+									style={styles.thumbnail}
+								/>
+							</View>
+						</View>
 						<View style={styles.contentWrapper}>
 							{renderContent()}
 						</View>
@@ -108,6 +106,7 @@ export { ArticleDetail }
 const styles = StyleSheet.create({
 	root: {
 		padding: 8,
+		borderColor: 'transparent',
 	},
 	imageContainer: {
 		flex: 1,
@@ -127,17 +126,19 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontWeight: '900',
-		fontSize: 20,
+		fontSize: 25,
+		textAlign: 'center',
 	},
 	contentWrapper: {
 		textAlign: 'justify',
+		flex: 1,
 	},
 
 	content: {
-		fontWeight: '400',
 		textAlign: 'justify',
 		fontSize: 18,
 		marginTop: 8,
+		opacity: 0.7,
 	},
 	icon: {
 		padding: 8,
@@ -149,5 +150,21 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		flexWrap: 'nowrap',
 		alignItems: 'center',
+	},
+	imgWithLogo: {
+		width: '100%',
+		paddingBottom: 16,
+		position: 'relative',
+	},
+	logoWrapper: {
+		position: 'absolute',
+		bottom: 0,
+		left: 8,
+	},
+	thumbnail: {
+		width: 40,
+		height: 40,
+		borderColor: 'white',
+		borderWidth: 2,
 	},
 })
