@@ -69,7 +69,14 @@ const ArticleDetail = ({ navigation }) => {
 				<CardItem cardBody>
 					<Body>
 						<Text style={styles.title}>{title}</Text>
-						<MutedText>{relativTime}</MutedText>
+						<View style={styles.timeWrapper}>
+							<Icon
+								type="AntDesign"
+								name="clockcircleo"
+								style={styles.icon}
+							/>
+							<MutedText>{relativTime}</MutedText>
+						</View>
 						<View style={styles.imgWithLogo}>
 							<ImageContainer>
 								<Image
@@ -166,5 +173,10 @@ const styles = StyleSheet.create({
 		height: 40,
 		borderColor: 'white',
 		borderWidth: 2,
+	},
+	timeWrapper: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
 	},
 })
