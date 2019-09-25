@@ -24,13 +24,13 @@ async function fetchQuery(operation, variables, cacheConfig) {
 	return fetch(global.nepalTodayServer, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 			// 'Authorization': 'Bearer ' + JSON.parse(userContext).token
 		},
 		body: JSON.stringify({
 			query: operation.text,
-			variables
-		})
+			variables,
+		}),
 	})
 		.then(response => {
 			return response.json()
@@ -52,7 +52,7 @@ async function fetchQuery(operation, variables, cacheConfig) {
 
 const environment = new Environment({
 	network: Network.create(fetchQuery),
-	store: new Store(new RecordSource())
+	store: new Store(new RecordSource()),
 })
 
 export default environment
