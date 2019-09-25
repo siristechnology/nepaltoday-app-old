@@ -21,7 +21,7 @@ class CardComponent extends React.PureComponent {
 	render() {
 		const { article } = this.props
 		const relativeTime = getRelativeTime(
-			article.publishedDate || article.modifiedDate
+			article.publishedDate || article.modifiedDate,
 		)
 
 		return (
@@ -33,10 +33,9 @@ class CardComponent extends React.PureComponent {
 						paddingTop: 12,
 						paddingLeft: 10,
 						paddingRight: 10,
-						paddingBottom: 4
+						paddingBottom: 4,
 					}}
-					activeOpacity={1}
-				>
+					activeOpacity={1}>
 					<Body>
 						<ImageContainer>
 							<Image
@@ -51,16 +50,15 @@ class CardComponent extends React.PureComponent {
 								flexDirection: 'row',
 								alignItems: 'baseline',
 								marginTop: 6,
-								marginBottom: 12
-							}}
-						>
+								marginBottom: 12,
+							}}>
 							<Thumbnail
 								source={{ uri: article.source.logoLink }}
 								style={{
 									width: 20,
 									height: 20,
 									borderRadius: 20 / 2,
-									marginRight: 4
+									marginRight: 4,
 								}}
 							/>
 							<Text style={styles.newsSource}>
@@ -76,16 +74,18 @@ class CardComponent extends React.PureComponent {
 					</Body>
 				</CardItem>
 				<CardItem
-					style={{ paddingTop: 0, paddingBottom: 4, marginBottom: 0 }}
-				>
+					style={{
+						paddingTop: 0,
+						paddingBottom: 4,
+						marginBottom: 0,
+					}}>
 					<Left>
 						<View
 							style={{
 								flex: 1,
 								flexDirection: 'row',
-								alignItems: 'baseline'
-							}}
-						>
+								alignItems: 'baseline',
+							}}>
 							<Text note>{relativeTime}</Text>
 						</View>
 					</Left>
@@ -101,23 +101,23 @@ const styles = StyleSheet.create({
 		height: 200,
 		top: 0,
 		borderRadius: 8,
-		borderWidth: 0.5
+		borderWidth: 0.5,
 	},
 	title: {
 		fontWeight: '900',
-		fontSize: 20
+		fontSize: 20,
 	},
 	content: {
 		fontWeight: '400',
 		textAlign: 'justify',
 		fontSize: 16,
-		marginTop: 8
+		marginTop: 8,
 	},
 	newsSource: {
 		color: '#737373',
 		fontSize: 16,
-		paddingRight: 10
-	}
+		paddingRight: 10,
+	},
 })
 
 function mapStateToProps() {
@@ -130,5 +130,5 @@ function mapDispatchToProps(dispatch) {
 
 export const ArticleCard = connect(
 	mapStateToProps,
-	mapDispatchToProps
+	mapDispatchToProps,
 )(CardComponent)

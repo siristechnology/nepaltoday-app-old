@@ -6,9 +6,10 @@ export const np = {
 		NEWS: 'समाचार',
 		OPINION: 'बिचार',
 		SOCIAL: 'समाज ',
-		SPORTS: 'खेलकुद'
+		SPORTS: 'खेलकुद',
 	},
 	public: {
-		READ_MORE: 'पूरा पढ्नुस'
-	}
+		READ_MORE: 'पूरा पढ्नुस',
+		BACK: 'पछी',
+	},
 }
