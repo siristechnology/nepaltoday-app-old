@@ -112,6 +112,7 @@ const styles = StyleSheet.create({
 		textAlign: 'justify',
 		fontSize: 16,
 		marginTop: 8,
+		opacity: 0.6,
 	},
 	newsSource: {
 		color: '#737373',
