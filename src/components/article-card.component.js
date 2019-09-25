@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import Analytics from 'appcenter-analytics'
-import { Image, StyleSheet } from 'react-native'
+import { StyleSheet, Image, ActivityIndicator, Dimensions } from 'react-native'
 import { Card, CardItem, Thumbnail, Text, Left, Body, View } from 'native-base'
 
 import { ImageContainer } from '../style'
@@ -40,8 +40,10 @@ class CardComponent extends React.PureComponent {
 						<ImageContainer>
 							<Image
 								source={{ uri: article.imageLink }}
+								resizeMode="cover"
 								resizeMethod="scale"
 								style={styles.image}
+								PlaceholderContent={<ActivityIndicator />}
 							/>
 						</ImageContainer>
 						<View
@@ -97,11 +99,10 @@ class CardComponent extends React.PureComponent {
 
 const styles = StyleSheet.create({
 	image: {
-		flex: 1,
+		width: Dimensions.get('window').width * 0.9,
 		height: 200,
 		top: 0,
 		borderRadius: 8,
-		borderWidth: 0.5,
 	},
 	title: {
 		fontWeight: '900',
