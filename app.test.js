@@ -13,8 +13,8 @@ import renderer from 'react-test-renderer'
 jest.mock('NativeModules', () => ({
 	UIManager: {
 		RCTView: () => ({
-			directEventTypes: {}
-		})
+			directEventTypes: {},
+		}),
 	},
 	KeyboardObserver: {},
 	RNGestureHandlerModule: {
@@ -23,20 +23,26 @@ jest.mock('NativeModules', () => ({
 		dropGestureHandler: jest.fn(),
 		updateGestureHandler: jest.fn(),
 		State: {},
-		Directions: {}
+		Directions: {},
 	},
 	PlatformConstants: {
-		forceTouchAvailable: false
+		forceTouchAvailable: false,
 	},
 	StatusBarManager: {
 		HEIGHT: 42,
 		setStyle: jest.fn(),
 		setHidden: jest.fn(),
-		setNetworkActivityIndicatorVisible: jest.fn()
+		setNetworkActivityIndicatorVisible: jest.fn(),
 	},
 	AppCenterReactNativeAnalytics: {
-		trackEvent: jest.fn()
-	}
+		trackEvent: jest.fn(),
+	},
+	RNCNetInfo: {
+		getCurrentConnectivity: jest.fn(),
+		isConnectionMetered: jest.fn(),
+		addListener: jest.fn(),
+		removeListeners: jest.fn(),
+	},
 }))
 
 it('renders correctly', () => {
