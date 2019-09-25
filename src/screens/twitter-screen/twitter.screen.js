@@ -18,6 +18,8 @@ class TwitterComponent extends React.PureComponent {
 							_id
 							text
 							name
+							tweetId
+							handle
 							profileImage
 							description
 							publishedDate

@@ -1,82 +1,82 @@
 {
-  "name": "nepaltodayapp",
-  "version": "0.0.2",
-  "private": true,
-  "scripts": {
-    "a": "react-native run-android",
-    "refresh": "adb shell input keyevent 46 46",
-    "relay": "relay-compiler --src ./src --schema ./schema.graphql --extensions js jsx",
-    "reset": "react-native start --reset-cache",
-    "jetify": "npx jetify",
-    "start": "react-native start",
-    "test": "jest",
-    "lint": "eslint ."
-  },
-  "dependencies": {
-    "@react-native-community/netinfo": "4.2.2",
-    "add": "2.0.6",
-    "appcenter": "^2.3.0",
-    "appcenter-analytics": "^2.3.0",
-    "appcenter-crashes": "^2.3.0",
-    "graphql": "^14.1.1",
-    "jetifier": "^1.6.4",
-    "moment": "2.24.0",
-    "native-base": "^2.13.8",
-    "react": "16.8.6",
-    "react-native": "0.60.5",
-    "react-native-elements": "^1.2.1",
-    "react-native-gesture-handler": "^1.4.1",
-    "react-native-splash-screen": "^3.2.0",
-    "react-native-webview": "^7.0.5",
-    "react-navigation": "3.1.2",
-    "react-redux": "^6.0.0",
-    "react-relay": "^2.0.0",
-    "redux": "^4.0.1",
-    "redux-logger": "^3.0.6",
-    "redux-saga": "^1.0.1",
-    "relay-compiler": "^2.0.0",
-    "styled-components": "^4.3.2",
-    "yarn": "1.17.3"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/runtime": "^7.5.5",
-    "@react-native-community/eslint-config": "^0.0.5",
-    "babel-eslint": "10.0.3",
-    "babel-jest": "^24.8.0",
-    "babel-plugin-module-resolver": "^3.2.0",
-    "babel-plugin-relay": "^2.0.0",
-    "babel-preset-react-app": "^7.0.1",
-    "babel-preset-react-native": "^4.0.1",
-    "eslint": "^6.1.0",
-    "eslint-config-prettier": "6.2.0",
-    "eslint-config-standard": "12.0.0",
-    "eslint-plugin-import": "2.16.0",
-    "eslint-plugin-node": "8.0.1",
-    "eslint-plugin-prettier": "3.1.0",
-    "eslint-plugin-promise": "4.0.1",
-    "eslint-plugin-react": "7.12.4",
-    "eslint-plugin-standard": "4.0.0",
-    "jest": "^24.8.0",
-    "metro-react-native-babel-preset": "^0.56.0",
-    "prettier": "1.18.2",
-    "react-test-renderer": "16.8.6"
-  },
-  "jest": {
-    "preset": "react-native",
-    "transform": {
-      "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "!node_modules/react-runtime"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/node_modules/"
-    ]
-  },
-  "rnpm": {
-    "android": {
-      "mainFilePath": "src/main/java/com/nepaltodayapp/MainApplication.java"
-    }
-  }
+	"name": "nepaltodayapp",
+	"version": "0.0.2",
+	"private": true,
+	"scripts": {
+		"a": "react-native run-android",
+		"refresh": "adb shell input keyevent 46 46",
+		"relay": "relay-compiler --src ./src --schema ./schema.graphql --extensions js jsx",
+		"reset": "react-native start --reset-cache",
+		"jetify": "npx jetify",
+		"start": "react-native start",
+		"test": "jest",
+		"lint": "eslint ."
+	},
+	"dependencies": {
+		"@react-native-community/netinfo": "4.2.2",
+		"add": "2.0.6",
+		"appcenter": "^2.3.0",
+		"appcenter-analytics": "^2.3.0",
+		"appcenter-crashes": "^2.3.0",
+		"graphql": "^14.1.1",
+		"jetifier": "^1.6.4",
+		"moment": "2.24.0",
+		"native-base": "^2.13.8",
+		"react": "16.8.6",
+		"react-native": "0.60.5",
+		"react-native-elements": "^1.2.1",
+		"react-native-gesture-handler": "^1.4.1",
+		"react-native-splash-screen": "^3.2.0",
+		"react-native-webview": "^7.0.5",
+		"react-navigation": "3.1.2",
+		"react-redux": "^6.0.0",
+		"react-relay": "^6.0.0",
+		"redux": "^4.0.1",
+		"redux-logger": "^3.0.6",
+		"redux-saga": "^1.0.1",
+		"relay-compiler": "^6.0.0",
+		"styled-components": "^4.3.2",
+		"yarn": "1.17.3"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.5.5",
+		"@babel/runtime": "^7.5.5",
+		"@react-native-community/eslint-config": "^0.0.5",
+		"babel-eslint": "10.0.3",
+		"babel-jest": "^24.8.0",
+		"babel-plugin-module-resolver": "^3.2.0",
+		"babel-plugin-relay": "^2.0.0",
+		"babel-preset-react-app": "^7.0.1",
+		"babel-preset-react-native": "^4.0.1",
+		"eslint": "^6.1.0",
+		"eslint-config-prettier": "6.2.0",
+		"eslint-config-standard": "12.0.0",
+		"eslint-plugin-import": "2.16.0",
+		"eslint-plugin-node": "8.0.1",
+		"eslint-plugin-prettier": "3.1.0",
+		"eslint-plugin-promise": "4.0.1",
+		"eslint-plugin-react": "7.12.4",
+		"eslint-plugin-standard": "4.0.0",
+		"jest": "^24.8.0",
+		"metro-react-native-babel-preset": "^0.56.0",
+		"prettier": "1.18.2",
+		"react-test-renderer": "16.8.6"
+	},
+	"jest": {
+		"preset": "react-native",
+		"transform": {
+			"^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+		},
+		"transformIgnorePatterns": [
+			"!node_modules/react-runtime"
+		],
+		"testPathIgnorePatterns": [
+			"<rootDir>/node_modules/"
+		]
+	},
+	"rnpm": {
+		"android": {
+			"mainFilePath": "src/main/java/com/nepaltodayapp/MainApplication.java"
+		}
+	}
 }
