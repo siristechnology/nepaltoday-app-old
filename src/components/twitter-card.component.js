@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/native'
 import { Text, ListItem, Body, Thumbnail, View } from 'native-base'
+import { Linking } from 'react-native'
 
 import { MutedText } from '../styled'
 import { getRelativeTime } from '../helper/time'
@@ -8,14 +9,24 @@ import { getRelativeTime } from '../helper/time'
 export class TwitterCard extends React.PureComponent {
 	render() {
 		const { tweet } = this.props
+		console.log('props here', tweet)
 		const relativeTime = getRelativeTime(tweet.publishedDate || new Date())
+		const handle = tweet.handle || tweet.twitterHandle.handle
+		const link = `https://twitter.com/${handle}/status/${tweet.tweetId}`
+		console.log('Link here=============', link)
+
+		const openTwitter = () => {
+			Linking.openURL(link).catch(error => {
+				throw new Error('Error opening twitter' + error)
+			})
+		}
 		return (
-			<ListItem avatar>
+			<ListItem avatar onPress={openTwitter}>
 				<StyledThumbnail
 					source={{
 						uri:
 							tweet.profileImage ||
-							'https://api.adorable.io/avatars/157/abott@adorable.png'
+							'https://api.adorable.io/avatars/157/abott@adorable.png',
 					}}
 				/>
 				<Body>

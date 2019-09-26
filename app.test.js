@@ -13,32 +13,55 @@ import renderer from 'react-test-renderer'
 jest.mock('NativeModules', () => ({
 	UIManager: {
 		RCTView: () => ({
-			directEventTypes: {}
-		})
+			directEventTypes: {},
+		}),
 	},
-	KeyboardObserver: {},
+	KeyboardObserver: { addListener: jest.fn() },
 	RNGestureHandlerModule: {
 		attachGestureHandler: jest.fn(),
 		createGestureHandler: jest.fn(),
 		dropGestureHandler: jest.fn(),
 		updateGestureHandler: jest.fn(),
 		State: {},
-		Directions: {}
+		Directions: {},
 	},
 	PlatformConstants: {
-		forceTouchAvailable: false
+		forceTouchAvailable: false,
 	},
 	StatusBarManager: {
 		HEIGHT: 42,
 		setStyle: jest.fn(),
 		setHidden: jest.fn(),
-		setNetworkActivityIndicatorVisible: jest.fn()
+		setNetworkActivityIndicatorVisible: jest.fn(),
 	},
 	AppCenterReactNativeAnalytics: {
-		trackEvent: jest.fn()
-	}
+		trackEvent: jest.fn(),
+	},
+	RNCNetInfo: {
+		getCurrentState: jest.fn(() => Promise.resolve({})),
+		getCurrentConnectivity: jest.fn(),
+		isConnectionMetered: jest.fn(),
+		addListener: jest.fn(),
+		removeListeners: jest.fn(),
+		isConnected: {
+			fetch: () => {
+				return Promise.resolve(true)
+			},
+			addEventListener: jest.fn(),
+			removeEventListener: jest.fn(),
+		},
+	},
 }))
 
-it('renders correctly', () => {
-	renderer.create(<App />)
+jest.mock('react-native-splash-screen', () => {
+	return {
+		hide: jest.fn(),
+		show: jest.fn(),
+	}
+})
+
+describe('App.js', () => {
+	it('app renders correctly', () => {
+		renderer.create(<App />)
+	})
 })

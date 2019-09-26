@@ -40,6 +40,8 @@ type TwitterHandle {
 type Tweet {
 	_id: String!
 	text: String
+	tweetId: String
+	handle: String
 	twitterHandle: TwitterHandle
 	publishedDate: String
 	createdAt: String

@@ -14,7 +14,6 @@
   },
   "dependencies": {
     "@react-native-community/netinfo": "4.2.2",
-    "add": "2.0.6",
     "appcenter": "^2.3.0",
     "appcenter-analytics": "^2.3.0",
     "appcenter-crashes": "^2.3.0",
@@ -30,13 +29,13 @@
     "react-native-webview": "^7.0.5",
     "react-navigation": "3.1.2",
     "react-redux": "^6.0.0",
-    "react-relay": "^2.0.0",
+    "react-relay": "^6.0.0",
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.1",
-    "relay-compiler": "^2.0.0",
-    "styled-components": "^4.3.2",
-    "yarn": "1.17.3"
+    "relay-compiler": "^6.0.0",
+    "relay-runtime": "^6.0.0",
+    "styled-components": "^4.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",
