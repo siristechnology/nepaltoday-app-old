@@ -1,10 +1,10 @@
 // import { AsyncStorage } from "react-native";
 import { Environment, Network, RecordSource, Store } from 'relay-runtime'
-import RelayQueryResponseCache from 'relay-runtime/lib/RelayQueryResponseCache'
+import { QueryResponseCache } from 'relay-runtime/lib/index'
 import global from '../global'
 
 const cacheTtl = 30 * 1000 // if someone refreshes in 30 seconds, they will get content from cache for now
-const cache = new RelayQueryResponseCache({ size: 1000, ttl: cacheTtl })
+const cache = new QueryResponseCache({ size: 1000, ttl: cacheTtl })
 
 async function fetchQuery(operation, variables, cacheConfig) {
 	const queryID = operation.text
@@ -24,13 +24,13 @@ async function fetchQuery(operation, variables, cacheConfig) {
 	return fetch(global.nepalTodayServer, {
 		method: 'POST',
 		headers: {
-			'Content-Type': 'application/json'
+			'Content-Type': 'application/json',
 			// 'Authorization': 'Bearer ' + JSON.parse(userContext).token
 		},
 		body: JSON.stringify({
 			query: operation.text,
-			variables
-		})
+			variables,
+		}),
 	})
 		.then(response => {
 			return response.json()
@@ -52,7 +52,7 @@ async function fetchQuery(operation, variables, cacheConfig) {
 
 const environment = new Environment({
 	network: Network.create(fetchQuery),
-	store: new Store(new RecordSource())
+	store: new Store(new RecordSource()),
 })
 
 export default environment

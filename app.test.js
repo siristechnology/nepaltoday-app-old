@@ -16,7 +16,7 @@ jest.mock('NativeModules', () => ({
 			directEventTypes: {},
 		}),
 	},
-	KeyboardObserver: {},
+	KeyboardObserver: { addListener: jest.fn() },
 	RNGestureHandlerModule: {
 		attachGestureHandler: jest.fn(),
 		createGestureHandler: jest.fn(),
@@ -38,13 +38,21 @@ jest.mock('NativeModules', () => ({
 		trackEvent: jest.fn(),
 	},
 	RNCNetInfo: {
+		getCurrentState: jest.fn(() => Promise.resolve({})),
 		getCurrentConnectivity: jest.fn(),
 		isConnectionMetered: jest.fn(),
 		addListener: jest.fn(),
 		removeListeners: jest.fn(),
+		isConnected: {
+			fetch: () => {
+				return Promise.resolve(true)
+			},
+			addEventListener: jest.fn(),
+			removeEventListener: jest.fn(),
+		},
 	},
 }))
 
-it('renders correctly', () => {
+it('app renders correctly', () => {
 	renderer.create(<App />)
 })
