@@ -53,6 +53,15 @@ jest.mock('NativeModules', () => ({
 	},
 }))
 
-it('app renders correctly', () => {
-	renderer.create(<App />)
+jest.mock('react-native-splash-screen', () => {
+	return {
+		hide: jest.fn(),
+		show: jest.fn(),
+	}
+})
+
+describe('App.js', () => {
+	it('app renders correctly', () => {
+		renderer.create(<App />)
+	})
 })
