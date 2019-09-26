@@ -23,6 +23,7 @@
 		"native-base": "^2.13.8",
 		"react": "16.8.6",
 		"react-native": "0.60.5",
+		"react-native-elements": "^1.2.1",
 		"react-native-gesture-handler": "^1.4.1",
 		"react-native-splash-screen": "^3.2.0",
 		"react-native-webview": "^7.0.5",
@@ -58,6 +59,18 @@
 		"metro-react-native-babel-preset": "^0.56.0",
 		"prettier": "1.18.2",
 		"react-test-renderer": "16.8.6"
+	},
+	"jest": {
+		"preset": "react-native",
+		"transform": {
+			"^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+		},
+		"transformIgnorePatterns": [
+			"!node_modules/react-runtime"
+		],
+		"testPathIgnorePatterns": [
+			"<rootDir>/node_modules/"
+		]
 	},
 	"rnpm": {
 		"android": {
