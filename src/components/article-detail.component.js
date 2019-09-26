@@ -19,7 +19,7 @@ import { ImageContainer } from '../style'
 import { getRelativeTime } from '../helper/time'
 
 const ArticleDetail = ({ navigation }) => {
-	const { READ_MORE, BACK } = np.public
+	const { READ_MORE } = np.public
 	const {
 		state: {
 			params: {
@@ -60,36 +60,37 @@ const ArticleDetail = ({ navigation }) => {
 				<Icon
 					onPress={navigateBack}
 					type="AntDesign"
-					name="back"
+					name="close"
 					style={styles.icon}
 				/>
-				<Text>{BACK}</Text>
 			</View>
 			<Card style={styles.root}>
 				<CardItem cardBody>
 					<Body>
 						<Text style={styles.title}>{title}</Text>
-						<View style={styles.timeWrapper}>
-							<Icon
-								type="AntDesign"
-								name="clockcircleo"
-								style={styles.icon}
+						<ImageContainer>
+							<Image
+								source={{ uri: imageLink || logoLink }}
+								resizeMethod="scale"
+								style={styles.image}
 							/>
-							<MutedText>{relativTime}</MutedText>
-						</View>
-						<View style={styles.imgWithLogo}>
-							<ImageContainer>
-								<Image
-									source={{ uri: imageLink || logoLink }}
-									resizeMethod="scale"
-									style={styles.image}
-								/>
-							</ImageContainer>
-							<View style={styles.logoWrapper}>
+						</ImageContainer>
+
+						<View style={styles.metaContainer}>
+							<View style={styles.logWithName}>
 								<Thumbnail
 									source={{ uri: logoLink }}
 									style={styles.thumbnail}
 								/>
+								<Text>{name}</Text>
+							</View>
+							<View style={styles.timeWrapper}>
+								<Icon
+									type="AntDesign"
+									name="clockcircleo"
+									style={styles.icon}
+								/>
+								<MutedText>{relativTime}</MutedText>
 							</View>
 						</View>
 						<View style={styles.contentWrapper}>
@@ -158,25 +159,36 @@ const styles = StyleSheet.create({
 		flexWrap: 'nowrap',
 		alignItems: 'center',
 	},
-	imgWithLogo: {
+	metaContainer: {
 		width: '100%',
-		paddingBottom: 16,
-		position: 'relative',
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
+		justifyContent: 'space-between',
 	},
-	logoWrapper: {
-		position: 'absolute',
-		bottom: 0,
-		left: 8,
+	logWithName: {
+		display: 'flex',
+		flexDirection: 'row',
+		alignItems: 'center',
 	},
+
 	thumbnail: {
 		width: 40,
 		height: 40,
-		borderColor: 'white',
+		marginRight: 8,
+		borderColor: '#eee',
 		borderWidth: 2,
 	},
 	timeWrapper: {
 		display: 'flex',
 		flexDirection: 'row',
 		alignItems: 'center',
+		margin: 0,
+	},
+	titleWithTime: {
+		paddingLeft: 8,
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'flex-start',
 	},
 })
