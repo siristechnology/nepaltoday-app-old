@@ -16,20 +16,20 @@ function MiniOfflineSign() {
 
 class OfflineNotice extends PureComponent {
 	state = {
-		isConnected: true
+		isConnected: true,
 	}
 
 	componentDidMount() {
 		NetInfo.isConnected.addEventListener(
 			'connectionChange',
-			this.handleConnectivityChange
+			this.handleConnectivityChange,
 		)
 	}
 
 	componentWillUnmount() {
 		NetInfo.isConnected.removeEventListener(
 			'connectionChange',
-			this.handleConnectivityChange
+			this.handleConnectivityChange,
 		)
 	}
 
@@ -56,9 +56,9 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'center',
-		width
+		width,
 	},
-	offlineText: { color: 'white' }
+	offlineText: { color: 'white' },
 })
 
 export { OfflineNotice }

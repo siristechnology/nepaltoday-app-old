@@ -1,7 +1,6 @@
 // import { AsyncStorage } from "react-native";
 import { Environment, Network, RecordSource, Store } from 'relay-runtime'
 import { QueryResponseCache } from 'relay-runtime/lib/index'
-
 import global from '../global'
 
 const cacheTtl = 30 * 1000 // if someone refreshes in 30 seconds, they will get content from cache for now
