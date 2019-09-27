@@ -1,7 +1,7 @@
 import React from 'react'
+import { Linking } from 'react-native'
 import styled from 'styled-components/native'
 import { Text, ListItem, Body, Thumbnail, View } from 'native-base'
-import { Linking } from 'react-native'
 
 import { MutedText } from '../styled'
 import { getRelativeTime } from '../helper/time'
@@ -13,7 +13,6 @@ export class TwitterCard extends React.PureComponent {
 		const relativeTime = getRelativeTime(tweet.publishedDate || new Date())
 		const handle = tweet.handle || tweet.twitterHandle.handle
 		const link = `https://twitter.com/${handle}/status/${tweet.tweetId}`
-		console.log('Link here=============', link)
 
 		const openTwitter = () => {
 			Linking.openURL(link).catch(error => {
