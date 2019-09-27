@@ -9,6 +9,7 @@ import { ImageContainer } from '../style'
 import actionCreators from '../ducks/actions.js'
 import { getRelativeTime } from '../helper/time'
 import SampleImage from '../images/horizontal.jpg'
+import { data } from '../data'
 
 class CardComponent extends React.PureComponent {
 	handleArticleCardPressed() {
@@ -70,9 +71,7 @@ class CardComponent extends React.PureComponent {
 						</View>
 						<View style={{ flex: 1, justifyContent: 'flex-start' }}>
 							<Text style={styles.title}>{article.title}</Text>
-							<Text style={styles.content}>
-								{article.shortDescription}
-							</Text>
+							<Text style={styles.content}>{data}</Text>
 						</View>
 					</Body>
 				</CardItem>
