@@ -1,19 +1,17 @@
 import React from 'react'
+import { Linking } from 'react-native'
 import styled from 'styled-components/native'
 import { Text, ListItem, Body, Thumbnail, View } from 'native-base'
-import { Linking } from 'react-native'
 
 import { MutedText } from '../styled'
-import { getRelativeTime } from '../helper/time'
+import { Time } from './time.component'
 
 export class TwitterCard extends React.PureComponent {
 	render() {
 		const { tweet } = this.props
 		console.log('props here', tweet)
-		const relativeTime = getRelativeTime(tweet.publishedDate || new Date())
 		const handle = tweet.handle || tweet.twitterHandle.handle
 		const link = `https://twitter.com/${handle}/status/${tweet.tweetId}`
-		console.log('Link here=============', link)
 
 		const openTwitter = () => {
 			Linking.openURL(link).catch(error => {
@@ -33,9 +31,7 @@ export class TwitterCard extends React.PureComponent {
 					<NameWrapper>
 						<Name>{tweet.twitterHandle.name}</Name>
 						<MutedText>{tweet.twitterHandle.handle}</MutedText>
-						<MutedText style={{ marginLeft: 8 }}>
-							{relativeTime}
-						</MutedText>
+						<Time value={tweet.publishedDate || new Date()} />
 					</NameWrapper>
 					<Tweet>{tweet.text}</Tweet>
 				</Body>
