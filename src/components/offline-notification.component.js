@@ -1,54 +1,39 @@
-import React, { PureComponent } from 'react'
-import NetInfo from '@react-native-community/netinfo'
+import { Icon } from 'native-base'
+import React, { useEffect, useState } from 'react'
+import { useNetInfo } from '@react-native-community/netinfo'
 import { View, Text, Dimensions, StyleSheet } from 'react-native'
 
 const { width } = Dimensions.get('window')
 
-function MiniOfflineSign() {
-	return (
-		<View style={styles.offlineContainer}>
-			<Text style={styles.offlineText}>
-				कृपया इन्टरनेट जाँच गर्नुहोस्
-			</Text>
-		</View>
-	)
-}
+function MiniOfflineSign() {}
 
-class OfflineNotice extends PureComponent {
-	state = {
-		isConnected: true,
-	}
+const OfflineNotice = () => {
+	const netInfo = useNetInfo()
+	const [isConnected, setConnected] = useState(true)
+	const [refreshCounter, setRefeshCounter] = useState(0)
 
-	componentDidMount() {
-		NetInfo.isConnected.addEventListener(
-			'connectionChange',
-			this.handleConnectivityChange,
+	useEffect(() => {
+		setConnected(netInfo.isConnected)
+	}, [netInfo])
+
+	if (!isConnected) {
+		return (
+			<View style={styles.offlineContainer}>
+				<Text style={styles.offlineText}>
+					कृपया इन्टरनेट जाँच गर्नुहोस्
+				</Text>
+				<Icon
+					onPress={() => setRefeshCounter(refreshCounter + 1)}
+					type="EvilIcons"
+					name="refresh"
+					style={styles.refreshIcon}
+				/>
+			</View>
 		)
-	}
-
-	componentWillUnmount() {
-		NetInfo.isConnected.removeEventListener(
-			'connectionChange',
-			this.handleConnectivityChange,
-		)
-	}
-
-	handleConnectivityChange = isConnected => {
-		if (isConnected) {
-			this.setState({ isConnected })
-		} else {
-			this.setState({ isConnected })
-		}
-	}
-
-	render() {
-		if (!this.state.isConnected) {
-			return <MiniOfflineSign />
-		}
+	} else {
 		return null
 	}
 }
-
 const styles = StyleSheet.create({
 	offlineContainer: {
 		backgroundColor: '#b52424',
@@ -59,6 +44,13 @@ const styles = StyleSheet.create({
 		width,
 	},
 	offlineText: { color: 'white' },
+	refreshIcon: {
+		alignSelf: 'center',
+		width: 30,
+		height: 30,
+		marginTop: 8,
+		color: 'white',
+	},
 })
 
 export { OfflineNotice }
