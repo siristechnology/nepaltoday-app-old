@@ -1,6 +1,6 @@
 import React from 'react'
+import { Spinner } from 'native-base'
 import { WebView } from 'react-native-webview'
-import { ActivityIndicator } from 'react-native'
 
 export class ArticleWebviewComponent extends React.Component {
 	render() {
@@ -10,7 +10,7 @@ export class ArticleWebviewComponent extends React.Component {
 		return (
 			<WebView
 				renderLoading={() => (
-					<ActivityIndicator
+					<Spinner
 						style={{
 							position: 'absolute',
 							left: 0,
