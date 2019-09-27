@@ -30,7 +30,11 @@ const {
 class HeadlineScreen extends React.PureComponent {
 	renderQuery = ({ error, props }) => {
 		if (!props) {
-			return <Spinner />
+			return (
+				<AppLayout>
+					<Spinner />
+				</AppLayout>
+			)
 		} else if (error) {
 			console.log('error:' + JSON.stringify(error))
 			throw new Error(`Error occured here ${JSON.stringify(error)}`)

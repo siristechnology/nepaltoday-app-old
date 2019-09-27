@@ -35,7 +35,11 @@ class TwitterComponent extends React.PureComponent {
 				render={({ error, props }) => {
 					console.log('twitter props here', props)
 					if (!props) {
-						return <Spinner />
+						return (
+							<AppLayout>
+								<Spinner />
+							</AppLayout>
+						)
 					} else if (error) {
 						console.log('error:' + JSON.stringify(error))
 					}
