@@ -14,9 +14,8 @@ import {
 import { Image, StyleSheet } from 'react-native'
 
 import { np } from '../lang/np'
-import { MutedText } from '../styled'
+import { Time } from './time.component'
 import { ImageContainer } from '../style'
-import { getRelativeTime } from '../helper/time'
 
 const ArticleDetail = ({ navigation }) => {
 	const { READ_MORE } = np.public
@@ -34,7 +33,6 @@ const ArticleDetail = ({ navigation }) => {
 			},
 		},
 	} = navigation
-	const relativTime = getRelativeTime(publishedDate)
 
 	const handleLinkClick = () => {
 		navigation.navigate('Article', { link })
@@ -84,14 +82,7 @@ const ArticleDetail = ({ navigation }) => {
 								/>
 								<Text>{name}</Text>
 							</View>
-							<View style={styles.timeWrapper}>
-								<Icon
-									type="AntDesign"
-									name="clockcircleo"
-									style={styles.icon}
-								/>
-								<MutedText>{relativTime}</MutedText>
-							</View>
+							<Time value={publishedDate} />
 						</View>
 						<View style={styles.contentWrapper}>
 							{renderContent()}
@@ -178,12 +169,6 @@ const styles = StyleSheet.create({
 		marginRight: 8,
 		borderColor: '#eee',
 		borderWidth: 2,
-	},
-	timeWrapper: {
-		display: 'flex',
-		flexDirection: 'row',
-		alignItems: 'center',
-		margin: 0,
 	},
 	titleWithTime: {
 		paddingLeft: 8,
