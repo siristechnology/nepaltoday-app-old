@@ -1,21 +1,24 @@
 import React from 'react'
+import { Button } from 'native-base'
 import { StyleSheet, Text, View } from 'react-native'
 
-export class SplashScreen extends React.Component {
-	static navigationOptions = {
-		header: null,
-	}
-	render() {
-		const viewStyles = [styles.container, { backgroundColor: 'skyblue' }]
+import { np } from '../lang/np'
 
-		return (
-			<View style={viewStyles}>
-				<Text style={styles.heading}>नेपाल आज</Text>
-				<Text style={styles.wait}>कृपया पर्खनुहोस्</Text>
-			</View>
-		)
-	}
+const SplashScreenComponent = ({ onRefresh = f => f }) => {
+	const {
+		public: { REFRESH, APP_NAME },
+	} = np
+	const viewStyles = [styles.container, { backgroundColor: 'skyblue' }]
+	return (
+		<View style={viewStyles}>
+			<Text style={styles.heading}>{APP_NAME}</Text>
+			<Button onPress={onRefresh} style={styles.refreshBtn}>
+				<Text style={styles.wait}>{REFRESH}</Text>
+			</Button>
+		</View>
+	)
 }
+export { SplashScreenComponent }
 
 const styles = StyleSheet.create({
 	container: {
@@ -24,10 +27,15 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		backgroundColor: '#F5FCFF',
 	},
+
 	heading: {
 		color: 'white',
 		fontSize: 30,
 		fontWeight: 'bold',
+	},
+	refreshBtn: {
+		alignSelf: 'center',
+		backgroundColor: '#ccccff',
 	},
 	wait: {
 		color: 'white',

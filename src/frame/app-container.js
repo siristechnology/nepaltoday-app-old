@@ -3,14 +3,14 @@ import { createStackNavigator, createAppContainer } from 'react-navigation'
 import {
 	ArticleDetail,
 	ArticleWebviewComponent,
-	SplashScreen,
+	SplashScreenComponent,
 } from '../components'
 import { BottomTabScreen } from '../screens/navigation/bottom-navigation.screen'
 
 const AppNavigator = createStackNavigator(
 	{
 		Splash: {
-			screen: SplashScreen,
+			screen: SplashScreenComponent,
 			navigationOptions: {
 				header: {
 					visible: false,

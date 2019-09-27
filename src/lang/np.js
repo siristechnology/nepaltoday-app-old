@@ -9,7 +9,9 @@ export const np = {
 		SPORTS: 'खेलकुद',
 	},
 	public: {
+		APP_NAME: 'नेपाल आज',
 		READ_MORE: 'पूरा पढ्नुस',
 		BACK: 'पछी',
+		REFRESH: 'रीफ्रेस गर्नुस',
 	},
 }
