@@ -8,6 +8,7 @@ import { Card, CardItem, Thumbnail, Text, Left, Body, View } from 'native-base'
 import { ImageContainer } from '../style'
 import actionCreators from '../ducks/actions.js'
 import { getRelativeTime } from '../helper/time'
+import SampleImage from '../images/horizontal.jpg'
 
 class CardComponent extends React.PureComponent {
 	handleArticleCardPressed() {
@@ -39,7 +40,7 @@ class CardComponent extends React.PureComponent {
 					<Body>
 						<ImageContainer>
 							<Image
-								source={{ uri: article.imageLink }}
+								source={SampleImage}
 								resizeMode="cover"
 								resizeMethod="scale"
 								style={styles.image}
