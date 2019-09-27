@@ -5,7 +5,6 @@ import { Footer, FooterTab, Button, Icon } from 'native-base'
 import HomeScreen from '../home-screen/home.screen'
 import TwitterScreen from '../twitter-screen/twitter.screen'
 import HeadlineScreen from '../headline-screen/headline.screen'
-import { SplashScreen } from '../../components'
 
 export const BottomTabScreen = createBottomTabNavigator(
 	{

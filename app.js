@@ -1,6 +1,6 @@
 import { Provider } from 'react-redux'
 import React, { useEffect } from 'react'
-import { StatusBar, Text } from 'react-native'
+import { StatusBar } from 'react-native'
 import { StyleProvider, Root } from 'native-base'
 import SplashScreen from 'react-native-splash-screen'
 

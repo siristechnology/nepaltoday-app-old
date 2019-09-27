@@ -5,8 +5,6 @@ import { View, Text, Dimensions, StyleSheet } from 'react-native'
 
 const { width } = Dimensions.get('window')
 
-function MiniOfflineSign() {}
-
 const OfflineNotice = () => {
 	const netInfo = useNetInfo()
 	const [isConnected, setConnected] = useState(true)
