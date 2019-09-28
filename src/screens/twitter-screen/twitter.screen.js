@@ -1,6 +1,6 @@
 import { Spinner } from 'native-base'
 import { FlatList } from 'react-native'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
 import { useNetInfo } from '@react-native-community/netinfo'
 
@@ -10,7 +10,10 @@ import AppLayout from '../../frame/app-layout'
 
 const TwitterComponent = ({ navigation }) => {
 	const netInfo = useNetInfo()
-	useEffect(() => {}, [netInfo.isConnected])
+	const [isConnected, setConnected] = useState(true)
+	useEffect(() => {
+		setConnected(netInfo.isConnected)
+	}, [netInfo.isConnected])
 	return (
 		<QueryRenderer
 			environment={environment}

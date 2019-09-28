@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
 	Tab,
 	Tabs,
@@ -30,7 +30,10 @@ const {
 
 const HeadlineScreen = ({ navigation }) => {
 	const netInfo = useNetInfo()
-	useEffect(() => {}, [netInfo.isConnected])
+	const [isConnected, setConnected] = useState(true)
+	useEffect(() => {
+		setConnected(netInfo.isConnected)
+	}, [netInfo.isConnected])
 
 	const renderQuery = ({ error, props }) => {
 		if (!props) {

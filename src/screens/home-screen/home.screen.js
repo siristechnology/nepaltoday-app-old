@@ -10,14 +10,17 @@ import { ArticleCard } from '../../components'
 import AppLayout from '../../frame/app-layout'
 
 const Home = ({ navigation, actions }) => {
-	const netinfo = useNetInfo()
+	const netInfo = useNetInfo()
 	const [isUpdated, setUpdated] = useState(false)
+	const [isConnected, setConnected] = useState(true)
 	const [appState, setAppState] = useState(AppState.currentState)
 
 	const handleRefresh = () => {
 		setUpdated(!isUpdated)
 	}
-	useEffect(() => {}, [netinfo.isConnected])
+	useEffect(() => {
+		setConnected(netInfo.isConnected)
+	}, [netInfo.isConnected])
 
 	const updateAppState = nextAppState => {
 		if (
