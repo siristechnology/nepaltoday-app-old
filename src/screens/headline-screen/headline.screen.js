@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {
 	Tab,
 	Tabs,
@@ -10,6 +10,7 @@ import {
 } from 'native-base'
 import { FlatList, StyleSheet } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
+import { useNetInfo } from '@react-native-community/netinfo'
 
 import { en } from '../../lang/en'
 import environment from '../../environment'
@@ -27,8 +28,11 @@ const {
 	SPORTS,
 } = en.menu
 
-class HeadlineScreen extends React.PureComponent {
-	renderQuery = ({ error, props }) => {
+const HeadlineScreen = ({ navigation }) => {
+	const netInfo = useNetInfo()
+	useEffect(() => {}, [netInfo.isConnected])
+
+	const renderQuery = ({ error, props }) => {
 		if (!props) {
 			return (
 				<AppLayout>
@@ -77,7 +81,7 @@ class HeadlineScreen extends React.PureComponent {
 										article={item}
 										key={item._id}
 										actions={() => {}}
-										navigation={this.props.navigation}
+										navigation={navigation}
 									/>
 								)
 							}}
@@ -105,35 +109,32 @@ class HeadlineScreen extends React.PureComponent {
 		}
 		return <Spinner color="blue" />
 	}
-
-	render() {
-		return (
-			<QueryRenderer
-				environment={environment}
-				query={graphql`
-					query headlineScreenQuery {
-						getArticles {
+	return (
+		<QueryRenderer
+			environment={environment}
+			query={graphql`
+				query headlineScreenQuery {
+					getArticles {
+						_id
+						title
+						shortDescription
+						content
+						link
+						imageLink
+						publishedDate
+						modifiedDate
+						category
+						source {
 							_id
-							title
-							shortDescription
-							content
-							link
-							imageLink
-							publishedDate
-							modifiedDate
-							category
-							source {
-								_id
-								name
-								logoLink
-							}
+							name
+							logoLink
 						}
 					}
-				`}
-				render={this.renderQuery}
-			/>
-		)
-	}
+				}
+			`}
+			render={renderQuery}
+		/>
+	)
 }
 
 export default HeadlineScreen
