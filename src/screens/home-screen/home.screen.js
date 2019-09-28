@@ -3,18 +3,21 @@ import Analytics from 'appcenter-analytics'
 import React, { useState, useEffect } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
 import { FlatList, RefreshControl, AppState } from 'react-native'
+import { useNetInfo } from '@react-native-community/netinfo'
 
 import environment from '../../environment'
 import { ArticleCard } from '../../components'
 import AppLayout from '../../frame/app-layout'
 
 const Home = ({ navigation, actions }) => {
+	const netinfo = useNetInfo()
 	const [isUpdated, setUpdated] = useState(false)
 	const [appState, setAppState] = useState(AppState.currentState)
 
 	const handleRefresh = () => {
 		setUpdated(!isUpdated)
 	}
+	useEffect(() => {}, [netinfo.isConnected])
 
 	const updateAppState = nextAppState => {
 		if (
