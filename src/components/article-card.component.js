@@ -11,7 +11,7 @@ import { Time } from './time.component'
 
 class CardComponent extends React.PureComponent {
 	handleArticleCardPressed() {
-		this.props.actions.startToOpenArticle(this.props.article)
+		// this.props.actions.startToOpenArticle(this.props.article)
 
 		Analytics.trackEvent('Article link click')
 		const { navigation } = this.props

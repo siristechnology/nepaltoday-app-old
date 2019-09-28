@@ -28,6 +28,7 @@ const ArticleDetail = ({ navigation }) => {
 					link,
 					imageLink,
 					publishedDate,
+					shortDescription,
 					source: { name, logoLink },
 				},
 			},
@@ -39,6 +40,9 @@ const ArticleDetail = ({ navigation }) => {
 	}
 
 	const renderContent = () => {
+		if (content.length <= 0) {
+			return <Text style={styles.content}>{shortDescription}</Text>
+		}
 		return (
 			content &&
 			content.split('\n').map((text, index) => (
@@ -85,7 +89,7 @@ const ArticleDetail = ({ navigation }) => {
 							<Time value={publishedDate} />
 						</View>
 						<View style={styles.contentWrapper}>
-							{renderContent()}
+							<Text>{renderContent()}</Text>
 						</View>
 					</Body>
 				</CardItem>
