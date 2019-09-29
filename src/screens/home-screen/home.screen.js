@@ -43,7 +43,6 @@ const Home = ({ navigation, actions }) => {
 	return (
 		<QueryRenderer
 			environment={environment}
-			variables={{ isUpdated }}
 			query={graphql`
 				query homeScreenQuery {
 					getArticles {
@@ -66,6 +65,7 @@ const Home = ({ navigation, actions }) => {
 			`}
 			variables={{
 				isConnected,
+				isUpdated,
 			}}
 			render={({ error, props: data }) => {
 				if (!data) {
