@@ -135,6 +135,9 @@ const HeadlineScreen = ({ navigation }) => {
 					}
 				}
 			`}
+			variables={{
+				isConnected,
+			}}
 			render={renderQuery}
 		/>
 	)

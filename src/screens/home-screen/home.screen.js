@@ -64,6 +64,9 @@ const Home = ({ navigation, actions }) => {
 					}
 				}
 			`}
+			variables={{
+				isConnected,
+			}}
 			render={({ error, props: data }) => {
 				if (!data) {
 					return (

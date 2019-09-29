@@ -37,6 +37,9 @@ const TwitterComponent = ({ navigation }) => {
 					}
 				}
 			`}
+			variables={{
+				isConnected,
+			}}
 			render={({ error, props }) => {
 				console.log('twitter props here', props)
 				if (!props) {
