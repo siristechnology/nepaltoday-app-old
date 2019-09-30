@@ -1,138 +1,111 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
+import { Spinner } from 'native-base'
 import Analytics from 'appcenter-analytics'
+import React, { useState, useEffect } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
 import { FlatList, RefreshControl, AppState } from 'react-native'
+import { useNetInfo } from '@react-native-community/netinfo'
 
-import { Spinner } from 'native-base'
 import environment from '../../environment'
-import AppLayout from '../../frame/app-layout'
 import { ArticleCard } from '../../components'
-import actionCreators from '../../ducks/actions'
+import AppLayout from '../../frame/app-layout'
 
-class Home extends React.PureComponent {
-	constructor(props) {
-		super(props)
-		this.state = {
-			isUpdated: false,
-			appState: AppState.currentState,
-		}
+const Home = ({ navigation, actions }) => {
+	const netInfo = useNetInfo()
+	const [isUpdated, setUpdated] = useState(false)
+	const [isConnected, setConnected] = useState(true)
+	const [appState, setAppState] = useState(AppState.currentState)
+
+	const handleRefresh = () => {
+		setUpdated(!isUpdated)
 	}
+	useEffect(() => {
+		setConnected(netInfo.isConnected)
+	}, [netInfo.isConnected])
 
-	componentDidMount() {
-		Analytics.trackEvent('Home page load')
-		AppState.addEventListener(
-			'change',
-			this._handleAppStateChange.bind(this),
-		)
-	}
-
-	componentDidUpdate() {
-		Analytics.trackEvent('Home page refresh')
-	}
-
-	componentWillUnmount() {
-		AppState.removeEventListener(
-			'change',
-			this._handleAppStateChange.bind(this),
-		)
-	}
-
-	_handleAppStateChange(nextAppState) {
+	const updateAppState = nextAppState => {
 		if (
-			this.state.appState.match(/inactive|background/) &&
+			appState.match(/inactive|background/) &&
 			nextAppState === 'active'
 		) {
-			console.log('App has come to the foreground!')
-			this.handleRefresh()
+			handleRefresh()
 		}
-		this.setState({ appState: nextAppState })
+		setAppState(nextAppState)
 	}
 
-	handleRefresh() {
-		Analytics.trackEvent('Pull down refresh')
-		this.setState({ isUpdated: !this.state.isUpdated })
-	}
+	useEffect(() => {
+		Analytics.trackEvent('Home page loaded')
+		AppState.addEventListener('change', updateAppState)
+		return () => {
+			AppState.removeEventListener('change', updateAppState)
+		}
+	}, [])
 
-	render() {
-		return (
-			<QueryRenderer
-				environment={environment}
-				variables={{ isUpdated: this.state.isUpdated }}
-				query={graphql`
-					query homeScreenQuery {
-						getArticles {
+	return (
+		<QueryRenderer
+			environment={environment}
+			query={graphql`
+				query homeScreenQuery {
+					getArticles {
+						_id
+						title
+						shortDescription
+						content
+						link
+						imageLink
+						publishedDate
+						modifiedDate
+						category
+						source {
 							_id
-							title
-							shortDescription
-							content
-							link
-							imageLink
-							publishedDate
-							modifiedDate
-							category
-							source {
-								_id
-								name
-								logoLink
-							}
+							name
+							logoLink
 						}
 					}
-				`}
-				render={({ error, props }) => {
-					if (!props) {
-						return (
-							<AppLayout>
-								<Spinner />
-							</AppLayout>
-						)
-					} else if (error) {
-						console.log('error:' + JSON.stringify(error))
-					}
-
+				}
+			`}
+			variables={{
+				isConnected,
+				isUpdated,
+			}}
+			render={({ error, props: data }) => {
+				if (!data) {
 					return (
 						<AppLayout>
-							<FlatList
-								data={props.getArticles}
-								keyExtractor={item => item._id}
-								extraData={this.state}
-								renderItem={({ item }) => {
-									return (
-										<ArticleCard
-											article={item}
-											key={item._id}
-											actions={this.props.actions}
-											navigation={this.props.navigation}
-										/>
-									)
-								}}
-								refreshControl={
-									<RefreshControl
-										colors={['#9Bd35A', '#689F38']}
-										onRefresh={this.handleRefresh.bind(
-											this,
-										)}
-									/>
-								}
-							/>
+							<Spinner />
 						</AppLayout>
 					)
-				}}
-			/>
-		)
-	}
+				} else if (error) {
+					console.log('error:' + JSON.stringify(error))
+				}
+
+				return (
+					<AppLayout>
+						<FlatList
+							data={data.getArticles}
+							keyExtractor={item => item._id}
+							extraData={isUpdated}
+							renderItem={({ item }) => {
+								return (
+									<ArticleCard
+										article={item}
+										key={item._id}
+										actions={actions}
+										navigation={navigation}
+									/>
+								)
+							}}
+							refreshControl={
+								<RefreshControl
+									colors={['#9Bd35A', '#689F38']}
+									onRefresh={handleRefresh}
+								/>
+							}
+						/>
+					</AppLayout>
+				)
+			}}
+		/>
+	)
 }
 
-function mapStateToProps(state) {
-	return {}
-}
-
-function mapDispatchToProps(dispatch) {
-	return { actions: bindActionCreators(actionCreators, dispatch) }
-}
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps,
-)(Home)
+export default Home
