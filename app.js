@@ -10,6 +10,9 @@ import ErrorBoundary from './src/error/error-boundry'
 import getTheme from './src/native-base-theme/components'
 import variables from './src/native-base-theme/variables/platform'
 
+import { mapping, light as lightTheme } from '@eva-design/eva'
+import { ApplicationProvider } from 'react-native-ui-kitten'
+
 function App() {
 	useEffect(() => {
 		SplashScreen.hide()
@@ -17,14 +20,16 @@ function App() {
 
 	return (
 		<StyleProvider style={getTheme(variables)}>
-			<Provider store={store}>
-				<StatusBar barStyle="light-content" />
-				<Root>
-					<ErrorBoundary>
-						<AppContainer />
-					</ErrorBoundary>
-				</Root>
-			</Provider>
+			<ApplicationProvider mapping={mapping} theme={lightTheme}>
+				<Provider store={store}>
+					<StatusBar barStyle="light-content" />
+					<Root>
+						<ErrorBoundary>
+							<AppContainer />
+						</ErrorBoundary>
+					</Root>
+				</Provider>
+			</ApplicationProvider>
 		</StyleProvider>
 	)
 }

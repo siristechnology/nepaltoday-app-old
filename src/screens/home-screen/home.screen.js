@@ -6,8 +6,9 @@ import { FlatList, RefreshControl, AppState } from 'react-native'
 import { useNetInfo } from '@react-native-community/netinfo'
 
 import environment from '../../environment'
-import { ArticleCard } from '../../components'
+// import { ArticleCard } from '../../components'
 import AppLayout from '../../frame/app-layout'
+import { ArticleListContainer } from '../../layout/article'
 
 const Home = ({ navigation, actions }) => {
 	const netInfo = useNetInfo()
@@ -80,26 +81,9 @@ const Home = ({ navigation, actions }) => {
 
 				return (
 					<AppLayout>
-						<FlatList
-							data={data.getArticles}
-							keyExtractor={item => item._id}
-							extraData={isUpdated}
-							renderItem={({ item }) => {
-								return (
-									<ArticleCard
-										article={item}
-										key={item._id}
-										actions={actions}
-										navigation={navigation}
-									/>
-								)
-							}}
-							refreshControl={
-								<RefreshControl
-									colors={['#9Bd35A', '#689F38']}
-									onRefresh={handleRefresh}
-								/>
-							}
+						<ArticleListContainer
+							navigation={navigation}
+							articles={data}
 						/>
 					</AppLayout>
 				)
