@@ -2,6 +2,7 @@ import React from 'react'
 import { withStyles } from 'react-native-ui-kitten/theme'
 import { List } from 'react-native-ui-kitten/ui'
 import { ArticleListItem } from './article-list-item.component'
+import { View } from 'react-native'
 
 const ArticleListComponent = ({ articles, onItemPress, themedStyle }) => {
 	console.log('artiles on article list component', articles)
@@ -20,8 +21,9 @@ const ArticleListComponent = ({ articles, onItemPress, themedStyle }) => {
 	return (
 		<List
 			contentContainerStyle={themedStyle.container}
-			data={articles}
+			data={articles.getArticles}
 			renderItem={renderItem}
+			keyExtractor={item => item._id}
 		/>
 	)
 }

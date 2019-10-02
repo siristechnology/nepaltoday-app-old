@@ -24,7 +24,7 @@ const ArticleListItemComponent = props => {
 			onPress={onPress}>
 			<ImageBackground
 				style={themedStyle.image}
-				source={{ uri: article.lead_image_url }}
+				source={{ uri: article.imageLink }}
 			/>
 			<View style={themedStyle.infoContainer}>
 				<Text style={themedStyle.titleLabel} category="h5">
