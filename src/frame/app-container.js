@@ -1,11 +1,8 @@
 import { createStackNavigator, createAppContainer } from 'react-navigation'
 
-import {
-	ArticleDetail,
-	ArticleWebviewComponent,
-	SplashScreenComponent,
-} from '../components'
+import { ArticleWebviewComponent, SplashScreenComponent } from '../components'
 import { BottomTabScreen } from '../screens/navigation/bottom-navigation.screen'
+import ArticleDetailScreen from '../layout/article/article-detail/article-detail.container'
 
 const AppNavigator = createStackNavigator(
 	{
@@ -19,7 +16,7 @@ const AppNavigator = createStackNavigator(
 		},
 		Tab: { screen: BottomTabScreen },
 		Article: { screen: ArticleWebviewComponent },
-		ArticleDetail: { screen: ArticleDetail },
+		ArticleDetail: { screen: ArticleDetailScreen },
 	},
 	{
 		headerMode: 'none',

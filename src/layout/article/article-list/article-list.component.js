@@ -1,11 +1,10 @@
 import React from 'react'
-import { withStyles } from 'react-native-ui-kitten/theme'
 import { List } from 'react-native-ui-kitten/ui'
+import { withStyles } from 'react-native-ui-kitten/theme'
+
 import { ArticleListItem } from './article-list-item.component'
-import { View } from 'react-native'
 
 const ArticleListComponent = ({ articles, onItemPress, themedStyle }) => {
-	console.log('artiles on article list component', articles)
 	const _onItemPress = article => {
 		onItemPress(article)
 	}
@@ -14,7 +13,7 @@ const ArticleListComponent = ({ articles, onItemPress, themedStyle }) => {
 			<ArticleListItem
 				style={themedStyle.item}
 				article={info.item}
-				onPress={_onItemPress}
+				onPress={() => _onItemPress(info.item)}
 			/>
 		)
 	}

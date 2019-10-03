@@ -1,12 +1,11 @@
 import { Spinner } from 'native-base'
+import { AppState } from 'react-native'
 import Analytics from 'appcenter-analytics'
 import React, { useState, useEffect } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
-import { FlatList, RefreshControl, AppState } from 'react-native'
 import { useNetInfo } from '@react-native-community/netinfo'
 
 import environment from '../../environment'
-// import { ArticleCard } from '../../components'
 import AppLayout from '../../frame/app-layout'
 import { ArticleListContainer } from '../../layout/article'
 
