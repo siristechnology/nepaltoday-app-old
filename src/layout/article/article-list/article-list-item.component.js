@@ -1,19 +1,16 @@
 import React from 'react'
-import { ImageBackground, TouchableOpacity, View } from 'react-native'
-import moment from 'moment'
-import { withStyles } from 'react-native-ui-kitten/theme'
 import { Text } from 'react-native-ui-kitten/ui'
-import { textStyle } from '../../../components/common/style'
+import { withStyles } from 'react-native-ui-kitten/theme'
+import { ImageBackground, TouchableOpacity, View } from 'react-native'
+
+import { getRelativeTime } from '../../../helper/time'
+import { ArticleActivityBar } from '../../../components/articles'
+import { ActivityAuthoring, textStyle } from '../../../components/common'
 
 const ArticleListItemComponent = props => {
 	const { style, themedStyle, article, ...restProps } = props
 	const onPress = () => {
 		props.onPress(article)
-	}
-	const getRelativeTime = date => {
-		return moment(Number(date))
-			.startOf('hour')
-			.fromNow()
 	}
 
 	return (
@@ -37,6 +34,13 @@ const ArticleListItemComponent = props => {
 					{article.shortDescription}
 				</Text>
 			</View>
+			<ArticleActivityBar style={themedStyle.activityContainer}>
+				<ActivityAuthoring
+					photo={{ uri: article.source.logoLink }}
+					name={`${article.source.name}`}
+					date={getRelativeTime(article.publishedDate)}
+				/>
+			</ArticleActivityBar>
 		</TouchableOpacity>
 	)
 }
