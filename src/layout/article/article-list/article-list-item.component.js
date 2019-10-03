@@ -20,7 +20,8 @@ const ArticleListItemComponent = props => {
 			style={[themedStyle.container, style]}
 			onPress={onPress}>
 			<ImageBackground
-				style={themedStyle.image}
+				style={themedStyle.imageContainer}
+				imageStyle={themedStyle.image}
 				source={{ uri: article.imageLink }}
 			/>
 			<View style={themedStyle.infoContainer}>
@@ -59,8 +60,12 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, theme => ({
 		paddingHorizontal: 16,
 		paddingVertical: 16,
 	},
-	image: {
+	imageContainer: {
 		height: 220,
+	},
+	image: {
+		borderTopLeftRadius: 12,
+		borderTopRightRadius: 12,
 	},
 	titleLabel: textStyle.headline,
 	descriptionLabel: {

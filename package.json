@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"a": "react-native run-android",
+		"d": "adb shell input keyevent 82",
 		"refresh": "adb shell input keyevent 46 46",
 		"relay": "relay-compiler --src ./src --schema ./schema.graphql --extensions js jsx",
 		"reset": "react-native start --reset-cache",
