@@ -14,8 +14,6 @@ export default class ArticleDetailContainer extends React.Component<
 	private onLikePress = () => {}
 
 	public render(): React.ReactNode {
-		console.log('Printing this.props inside detail', this.props)
-
 		const {
 			navigation: {
 				state: {
@@ -29,6 +27,7 @@ export default class ArticleDetailContainer extends React.Component<
 				article={article}
 				onCommentPress={this.onCommentPress}
 				onLikePress={this.onLikePress}
+				navigation={this.props.navigation}
 			/>
 		)
 	}

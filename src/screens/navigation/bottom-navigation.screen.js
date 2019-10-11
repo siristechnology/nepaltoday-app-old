@@ -13,8 +13,6 @@ export const ButtonNavigationComponent = props => {
 		props.navigation.navigate(selectedRoute.routeName)
 	}
 
-	const HomeIcon = <FontAwesome name="home" />
-
 	return (
 		<BottomNavigation
 			selectedIndex={props.navigation.state.index}

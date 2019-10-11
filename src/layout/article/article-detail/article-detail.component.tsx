@@ -5,7 +5,8 @@ import {
 	ThemeType,
 	withStyles,
 } from 'react-native-ui-kitten/theme'
-import { Avatar, Text } from 'react-native-ui-kitten/ui'
+import { Avatar, Text, Button } from 'react-native-ui-kitten/ui'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import { getRelativeTime } from '../../../helper/time'
 import { ClockIconOutline } from '../../../assets/icons'
@@ -14,13 +15,16 @@ import { ContainerView, textStyle } from '../../../components/common'
 
 interface ComponentProps {
 	article
+	navigation: any
 	onCommentPress: () => void
 	onLikePress: () => void
 }
 
-export type Article2Props = ThemedComponentProps & ComponentProps
+export type ArticleDetailComponentProps = ThemedComponentProps & ComponentProps
 
-class Article2Component extends React.Component<Article2Props> {
+class ArticleDetailComponent extends React.Component<
+	ArticleDetailComponentProps
+> {
 	private onCommentButtonPress = () => {
 		this.props.onCommentPress()
 	}
@@ -29,11 +33,28 @@ class Article2Component extends React.Component<Article2Props> {
 		this.props.onLikePress()
 	}
 
+	private navigateBack = () => {
+		this.props.navigation.goBack()
+	}
+
 	public render(): React.ReactNode {
 		const { themedStyle, article } = this.props
+		const BackIcon = (
+			<FontAwesome
+				name="arrow-left"
+				size={24}
+				color="grey"
+				onPress={this.navigateBack}
+				style={{
+					padding: 8,
+					paddingLeft: 16,
+				}}
+			/>
+		)
 
 		return (
 			<ContainerView style={themedStyle.container}>
+				<View style={themedStyle.backIconContainer}>{BackIcon}</View>
 				<ImageBackground
 					style={themedStyle.image}
 					source={{ uri: article.imageLink }}>
@@ -72,7 +93,7 @@ class Article2Component extends React.Component<Article2Props> {
 }
 
 export const ArticleDetail = withStyles(
-	Article2Component,
+	ArticleDetailComponent,
 	(theme: ThemeType) => ({
 		container: {
 			flex: 1,
@@ -125,6 +146,9 @@ export const ArticleDetail = withStyles(
 			width: 24,
 			height: 24,
 			tintColor: theme['text-hint-color'],
+		},
+		backIconContainer: {
+			flex: 1,
 		},
 	}),
 )
