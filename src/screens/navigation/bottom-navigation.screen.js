@@ -1,53 +1,36 @@
 import React from 'react'
-import { createBottomTabNavigator } from 'react-navigation'
-import { Footer, FooterTab, Button, Icon } from 'native-base'
+import { createBottomTabNavigator } from 'react-navigation-tabs'
+import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten'
 
 import HomeScreen from '../home-screen/home.screen'
 import TwitterScreen from '../twitter-screen/twitter.screen'
 import HeadlineScreen from '../headline-screen/headline.screen'
 
+export const ButtonNavigationComponent = props => {
+	const onTabSelect = selectedIndex => {
+		const { [selectedIndex]: selectedRoute } = props.navigation.state.routes
+		props.navigation.navigate(selectedRoute.routeName)
+	}
+
+	return (
+		<BottomNavigation
+			selectedIndex={props.navigation.state.index}
+			onSelect={onTabSelect}>
+			<BottomNavigationTab title="Home" />
+			<BottomNavigationTab title="Headline" />
+			<BottomNavigationTab title="Twitter" />
+		</BottomNavigation>
+	)
+}
+
 export const BottomTabScreen = createBottomTabNavigator(
 	{
-		Home: { screen: HomeScreen },
-		Headline: { screen: HeadlineScreen },
-		Twitter: { screen: TwitterScreen },
+		Home: HomeScreen,
+		Headline: HeadlineScreen,
+		Twitter: TwitterScreen,
 	},
 	{
-		tabBarPosition: 'bottom',
-		swipeEnabled: false,
-		tabBarComponent: props => {
-			return (
-				<Footer>
-					<FooterTab>
-						<Button
-							vertical
-							active={props.navigation.state.index === 0}
-							onPress={() => props.navigation.navigate('Home')}>
-							<Icon ios="ios-menu" name="home" />
-						</Button>
-						<Button
-							vertical
-							active={props.navigation.state.index === 1}
-							onPress={() =>
-								props.navigation.navigate('Headline')
-							}>
-							<Icon name="newspaper" type="FontAwesome5" />
-						</Button>
-						<Button
-							vertical
-							active={props.navigation.state.index === 2}
-							onPress={() =>
-								props.navigation.navigate('Twitter')
-							}>
-							<Icon
-								ios="twitter"
-								android="twitter"
-								type="FontAwesome"
-							/>
-						</Button>
-					</FooterTab>
-				</Footer>
-			)
-		},
+		initialRouteName: 'Home',
+		tabBarComponent: ButtonNavigationComponent,
 	},
 )
