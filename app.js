@@ -12,7 +12,7 @@ import { ApplicationProvider } from 'react-native-ui-kitten'
 import variables from './src/native-base-theme/variables/platform'
 
 /* diable-eslint-line */
-import { mapping, light as lightTheme, dark } from '@eva-design/eva'
+import { mapping, light as lightTheme } from '@eva-design/eva'
 
 function App() {
 	useEffect(() => {
