@@ -1,23 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import {
-	Tab,
-	Tabs,
-	Text,
-	Header,
-	Spinner,
-	Container,
-	ScrollableTab,
-} from 'native-base'
-import { FlatList, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
 import { useNetInfo } from '@react-native-community/netinfo'
 
 import { en } from '../../lang/en'
 import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
-import { ArticleCard } from '../../components'
 import { getLocalName } from '../../helper/text'
-
+import { HealineListContainer } from '../../layout/headline'
+import { TabView, Tab, Text } from 'react-native-ui-kitten/ui'
+import { ContainerView, CircularSpinner } from '../../components/common'
 const {
 	POLITICS,
 	NEWS,
@@ -31,17 +23,19 @@ const {
 const HeadlineScreen = ({ navigation }) => {
 	const netInfo = useNetInfo()
 	const [isConnected, setConnected] = useState(true)
+	const [selectedIndex, setSelectedIndex] = useState(0)
+
 	useEffect(() => {
 		setConnected(netInfo.isConnected)
 	}, [netInfo.isConnected])
 
+	const onTabSelect = index => {
+		setSelectedIndex(index)
+	}
+
 	const renderQuery = ({ error, props }) => {
 		if (!props) {
-			return (
-				<AppLayout>
-					<Spinner />
-				</AppLayout>
-			)
+			return <CircularSpinner />
 		} else if (error) {
 			console.log('error:' + JSON.stringify(error))
 			throw new Error(`Error occured here ${JSON.stringify(error)}`)
@@ -67,27 +61,17 @@ const HeadlineScreen = ({ navigation }) => {
 
 				if (dataArr.length <= 0) {
 					return (
-						<Tab heading={localTabName} key={idx}>
+						<Tab title={localTabName} key={idx}>
 							<Text>Not available</Text>
 						</Tab>
 					)
 				}
 
 				return (
-					<Tab heading={localTabName} key={idx}>
-						<FlatList
-							data={dataArr}
-							keyExtractor={item => item._id}
-							renderItem={({ item }) => {
-								return (
-									<ArticleCard
-										article={item}
-										key={item._id}
-										actions={() => {}}
-										navigation={navigation}
-									/>
-								)
-							}}
+					<Tab title={localTabName} key={idx} style={styles.tab}>
+						<HealineListContainer
+							articles={dataArr}
+							navigation={navigation}
 						/>
 					</Tab>
 				)
@@ -100,17 +84,21 @@ const HeadlineScreen = ({ navigation }) => {
 			return (
 				<AppLayout>
 					{props && props.getArticles.length > 0 ? (
-						<Container>
-							<Header hasTabs style={styles.header} />
-							<Tabs renderTabBar={() => <ScrollableTab />}>
+						<ContainerView>
+							<TabView
+								selectedIndex={selectedIndex}
+								onSelect={onTabSelect}
+								shouldLoadComponent={index =>
+									index === selectedIndex
+								}>
 								{renderTab()}
-							</Tabs>
-						</Container>
+							</TabView>
+						</ContainerView>
 					) : null}
 				</AppLayout>
 			)
 		}
-		return <Spinner color="blue" />
+		return <CircularSpinner />
 	}
 	return (
 		<QueryRenderer
@@ -146,7 +134,5 @@ const HeadlineScreen = ({ navigation }) => {
 export default HeadlineScreen
 
 const styles = StyleSheet.create({
-	header: {
-		height: 10,
-	},
+	tab: {},
 })
