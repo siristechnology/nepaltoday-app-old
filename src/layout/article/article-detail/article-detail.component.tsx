@@ -8,6 +8,7 @@ import {
 import { Avatar, Text, Button } from 'react-native-ui-kitten/ui'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
+import { np } from '../../../lang/np'
 import { getRelativeTime } from '../../../helper/time'
 import { ClockIconOutline } from '../../../assets/icons'
 import { ArticleActivityBar } from '../../../components/articles'
@@ -37,8 +38,14 @@ class ArticleDetailComponent extends React.Component<
 		this.props.navigation.goBack()
 	}
 
+	private handleLinkClick = () => {
+		const link = this.props.article.link
+		this.props.navigation.navigate('Article', { link })
+	}
+
 	public render(): React.ReactNode {
 		const { themedStyle, article } = this.props
+		const { READ_MORE } = np.public
 		const BackIcon = (
 			<FontAwesome
 				name="arrow-left"
@@ -71,6 +78,13 @@ class ArticleDetailComponent extends React.Component<
 				<Text category="s1" style={themedStyle.contentLabel}>
 					{article.content}
 				</Text>
+				<View style={themedStyle.readMoreBtnWrapper}>
+					<Button
+						onPress={this.handleLinkClick}
+						style={themedStyle.readMoreBtn}>
+						{READ_MORE}
+					</Button>
+				</View>
 				<ArticleActivityBar
 					style={themedStyle.detailsContainer}
 					comments={article.comments ? article.comments.length : 0}
@@ -149,6 +163,15 @@ export const ArticleDetail = withStyles(
 		},
 		backIconContainer: {
 			flex: 1,
+		},
+		readMoreBtnWrapper: {
+			display: 'flex',
+			alignItems: 'center',
+			justifyContent: 'center',
+			margin: 8,
+		},
+		readMoreBtn: {
+			width: 200,
 		},
 	}),
 )
