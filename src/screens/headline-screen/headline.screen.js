@@ -134,5 +134,7 @@ const HeadlineScreen = ({ navigation }) => {
 export default HeadlineScreen
 
 const styles = StyleSheet.create({
-	tab: {},
+	tab: {
+		minWidth: 100,
+	},
 })
