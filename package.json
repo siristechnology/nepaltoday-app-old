@@ -3,12 +3,14 @@
 	"version": "0.0.2",
 	"private": true,
 	"scripts": {
-		"a": "react-native run-android",
+		"a": "react-native run-android --variant unsigneddebug",
 		"refresh": "adb shell input keyevent 46 46",
 		"relay": "relay-compiler --src ./src --schema ./schema.graphql --extensions js jsx",
 		"reset": "react-native start --reset-cache",
 		"jetify": "npx jetify",
 		"start": "react-native start",
+		"build": "cd android && ./gradlew app:assembleRelease && cd ..",
+		"start:dev": "concurrently \"react-native start\"  \"react-native run-android --variant unsigneddebug\"",
 		"test": "jest",
 		"lint": "eslint ."
 	},
