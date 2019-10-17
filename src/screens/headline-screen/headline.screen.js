@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
 import { useNetInfo } from '@react-native-community/netinfo'
 
@@ -8,8 +8,13 @@ import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
 import { getLocalName } from '../../helper/text'
 import { HealineListContainer } from '../../layout/headline'
-import { TabView, Tab, Text } from 'react-native-ui-kitten/ui'
-import { ContainerView, CircularSpinner } from '../../components/common'
+import { Text } from 'react-native-ui-kitten/ui'
+import { CircularSpinner } from '../../components/common'
+
+import ScrollableTabView, {
+	ScrollableTabBar,
+} from 'react-native-scrollable-tab-view'
+
 const {
 	POLITICS,
 	NEWS,
@@ -61,19 +66,19 @@ const HeadlineScreen = ({ navigation }) => {
 
 				if (dataArr.length <= 0) {
 					return (
-						<Tab title={localTabName} key={idx}>
+						<View tabLabel={localTabName} key={idx}>
 							<Text>Not available</Text>
-						</Tab>
+						</View>
 					)
 				}
 
 				return (
-					<Tab title={localTabName} key={idx} style={styles.tab}>
+					<View tabLabel={localTabName} key={idx}>
 						<HealineListContainer
 							articles={dataArr}
 							navigation={navigation}
 						/>
-					</Tab>
+					</View>
 				)
 			})
 		}
@@ -83,18 +88,11 @@ const HeadlineScreen = ({ navigation }) => {
 		} else if (props) {
 			return (
 				<AppLayout>
-					{props && props.getArticles.length > 0 ? (
-						<ContainerView>
-							<TabView
-								selectedIndex={selectedIndex}
-								onSelect={onTabSelect}
-								shouldLoadComponent={index =>
-									index === selectedIndex
-								}>
-								{renderTab()}
-							</TabView>
-						</ContainerView>
-					) : null}
+					<ScrollableTabView
+						initialPage={0}
+						renderTabBar={() => <ScrollableTabBar />}>
+						{renderTab()}
+					</ScrollableTabView>
 				</AppLayout>
 			)
 		}
