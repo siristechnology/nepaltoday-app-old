@@ -1,5 +1,9 @@
+import { View } from 'react-native'
+import ScrollableTabView, {
+	ScrollableTabBar,
+} from 'react-native-scrollable-tab-view'
+import { Text } from 'react-native-ui-kitten/ui'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
 import { useNetInfo } from '@react-native-community/netinfo'
 
@@ -7,13 +11,8 @@ import { en } from '../../lang/en'
 import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
 import { getLocalName } from '../../helper/text'
-import { HealineListContainer } from '../../layout/headline'
-import { Text } from 'react-native-ui-kitten/ui'
 import { CircularSpinner } from '../../components/common'
-
-import ScrollableTabView, {
-	ScrollableTabBar,
-} from 'react-native-scrollable-tab-view'
+import { HealineListContainer } from '../../layout/headline'
 
 const {
 	POLITICS,
@@ -28,15 +27,10 @@ const {
 const HeadlineScreen = ({ navigation }) => {
 	const netInfo = useNetInfo()
 	const [isConnected, setConnected] = useState(true)
-	const [selectedIndex, setSelectedIndex] = useState(0)
 
 	useEffect(() => {
 		setConnected(netInfo.isConnected)
 	}, [netInfo.isConnected])
-
-	const onTabSelect = index => {
-		setSelectedIndex(index)
-	}
 
 	const renderQuery = ({ error, props }) => {
 		if (!props) {
@@ -130,9 +124,3 @@ const HeadlineScreen = ({ navigation }) => {
 }
 
 export default HeadlineScreen
-
-const styles = StyleSheet.create({
-	tab: {
-		minWidth: 100,
-	},
-})
