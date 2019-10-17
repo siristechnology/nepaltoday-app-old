@@ -83,6 +83,7 @@ const Home = ({ navigation, actions }) => {
 						<ArticleListContainer
 							navigation={navigation}
 							articles={data}
+							handleRefresh={handleRefresh}
 						/>
 					</AppLayout>
 				)
