@@ -27,6 +27,11 @@ const {
 const HeadlineScreen = ({ navigation }) => {
 	const netInfo = useNetInfo()
 	const [isConnected, setConnected] = useState(true)
+	const [refreshCounter, setRefreshCounter] = useState(0)
+
+	const handleRefresh = () => {
+		setRefreshCounter(refreshCounter + 1)
+	}
 
 	useEffect(() => {
 		setConnected(netInfo.isConnected)
@@ -71,6 +76,7 @@ const HeadlineScreen = ({ navigation }) => {
 						<HealineListContainer
 							articles={dataArr}
 							navigation={navigation}
+							handleRefresh={handleRefresh}
 						/>
 					</View>
 				)
@@ -112,6 +118,7 @@ const HeadlineScreen = ({ navigation }) => {
 			`}
 			variables={{
 				isConnected,
+				refreshCounter,
 			}}
 			render={renderQuery}
 		/>

@@ -1,9 +1,15 @@
 import React from 'react'
+import { RefreshControl } from 'react-native'
 import { List } from 'react-native-ui-kitten/ui'
 import { withStyles } from 'react-native-ui-kitten/theme'
 import { ArticleListItem } from '../../article/article-list/article-list-item.component'
 
-const HeadlineListComponent = ({ articles, onItemPress, themedStyle }) => {
+const HeadlineListComponent = ({
+	articles,
+	onItemPress,
+	themedStyle,
+	handleRefresh,
+}) => {
 	const _onItemPress = article => {
 		onItemPress(article)
 	}
@@ -23,6 +29,12 @@ const HeadlineListComponent = ({ articles, onItemPress, themedStyle }) => {
 			data={articles}
 			renderItem={renderItem}
 			keyExtractor={item => item._id}
+			refreshControl={
+				<RefreshControl
+					colors={['#9Bd35A', '#689F38']}
+					onRefresh={handleRefresh}
+				/>
+			}
 		/>
 	)
 }
