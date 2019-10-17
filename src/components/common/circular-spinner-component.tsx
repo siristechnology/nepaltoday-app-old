@@ -4,7 +4,7 @@ import { Layout, Spinner } from 'react-native-ui-kitten/ui'
 
 export const CircularSpinner = () => (
 	<Layout style={styles.container}>
-		<Spinner size="tiny" />
+		<Spinner />
 	</Layout>
 )
 
