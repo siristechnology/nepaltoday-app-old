@@ -26,14 +26,6 @@ export type ArticleDetailComponentProps = ThemedComponentProps & ComponentProps
 class ArticleDetailComponent extends React.Component<
 	ArticleDetailComponentProps
 > {
-	private onCommentButtonPress = () => {
-		this.props.onCommentPress()
-	}
-
-	private onLikeButtonPress = () => {
-		this.props.onLikePress()
-	}
-
 	private navigateBack = () => {
 		this.props.navigation.goBack()
 	}
@@ -85,12 +77,7 @@ class ArticleDetailComponent extends React.Component<
 						{READ_MORE}
 					</Button>
 				</View>
-				<ArticleActivityBar
-					style={themedStyle.detailsContainer}
-					comments={article.comments ? article.comments.length : 0}
-					likes={article.likes}
-					onCommentPress={this.onCommentButtonPress}
-					onLikePress={this.onLikeButtonPress}>
+				<ArticleActivityBar style={themedStyle.detailsContainer}>
 					<View style={themedStyle.dateContainer}>
 						{ClockIconOutline(themedStyle.dateIcon)}
 						<Text
