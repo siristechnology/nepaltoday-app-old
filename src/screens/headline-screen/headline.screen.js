@@ -1,5 +1,9 @@
+import { View } from 'react-native'
+import ScrollableTabView, {
+	ScrollableTabBar,
+} from 'react-native-scrollable-tab-view'
+import { Text } from 'react-native-ui-kitten/ui'
 import React, { useEffect, useState } from 'react'
-import { StyleSheet } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
 import { useNetInfo } from '@react-native-community/netinfo'
 
@@ -7,9 +11,9 @@ import { en } from '../../lang/en'
 import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
 import { getLocalName } from '../../helper/text'
+import { CircularSpinner } from '../../components/common'
 import { HealineListContainer } from '../../layout/headline'
-import { TabView, Tab, Text } from 'react-native-ui-kitten/ui'
-import { ContainerView, CircularSpinner } from '../../components/common'
+
 const {
 	POLITICS,
 	NEWS,
@@ -23,15 +27,10 @@ const {
 const HeadlineScreen = ({ navigation }) => {
 	const netInfo = useNetInfo()
 	const [isConnected, setConnected] = useState(true)
-	const [selectedIndex, setSelectedIndex] = useState(0)
 
 	useEffect(() => {
 		setConnected(netInfo.isConnected)
 	}, [netInfo.isConnected])
-
-	const onTabSelect = index => {
-		setSelectedIndex(index)
-	}
 
 	const renderQuery = ({ error, props }) => {
 		if (!props) {
@@ -61,44 +60,32 @@ const HeadlineScreen = ({ navigation }) => {
 
 				if (dataArr.length <= 0) {
 					return (
-						<Tab title={localTabName} key={idx}>
+						<View tabLabel={localTabName} key={idx}>
 							<Text>Not available</Text>
-						</Tab>
+						</View>
 					)
 				}
 
 				return (
-					<Tab title={localTabName} key={idx} style={styles.tab}>
+					<View tabLabel={localTabName} key={idx}>
 						<HealineListContainer
 							articles={dataArr}
 							navigation={navigation}
 						/>
-					</Tab>
+					</View>
 				)
 			})
 		}
 
-		if (error) {
-			return <Text>{error.message}</Text>
-		} else if (props) {
-			return (
-				<AppLayout>
-					{props && props.getArticles.length > 0 ? (
-						<ContainerView>
-							<TabView
-								selectedIndex={selectedIndex}
-								onSelect={onTabSelect}
-								shouldLoadComponent={index =>
-									index === selectedIndex
-								}>
-								{renderTab()}
-							</TabView>
-						</ContainerView>
-					) : null}
-				</AppLayout>
-			)
-		}
-		return <CircularSpinner />
+		return (
+			<AppLayout>
+				<ScrollableTabView
+					initialPage={0}
+					renderTabBar={() => <ScrollableTabBar />}>
+					{renderTab()}
+				</ScrollableTabView>
+			</AppLayout>
+		)
 	}
 	return (
 		<QueryRenderer
@@ -132,9 +119,3 @@ const HeadlineScreen = ({ navigation }) => {
 }
 
 export default HeadlineScreen
-
-const styles = StyleSheet.create({
-	tab: {
-		minWidth: 100,
-	},
-})
