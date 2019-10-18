@@ -32,7 +32,7 @@ const ArticleListItemComponent = props => {
 					style={themedStyle.descriptionLabel}
 					appearance="hint"
 					category="s1">
-					{article.shortDescription}
+					{article.shortDescription}...
 				</Text>
 			</View>
 			<ArticleActivityBar style={themedStyle.activityContainer}>
@@ -45,20 +45,19 @@ const ArticleListItemComponent = props => {
 		</TouchableOpacity>
 	)
 }
-
 export const ArticleListItem = withStyles(ArticleListItemComponent, theme => ({
 	container: {
 		borderRadius: 12,
 	},
 	infoContainer: {
 		paddingHorizontal: 16,
-		paddingVertical: 24,
+		paddingVertical: 8,
 		borderBottomWidth: 1,
 		borderBottomColor: theme['border-basic-color-2'],
 	},
 	activityContainer: {
 		paddingHorizontal: 16,
-		paddingVertical: 16,
+		paddingVertical: 4,
 	},
 	imageContainer: {
 		height: 220,
@@ -69,7 +68,7 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, theme => ({
 	},
 	titleLabel: textStyle.headline,
 	descriptionLabel: {
-		marginTop: 16,
+		marginTop: 2,
 		...textStyle.subtitle,
 	},
 }))
