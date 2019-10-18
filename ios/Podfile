@@ -28,6 +28,8 @@ target 'nepaltodayapp' do
 
 
 
+  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+
   target 'nepaltodayappTests' do
     inherit! :search_paths
     # Pods for testing
