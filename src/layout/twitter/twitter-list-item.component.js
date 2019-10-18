@@ -87,6 +87,7 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 	},
 	dateContainer: {
 		flexDirection: 'row',
+		alignItems: 'center',
 	},
 	dateLabel: {
 		marginLeft: 8,
