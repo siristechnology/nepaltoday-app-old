@@ -1,6 +1,4 @@
 export * from './time.component'
-export * from './article-card.component'
-export * from './article-detail.component'
 export * from './offline-notification.component'
 export * from './splash-screen.component'
 export * from './twitter-card.component'

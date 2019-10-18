@@ -1,13 +1,13 @@
 import { Spinner } from 'native-base'
+import { AppState } from 'react-native'
 import Analytics from 'appcenter-analytics'
 import React, { useState, useEffect } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
-import { FlatList, RefreshControl, AppState } from 'react-native'
 import { useNetInfo } from '@react-native-community/netinfo'
 
 import environment from '../../environment'
-import { ArticleCard } from '../../components'
 import AppLayout from '../../frame/app-layout'
+import { ArticleListContainer } from '../../layout/article'
 
 const Home = ({ navigation, actions }) => {
 	const netInfo = useNetInfo()
@@ -80,26 +80,10 @@ const Home = ({ navigation, actions }) => {
 
 				return (
 					<AppLayout>
-						<FlatList
-							data={data.getArticles}
-							keyExtractor={item => item._id}
-							extraData={isUpdated}
-							renderItem={({ item }) => {
-								return (
-									<ArticleCard
-										article={item}
-										key={item._id}
-										actions={actions}
-										navigation={navigation}
-									/>
-								)
-							}}
-							refreshControl={
-								<RefreshControl
-									colors={['#9Bd35A', '#689F38']}
-									onRefresh={handleRefresh}
-								/>
-							}
+						<ArticleListContainer
+							navigation={navigation}
+							articles={data}
+							handleRefresh={handleRefresh}
 						/>
 					</AppLayout>
 				)

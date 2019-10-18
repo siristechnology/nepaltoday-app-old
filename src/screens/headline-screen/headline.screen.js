@@ -1,22 +1,18 @@
+import { View } from 'react-native'
+import ScrollableTabView, {
+	ScrollableTabBar,
+} from 'react-native-scrollable-tab-view'
+import { Text } from 'react-native-ui-kitten/ui'
 import React, { useEffect, useState } from 'react'
-import {
-	Tab,
-	Tabs,
-	Text,
-	Header,
-	Spinner,
-	Container,
-	ScrollableTab,
-} from 'native-base'
-import { FlatList, StyleSheet } from 'react-native'
 import { QueryRenderer, graphql } from 'react-relay'
 import { useNetInfo } from '@react-native-community/netinfo'
 
 import { en } from '../../lang/en'
 import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
-import { ArticleCard } from '../../components'
 import { getLocalName } from '../../helper/text'
+import { CircularSpinner } from '../../components/common'
+import { HealineListContainer } from '../../layout/headline'
 
 const {
 	POLITICS,
@@ -31,17 +27,19 @@ const {
 const HeadlineScreen = ({ navigation }) => {
 	const netInfo = useNetInfo()
 	const [isConnected, setConnected] = useState(true)
+	const [refreshCounter, setRefreshCounter] = useState(0)
+
+	const handleRefresh = () => {
+		setRefreshCounter(refreshCounter + 1)
+	}
+
 	useEffect(() => {
 		setConnected(netInfo.isConnected)
 	}, [netInfo.isConnected])
 
 	const renderQuery = ({ error, props }) => {
 		if (!props) {
-			return (
-				<AppLayout>
-					<Spinner />
-				</AppLayout>
-			)
+			return <CircularSpinner />
 		} else if (error) {
 			console.log('error:' + JSON.stringify(error))
 			throw new Error(`Error occured here ${JSON.stringify(error)}`)
@@ -67,50 +65,33 @@ const HeadlineScreen = ({ navigation }) => {
 
 				if (dataArr.length <= 0) {
 					return (
-						<Tab heading={localTabName} key={idx}>
+						<View tabLabel={localTabName} key={idx}>
 							<Text>Not available</Text>
-						</Tab>
+						</View>
 					)
 				}
 
 				return (
-					<Tab heading={localTabName} key={idx}>
-						<FlatList
-							data={dataArr}
-							keyExtractor={item => item._id}
-							renderItem={({ item }) => {
-								return (
-									<ArticleCard
-										article={item}
-										key={item._id}
-										actions={() => {}}
-										navigation={navigation}
-									/>
-								)
-							}}
+					<View tabLabel={localTabName} key={idx}>
+						<HealineListContainer
+							articles={dataArr}
+							navigation={navigation}
+							handleRefresh={handleRefresh}
 						/>
-					</Tab>
+					</View>
 				)
 			})
 		}
 
-		if (error) {
-			return <Text>{error.message}</Text>
-		} else if (props) {
-			return (
-				<AppLayout>
-					{props && props.getArticles.length > 0 ? (
-						<Container>
-							<Header hasTabs style={styles.header} />
-							<Tabs renderTabBar={() => <ScrollableTab />}>
-								{renderTab()}
-							</Tabs>
-						</Container>
-					) : null}
-				</AppLayout>
-			)
-		}
-		return <Spinner color="blue" />
+		return (
+			<AppLayout>
+				<ScrollableTabView
+					initialPage={0}
+					renderTabBar={() => <ScrollableTabBar />}>
+					{renderTab()}
+				</ScrollableTabView>
+			</AppLayout>
+		)
 	}
 	return (
 		<QueryRenderer
@@ -137,6 +118,7 @@ const HeadlineScreen = ({ navigation }) => {
 			`}
 			variables={{
 				isConnected,
+				refreshCounter,
 			}}
 			render={renderQuery}
 		/>
@@ -144,9 +126,3 @@ const HeadlineScreen = ({ navigation }) => {
 }
 
 export default HeadlineScreen
-
-const styles = StyleSheet.create({
-	header: {
-		height: 10,
-	},
-})

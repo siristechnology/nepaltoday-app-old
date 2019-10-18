@@ -3,5 +3,6 @@
 	"editor.insertSpaces": false,
 	"editor.tabSize": 4,
 	"editor.formatOnSave": true,
-	"javascript.format.enable": false
+	"javascript.format.enable": false,
+	"deepscan.enable": true
 }

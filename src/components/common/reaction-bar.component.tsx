@@ -1,0 +1,25 @@
+import React from 'react'
+import { View, ViewProps } from 'react-native'
+import { ThemedComponentProps, withStyles } from 'react-native-ui-kitten/theme'
+
+type ChildElement = React.ReactElement<any>
+
+interface ComponentProps {
+	children: ChildElement | ChildElement[]
+}
+
+export type ReactionBarProps = ThemedComponentProps & ViewProps & ComponentProps
+
+class ReactionBarComponent extends React.Component<ReactionBarProps> {
+	public render(): React.ReactNode {
+		const { themedStyle, style, ...restProps } = this.props
+
+		return <View {...restProps} style={[themedStyle.container, style]} />
+	}
+}
+
+export const ReactionBar = withStyles(ReactionBarComponent, () => ({
+	container: {
+		flexDirection: 'row',
+	},
+}))
