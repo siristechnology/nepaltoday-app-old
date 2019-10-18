@@ -1,19 +1,24 @@
 import { Spinner } from 'native-base'
-import { FlatList } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
 import { useNetInfo } from '@react-native-community/netinfo'
 
 import environment from '../../environment'
-import { TwitterCard } from '../../components'
 import AppLayout from '../../frame/app-layout'
 
-const TwitterComponent = ({ navigation }) => {
+import { TwitterListContainer } from '../../layout/twitter/twitter-list.container'
+
+const TwitterComponent = ({}) => {
 	const netInfo = useNetInfo()
 	const [isConnected, setConnected] = useState(true)
+	const [refreshCounter, setRefreshCounter] = useState(0)
 	useEffect(() => {
 		setConnected(netInfo.isConnected)
 	}, [netInfo.isConnected])
+
+	const handleRefresh = () => {
+		setRefreshCounter(refreshCounter + 1)
+	}
 	return (
 		<QueryRenderer
 			environment={environment}
@@ -39,9 +44,9 @@ const TwitterComponent = ({ navigation }) => {
 			`}
 			variables={{
 				isConnected,
+				refreshCounter,
 			}}
 			render={({ error, props }) => {
-				console.log('twitter props here', props)
 				if (!props) {
 					return (
 						<AppLayout>
@@ -53,18 +58,9 @@ const TwitterComponent = ({ navigation }) => {
 				}
 				return (
 					<AppLayout>
-						<FlatList
-							data={props.getTweets}
-							keyExtractor={item => item._id}
-							renderItem={({ item }) => {
-								return (
-									<TwitterCard
-										tweet={item}
-										key={item.id}
-										navigation={navigation}
-									/>
-								)
-							}}
+						<TwitterListContainer
+							tweets={props.getTweets}
+							handleRefresh={handleRefresh}
 						/>
 					</AppLayout>
 				)
