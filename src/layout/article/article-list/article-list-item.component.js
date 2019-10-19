@@ -24,6 +24,13 @@ const ArticleListItemComponent = props => {
 				imageStyle={themedStyle.image}
 				source={{ uri: article.imageLink }}
 			/>
+			<ArticleActivityBar style={themedStyle.activityContainer}>
+				<ActivityAuthoring
+					photo={{ uri: article.source.logoLink }}
+					name={`${article.source.name}`}
+					date={getRelativeTime(article.publishedDate)}
+				/>
+			</ArticleActivityBar>
 			<View style={themedStyle.infoContainer}>
 				<Text style={themedStyle.titleLabel} category="h5">
 					{article.title}
@@ -35,13 +42,6 @@ const ArticleListItemComponent = props => {
 					{article.shortDescription}...
 				</Text>
 			</View>
-			<ArticleActivityBar style={themedStyle.activityContainer}>
-				<ActivityAuthoring
-					photo={{ uri: article.source.logoLink }}
-					name={`${article.source.name}`}
-					date={getRelativeTime(article.publishedDate)}
-				/>
-			</ArticleActivityBar>
 		</TouchableOpacity>
 	)
 }
@@ -57,7 +57,7 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, theme => ({
 	},
 	activityContainer: {
 		paddingHorizontal: 16,
-		paddingVertical: 4,
+		paddingVertical: 8,
 	},
 	imageContainer: {
 		height: 220,
