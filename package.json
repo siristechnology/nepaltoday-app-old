@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@eva-design/eva": "^1.2.0",
+    "@react-native-community/async-storage": "^1.6.2",
     "@react-native-community/netinfo": "4.2.2",
     "appcenter": "^2.3.0",
     "appcenter-analytics": "^2.3.0",
