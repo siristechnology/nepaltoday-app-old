@@ -125,6 +125,7 @@ export const ArticleDetail = withStyles(
 			marginHorizontal: 24,
 			marginTop: 48,
 			...textStyle.headline,
+			fontSize: 22,
 		},
 		translatedLabel: {
 			flex: 1,
@@ -138,6 +139,7 @@ export const ArticleDetail = withStyles(
 			marginHorizontal: 24,
 			marginVertical: 24,
 			...textStyle.paragraph,
+			fontSize: 18,
 		},
 		dateLabel: {
 			marginLeft: 8,
