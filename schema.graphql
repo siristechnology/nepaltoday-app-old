@@ -59,3 +59,15 @@ type Query {
 	getArticles(criteria: ArticleCriteria): [Article]!
 	getTweets(criteria: TweetCriteria): [Tweet]!
 }
+
+type Gcm {
+	gcmToken: String
+}
+
+input CreateGcmInput {
+	lastGcmId: String
+	lastMutationDate: String
+}
+type Mutation {
+	createGcm(gcmToken: String): [Gcm]!
+}
