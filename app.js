@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux'
-import { StatusBar } from 'react-native'
+import { StatusBar, Alert } from 'react-native'
 import firebase from 'react-native-firebase'
 import { StyleProvider, Root } from 'native-base'
 import React, { useEffect, useState } from 'react'
@@ -17,6 +17,8 @@ import variables from './src/native-base-theme/variables/platform'
 import { mapping, light as lightTheme } from '@eva-design/eva'
 
 function App() {
+	const [isNotification, setNotification] = useState(false)
+
 	const getToken = async () => {
 		try {
 			let fcmToken = await AsyncStorage.getItem('fcmToken')
@@ -41,7 +43,10 @@ function App() {
 			await firebase.messaging().requestPermission()
 			getToken()
 		} catch (error) {
-			console.log('----------------permission rejected')
+			console.log(
+				'_______________error occured on request permission_______________',
+				error,
+			)
 		}
 	}
 
@@ -61,9 +66,60 @@ function App() {
 			)
 		}
 	}
+
+	const showAlert = (title, message) => {
+		return Alert.alert(
+			title,
+			message,
+			[{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+			{ cancelable: false },
+		)
+	}
+
+	const messageListner = async () => {
+		firebase.notifications().onNotification(notification => {
+			const { title, body } = notification
+			setNotification(true)
+			console.log(
+				'_______________notification_______________',
+				notification,
+				isNotification,
+			)
+			showAlert(title, body)
+		})
+
+		firebase.notifications().onNotificationOpened(notificationOpen => {
+			const { title, body } = notificationOpen.notification
+			setNotification(true)
+			console.log(
+				'_______________title and body_______________',
+				title,
+				body,
+			)
+			showAlert(title, body)
+		})
+
+		const notificationOpen = await firebase
+			.notifications()
+			.getInitialNotification()
+		if (notificationOpen) {
+			setNotification(true)
+			const { title, body } = notificationOpen.notification
+			showAlert(title, body)
+		}
+
+		firebase.messaging().onMessage(message => {
+			console.log(
+				'_______________message_______________',
+				JSON.stringify(message),
+			)
+		})
+	}
+
 	useEffect(() => {
 		SplashScreen.hide()
 		checkPushNotificationPermission()
+		messageListner()
 	}, [])
 
 	/* diable-eslint-line */
