@@ -61,6 +61,7 @@ type Query {
 }
 
 type Gcm {
+	_id: String
 	gcmToken: String
 }
 

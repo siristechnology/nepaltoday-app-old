@@ -1,14 +1,13 @@
 // 1
 import { commitMutation, graphql } from 'react-relay'
+
 import environment from '../Environment'
 
 // 2
 const mutation = graphql`
 	mutation createGcmMutation($input: CreateGcmInput!) {
 		createGcm(input: $input) {
-			gcmToken {
-				gcmToken
-			}
+			gcmToken
 		}
 	}
 `
