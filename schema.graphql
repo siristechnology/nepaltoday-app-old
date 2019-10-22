@@ -62,13 +62,14 @@ type Query {
 
 type Gcm {
 	_id: String
-	gcmToken: String
+	fcmToken: String
+	countryCode: String
 }
 
-input CreateGcmInput {
-	lastGcmId: String
-	lastMutationDate: String
+input StoreFcmInput {
+	fcmToken: String
+	countryCode: String
 }
 type Mutation {
-	createGcm(gcmToken: String): [Gcm]!
+	storeFcmToken(input: StoreFcmInput): Gcm
 }
