@@ -27,8 +27,7 @@ function App() {
 
 	const getToken = async () => {
 		try {
-			let fcmToken = null
-			// || (await AsyncStorage.getItem('fcmToken'))
+			let fcmToken = await AsyncStorage.getItem('fcmToken')
 			console.log('_______________fcm token _______________', fcmToken)
 
 			if (!fcmToken) {
