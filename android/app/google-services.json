@@ -1,40 +1,40 @@
 {
-  "project_info": {
-    "project_number": "40342353979",
-    "firebase_url": "https://nepaltodayapp.firebaseio.com",
-    "project_id": "nepaltodayapp",
-    "storage_bucket": "nepaltodayapp.appspot.com"
-  },
-  "client": [
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:40342353979:android:ffa89e4e29e6c3d9bf841e",
-        "android_client_info": {
-          "package_name": "com.siristechnology.nepaltodayapp"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "40342353979-396ce19tr5j0kj8qeicbsjv0r5s7ur82.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAWmWO2fSUj_-zqJx4jRft3bsXYJRM9lZ4"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "40342353979-396ce19tr5j0kj8qeicbsjv0r5s7ur82.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        }
-      }
-    }
-  ],
-  "configuration_version": "1"
+	"project_info": {
+		"project_number": "694326466848",
+		"firebase_url": "https://nepaltoday.firebaseio.com",
+		"project_id": "nepaltoday",
+		"storage_bucket": "nepaltoday.appspot.com"
+	},
+	"client": [
+		{
+			"client_info": {
+				"mobilesdk_app_id": "1:694326466848:android:a78649736d1c284fc0df45",
+				"android_client_info": {
+					"package_name": "com.siristechnology.nepaltodayapp"
+				}
+			},
+			"oauth_client": [
+				{
+					"client_id": "694326466848-pgl253vpirm9te0ailmolkf3qvvnctnr.apps.googleusercontent.com",
+					"client_type": 3
+				}
+			],
+			"api_key": [
+				{
+					"current_key": "AIzaSyDMBlvCiQQhzSwd8NWRw2mShXIOfWXuPi4"
+				}
+			],
+			"services": {
+				"appinvite_service": {
+					"other_platform_oauth_client": [
+						{
+							"client_id": "694326466848-pgl253vpirm9te0ailmolkf3qvvnctnr.apps.googleusercontent.com",
+							"client_type": 3
+						}
+					]
+				}
+			}
+		}
+	],
+	"configuration_version": "1"
 }
