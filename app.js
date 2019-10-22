@@ -13,11 +13,16 @@ import getTheme from './src/native-base-theme/components'
 import { ApplicationProvider } from 'react-native-ui-kitten'
 import variables from './src/native-base-theme/variables/platform'
 
+import * as RNLocalize from 'react-native-localize'
+
 /* diable-eslint-line */
 import { mapping, light as lightTheme } from '@eva-design/eva'
 
 function App() {
 	const [isNotification, setNotification] = useState(false)
+	const [country] = useState(RNLocalize.getCountry())
+
+	console.log('_______________country_______________', country)
 
 	const getToken = async () => {
 		try {
