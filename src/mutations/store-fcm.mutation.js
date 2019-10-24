@@ -7,6 +7,7 @@ const gcmMutation = graphql`
 		storeFcmToken(input: $input) {
 			fcmToken
 			countryCode
+			timeZone
 		}
 	}
 `
