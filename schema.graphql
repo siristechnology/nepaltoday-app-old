@@ -64,11 +64,13 @@ type Gcm {
 	_id: String
 	fcmToken: String
 	countryCode: String
+	timeZone: String
 }
 
 input StoreFcmInput {
 	fcmToken: String
 	countryCode: String
+	timeZone: String
 }
 type Mutation {
 	storeFcmToken(input: StoreFcmInput): Gcm

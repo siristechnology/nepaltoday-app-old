@@ -22,6 +22,9 @@ import { storeFcmToken } from './src/mutations/store-fcm.mutation'
 function App() {
 	const [isNotification, setNotification] = useState(false)
 	const [country] = useState(RNLocalize.getCountry())
+	const [timeZone] = useState(RNLocalize.getTimeZone())
+
+	console.log('_______________timezone_______________', timeZone)
 
 	console.log('_______________country_______________', country)
 
@@ -34,7 +37,7 @@ function App() {
 				fcmToken = await firebase.messaging().getToken()
 				if (fcmToken) {
 					await AsyncStorage.setItem('fcmToken', fcmToken)
-					storeFcmToken({ fcmToken, countryCode: country })
+					storeFcmToken({ fcmToken, countryCode: country, timeZone })
 				}
 			}
 		} catch (error) {
