@@ -1,5 +1,5 @@
 import { commitMutation } from 'react-relay'
-import environment from '../Environment'
+import environment from '../environment'
 
 export default (
 	mutation = '',
