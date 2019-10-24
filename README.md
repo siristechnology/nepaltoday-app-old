@@ -1,6 +1,6 @@
 # Nepal Today App
 
-[![Build status](https://build.appcenter.ms/v0.1/apps/dcdc5d16-bf47-4a9a-bec9-a4d30faa77a3/branches/master/badge)](https://appcenter.ms)
+[![Build status](https://build.appcenter.ms/v0.1/apps/dcdc5d16-bf47-4a9a-bec9-a4d30faa77a3/branches/master/badge)](https://appcenter.ms) [![Greenkeeper badge](https://badges.greenkeeper.io/siristechnology/nepaltoday-app.svg)](https://greenkeeper.io/)
 
 ### [Download from Google Play Store](https://play.google.com/store/apps/details?id=com.siristechnology.nepaltodayapp)
 
