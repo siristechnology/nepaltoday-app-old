@@ -17,6 +17,7 @@ import * as RNLocalize from 'react-native-localize'
 
 /* diable-eslint-line */
 import { mapping, light as lightTheme } from '@eva-design/eva'
+import { storeFcmToken } from './src/mutations/store-fcm.mutation'
 
 function App() {
 	const [isNotification, setNotification] = useState(false)
@@ -33,6 +34,7 @@ function App() {
 				fcmToken = await firebase.messaging().getToken()
 				if (fcmToken) {
 					await AsyncStorage.setItem('fcmToken', fcmToken)
+					storeFcmToken({ fcmToken, countryCode: country })
 				}
 			}
 		} catch (error) {
