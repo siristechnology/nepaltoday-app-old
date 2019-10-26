@@ -86,37 +86,39 @@ function App() {
 		)
 	}
 
+	/*
+	 * Triggered when a particular notification has been received in foreground
+	 * */
 	const messageListner = async () => {
-		firebase.notifications().onNotification(notification => {
-			const { title, body } = notification
-			setNotification(true)
-			console.log(
-				'_______________notification_______________',
-				notification,
-				isNotification,
-			)
-			showAlert(title, body)
-		})
-
-		firebase.notifications().onNotificationOpened(notificationOpen => {
-			const { title, body } = notificationOpen.notification
-			setNotification(true)
-			console.log(
-				'_______________title and body_______________',
-				title,
-				body,
-			)
-			showAlert(title, body)
-		})
-
-		const notificationOpen = await firebase
+		this.foregroundNotificationListner = firebase
 			.notifications()
-			.getInitialNotification()
-		if (notificationOpen) {
-			setNotification(true)
-			const { title, body } = notificationOpen.notification
-			showAlert(title, body)
-		}
+			.onNotification(notification => {
+				const { title, body } = notification
+				setNotification(true)
+
+				console.log(
+					'_______________app is in foreground_______________',
+				)
+				showAlert(title, body)
+			})
+
+		/*
+		 * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
+		 * */
+		this.backgroundNotificationListener = firebase
+			.notifications()
+			.onNotificationOpened(notificationOpen => {
+				const { title, body } = notificationOpen.notification
+				console.log('_______________app in background_______________')
+				setNotification(true)
+
+				showAlert(title, body)
+			})
+
+		/*
+		 * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
+		 * */
+		await firebase.notifications().getInitialNotification()
 
 		firebase.messaging().onMessage(message => {
 			console.log(
@@ -130,6 +132,10 @@ function App() {
 		SplashScreen.hide()
 		checkPushNotificationPermission()
 		messageListner()
+		return () => {
+			this.foregroundNotificationListner()
+			this.backgroundNotificationListener()
+		}
 	}, [])
 
 	/* diable-eslint-line */
