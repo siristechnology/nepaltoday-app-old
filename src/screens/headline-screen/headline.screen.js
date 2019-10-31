@@ -14,15 +14,7 @@ import { getLocalName } from '../../helper/text'
 import { CircularSpinner } from '../../components/common'
 import { HealineListContainer } from '../../layout/headline'
 
-const {
-	POLITICS,
-	NEWS,
-	ENTERTAINMENT,
-	BUSINESS,
-	OPINION,
-	SOCIAL,
-	SPORTS,
-} = en.menu
+const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
 const HeadlineScreen = ({ navigation }) => {
 	const netInfo = useNetInfo()
@@ -48,7 +40,6 @@ const HeadlineScreen = ({ navigation }) => {
 		const renderTab = () => {
 			const tabNames = [
 				NEWS,
-				POLITICS,
 				ENTERTAINMENT,
 				BUSINESS,
 				OPINION,
