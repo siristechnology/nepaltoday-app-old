@@ -1,4 +1,3 @@
-import { Spinner } from 'native-base'
 import React, { useEffect, useState } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
 import { useNetInfo } from '@react-native-community/netinfo'
@@ -6,6 +5,7 @@ import { useNetInfo } from '@react-native-community/netinfo'
 import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
 
+import { CircularSpinner } from '../../components/common'
 import { TwitterListContainer } from '../../layout/twitter/twitter-list.container'
 
 const TwitterComponent = ({}) => {
@@ -50,7 +50,7 @@ const TwitterComponent = ({}) => {
 				if (!props) {
 					return (
 						<AppLayout>
-							<Spinner />
+							<CircularSpinner />
 						</AppLayout>
 					)
 				} else if (error) {
