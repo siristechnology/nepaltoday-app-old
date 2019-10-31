@@ -18,11 +18,15 @@ import * as RNLocalize from 'react-native-localize'
 /* diable-eslint-line */
 import { mapping, light as lightTheme } from '@eva-design/eva'
 import { storeFcmToken } from './src/mutations/store-fcm.mutation'
+import { useModal } from './src/components/common/modal.component'
+import { NotificationModal } from './src/layout/notification/notification-modal'
 
 function App() {
-	const [isNotification, setNotification] = useState(false)
+	const [notification, setNotification] = useState(false)
 	const [country] = useState(RNLocalize.getCountry())
 	const [timeZone] = useState(RNLocalize.getTimeZone())
+
+	const notificationModal = useModal()
 
 	console.log('_______________timezone_______________', timeZone)
 
@@ -77,13 +81,20 @@ function App() {
 		}
 	}
 
-	const showAlert = (title, message) => {
-		return Alert.alert(
-			title,
-			message,
-			[{ text: 'OK', onPress: () => console.log('OK Pressed') }],
-			{ cancelable: false },
+	const showAlert = () => {
+		console.log('_______________title_______________', notification.title)
+		console.log(
+			'_______________message_______________',
+			notification.message,
 		)
+		notificationModal.open()
+
+		// return Alert.alert(
+		// 	title,
+		// 	message,
+		// 	[{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+		// 	{ cancelable: false },
+		// )
 	}
 
 	/*
@@ -94,12 +105,12 @@ function App() {
 			.notifications()
 			.onNotification(notification => {
 				const { title, body } = notification
-				setNotification(true)
+				setNotification({ title, message: body })
 
 				console.log(
 					'_______________app is in foreground_______________',
 				)
-				showAlert(title, body)
+				showAlert()
 			})
 
 		/*
@@ -110,7 +121,7 @@ function App() {
 			.onNotificationOpened(notificationOpen => {
 				const { title, body } = notificationOpen.notification
 				console.log('_______________app in background_______________')
-				setNotification(true)
+				setNotification({ title, message: body })
 
 				showAlert(title, body)
 			})
@@ -149,6 +160,9 @@ function App() {
 					<Root>
 						<ErrorBoundary>
 							<AppContainer />
+							<NotificationModal
+								notification={notification.message}
+							/>
 						</ErrorBoundary>
 					</Root>
 				</Provider>
