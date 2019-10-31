@@ -1,4 +1,3 @@
-import { Spinner } from 'native-base'
 import { AppState } from 'react-native'
 import Analytics from 'appcenter-analytics'
 import React, { useState, useEffect } from 'react'
@@ -7,6 +6,7 @@ import { useNetInfo } from '@react-native-community/netinfo'
 
 import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
+import { CircularSpinner } from '../../components/common'
 import { ArticleListContainer } from '../../layout/article'
 
 const Home = ({ navigation, actions }) => {
@@ -71,7 +71,7 @@ const Home = ({ navigation, actions }) => {
 				if (!data) {
 					return (
 						<AppLayout>
-							<Spinner />
+							<CircularSpinner />
 						</AppLayout>
 					)
 				} else if (error) {
