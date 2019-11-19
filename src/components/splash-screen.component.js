@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button } from 'native-base'
+import { Button } from 'react-native-ui-kitten'
 import { StyleSheet, Text, View } from 'react-native'
 
 import { np } from '../lang/np'

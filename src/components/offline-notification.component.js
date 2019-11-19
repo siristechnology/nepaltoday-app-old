@@ -7,7 +7,6 @@ const { width } = Dimensions.get('window')
 const OfflineNotice = () => {
 	const netInfo = useNetInfo()
 	const [isConnected, setConnected] = useState(true)
-	const [refreshCounter, setRefeshCounter] = useState(0)
 
 	useEffect(() => {
 		setConnected(netInfo.isConnected)
