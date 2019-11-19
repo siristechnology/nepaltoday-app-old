@@ -1,5 +1,5 @@
 import React from 'react'
-import { Toast } from 'native-base'
+import { Alert } from 'react-native'
 class ErrorBoundary extends React.Component {
 	constructor(props) {
 		super(props)
@@ -11,11 +11,12 @@ class ErrorBoundary extends React.Component {
 	}
 	componentDidCatch() {
 		if (this.state.hasError) {
-			Toast.show({
-				text: 'Something went wrong please refresh your app !!',
-				type: 'warning',
-				position: 'top'
-			})
+			Alert.alert(
+				'Error!!',
+				'Something went wrong please refresh your app !!',
+				[],
+				{ cancelable: true },
+			)
 		}
 	}
 

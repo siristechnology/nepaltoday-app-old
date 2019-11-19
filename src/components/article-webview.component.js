@@ -1,5 +1,5 @@
 import React from 'react'
-import { Spinner } from 'native-base'
+import { Spinner } from 'react-native-ui-kitten'
 import { WebView } from 'react-native-webview'
 
 export class ArticleWebviewComponent extends React.Component {
