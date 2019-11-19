@@ -13,6 +13,7 @@ import AppLayout from '../../frame/app-layout'
 import { getLocalName } from '../../helper/text'
 import { CircularSpinner } from '../../components/common'
 import { HealineListContainer } from '../../layout/headline'
+import { OfflineNotice } from '../../components'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
@@ -64,6 +65,7 @@ const HeadlineScreen = ({ navigation }) => {
 
 				return (
 					<View tabLabel={localTabName} key={idx}>
+						<OfflineNotice />
 						<HealineListContainer
 							articles={dataArr}
 							navigation={navigation}
@@ -75,13 +77,11 @@ const HeadlineScreen = ({ navigation }) => {
 		}
 
 		return (
-			<AppLayout>
-				<ScrollableTabView
-					initialPage={0}
-					renderTabBar={() => <ScrollableTabBar />}>
-					{renderTab()}
-				</ScrollableTabView>
-			</AppLayout>
+			<ScrollableTabView
+				initialPage={0}
+				renderTabBar={() => <ScrollableTabBar />}>
+				{renderTab()}
+			</ScrollableTabView>
 		)
 	}
 	return (

@@ -1,15 +1,15 @@
 import React from 'react'
-import { Layout } from 'react-native-ui-kitten'
+import { View } from 'react-native'
 import { OfflineNotice } from '../components'
 
 class AppLayout extends React.PureComponent {
 	render() {
 		const { children } = this.props
 		return (
-			<Layout>
+			<View>
 				<OfflineNotice />
 				{children}
-			</Layout>
+			</View>
 		)
 	}
 }
