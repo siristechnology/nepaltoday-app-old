@@ -1,7 +1,6 @@
 import { Provider } from 'react-redux'
-import { StatusBar, Alert } from 'react-native'
+import { StatusBar } from 'react-native'
 import firebase from 'react-native-firebase'
-import { StyleProvider, Root } from 'native-base'
 import React, { useEffect, useState } from 'react'
 import SplashScreen from 'react-native-splash-screen'
 import AsyncStorage from '@react-native-community/async-storage'
@@ -9,28 +8,19 @@ import AsyncStorage from '@react-native-community/async-storage'
 import { store } from './src/store'
 import AppContainer from './src/frame/app-container'
 import ErrorBoundary from './src/error/error-boundry'
-import getTheme from './src/native-base-theme/components'
 import { ApplicationProvider } from 'react-native-ui-kitten'
-import variables from './src/native-base-theme/variables/platform'
 
 import * as RNLocalize from 'react-native-localize'
 
 /* diable-eslint-line */
 import { mapping, light as lightTheme } from '@eva-design/eva'
 import { storeFcmToken } from './src/mutations/store-fcm.mutation'
-import { useModal } from './src/components/common/modal.component'
 import { NotificationModal } from './src/layout/notification/notification-modal'
 
 function App() {
 	const [notification, setNotification] = useState(false)
 	const [country] = useState(RNLocalize.getCountry())
 	const [timeZone] = useState(RNLocalize.getTimeZone())
-
-	const notificationModal = useModal()
-
-	console.log('_______________timezone_______________', timeZone)
-
-	console.log('_______________country_______________', country)
 
 	const getToken = async () => {
 		try {
@@ -81,22 +71,6 @@ function App() {
 		}
 	}
 
-	const showAlert = () => {
-		console.log('_______________title_______________', notification.title)
-		console.log(
-			'_______________message_______________',
-			notification.message,
-		)
-		notificationModal.open()
-
-		// return Alert.alert(
-		// 	title,
-		// 	message,
-		// 	[{ text: 'OK', onPress: () => console.log('OK Pressed') }],
-		// 	{ cancelable: false },
-		// )
-	}
-
 	/*
 	 * Triggered when a particular notification has been received in foreground
 	 * */
@@ -107,9 +81,6 @@ function App() {
 				const { title, body } = notification
 				setNotification({ title, message: body })
 
-				console.log(
-					'_______________app is in foreground_______________',
-				)
 				showAlert()
 			})
 
@@ -122,8 +93,6 @@ function App() {
 				const { title, body } = notificationOpen.notification
 				console.log('_______________app in background_______________')
 				setNotification({ title, message: body })
-
-				showAlert(title, body)
 			})
 
 		/*
@@ -153,21 +122,15 @@ function App() {
 	const [theme, setTheme] = useState(lightTheme)
 
 	return (
-		<StyleProvider style={getTheme(variables)}>
-			<ApplicationProvider mapping={mapping} theme={theme}>
-				<Provider store={store}>
-					<StatusBar barStyle="light-content" />
-					<Root>
-						<ErrorBoundary>
-							<AppContainer />
-							<NotificationModal
-								notification={notification.message}
-							/>
-						</ErrorBoundary>
-					</Root>
-				</Provider>
-			</ApplicationProvider>
-		</StyleProvider>
+		<ApplicationProvider mapping={mapping} theme={theme}>
+			<Provider store={store}>
+				<StatusBar barStyle="light-content" />
+				<ErrorBoundary>
+					<AppContainer />
+					<NotificationModal notification={notification.message} />
+				</ErrorBoundary>
+			</Provider>
+		</ApplicationProvider>
 	)
 }
 

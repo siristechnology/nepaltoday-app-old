@@ -1,4 +1,3 @@
-import { Icon } from 'native-base'
 import React, { useEffect, useState } from 'react'
 import { useNetInfo } from '@react-native-community/netinfo'
 import { View, Text, Dimensions, StyleSheet } from 'react-native'
@@ -8,7 +7,6 @@ const { width } = Dimensions.get('window')
 const OfflineNotice = () => {
 	const netInfo = useNetInfo()
 	const [isConnected, setConnected] = useState(true)
-	const [refreshCounter, setRefeshCounter] = useState(0)
 
 	useEffect(() => {
 		setConnected(netInfo.isConnected)
@@ -20,12 +18,6 @@ const OfflineNotice = () => {
 				<Text style={styles.offlineText}>
 					कृपया इन्टरनेट जाँच गर्नुहोस्
 				</Text>
-				<Icon
-					onPress={() => setRefeshCounter(refreshCounter + 1)}
-					type="EvilIcons"
-					name="refresh"
-					style={styles.refreshIcon}
-				/>
 			</View>
 		)
 	} else {

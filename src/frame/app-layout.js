@@ -1,15 +1,15 @@
 import React from 'react'
-import { Container } from 'native-base'
+import { View } from 'react-native'
 import { OfflineNotice } from '../components'
 
 class AppLayout extends React.PureComponent {
 	render() {
 		const { children } = this.props
 		return (
-			<Container>
+			<View>
 				<OfflineNotice />
 				{children}
-			</Container>
+			</View>
 		)
 	}
 }

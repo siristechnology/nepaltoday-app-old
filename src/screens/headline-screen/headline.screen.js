@@ -9,8 +9,8 @@ import { useNetInfo } from '@react-native-community/netinfo'
 
 import { en } from '../../lang/en'
 import environment from '../../environment'
-import AppLayout from '../../frame/app-layout'
 import { getLocalName } from '../../helper/text'
+import { OfflineNotice } from '../../components'
 import { CircularSpinner } from '../../components/common'
 import { HealineListContainer } from '../../layout/headline'
 
@@ -64,6 +64,7 @@ const HeadlineScreen = ({ navigation }) => {
 
 				return (
 					<View tabLabel={localTabName} key={idx}>
+						<OfflineNotice />
 						<HealineListContainer
 							articles={dataArr}
 							navigation={navigation}
@@ -75,13 +76,11 @@ const HeadlineScreen = ({ navigation }) => {
 		}
 
 		return (
-			<AppLayout>
-				<ScrollableTabView
-					initialPage={0}
-					renderTabBar={() => <ScrollableTabBar />}>
-					{renderTab()}
-				</ScrollableTabView>
-			</AppLayout>
+			<ScrollableTabView
+				initialPage={0}
+				renderTabBar={() => <ScrollableTabBar />}>
+				{renderTab()}
+			</ScrollableTabView>
 		)
 	}
 	return (
