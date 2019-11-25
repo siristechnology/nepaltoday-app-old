@@ -80,8 +80,6 @@ function App() {
 			.onNotification(notification => {
 				const { title, body } = notification
 				setNotification({ title, message: body })
-
-				showAlert()
 			})
 
 		/*
