@@ -31,7 +31,7 @@ const HeadlineListComponent = ({
 			keyExtractor={item => item._id}
 			refreshControl={
 				<RefreshControl
-					colors={['#9Bd35A', '#689F38']}
+					colors={['#0000ff', '#689F38']}
 					onRefresh={handleRefresh}
 				/>
 			}
