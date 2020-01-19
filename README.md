@@ -19,10 +19,6 @@
 -   Run `adb uninstall com.siristechnology.nepaltodayapp` to uninstall app from the android simulator
 -   Run `adb logcat` to view android emulator logs in terminal
 
-## upgrade details (for review)
-
-https://react-native-community.github.io/upgrade-helper/?from=0.58.3&to=0.60.5
-
 ## data type
 
 ```
