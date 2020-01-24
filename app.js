@@ -113,9 +113,9 @@ const App = () => {
 
 		const channel = new firebase.notifications.Android.Channel(
 			'insider',
-			'Test Channel',
+			'Latest News Channel',
 			firebase.notifications.Android.Importance.Max,
-		).setDescription('My test app channel')
+		).setDescription('Latest News Channel push notification')
 		firebase.notifications().android.createChannel(channel)
 		checkPushNotificationPermission()
 		messageListner()
