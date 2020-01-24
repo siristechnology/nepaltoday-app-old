@@ -17,7 +17,7 @@ import { mapping, light as lightTheme } from '@eva-design/eva'
 import { storeFcmToken } from './src/mutations/store-fcm.mutation'
 import { NotificationModal } from './src/layout/notification/notification-modal'
 
-function App() {
+const App = () => {
 	const [notification, setNotification] = useState(false)
 	const [country] = useState(RNLocalize.getCountry())
 	const [timeZone] = useState(RNLocalize.getTimeZone())
@@ -78,6 +78,8 @@ function App() {
 		this.foregroundNotificationListner = firebase
 			.notifications()
 			.onNotification(notification => {
+				notification.android.setChannelId('insider').setSound('default')
+				firebase.notifications().displayNotification(notification)
 				const { title, body } = notification
 				setNotification({ title, message: body })
 			})
@@ -108,6 +110,13 @@ function App() {
 
 	useEffect(() => {
 		SplashScreen.hide()
+
+		const channel = new firebase.notifications.Android.Channel(
+			'insider',
+			'Latest News Channel',
+			firebase.notifications.Android.Importance.Max,
+		).setDescription('Latest News Channel push notification')
+		firebase.notifications().android.createChannel(channel)
 		checkPushNotificationPermission()
 		messageListner()
 		return () => {
