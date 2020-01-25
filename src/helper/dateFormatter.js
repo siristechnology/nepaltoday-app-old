@@ -22,7 +22,7 @@ const getCurrentDayNameInNepali = () => {
 			currentDayNameInNepali = 'शुक्रवार'
 			break
 		case 'saturday':
-			currentDayNameInNepali = 'सोमवार'
+			currentDayNameInNepali = 'शनिवार'
 			break
 	}
 	return currentDayNameInNepali

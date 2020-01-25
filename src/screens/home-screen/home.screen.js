@@ -14,7 +14,6 @@ import {
 	convertNos,
 } from '../../helper/dateConverter'
 import { getCurrentDayNameInNepali } from '../../helper/dateFormatter'
-import { getCurrentTime } from '../../helper/time'
 
 const Home = ({ navigation, actions }) => {
 	const netInfo = useNetInfo()
@@ -22,6 +21,7 @@ const Home = ({ navigation, actions }) => {
 	const [isConnected, setConnected] = useState(true)
 	const [appState, setAppState] = useState(AppState.currentState)
 	const [nepaliDate, setNepaliDate] = useState('')
+	const [weatherData, setWeatherData] = useState({})
 
 	const handleRefresh = () => {
 		setUpdated(!isUpdated)
@@ -51,6 +51,19 @@ const Home = ({ navigation, actions }) => {
 			AppState.removeEventListener('change', updateAppState)
 		}
 	}, [])
+
+	useEffect(() => {
+		fetch(
+			'http://api.openweathermap.org/data/2.5/weather?lat=27.700769&lon=85.300140&APPID=25e02e338ce3a39c75e5f2595a881e3d&units=metric',
+		)
+			.then(res => res.json())
+			.then(json => {
+				setWeatherData({
+					temperature: json.main.temp,
+					weatherCondition: json.weather[0].main,
+				})
+			})
+	})
 
 	return (
 		<QueryRenderer
@@ -92,7 +105,7 @@ const Home = ({ navigation, actions }) => {
 
 				return (
 					<AppLayout>
-						<View>
+						<View style={style.headerStyle}>
 							<Text style={style.textStyle}>
 								{getCurrentDayNameInNepali() +
 									', ' +
@@ -104,8 +117,9 @@ const Home = ({ navigation, actions }) => {
 										nepaliDate.slice(8, 9),
 									)}${convertNos(nepaliDate.slice(9, 10))}`}
 							</Text>
-							<Text style={style.timeTextStyle}>
-								{getCurrentTime()}
+							<Text style={style.weatherStyle}>
+								{weatherData.temperature} degree,{' '}
+								{weatherData.weatherCondition}
 							</Text>
 						</View>
 						<ArticleListContainer
@@ -121,11 +135,21 @@ const Home = ({ navigation, actions }) => {
 }
 
 const style = StyleSheet.create({
+	headerStyle: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		flexDirection: 'row',
+		alignItems: 'center',
+		paddingHorizontal: 20,
+	},
 	textStyle: {
 		fontWeight: 'bold',
 		fontSize: 26,
 		paddingTop: 5,
-		paddingLeft: 20,
+	},
+	weatherStyle: {
+		fontWeight: 'bold',
+		fontSize: 18,
 	},
 	timeTextStyle: {
 		fontWeight: 'bold',
