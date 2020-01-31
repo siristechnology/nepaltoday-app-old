@@ -1,19 +1,23 @@
-import { AppState, Text, StyleSheet, View } from 'react-native'
+import {
+	AppState,
+	Text,
+	StyleSheet,
+	View,
+	ScrollView,
+	SafeAreaView,
+} from 'react-native'
 import Analytics from 'appcenter-analytics'
 import React, { useState, useEffect } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
 import { useNetInfo } from '@react-native-community/netinfo'
+import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
 import { ArticleListContainer } from '../../layout/article'
-import {
-	AD2BS,
-	getNepaliMonthsInNepali,
-	convertNos,
-} from '../../helper/dateConverter'
-import { getCurrentDayNameInNepali } from '../../helper/dateFormatter'
+import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
+import global from '../../../global'
 
 const Home = ({ navigation, actions }) => {
 	const netInfo = useNetInfo()
@@ -43,24 +47,20 @@ const Home = ({ navigation, actions }) => {
 	useEffect(() => {
 		Analytics.trackEvent('Home page loaded')
 		AppState.addEventListener('change', updateAppState)
-		let d = new Date()
-		let s = d.toISOString()
-		s = s.slice(0, 10)
-		setNepaliDate(AD2BS(s))
+		setNepaliDate(getFormattedCurrentNepaliDate())
 		return () => {
 			AppState.removeEventListener('change', updateAppState)
 		}
 	}, [])
 
 	useEffect(() => {
-		fetch(
-			'http://api.openweathermap.org/data/2.5/weather?lat=27.700769&lon=85.300140&APPID=25e02e338ce3a39c75e5f2595a881e3d&units=metric',
-		)
+		fetch(global.weatherAPI)
 			.then(res => res.json())
 			.then(json => {
 				setWeatherData({
 					temperature: json.main.temp,
 					weatherCondition: json.weather[0].main,
+					name: json.name,
 				})
 			})
 	})
@@ -106,21 +106,19 @@ const Home = ({ navigation, actions }) => {
 				return (
 					<AppLayout>
 						<View style={style.headerStyle}>
-							<Text style={style.textStyle}>
-								{getCurrentDayNameInNepali() +
-									', ' +
-									getNepaliMonthsInNepali()[
-										parseInt(nepaliDate.slice(5, 7)) - 1
-									] +
-									' ' +
-									`${convertNos(
-										nepaliDate.slice(8, 9),
-									)}${convertNos(nepaliDate.slice(9, 10))}`}
-							</Text>
-							<Text style={style.weatherStyle}>
-								{weatherData.temperature} degree,{' '}
-								{weatherData.weatherCondition}
-							</Text>
+							<Text style={style.textStyle}>{nepaliDate}</Text>
+							<View
+								style={{
+									display: 'flex',
+									flexDirection: 'row',
+									alignItems: 'center',
+								}}>
+								<FontAwesome name="cloud" size={20} />
+								<Text style={style.weatherStyle}>
+									{weatherData.temperature} C,{' '}
+									{weatherData.name}
+								</Text>
+							</View>
 						</View>
 						<ArticleListContainer
 							navigation={navigation}
@@ -141,6 +139,7 @@ const style = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		paddingHorizontal: 20,
+		paddingBottom: 10,
 	},
 	textStyle: {
 		fontWeight: 'bold',
@@ -150,6 +149,7 @@ const style = StyleSheet.create({
 	weatherStyle: {
 		fontWeight: 'bold',
 		fontSize: 18,
+		marginLeft: 3,
 	},
 	timeTextStyle: {
 		fontWeight: 'bold',
