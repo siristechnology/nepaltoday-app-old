@@ -1,16 +1,8 @@
-import {
-	AppState,
-	Text,
-	StyleSheet,
-	View,
-	ScrollView,
-	SafeAreaView,
-} from 'react-native'
+import { AppState, Text, StyleSheet, View } from 'react-native'
 import Analytics from 'appcenter-analytics'
 import React, { useState, useEffect } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
 import { useNetInfo } from '@react-native-community/netinfo'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
 
 import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
@@ -18,6 +10,7 @@ import { CircularSpinner } from '../../components/common'
 import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import global from '../../../global'
+import Weather from '../../components/weather.component'
 
 const Home = ({ navigation, actions }) => {
 	const netInfo = useNetInfo()
@@ -107,18 +100,7 @@ const Home = ({ navigation, actions }) => {
 					<AppLayout>
 						<View style={style.headerStyle}>
 							<Text style={style.textStyle}>{nepaliDate}</Text>
-							<View
-								style={{
-									display: 'flex',
-									flexDirection: 'row',
-									alignItems: 'center',
-								}}>
-								<FontAwesome name="cloud" size={20} />
-								<Text style={style.weatherStyle}>
-									{weatherData.temperature} C,{' '}
-									{weatherData.name}
-								</Text>
-							</View>
+							<Weather weather={weatherData} />
 						</View>
 						<ArticleListContainer
 							navigation={navigation}
@@ -145,11 +127,6 @@ const style = StyleSheet.create({
 		fontWeight: 'bold',
 		fontSize: 26,
 		paddingTop: 5,
-	},
-	weatherStyle: {
-		fontWeight: 'bold',
-		fontSize: 18,
-		marginLeft: 3,
 	},
 	timeTextStyle: {
 		fontWeight: 'bold',
