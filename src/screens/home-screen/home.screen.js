@@ -9,6 +9,7 @@ import Analytics from 'appcenter-analytics'
 import React, { useState, useEffect } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
 import { useNetInfo } from '@react-native-community/netinfo'
+import Geolocation from 'react-native-geolocation-service'
 
 import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
@@ -16,7 +17,7 @@ import { CircularSpinner } from '../../components/common'
 import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from '../../components/weather.component'
-import Geolocation from 'react-native-geolocation-service'
+import global from '../../../global'
 
 const Home = ({ navigation, actions }) => {
 	const netInfo = useNetInfo()
@@ -95,7 +96,7 @@ const Home = ({ navigation, actions }) => {
 
 	const fetchWeather = async (latitude = 10, longitude = 10) => {
 		let response = await fetch(
-			`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=25e02e338ce3a39c75e5f2595a881e3d&units=metric`,
+			`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${global.weatherAPI_APPID}&units=metric`,
 		)
 
 		let json = await response.json()
