@@ -1,6 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import { convertToNepaliDigit } from '../helper/utils'
 
 const Weather = ({ weather }) => {
 	const { temperature, name } = weather
@@ -8,7 +9,7 @@ const Weather = ({ weather }) => {
 		<View style={styles.weatherContainerStyle}>
 			<FontAwesome name="cloud" size={20} />
 			<Text style={styles.weatherTextStyle}>
-				{temperature} C, {name}
+				{convertToNepaliDigit(temperature)} ˚C, {name}
 			</Text>
 		</View>
 	)

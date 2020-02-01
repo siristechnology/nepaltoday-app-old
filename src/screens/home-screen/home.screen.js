@@ -1,4 +1,10 @@
-import { AppState, Text, StyleSheet, View } from 'react-native'
+import {
+	AppState,
+	Text,
+	StyleSheet,
+	View,
+	PermissionsAndroid,
+} from 'react-native'
 import Analytics from 'appcenter-analytics'
 import React, { useState, useEffect } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
@@ -9,8 +15,8 @@ import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
 import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
-import global from '../../../global'
 import Weather from '../../components/weather.component'
+import Geolocation from 'react-native-geolocation-service'
 
 const Home = ({ navigation, actions }) => {
 	const netInfo = useNetInfo()
@@ -37,6 +43,47 @@ const Home = ({ navigation, actions }) => {
 		setAppState(nextAppState)
 	}
 
+	const checkLocationAccess = async () => {
+		const hasPermission = await PermissionsAndroid.check(
+			PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+		)
+		if (hasPermission) return true
+
+		const status = await PermissionsAndroid.request(
+			PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+		)
+
+		if (status === PermissionsAndroid.RESULTS.GRANTED) return true
+
+		return false
+	}
+
+	const getLocation = async () => {
+		const hasLocationPermission = await checkLocationAccess()
+
+		if (!hasLocationPermission) return
+
+		Geolocation.getCurrentPosition(
+			position => {
+				console.log('_________location_detail________', position)
+				fetchWeather(
+					position.coords.latitude,
+					position.coords.longitude,
+				)
+			},
+			error => {
+				console.log('__________location_error_______', error)
+			},
+			{
+				enableHighAccuracy: true,
+				timeout: 15000,
+				maximumAge: 10000,
+				distanceFilter: 50,
+				forceRequestLocation: true,
+			},
+		)
+	}
+
 	useEffect(() => {
 		Analytics.trackEvent('Home page loaded')
 		AppState.addEventListener('change', updateAppState)
@@ -46,17 +93,23 @@ const Home = ({ navigation, actions }) => {
 		}
 	}, [])
 
+	const fetchWeather = async (latitude = 10, longitude = 10) => {
+		let response = await fetch(
+			`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=25e02e338ce3a39c75e5f2595a881e3d&units=metric`,
+		)
+
+		let json = await response.json()
+
+		setWeatherData({
+			temperature: json.main.temp,
+			weatherCondition: json.weather[0].main,
+			name: json.name,
+		})
+	}
+
 	useEffect(() => {
-		fetch(global.weatherAPI)
-			.then(res => res.json())
-			.then(json => {
-				setWeatherData({
-					temperature: json.main.temp,
-					weatherCondition: json.weather[0].main,
-					name: json.name,
-				})
-			})
-	})
+		getLocation()
+	}, [])
 
 	return (
 		<QueryRenderer
