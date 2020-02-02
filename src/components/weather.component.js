@@ -9,7 +9,7 @@ const Weather = ({ weather }) => {
 		<View style={styles.weatherContainerStyle}>
 			<FontAwesome name="cloud" size={20} />
 			<Text style={styles.weatherTextStyle}>
-				{convertToNepaliDigit(temperature)} ˚C, {name}
+				{convertToNepaliDigit(temperature)} ˚C
 			</Text>
 		</View>
 	)
