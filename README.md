@@ -1,5 +1,6 @@
 # Nepal Today App
 
+![Android Apk Publish](https://github.com/siristechnology/nepaltoday-app/workflows/Android%20Apk%20Publish/badge.svg)
 [![Build status](https://build.appcenter.ms/v0.1/apps/034ab548-ee10-4898-8d10-32c39ed6db38/branches/release/badge)](https://appcenter.ms)
 
 ### [Download from Google Play Store](https://play.google.com/store/apps/details?id=com.siristechnology.nepaltodayapp)
