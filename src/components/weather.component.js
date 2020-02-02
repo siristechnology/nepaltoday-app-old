@@ -4,7 +4,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { convertToNepaliDigit } from '../helper/utils'
 
 const Weather = ({ weather }) => {
-	const { temperature, name } = weather
+	let { temperature } = weather
+	if (!temperature) return null
+
+	temperature = Math.ceil(temperature)
+
 	return (
 		<View style={styles.weatherContainerStyle}>
 			<FontAwesome name="cloud" size={20} />
