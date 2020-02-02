@@ -3,12 +3,11 @@ export const addLeadingZero = val => {
 }
 
 export const convertToNepaliDigit = val => {
-	let rem = 0
+	let num = val + ''
 	let result = ''
-	while (val > 0) {
-		rem = val % 10
-		result += convertNo(rem)
-		val = parseInt(val / 10)
+
+	for (let i = 0; i < num.length; i++) {
+		result += convertNo(num[i])
 	}
 	return result
 }

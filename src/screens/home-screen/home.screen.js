@@ -100,6 +100,7 @@ const Home = ({ navigation, actions }) => {
 		)
 
 		let json = await response.json()
+		console.log('__________weather_data___________', json)
 
 		setWeatherData({
 			temperature: json.main.temp,
