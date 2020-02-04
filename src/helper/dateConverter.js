@@ -1,52 +1,3 @@
-function BsAddDays(t, e) {
-	var n = new NepaliDateConverter()
-	return n.add_bs_days(t, e)
-}
-function BsDatesDiff(t, e) {
-	var n = new NepaliDateConverter()
-	return n.count_bs_days(t, e) + 2
-}
-function get2DigitNo(t) {
-	return (t = parseInt(t, 10)), 10 > t ? '0' + t : '' + t
-}
-function getMonths() {
-	var t = [
-		'January',
-		'February',
-		'March',
-		'April',
-		'May',
-		'June',
-		'July',
-		'August',
-		'September',
-		'October',
-		'November',
-		'December',
-	]
-	return t
-}
-function getNepaliMonths() {
-	var t = [
-		'Baisakh',
-		'Jestha',
-		'Ashar',
-		'Shrawan',
-		'Bhadra',
-		'Ashoj',
-		'Kartik',
-		'Mangsir',
-		'Poush',
-		'Magh',
-		'Falgun',
-		'Chaitra',
-	]
-	return t
-}
-function getNepaliDaysShort() {
-	var t = ['आ', 'सो', 'मं', 'बु', 'बि', 'शु', 'श']
-	return t
-}
 function getNepaliMonthsInNepali() {
 	return [
 		'बैशाख',
@@ -83,24 +34,6 @@ function getCurrentDayName() {
 		n[e]
 	)
 }
-function getDayFromDate(t) {
-	var e = t.split('-'),
-		n = e[2],
-		a = e[1],
-		s = e[0],
-		r = new Date(s, a - 1, n),
-		i = r.getDay(),
-		d = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-	return d[i]
-}
-function numberOfBsDays(t, e) {
-	var n = new NepaliDateConverter()
-	return n.bs[t][e]
-}
-function numberOfDays(t, e) {
-	var n = new Date(t, e, 0)
-	return n.getDate()
-}
 function AD2BS(t) {
 	var e = new NepaliDateConverter()
 	return e.ad2bs(getNepaliFormat(t))
@@ -108,19 +41,6 @@ function AD2BS(t) {
 function BS2AD(t) {
 	var e = new NepaliDateConverter()
 	return e.bs2ad(getNepaliFormat(t))
-}
-function getNepaliDate() {
-	var t = new NepaliDateConverter()
-	return t.ad2bs(getDateInNo('/'))
-}
-function getDateInWords() {
-	var t = getMonths(),
-		e = new Date(),
-		n = e.getDate(),
-		a = e.getMonth() + 1,
-		s = e.getYear(),
-		r = 1e3 > s ? s + 1900 : s
-	return n + ' ' + t[a] + ', ' + r
 }
 function getDateInNo(t) {
 	var e = new Date(),
@@ -136,46 +56,7 @@ function getNepaliFormat(t) {
 		s = e[0]
 	return a + '/' + n + '/' + s
 }
-function getAdDateInWords(t) {
-	var e = getMonths(),
-		n = t.split('-'),
-		a = n[2],
-		s = n[1],
-		r = n[0]
-	return a + ' ' + e[s] + ', ' + r
-}
-function getNepaliDateInWords(t) {
-	var e = getNepaliMonths(),
-		n = t.split('-'),
-		a = n[2],
-		s = n[1],
-		r = n[0]
-	return a + ' ' + e[s] + ', ' + r
-}
-function getCurrentYear() {
-	var t = new Date(),
-		e = t.getFullYear()
-	return e
-}
-function getCurrentMonth() {
-	var t = new Date(),
-		e = t.getMonth() + 1
-	return e
-}
-function getCurrentDay() {
-	var t = new Date(),
-		e = t.getDate()
-	return e
-}
-function makeArray() {
-	for (i = 0; i < makeArray.arguments.length; i++)
-		this[i + 1] = makeArray.arguments[i]
-}
-function englishNo2Nep(t) {
-	t = '' + t
-	for (var e = '', n = 0; n < t.length; n++) e += convertNos(t[n])
-	return e
-}
+
 function convertNos(t) {
 	switch (t) {
 		case '०':
