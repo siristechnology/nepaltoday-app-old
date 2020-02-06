@@ -63,3 +63,5 @@ android/app/debug/*
 # CocoaPods
 /ios/Pods/
 
+# vscode
+.vscode/
