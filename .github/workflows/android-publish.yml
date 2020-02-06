@@ -39,3 +39,9 @@ jobs:
                   GITHUB_TOKEN: ${{ secrets.TOKEN }}
                   RELEASE_FILE_PATH: android/app/build/outputs/apk/signed/release/app-signed-release.apk
                   RELEASE_TITLE: 'New Build'
+
+            - name: Upload APK artifact
+              uses: actions/upload-artifact@v1
+              with:
+                  name: app-signed-release.apk
+                  path: android/app/build/outputs/apk/signed/release/app-signed-release.apk
