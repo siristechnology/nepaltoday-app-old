@@ -10,7 +10,7 @@
 			"client_info": {
 				"mobilesdk_app_id": "1:694326466848:android:a78649736d1c284fc0df45",
 				"android_client_info": {
-					"package_name": "com.siristechnology.nepaltodayapp.testing"
+					"package_name": "com.siristechnology.nepaltodayapp"
 				}
 			},
 			"oauth_client": [
