@@ -8,7 +8,7 @@ on:
 
 jobs:
     build:
-        runs-on: macos-latest
+        runs-on: ubuntu-latest
 
         strategy:
             matrix:
@@ -30,9 +30,8 @@ jobs:
             - name: Yarn Install, (Test)
               run: |
                   yarn
-            - name: Build with Gradle after renaming package
+            - name: Build with Gradle (--after renaming package)
               run: |
-                  sh ./rename_package.sh
                   yarn build
 
             - name: Publish Release APK
