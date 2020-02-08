@@ -16,13 +16,16 @@ then
 fi
 
 PROJECT_NAME=nepaltodayapp
-ANDROID_MANIFEST_FILE=$APPCENTER_SOURCE_DIRECTORY/android/app/src/main/AndroidManifest.xml
+BUILD_GRADLE=$APPCENTER_SOURCE_DIRECTORY/android/app/build.gradle
+GOOGLE_SERVICES_FILE=$APPCENTER_SOURCE_DIRECTORY/android/app/google-services.json
 INFO_PLIST_FILE=$APPCENTER_SOURCE_DIRECTORY/ios/$PROJECT_NAME/Info.plist
 
 if [ -e "$ANDROID_MANIFEST_FILE" ]
 then
-    echo "Updating package name to $PACKAGE_NAME in AndroidManifest.xml"
-    sed -i '' 's/package="[^"]*"/package="'$PACKAGE_NAME'"/' $ANDROID_MANIFEST_FILE
+    echo "Updating applicationId in $PACKAGE_NAME in build.gradle"
+    sed -i '' 's/applicationId "[^"]*"/applicationId "'$PACKAGE_NAME'"/' $BUILD_GRADLE
+
+    sed -i '' 's/"package_name": "[^"]*"/"package_name": "'$PACKAGE_NAME'"/' $GOOGLE_SERVICES_FILE
 
     echo "File content:"
     cat $ANDROID_MANIFEST_FILE

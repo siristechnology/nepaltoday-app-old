@@ -30,8 +30,10 @@ jobs:
             - name: Yarn Install, (Test)
               run: |
                   yarn
-            - name: Build with Gradle
-              run: yarn build
+            - name: Build with Gradle after renaming package
+              run: |
+                  sh ./rename_package.sh
+                  yarn build
 
             - name: Publish Release APK
               uses: siristechnology/action-create-release@master
