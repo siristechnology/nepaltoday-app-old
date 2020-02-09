@@ -1,4 +1,4 @@
-name: Android Apk Publish
+name: Android Apk - Github Release & Google Play Publish
 
 on:
     push:
