@@ -37,9 +37,10 @@ jobs:
             - name: Publish Release APK
               uses: marvinpinto/action-automatic-releases@latest
               with:
-                  files: android/app/build/outputs/apk/signed/release/app-signed-release.apk                  
+                  files: android/app/build/outputs/apk/signed/release/app-signed-release.apk
                   repo_token: ${{ secrets.GITHUB_TOKEN }}
-                  automatic_release_tag: "Beta Build"
+                  automatic_release_tag: 'latest'
+                  title: 'Beta Build'
                   prerelease: false
 
             - name: Upload APK artifact
