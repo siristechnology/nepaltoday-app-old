@@ -1,14 +1,13 @@
-name: Android Apk Publish
+name: Android Apk - Release & Google Play Publish
 
 on:
     push:
         branches:
             - master
-            - release**
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: macos-latest
 
         strategy:
             matrix:
@@ -32,14 +31,17 @@ jobs:
                   yarn
             - name: Build with Gradle (--after renaming package)
               run: |
+                  sh rename_package.sh
                   yarn build
 
             - name: Publish Release APK
-              uses: siristechnology/action-create-release@master
-              env:
-                  GITHUB_TOKEN: ${{ secrets.TOKEN }}
-                  RELEASE_FILE_PATH: android/app/build/outputs/apk/signed/release/app-signed-release.apk
-                  RELEASE_TITLE: 'New Build'
+              uses: marvinpinto/action-automatic-releases@latest
+              with:
+                  files: android/app/build/outputs/apk/signed/release/app-signed-release.apk
+                  repo_token: ${{ secrets.GITHUB_TOKEN }}
+                  automatic_release_tag: 'latest'
+                  title: 'Beta Build'
+                  prerelease: false
 
             - name: Upload APK artifact
               uses: actions/upload-artifact@v1
