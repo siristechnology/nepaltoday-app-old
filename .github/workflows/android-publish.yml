@@ -57,4 +57,3 @@ jobs:
                   packageName: 'com.siristechnology.nepaltodayapp.beta'
                   releaseFile: android/app/build/outputs/apk/signed/release/app-signed-release.apk
                   track: internal
-                  userFraction: 1.0
