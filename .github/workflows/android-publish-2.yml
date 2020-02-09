@@ -34,10 +34,10 @@ jobs:
                   yarn build
 
             - name: Publish Release APK
-              uses: yakuhzi/action-release@v1.2.0
+              uses: marvinpinto/action-automatic-releases@latest
               env:
-                  file: android/app/build/outputs/apk/signed/release/app-signed-release.apk
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                  files: android/app/build/outputs/apk/signed/release/app-signed-release.apk
+                  repo_token: ${{ secrets.GITHUB_TOKEN }}
 
             - name: Upload APK artifact
               uses: actions/upload-artifact@v1
