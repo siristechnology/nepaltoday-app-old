@@ -1,7 +1,6 @@
 # Nepal Today App
 
-![Android Apk Publish](https://github.com/siristechnology/nepaltoday-app/workflows/Android%20Apk%20Publish/badge.svg)
-[![Build status](https://build.appcenter.ms/v0.1/apps/034ab548-ee10-4898-8d10-32c39ed6db38/branches/release/badge)](https://appcenter.ms)
+![Android Apk - Release & Google Play Publish](https://github.com/siristechnology/nepaltoday-app/workflows/Android%20Apk%20-%20Release%20&%20Google%20Play%20Publish/badge.svg)
 
 <a href='https://play.google.com/store/apps/details?id=com.siristechnology.nepaltodayapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80"/></a>
 
