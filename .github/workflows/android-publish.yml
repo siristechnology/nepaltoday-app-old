@@ -48,3 +48,13 @@ jobs:
               with:
                   name: app-signed-release.apk
                   path: android/app/build/outputs/apk/signed/release/app-signed-release.apk
+
+            - name: Upload Android Release to Play Store
+             uses: r0adkll/upload-google-play@v1
+             with:
+                 # The service account json private key file to authorize the upload request
+                 serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+                 packageName: 'com.siristechnology.nepaltodayapp.beta'
+                 releaseFile: android/app/build/outputs/apk/signed/release/app-signed-release.apk
+                 track: internal
+                 userFraction: 1.0
