@@ -35,8 +35,8 @@ jobs:
 
             - name: Publish Release APK
               uses: marvinpinto/action-automatic-releases@latest
-              env:
-                  files: android/app/build/outputs/apk/signed/release/app-signed-release.apk
+              with:
+                  files: android/app/build/outputs/apk/signed/release/app-signed-release.apk                  
                   repo_token: ${{ secrets.TOKEN }}
 
             - name: Upload APK artifact
