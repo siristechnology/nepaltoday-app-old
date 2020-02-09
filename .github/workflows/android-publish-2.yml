@@ -37,7 +37,8 @@ jobs:
               uses: marvinpinto/action-automatic-releases@latest
               with:
                   files: android/app/build/outputs/apk/signed/release/app-signed-release.apk                  
-                  repo_token: ${{ secrets.TOKEN }}
+                  repo_token: ${{ secrets.GITHUB_TOKEN }}
+                  automatic_release_tag: "latest"
 
             - name: Upload APK artifact
               uses: actions/upload-artifact@v1
