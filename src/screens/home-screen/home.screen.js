@@ -46,7 +46,7 @@ const Home = ({ navigation, actions }) => {
 
 	const checkLocationAccess = async () => {
 		const hasPermission = await PermissionsAndroid.check(
-			PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
+			PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
 		)
 		if (hasPermission) return true
 
@@ -78,7 +78,7 @@ const Home = ({ navigation, actions }) => {
 			{
 				enableHighAccuracy: true,
 				timeout: 15000,
-				maximumAge: 10000,
+				maximumAge: 3600000,
 				distanceFilter: 50,
 				forceRequestLocation: true,
 			},
