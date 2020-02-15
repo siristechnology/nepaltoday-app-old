@@ -46,7 +46,7 @@ const Home = ({ navigation, actions }) => {
 
 	const checkLocationAccess = async () => {
 		const hasPermission = await PermissionsAndroid.check(
-			PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION
+			PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
 		)
 		if (hasPermission) return true
 
@@ -96,7 +96,7 @@ const Home = ({ navigation, actions }) => {
 
 	const fetchWeather = async (latitude = 10, longitude = 10) => {
 		let response = await fetch(
-			`http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${global.weatherAPI_APPID}&units=metric`,
+			`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${global.weatherAPI_APPID}&units=metric`,
 		)
 
 		let json = await response.json()
