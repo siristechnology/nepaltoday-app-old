@@ -1,14 +1,13 @@
-name: Android Apk Publish
+name: Android Apk - Release & Google Play Publish
 
 on:
     push:
         branches:
             - master
-            - release**
 
 jobs:
     build:
-        runs-on: ubuntu-latest
+        runs-on: macos-latest
 
         strategy:
             matrix:
@@ -30,18 +29,31 @@ jobs:
             - name: Yarn Install, (Test)
               run: |
                   yarn
-            - name: Build with Gradle
-              run: yarn build
+            - name: Build with Gradle (--after renaming package)
+              run: |
+                  sh rename_package.sh
+                  yarn build
 
             - name: Publish Release APK
-              uses: siristechnology/action-create-release@master
-              env:
-                  GITHUB_TOKEN: ${{ secrets.TOKEN }}
-                  RELEASE_FILE_PATH: android/app/build/outputs/apk/signed/release/app-signed-release.apk
-                  RELEASE_TITLE: 'New Build'
+              uses: marvinpinto/action-automatic-releases@latest
+              with:
+                  files: android/app/build/outputs/apk/signed/release/app-signed-release.apk
+                  repo_token: ${{ secrets.GITHUB_TOKEN }}
+                  automatic_release_tag: 'latest'
+                  title: 'Beta Build'
+                  prerelease: false
 
             - name: Upload APK artifact
               uses: actions/upload-artifact@v1
               with:
                   name: app-signed-release.apk
                   path: android/app/build/outputs/apk/signed/release/app-signed-release.apk
+
+            - name: Upload Android Release to Play Store
+              uses: r0adkll/upload-google-play@v1
+              with:
+                  # The service account json private key file to authorize the upload request
+                  serviceAccountJson: ${{ secrets.SERVICE_ACCOUNT_JSON }}
+                  packageName: 'com.siristechnology.nepaltodayapp.beta'
+                  releaseFile: android/app/build/outputs/apk/signed/release/app-signed-release.apk
+                  track: internal
