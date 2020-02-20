@@ -9,7 +9,7 @@
 		"reset": "react-native start --reset-cache",
 		"jetify": "npx jetify",
 		"start": "react-native start",
-		"build": "npx jetify && cd android && ./gradlew app:assembleRelease && cd ..",
+		"build": "npx jetify && cd android && ./gradlew app:assembleSignedRelease && cd ..",
 		"start:dev": "concurrently \"react-native start\"  \"react-native run-android --variant unsigneddebug\"",
 		"test": "jest",
 		"lint": "eslint ."
