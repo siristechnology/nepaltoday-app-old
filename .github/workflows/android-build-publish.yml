@@ -1,9 +1,6 @@
-name: Android Apk - Release & Google Play Publish
+name: Android Apk - Build & Release
 
-on:
-    push:
-        branches:
-            - master
+on: [push]
 
 jobs:
     build:
@@ -29,19 +26,11 @@ jobs:
             - name: Yarn Install, (Test)
               run: |
                   yarn
+
             - name: Build with Gradle (--after renaming package)
               run: |
                   sh rename_package.sh
                   yarn build
-
-            - name: Publish Release APK
-              uses: marvinpinto/action-automatic-releases@latest
-              with:
-                  files: android/app/build/outputs/apk/signed/release/app-signed-release.apk
-                  repo_token: ${{ secrets.GITHUB_TOKEN }}
-                  automatic_release_tag: 'latest'
-                  title: 'Beta Build'
-                  prerelease: false
 
             - name: Upload APK artifact
               uses: actions/upload-artifact@v1
@@ -49,8 +38,19 @@ jobs:
                   name: app-signed-release.apk
                   path: android/app/build/outputs/apk/signed/release/app-signed-release.apk
 
-            - name: Upload Android Release to Play Store
+            - name: Publish Apk to Github Release
+              uses: marvinpinto/action-automatic-releases@latest
+              if: github.ref == 'refs/heads/master'
+              with:
+                  files: android/app/build/outputs/apk/signed/release/app-signed-release.apk
+                  repo_token: ${{ secrets.GITHUB_TOKEN }}
+                  automatic_release_tag: 'latest'
+                  title: 'Beta Build'
+                  prerelease: false
+
+            - name: Publish Apk to Google Play Store
               uses: r0adkll/upload-google-play@v1
+              if: github.ref == 'refs/heads/master'
               with:
                   # The service account json private key file to authorize the upload request
                   serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON_PLAIN_TEXT }}
