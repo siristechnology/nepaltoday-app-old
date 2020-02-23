@@ -129,10 +129,10 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.siristechnology.nepaltodayapp"
+        applicationId "com.siristechnology.nepaltodayapp.beta"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 9
+        versionCode 1582496178
         versionName "0.0.9"
     }
     splits {
