@@ -10,6 +10,7 @@
 		"jetify": "npx jetify",
 		"start": "react-native start",
 		"build": "npx jetify && cd android && ./gradlew app:assembleSignedRelease && cd ..",
+		"bundle": "npx jetify && cd android && ./gradlew app:bundleSignedRelease && cd ..",
 		"start:dev": "concurrently \"react-native start\"  \"react-native run-android --variant unsigneddebug\"",
 		"test": "jest",
 		"lint": "eslint ."
