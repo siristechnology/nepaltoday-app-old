@@ -17,7 +17,7 @@ import { CircularSpinner } from '../../components/common'
 import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from '../../components/weather.component'
-import global from '../../../global'
+import { WEATHER_API_APPID } from 'react-native-dotenv';
 
 const Home = ({ navigation, actions }) => {
 	const netInfo = useNetInfo()
@@ -96,7 +96,7 @@ const Home = ({ navigation, actions }) => {
 
 	const fetchWeather = async (latitude = 10, longitude = 10) => {
 		let response = await fetch(
-			`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${global.weatherAPI_APPID}&units=metric`,
+			`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&APPID=${WEATHER_API_APPID}&units=metric`,
 		)
 
 		let json = await response.json()

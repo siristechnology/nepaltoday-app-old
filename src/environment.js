@@ -1,7 +1,7 @@
 // import { AsyncStorage } from "react-native";
 import { Environment, Network, RecordSource, Store } from 'relay-runtime'
 import { QueryResponseCache } from 'relay-runtime/lib/index'
-import global from '../global'
+import { NEPALTODAY_SERVER } from 'react-native-dotenv';
 
 const cacheTtl = 30 * 1000 // if someone refreshes in 30 seconds, they will get content from cache for now
 const cache = new QueryResponseCache({ size: 1000, ttl: cacheTtl })
@@ -21,7 +21,7 @@ async function fetchQuery(operation, variables, cacheConfig) {
 	}
 
 	// Otherwise, fetch data from server
-	return fetch(global.nepalTodayServer, {
+	return fetch(NEPALTODAY_SERVER, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
