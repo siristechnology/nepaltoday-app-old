@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-
-if [[ $APPCENTER_BRANCH != release*]]
+if [[ $APPCENTER_BRANCH != release* ]]
 then
     echo "Only release branches can build from appcenter.ms and release to Google Play"
     exit
