@@ -125,11 +125,8 @@ const App = () => {
 		}
 	}, [])
 
-	/* diable-eslint-line */
-	const [theme, setTheme] = useState(lightTheme)
-
 	return (
-		<ApplicationProvider mapping={mapping} theme={theme}>
+		<ApplicationProvider mapping={mapping} theme={lightTheme}>
 			<Provider store={store}>
 				<StatusBar barStyle="light-content" />
 				<ErrorBoundary>
