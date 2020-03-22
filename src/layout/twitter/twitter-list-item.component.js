@@ -58,7 +58,6 @@ const TwitterListItemComponent = props => {
 							</Text>
 						</View>
 					</ArticleActivityBar>
-
 				</View>
 			</View>
 		</TouchableOpacity>
@@ -89,7 +88,7 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 	},
 	titleLabel: {
 		...textStyle.caption1,
-		fontWeight: 'bold'
+		fontWeight: 'bold',
 	},
 	descriptionLabel: {
 		marginLeft: 4,
@@ -100,12 +99,12 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 	},
 	tweetText: {
 		flex: 1,
-		flexWrap: 'wrap'
+		flexWrap: 'wrap',
 	},
 	dateContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginTop: 4
+		marginTop: 4,
 	},
 	dateLabel: {
 		marginLeft: 4,

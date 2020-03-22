@@ -39,7 +39,9 @@ const ArticleListItemComponent = props => {
 					style={themedStyle.descriptionLabel}
 					appearance="hint"
 					category="s1">
-					{article.shortDescription}...
+					{article.shortDescription
+						? article.shortDescription.substring(0, 100) + '...'
+						: ''}
 				</Text>
 			</View>
 		</TouchableOpacity>
@@ -65,6 +67,8 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, theme => ({
 	image: {
 		borderTopLeftRadius: 12,
 		borderTopRightRadius: 12,
+		borderWidth: 1,
+		borderColor: '#f5f7fa',
 	},
 	titleLabel: textStyle.headline,
 	descriptionLabel: {
