@@ -18,8 +18,6 @@ const TwitterListItemComponent = props => {
 		})
 	}
 
-	console.log('_______-tweet', tweet)
-
 	return (
 		<TouchableOpacity
 			activeOpacity={0.95}
@@ -33,7 +31,7 @@ const TwitterListItemComponent = props => {
 						style={themedStyle.avatar}
 					/>
 					<View style={themedStyle.handleWrapper}>
-						<Text style={themedStyle.titleLabel} category="h5">
+						<Text style={themedStyle.titleLabel} category="h6">
 							{tweet.name}
 						</Text>
 						<Text
@@ -64,26 +62,31 @@ const TwitterListItemComponent = props => {
 export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 	container: {
 		borderRadius: 4,
-		marginVertical: 4,
+		marginVertical: 2,
 		backgroundColor: '#FFFFFF',
 	},
 	tweetWrapper: {
-		padding: 8,
+		padding: 4,
 	},
 	headerWrapper: {
 		flexDirection: 'row',
-		padding: 8,
+		padding: 4,
 		alignItems: 'center',
 	},
 	avatar: {
 		marginRight: 8,
 	},
-	titleLabel: textStyle.headline,
+	handleWrapper: {
+		flexDirection: 'row',
+		flexWrap: 'wrap'
+	},
+	titleLabel: textStyle.label,
 	descriptionLabel: {
+		marginLeft: 4,
 		...textStyle.subtitle,
 	},
 	detailsContainer: {
-		paddingTop: 16,
+		paddingTop: 2,
 	},
 	dateContainer: {
 		flexDirection: 'row',
@@ -94,8 +97,8 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 		...textStyle.paragraph,
 	},
 	dateIcon: {
-		width: 24,
-		height: 24,
+		width: 12,
+		height: 12,
 		tintColor: theme['text-hint-color'],
 	},
 }))
