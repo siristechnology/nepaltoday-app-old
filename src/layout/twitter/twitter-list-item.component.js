@@ -29,6 +29,7 @@ const TwitterListItemComponent = props => {
 					<Avatar
 						source={{ uri: tweet.profileImage }}
 						style={themedStyle.avatar}
+						size="giant"
 					/>
 				</View>
 				<View style={themedStyle.rightWrapper}>
@@ -45,18 +46,19 @@ const TwitterListItemComponent = props => {
 					</View>
 					<View>
 						<Text>{tweet.text}</Text>
-						<ArticleActivityBar style={themedStyle.detailsContainer}>
-							<View style={themedStyle.dateContainer}>
-								{ClockIconOutline(themedStyle.dateIcon)}
-								<Text
-									style={themedStyle.dateLabel}
-									appearance="hint"
-									category="p2">
-									{getRelativeTime(tweet.publishedDate)}
-								</Text>
-							</View>
-						</ArticleActivityBar>
 					</View>
+					<ArticleActivityBar style={themedStyle.detailsContainer}>
+						<View style={themedStyle.dateContainer}>
+							{ClockIconOutline(themedStyle.dateIcon)}
+							<Text
+								style={themedStyle.dateLabel}
+								appearance="hint"
+								category="p2">
+								{getRelativeTime(tweet.publishedDate)}
+							</Text>
+						</View>
+					</ArticleActivityBar>
+
 				</View>
 			</View>
 		</TouchableOpacity>
@@ -72,12 +74,8 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 		padding: 4,
 		flexDirection: 'row',
 	},
-	leftWrapper: {
-		maxWidth: 80
-	},
 	rightWrapper: {
-		display: 'flex',
-		flexDirection: 'column',
+		flex: 1,
 	},
 	headerWrapper: {
 		flexDirection: 'row',
@@ -86,11 +84,8 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 		alignItems: 'center',
 	},
 	avatar: {
-		margin: 6,
-	},
-	handleWrapper: {
-		flexDirection: 'row',
-		flexWrap: 'wrap'
+		minWidth: 40,
+		margin: 8,
 	},
 	titleLabel: {
 		...textStyle.caption1,
@@ -103,13 +98,17 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 	detailsContainer: {
 		paddingTop: 2,
 	},
+	tweetText: {
+		flex: 1,
+		flexWrap: 'wrap'
+	},
 	dateContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
 		marginTop: 4
 	},
 	dateLabel: {
-		marginLeft: 8,
+		marginLeft: 4,
 		...textStyle.paragraph,
 	},
 	dateIcon: {
