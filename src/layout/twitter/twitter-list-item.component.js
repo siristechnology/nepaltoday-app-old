@@ -18,8 +18,6 @@ const TwitterListItemComponent = props => {
 		})
 	}
 
-	console.log('_______-tweet', tweet)
-
 	return (
 		<TouchableOpacity
 			activeOpacity={0.95}
@@ -27,13 +25,15 @@ const TwitterListItemComponent = props => {
 			style={[themedStyle.container]}
 			onPress={handlePress}>
 			<View style={themedStyle.tweetWrapper}>
-				<View style={themedStyle.headerWrapper}>
+				<View style={themedStyle.leftWrapper}>
 					<Avatar
 						source={{ uri: tweet.profileImage }}
 						style={themedStyle.avatar}
 					/>
-					<View style={themedStyle.handleWrapper}>
-						<Text style={themedStyle.titleLabel} category="h5">
+				</View>
+				<View style={themedStyle.rightWrapper}>
+					<View style={themedStyle.headerWrapper}>
+						<Text style={themedStyle.titleLabel} category="h6">
 							{tweet.name}
 						</Text>
 						<Text
@@ -43,19 +43,21 @@ const TwitterListItemComponent = props => {
 							{tweet.twitterHandle.handle}
 						</Text>
 					</View>
-				</View>
-				<Text>{tweet.text}</Text>
-				<ArticleActivityBar style={themedStyle.detailsContainer}>
-					<View style={themedStyle.dateContainer}>
-						{ClockIconOutline(themedStyle.dateIcon)}
-						<Text
-							style={themedStyle.dateLabel}
-							appearance="hint"
-							category="p2">
-							{getRelativeTime(tweet.publishedDate)}
-						</Text>
+					<View>
+						<Text>{tweet.text}</Text>
+						<ArticleActivityBar style={themedStyle.detailsContainer}>
+							<View style={themedStyle.dateContainer}>
+								{ClockIconOutline(themedStyle.dateIcon)}
+								<Text
+									style={themedStyle.dateLabel}
+									appearance="hint"
+									category="p2">
+									{getRelativeTime(tweet.publishedDate)}
+								</Text>
+							</View>
+						</ArticleActivityBar>
 					</View>
-				</ArticleActivityBar>
+				</View>
 			</View>
 		</TouchableOpacity>
 	)
@@ -63,39 +65,56 @@ const TwitterListItemComponent = props => {
 
 export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 	container: {
-		borderRadius: 4,
-		marginVertical: 4,
+		marginVertical: 1,
 		backgroundColor: '#FFFFFF',
 	},
 	tweetWrapper: {
-		padding: 8,
+		padding: 4,
+		flexDirection: 'row',
+	},
+	leftWrapper: {
+		maxWidth: 80
+	},
+	rightWrapper: {
+		display: 'flex',
+		flexDirection: 'column',
 	},
 	headerWrapper: {
 		flexDirection: 'row',
-		padding: 8,
+		flexWrap: 'wrap',
+		paddingBottom: 4,
 		alignItems: 'center',
 	},
 	avatar: {
-		marginRight: 8,
+		margin: 6,
 	},
-	titleLabel: textStyle.headline,
+	handleWrapper: {
+		flexDirection: 'row',
+		flexWrap: 'wrap'
+	},
+	titleLabel: {
+		...textStyle.caption1,
+		fontWeight: 'bold'
+	},
 	descriptionLabel: {
+		marginLeft: 4,
 		...textStyle.subtitle,
 	},
 	detailsContainer: {
-		paddingTop: 16,
+		paddingTop: 2,
 	},
 	dateContainer: {
 		flexDirection: 'row',
 		alignItems: 'center',
+		marginTop: 4
 	},
 	dateLabel: {
 		marginLeft: 8,
 		...textStyle.paragraph,
 	},
 	dateIcon: {
-		width: 24,
-		height: 24,
+		width: 16,
+		height: 16,
 		tintColor: theme['text-hint-color'],
 	},
 }))
