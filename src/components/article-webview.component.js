@@ -1,5 +1,6 @@
 import React from 'react'
-import { Spinner } from 'react-native-ui-kitten'
+import { StyleSheet } from 'react-native'
+import { Layout, Spinner } from 'react-native-ui-kitten'
 import { WebView } from 'react-native-webview'
 
 export class ArticleWebviewComponent extends React.Component {
@@ -10,17 +11,9 @@ export class ArticleWebviewComponent extends React.Component {
 		return (
 			<WebView
 				renderLoading={() => (
-					<Spinner
-						style={{
-							position: 'absolute',
-							left: 0,
-							right: 0,
-							top: 0,
-							bottom: 0,
-							alignItems: 'center',
-							justifyContent: 'center',
-						}}
-					/>
+					<Layout style={styles.container}>
+						<Spinner />
+					</Layout>
 				)}
 				startInLoadingState
 				source={{ uri: link }}
@@ -28,9 +21,16 @@ export class ArticleWebviewComponent extends React.Component {
 					flex: 1,
 					alignItems: 'center',
 					justifyContent: 'center',
-					marginTop: 20,
 				}}
 			/>
 		)
 	}
 }
+
+const styles = StyleSheet.create({
+	container: {
+		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'center',
+	},
+})
