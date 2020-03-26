@@ -71,6 +71,7 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 	},
 	tweetWrapper: {
 		padding: 4,
+		marginVertical: 6,
 		flexDirection: 'row',
 	},
 	rightWrapper: {
@@ -84,7 +85,7 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 	},
 	avatar: {
 		minWidth: 40,
-		margin: 8,
+		margin: 10,
 	},
 	titleLabel: {
 		...textStyle.caption1,

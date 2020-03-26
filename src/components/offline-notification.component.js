@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { useNetInfo } from '@react-native-community/netinfo'
+import NetInfo from '@react-native-community/netinfo'
 import { View, Text, Dimensions, StyleSheet } from 'react-native'
 
 const { width } = Dimensions.get('window')
 
 const OfflineNotice = () => {
-	const netInfo = useNetInfo()
 	const [isConnected, setConnected] = useState(true)
 
 	useEffect(() => {
-		setConnected(netInfo.isConnected)
-	}, [netInfo])
+		NetInfo.fetch().then(state => {
+			setConnected(state.isConnected)
+		})
+	})
 
 	if (!isConnected) {
 		return (

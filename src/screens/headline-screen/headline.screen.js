@@ -5,7 +5,6 @@ import ScrollableTabView, {
 import { Text } from 'react-native-ui-kitten/ui'
 import React, { useEffect, useState } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
-import { useNetInfo } from '@react-native-community/netinfo'
 
 import { en } from '../../lang/en'
 import environment from '../../environment'
@@ -17,17 +16,11 @@ import { HealineListContainer } from '../../layout/headline'
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
 const HeadlineScreen = ({ navigation }) => {
-	const netInfo = useNetInfo()
-	const [isConnected, setConnected] = useState(true)
 	const [refreshCounter, setRefreshCounter] = useState(0)
 
 	const handleRefresh = () => {
 		setRefreshCounter(refreshCounter + 1)
 	}
-
-	useEffect(() => {
-		setConnected(netInfo.isConnected)
-	}, [netInfo.isConnected])
 
 	const renderQuery = ({ error, props }) => {
 		if (!props) {
@@ -107,7 +100,6 @@ const HeadlineScreen = ({ navigation }) => {
 				}
 			`}
 			variables={{
-				isConnected,
 				refreshCounter,
 			}}
 			render={renderQuery}

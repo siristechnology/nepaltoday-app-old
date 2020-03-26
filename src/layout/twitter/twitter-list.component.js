@@ -28,7 +28,7 @@ const TwitterListComponent = ({ tweets, themedStyle, handleRefresh }) => {
 
 export const TwitterList = withStyles(TwitterListComponent, theme => ({
 	container: {
-		paddingVertical: 4,
+		paddingVertical: 8,
 		backgroundColor: theme['background-basic-color-2'],
 	},
 	item: {
