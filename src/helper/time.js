@@ -13,10 +13,18 @@ moment.updateLocale('en', {
 		dd: '%d दिन',
 	},
 })
-export const getRelativeTime = date =>
-	moment(Number(date))
-		.startOf('hour')
-		.fromNow()
+export const getRelativeTime = date => {
+	let convertedDate = Number(date)
+	if (!isNaN(convertedDate) && typeof convertedDate == 'number') {
+		return moment(convertedDate)
+			.startOf('hour')
+			.fromNow()
+	} else {
+		return moment(date)
+			.startOf('hour')
+			.fromNow()
+	}
+}
 
 export const getCurrentTime = () => {
 	let hours = moment().hours()

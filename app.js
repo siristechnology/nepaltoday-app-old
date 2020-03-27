@@ -1,9 +1,7 @@
 import { Provider } from 'react-redux'
 import { StatusBar } from 'react-native'
-import firebase from 'react-native-firebase'
-import React, { useEffect, useState } from 'react'
+import React, { Component } from 'react'
 import SplashScreen from 'react-native-splash-screen'
-import AsyncStorage from '@react-native-community/async-storage'
 
 import { store } from './src/store'
 import AppContainer from './src/frame/app-container'
@@ -15,127 +13,73 @@ import * as RNLocalize from 'react-native-localize'
 /* diable-eslint-line */
 import { mapping, light as lightTheme } from '@eva-design/eva'
 import { storeFcmToken } from './src/mutations/store-fcm.mutation'
-import { NotificationModal } from './src/layout/notification/notification-modal'
 
-const App = () => {
-	const [notification, setNotification] = useState(false)
-	const [country] = useState(RNLocalize.getCountry())
-	const [timeZone] = useState(RNLocalize.getTimeZone())
+import { fcmService } from './src/services/FCMService'
+import NavigationService from './src/services/navigationService'
 
-	const getToken = async () => {
-		try {
-			let fcmToken = await AsyncStorage.getItem('fcmToken')
-			console.log('_______________fcm token _______________', fcmToken)
 
-			if (!fcmToken) {
-				fcmToken = await firebase.messaging().getToken()
-				if (fcmToken) {
-					await AsyncStorage.setItem('fcmToken', fcmToken)
-					storeFcmToken({ fcmToken, countryCode: country, timeZone })
-				}
-			}
-		} catch (error) {
-			console.log(
-				'_________________error on get token__________________',
-				error,
-			)
-		}
-	}
-
-	const requestPermission = async () => {
-		try {
-			await firebase.messaging().requestPermission()
-			getToken()
-		} catch (error) {
-			console.log(
-				'_______________error occured on request permission_______________',
-				error,
-			)
-		}
-	}
-
-	const checkPushNotificationPermission = async () => {
-		try {
-			const enabled = await firebase.messaging().hasPermission()
-			console.log('_______________enabled_______________', enabled)
-			if (enabled) {
-				getToken()
-			} else {
-				requestPermission()
-			}
-		} catch (error) {
-			console.log(
-				'_______________error on push notification permission_______________',
-				error,
-			)
-		}
-	}
-
-	/*
-	 * Triggered when a particular notification has been received in foreground
-	 * */
-	const messageListner = async () => {
-		this.foregroundNotificationListner = firebase
-			.notifications()
-			.onNotification(notification => {
-				notification.android.setChannelId('insider').setSound('default')
-				firebase.notifications().displayNotification(notification)
-				const { title, body } = notification
-				setNotification({ title, message: body })
-			})
-
-		/*
-		 * If your app is in background, you can listen for when a notification is clicked / tapped / opened as follows:
-		 * */
-		this.backgroundNotificationListener = firebase
-			.notifications()
-			.onNotificationOpened(notificationOpen => {
-				const { title, body } = notificationOpen.notification
-				console.log('_______________app in background_______________')
-				setNotification({ title, message: body })
-			})
-
-		/*
-		 * If your app is closed, you can check if it was opened by a notification being clicked / tapped / opened as follows:
-		 * */
-		await firebase.notifications().getInitialNotification()
-
-		firebase.messaging().onMessage(message => {
-			console.log(
-				'_______________message_______________',
-				JSON.stringify(message),
-			)
-		})
-	}
-
-	useEffect(() => {
+class App extends Component {
+	componentDidMount() {
 		SplashScreen.hide()
 
-		const channel = new firebase.notifications.Android.Channel(
-			'insider',
-			'Latest News Channel',
-			firebase.notifications.Android.Importance.Max,
-		).setDescription('Latest News Channel push notification')
-		firebase.notifications().android.createChannel(channel)
-		checkPushNotificationPermission()
-		messageListner()
-		return () => {
-			this.foregroundNotificationListner()
-			this.backgroundNotificationListener()
-		}
-	}, [])
+		fcmService.register(
+			this.onRegister,
+			this.onNotification,
+			this.onOpenNotification,
+		)
+	}
 
-	return (
-		<ApplicationProvider mapping={mapping} theme={lightTheme}>
-			<Provider store={store}>
-				<StatusBar barStyle="light-content" />
-				<ErrorBoundary>
-					<AppContainer />
-					<NotificationModal notification={notification.message} />
-				</ErrorBoundary>
-			</Provider>
-		</ApplicationProvider>
-	)
+	onRegister(token) {
+		console.log('[NotificationFCM] onRegister:', token)
+		storeFcmToken({fcmToken:token, countryCode: RNLocalize.getCountry(), timeZone: RNLocalize.getTimeZone()})
+	}
+
+	onNotification(notify) {
+		console.log('[NotificationFCM] onNotification: ', notify)
+		//For Android
+		const channelObj = {
+			channelId: 'SampleChannelId',
+			channelName: 'SampleChannelName',
+			channelDes: 'SampleChannelDes',
+		}
+		const channel = fcmService.buildChannel(channelObj)
+		const buildNotify = {
+			dataId: notify._notificationId,
+			title: notify._title,
+			content: notify._body,
+			sound: 'default',
+			channel: channel,
+			data: notify._data,
+			vibrate: true,
+		}
+		const notification = fcmService.buildNotification(buildNotify)
+		fcmService.displayNotification(notification)
+	}
+
+	onOpenNotification(notify) {
+		console.log('[NotificationFCM] onOpenNotification: ', notify)
+		let article = { ...notify.notification.data }
+		article.source = JSON.parse(article.source)
+		NavigationService.navigate('ArticleDetail', { article })
+	}
+	render() {
+		return (
+			<ApplicationProvider mapping={mapping} theme={lightTheme}>
+				<Provider store={store}>
+					<StatusBar barStyle="light-content" />
+					<ErrorBoundary>
+						<AppContainer
+							ref={navigatorRef => {
+								NavigationService.setTopLevelNavigator(
+									navigatorRef,
+								)
+							}}
+						/>
+					</ErrorBoundary>
+				</Provider>
+			</ApplicationProvider>
+		)
+	}
 }
 
 export default App
