@@ -61,6 +61,8 @@ export const ActivityAuthoring = withStyles(
 		},
 		authorPhoto: {
 			margin: 0,
+			borderWidth: 2,
+			borderColor: theme['border-basic-color-2'],
 		},
 		authorNameLabel: textStyle.subtitle,
 		dateLabel: textStyle.paragraph,

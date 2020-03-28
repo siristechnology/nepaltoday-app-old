@@ -8,7 +8,6 @@ import {
 import Analytics from 'appcenter-analytics'
 import React, { useState, useEffect } from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
-import { useNetInfo } from '@react-native-community/netinfo'
 import Geolocation from 'react-native-geolocation-service'
 
 import environment from '../../environment'
@@ -17,12 +16,10 @@ import { CircularSpinner } from '../../components/common'
 import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from '../../components/weather.component'
-import { WEATHER_API_APPID } from 'react-native-dotenv';
+import { WEATHER_API_APPID } from 'react-native-dotenv'
 
 const Home = ({ navigation, actions }) => {
-	const netInfo = useNetInfo()
 	const [isUpdated, setUpdated] = useState(false)
-	const [isConnected, setConnected] = useState(true)
 	const [appState, setAppState] = useState(AppState.currentState)
 	const [nepaliDate, setNepaliDate] = useState('')
 	const [weatherData, setWeatherData] = useState({})
@@ -30,9 +27,6 @@ const Home = ({ navigation, actions }) => {
 	const handleRefresh = () => {
 		setUpdated(!isUpdated)
 	}
-	useEffect(() => {
-		setConnected(netInfo.isConnected)
-	}, [netInfo.isConnected])
 
 	const updateAppState = nextAppState => {
 		if (
@@ -137,7 +131,6 @@ const Home = ({ navigation, actions }) => {
 				}
 			`}
 			variables={{
-				isConnected,
 				isUpdated,
 			}}
 			render={({ error, props: data }) => {

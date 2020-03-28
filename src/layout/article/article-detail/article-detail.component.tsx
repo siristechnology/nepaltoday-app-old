@@ -64,30 +64,32 @@ class ArticleDetailComponent extends React.Component<
 					/>
 				</ImageBackground>
 
-				<Text style={themedStyle.titleLabel} category="h5">
-					{article.title}
-				</Text>
-				<Text category="s1" style={themedStyle.contentLabel}>
-					{article.content}
-				</Text>
-				<View style={themedStyle.readMoreBtnWrapper}>
-					<Button
-						onPress={this.handleLinkClick}
-						style={themedStyle.readMoreBtn}>
-						{READ_MORE}
-					</Button>
-				</View>
-				<ArticleActivityBar style={themedStyle.detailsContainer}>
-					<View style={themedStyle.dateContainer}>
-						{ClockIconOutline(themedStyle.dateIcon)}
-						<Text
-							style={themedStyle.dateLabel}
-							appearance="hint"
-							category="p2">
-							{getRelativeTime(article.publishedDate)}
-						</Text>
+				<View style={themedStyle.detailsContainer}>
+					<Text style={themedStyle.titleLabel} category="h5">
+						{article.title}
+					</Text>
+					<ArticleActivityBar>
+						<View style={themedStyle.dateContainer}>
+							{ClockIconOutline(themedStyle.dateIcon)}
+							<Text
+								style={themedStyle.dateLabel}
+								appearance="hint"
+								category="p2">
+								{getRelativeTime(article.publishedDate)}
+							</Text>
+						</View>
+					</ArticleActivityBar>
+					<Text category="s1" style={themedStyle.contentLabel}>
+						{article.content}
+					</Text>
+					<View style={themedStyle.readMoreBtnWrapper}>
+						<Button
+							onPress={this.handleLinkClick}
+							style={themedStyle.readMoreBtn}>
+							{READ_MORE}
+						</Button>
 					</View>
-				</ArticleActivityBar>
+				</View>
 			</ContainerView>
 		)
 	}
@@ -102,9 +104,7 @@ export const ArticleDetail = withStyles(
 		},
 		detailsContainer: {
 			paddingHorizontal: 24,
-			paddingVertical: 24,
-			borderTopWidth: 1,
-			borderTopColor: theme['border-basic-color-2'],
+			paddingVertical: 4,
 		},
 		dateContainer: {
 			flexDirection: 'row',
@@ -112,6 +112,8 @@ export const ArticleDetail = withStyles(
 		},
 		image: {
 			minHeight: 175,
+			borderWidth: 1,
+			borderColor: '#f5f7fa',
 		},
 		authorPhoto: {
 			position: 'absolute',
@@ -122,33 +124,24 @@ export const ArticleDetail = withStyles(
 			borderColor: theme['border-basic-color-2'],
 		},
 		titleLabel: {
-			marginHorizontal: 24,
-			marginTop: 48,
+			marginTop: 30,
 			...textStyle.headline,
 			fontSize: 22,
 		},
-		translatedLabel: {
-			flex: 1,
-		},
-		englishLabel: {
-			flex: 1,
-			color: '#dadfe3',
-		},
 		contentLabel: {
 			flex: 1,
-			marginHorizontal: 24,
-			marginVertical: 24,
+			marginVertical: 12,
 			...textStyle.paragraph,
 			fontSize: 18,
 		},
-		dateLabel: {
-			marginLeft: 8,
-			...textStyle.paragraph,
-		},
 		dateIcon: {
-			width: 24,
-			height: 24,
+			width: 16,
+			height: 16,
 			tintColor: theme['text-hint-color'],
+		},
+		dateLabel: {
+			marginLeft: 4,
+			...textStyle.paragraph,
 		},
 		backIconContainer: {
 			flex: 1,
