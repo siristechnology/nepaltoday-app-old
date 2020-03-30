@@ -94,8 +94,7 @@ class FCMService {
 			.getInitialNotification()
 			.then(notificationOpen => {
 				if (notificationOpen) {
-					const notification = notificationOpen.notification
-					onOpenNotification(notification)
+					onOpenNotification(notificationOpen)
 				}
 			})
 
