@@ -17,6 +17,7 @@ import { storeFcmToken } from './src/mutations/store-fcm.mutation'
 import { fcmService } from './src/services/FCMService'
 import NavigationService from './src/services/navigationService'
 
+import { NEPALTODAY_SERVER } from 'react-native-dotenv'
 
 class App extends Component {
 	componentDidMount() {
@@ -31,7 +32,11 @@ class App extends Component {
 
 	onRegister(token) {
 		console.log('[NotificationFCM] onRegister:', token)
-		storeFcmToken({fcmToken:token, countryCode: RNLocalize.getCountry(), timeZone: RNLocalize.getTimeZone()})
+		storeFcmToken({
+			fcmToken: token,
+			countryCode: RNLocalize.getCountry(),
+			timeZone: RNLocalize.getTimeZone(),
+		})
 	}
 
 	onNotification(notify) {
@@ -58,9 +63,35 @@ class App extends Component {
 
 	onOpenNotification(notify) {
 		console.log('[NotificationFCM] onOpenNotification: ', notify)
-		let article = { ...notify.notification.data }
-		article.source = JSON.parse(article.source)
-		NavigationService.navigate('ArticleDetail', { article })
+		fetch(NEPALTODAY_SERVER, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				query: `{
+                  getArticle(_id: "${notify.notification.data._id}") {
+                    title,
+                    content,
+                    imageLink,
+                    shortDescription,
+                    publishedDate,
+                    link,
+                    source {
+                    logoLink,
+                    name
+                     }
+                  }
+				}
+                `,
+			}),
+		})
+			.then(res => res.json())
+			.then(articleJson => {
+				console.log('article', articleJson.data.getArticle)
+				let article = articleJson.data.getArticle
+				NavigationService.navigate('ArticleDetail', { article })
+			})
 	}
 	render() {
 		return (
