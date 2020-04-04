@@ -5,33 +5,28 @@ import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
 
 import { CircularSpinner } from '../../components/common'
-import { TwitterListContainer } from '../../layout/twitter/twitter-list.container'
+import StatsList from './components/stats.list'
 
-const TwitterComponent = ({}) => {
+export default CoronaStatsComponent = ({}) => {
 	const [refreshCounter, setRefreshCounter] = useState(0)
 
 	const handleRefresh = () => {
 		setRefreshCounter(refreshCounter + 1)
 	}
+
 	return (
 		<QueryRenderer
 			environment={environment}
 			query={graphql`
-				query twitterScreenQuery {
-					getTweets {
-						_id
-						text
-						name
-						tweetId
-						handle
-						profileImage
-						description
-						publishedDate
-						twitterHandle {
-							_id
-							name
-							handle
-							category
+				query coronaStatsScreenQuery {
+					getLatestCoronaStats {
+						createdDate
+						stats {
+							country
+							total_cases
+							total_deaths
+							new_cases
+							new_deaths
 						}
 					}
 				}
@@ -49,16 +44,8 @@ const TwitterComponent = ({}) => {
 				} else if (error) {
 					console.log('error:' + JSON.stringify(error))
 				}
-				return (
-					<AppLayout>
-						<TwitterListContainer
-							tweets={props.getTweets}
-							handleRefresh={handleRefresh}
-						/>
-					</AppLayout>
-				)
+				return <StatsList stats={props.getLatestCoronaStats} handleRefresh={handleRefresh} />
 			}}
 		/>
 	)
 }
-export default TwitterComponent

@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 1ce7541bbb60cdecc041c40fe47bf25b
+ * @relayHash 3e954a5cb62bbe1c2fd3fadefb6c0e01
  */
 
 /* eslint-disable */
@@ -9,8 +9,8 @@
 
 /*::
 import type { ConcreteRequest } from 'relay-runtime';
-export type twitterQueryVariables = {||};
-export type twitterQueryResponse = {|
+export type twitterScreenQueryVariables = {||};
+export type twitterScreenQueryResponse = {|
   +getTweets: $ReadOnlyArray<?{|
     +_id: string,
     +text: ?string,
@@ -28,15 +28,15 @@ export type twitterQueryResponse = {|
     |},
   |}>
 |};
-export type twitterQuery = {|
-  variables: twitterQueryVariables,
-  response: twitterQueryResponse,
+export type twitterScreenQuery = {|
+  variables: twitterScreenQueryVariables,
+  response: twitterScreenQueryResponse,
 |};
 */
 
 
 /*
-query twitterQuery {
+query twitterScreenQuery {
   getTweets {
     _id
     text
@@ -154,7 +154,7 @@ return {
   "kind": "Request",
   "fragment": {
     "kind": "Fragment",
-    "name": "twitterQuery",
+    "name": "twitterScreenQuery",
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
@@ -162,19 +162,20 @@ return {
   },
   "operation": {
     "kind": "Operation",
-    "name": "twitterQuery",
+    "name": "twitterScreenQuery",
     "argumentDefinitions": [],
     "selections": (v3/*: any*/)
   },
   "params": {
     "operationKind": "query",
-    "name": "twitterQuery",
+    "name": "twitterScreenQuery",
     "id": null,
-    "text": "query twitterQuery {\n  getTweets {\n    _id\n    text\n    name\n    tweetId\n    handle\n    profileImage\n    description\n    publishedDate\n    twitterHandle {\n      _id\n      name\n      handle\n      category\n    }\n  }\n}\n",
+    "text": "query twitterScreenQuery {\n  getTweets {\n    _id\n    text\n    name\n    tweetId\n    handle\n    profileImage\n    description\n    publishedDate\n    twitterHandle {\n      _id\n      name\n      handle\n      category\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'a616979a38a1f60c917f78cac6a45b95';
+(node/*: any*/).hash = '9f07ea4acefad61bd563bbac23bb1527';
+
 module.exports = node;
