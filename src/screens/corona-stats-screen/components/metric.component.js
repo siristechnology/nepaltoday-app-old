@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, ViewProps } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-ui-kitten'
 
 export default MetricComponent = (props) => {

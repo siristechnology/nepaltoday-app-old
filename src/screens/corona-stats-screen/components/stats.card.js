@@ -1,13 +1,13 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Text, Card, Divider } from 'react-native-ui-kitten/ui'
+import { Text, Card } from 'react-native-ui-kitten/ui'
 import { withStyles } from 'react-native-ui-kitten/theme'
 
 import { textStyle } from '../../../components/common'
 import MetricComponent from './metric.component'
 
 const StatsComponent = (props) => {
-	const { style, hint, value, icon, themedStyle, statMetric, ...restProps } = props
+	const { style, hint, value, icon, themedStyle, statMetric } = props
 
 	return (
 		<Card>
