@@ -1,70 +1,39 @@
 import React from 'react'
-import { View, TouchableOpacity, Linking } from 'react-native'
-import { Avatar, Text } from 'react-native-ui-kitten/ui'
+import { View } from 'react-native'
+import { Text, Card, Divider } from 'react-native-ui-kitten/ui'
 import { withStyles } from 'react-native-ui-kitten/theme'
 
 import { textStyle } from '../../../components/common'
-import { ArticleActivityBar } from '../../../components/articles'
-import { ClockIconOutline } from '../../../assets/icons'
-import { getRelativeTime } from '../../../helper/time'
+import MetricComponent from './metric.component'
 
-const StatsComponent = props => {
-	const { style, themedStyle, tweet, ...restProps } = props
-	const handlePress = () => {
-		const handle = tweet.handle || tweet.twitterHandle.handle
-		const link = `https://twitter.com/${handle}/status/${tweet.tweetId}`
-		Linking.openURL(link).catch(error => {
-			throw new Error('Error opening twitter' + error)
-		})
-	}
+const StatsComponent = (props) => {
+	const { style, hint, value, icon, themedStyle, statMetric, ...restProps } = props
 
 	return (
-		<TouchableOpacity
-			activeOpacity={0.95}
-			{...restProps}
-			style={[themedStyle.container]}
-			onPress={handlePress}>
-			<View style={themedStyle.tweetWrapper}>
-				<View style={themedStyle.leftWrapper}>
-					<Avatar
-						source={{ uri: tweet.profileImage }}
-						style={themedStyle.avatar}
-						size="giant"
-					/>
-				</View>
-				<View style={themedStyle.rightWrapper}>
-					<View style={themedStyle.headerWrapper}>
-						<Text style={themedStyle.titleLabel} category="h6">
-							{tweet.name}
-						</Text>
-						<Text
-							style={themedStyle.descriptionLabel}
-							appearance="hint"
-							category="s1">
-							{tweet.twitterHandle.handle}
-						</Text>
-					</View>
-					<View>
-						<Text>{tweet.text}</Text>
-					</View>
-					<ArticleActivityBar style={themedStyle.detailsContainer}>
-						<View style={themedStyle.dateContainer}>
-							{ClockIconOutline(themedStyle.dateIcon)}
-							<Text
-								style={themedStyle.dateLabel}
-								appearance="hint"
-								category="p2">
-								{getRelativeTime(tweet.publishedDate)}
-							</Text>
-						</View>
-					</ArticleActivityBar>
-				</View>
+		<Card>
+			<View style={themedStyle.profileSocialsContainer}>
+				<Text>{statMetric.country}</Text>
+				<View
+					style={{
+						borderLeftWidth: 1,
+						borderLeftColor: '#d9dbde',
+					}}
+				/>
+				<MetricComponent hint="Total Cases" value={`${statMetric.total_cases}`} />
+				<MetricComponent hint="Total Deaths" value={`${statMetric.total_deaths}`} />
+				<MetricComponent hint="New Cases" value={`${statMetric.new_cases}`} />
+				<MetricComponent hint="New Deaths" value={`${statMetric.new_deaths}`} />
 			</View>
-		</TouchableOpacity>
+		</Card>
 	)
 }
 
-export default StatsCard = withStyles(StatsComponent, theme => ({
+export default StatsCard = withStyles(StatsComponent, (theme) => ({
+	profileSocialsContainer: {
+		flexDirection: 'row',
+		justifyContent: 'space-evenly',
+		marginTop: 24,
+	},
 	container: {
 		marginVertical: 1,
 		backgroundColor: '#FFFFFF',

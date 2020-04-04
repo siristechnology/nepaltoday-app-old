@@ -13,25 +13,20 @@ export default CoronaStatsComponent = ({}) => {
 	const handleRefresh = () => {
 		setRefreshCounter(refreshCounter + 1)
 	}
+
 	return (
 		<QueryRenderer
 			environment={environment}
 			query={graphql`
 				query coronaStatsScreenQuery {
-					getTweets {
-						_id
-						text
-						name
-						tweetId
-						handle
-						profileImage
-						description
-						publishedDate
-						twitterHandle {
-							_id
-							name
-							handle
-							category
+					getLatestCoronaStats {
+						createdDate
+						stats {
+							country
+							total_cases
+							total_deaths
+							new_cases
+							new_deaths
 						}
 					}
 				}
@@ -49,14 +44,7 @@ export default CoronaStatsComponent = ({}) => {
 				} else if (error) {
 					console.log('error:' + JSON.stringify(error))
 				}
-				return (
-					<AppLayout>
-						<StatsList
-							tweets={props.getTweets}
-							handleRefresh={handleRefresh}
-						/>
-					</AppLayout>
-				)
+				return <StatsList stats={props.getLatestCoronaStats} handleRefresh={handleRefresh} />
 			}}
 		/>
 	)

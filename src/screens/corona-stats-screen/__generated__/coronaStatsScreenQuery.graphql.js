@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 08e337df673e00f145e68d1ab7cb2bb9
+ * @relayHash 1884b459ff36c881577d2dc41caf3baa
  */
 
 /* eslint-disable */
@@ -11,22 +11,16 @@
 import type { ConcreteRequest } from 'relay-runtime';
 export type coronaStatsScreenQueryVariables = {||};
 export type coronaStatsScreenQueryResponse = {|
-  +getTweets: $ReadOnlyArray<?{|
-    +_id: string,
-    +text: ?string,
-    +name: ?string,
-    +tweetId: ?string,
-    +handle: ?string,
-    +profileImage: ?string,
-    +description: ?string,
-    +publishedDate: ?string,
-    +twitterHandle: ?{|
-      +_id: string,
-      +name: ?string,
-      +handle: ?string,
-      +category: ?string,
-    |},
-  |}>
+  +getLatestCoronaStats: ?{|
+    +createdDate: ?string,
+    +stats: ?$ReadOnlyArray<?{|
+      +country: ?string,
+      +total_cases: ?number,
+      +total_deaths: ?number,
+      +new_cases: ?number,
+      +new_deaths: ?number,
+    |}>,
+  |}
 |};
 export type coronaStatsScreenQuery = {|
   variables: coronaStatsScreenQueryVariables,
@@ -37,111 +31,78 @@ export type coronaStatsScreenQuery = {|
 
 /*
 query coronaStatsScreenQuery {
-  getTweets {
-    _id
-    text
-    name
-    tweetId
-    handle
-    profileImage
-    description
-    publishedDate
-    twitterHandle {
-      _id
-      name
-      handle
-      category
+  getLatestCoronaStats {
+    createdDate
+    stats {
+      country
+      total_cases
+      total_deaths
+      new_cases
+      new_deaths
     }
   }
 }
 */
 
 const node/*: ConcreteRequest*/ = (function(){
-var v0 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "_id",
-  "args": null,
-  "storageKey": null
-},
-v1 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "name",
-  "args": null,
-  "storageKey": null
-},
-v2 = {
-  "kind": "ScalarField",
-  "alias": null,
-  "name": "handle",
-  "args": null,
-  "storageKey": null
-},
-v3 = [
+var v0 = [
   {
     "kind": "LinkedField",
     "alias": null,
-    "name": "getTweets",
+    "name": "getLatestCoronaStats",
     "storageKey": null,
     "args": null,
-    "concreteType": "Tweet",
-    "plural": true,
+    "concreteType": "CoronaStats",
+    "plural": false,
     "selections": [
-      (v0/*: any*/),
       {
         "kind": "ScalarField",
         "alias": null,
-        "name": "text",
-        "args": null,
-        "storageKey": null
-      },
-      (v1/*: any*/),
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "tweetId",
-        "args": null,
-        "storageKey": null
-      },
-      (v2/*: any*/),
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "profileImage",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "description",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "publishedDate",
+        "name": "createdDate",
         "args": null,
         "storageKey": null
       },
       {
         "kind": "LinkedField",
         "alias": null,
-        "name": "twitterHandle",
+        "name": "stats",
         "storageKey": null,
         "args": null,
-        "concreteType": "TwitterHandle",
-        "plural": false,
+        "concreteType": "CoronaMetrics",
+        "plural": true,
         "selections": [
-          (v0/*: any*/),
-          (v1/*: any*/),
-          (v2/*: any*/),
           {
             "kind": "ScalarField",
             "alias": null,
-            "name": "category",
+            "name": "country",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "total_cases",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "total_deaths",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "new_cases",
+            "args": null,
+            "storageKey": null
+          },
+          {
+            "kind": "ScalarField",
+            "alias": null,
+            "name": "new_deaths",
             "args": null,
             "storageKey": null
           }
@@ -158,24 +119,24 @@ return {
     "type": "Query",
     "metadata": null,
     "argumentDefinitions": [],
-    "selections": (v3/*: any*/)
+    "selections": (v0/*: any*/)
   },
   "operation": {
     "kind": "Operation",
     "name": "coronaStatsScreenQuery",
     "argumentDefinitions": [],
-    "selections": (v3/*: any*/)
+    "selections": (v0/*: any*/)
   },
   "params": {
     "operationKind": "query",
     "name": "coronaStatsScreenQuery",
     "id": null,
-    "text": "query coronaStatsScreenQuery {\n  getTweets {\n    _id\n    text\n    name\n    tweetId\n    handle\n    profileImage\n    description\n    publishedDate\n    twitterHandle {\n      _id\n      name\n      handle\n      category\n    }\n  }\n}\n",
+    "text": "query coronaStatsScreenQuery {\n  getLatestCoronaStats {\n    createdDate\n    stats {\n      country\n      total_cases\n      total_deaths\n      new_cases\n      new_deaths\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = 'c97b9b4759fa4ac0c91758806d3ffd4c';
+(node/*: any*/).hash = '487549f98cb8f92df88d433cfca778a7';
 
 module.exports = node;

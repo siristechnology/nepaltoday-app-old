@@ -55,9 +55,23 @@ input TweetCriteria {
 	lastQueryDate: String
 }
 
+type CoronaStats {
+	createdDate: String
+	stats: [CoronaMetrics]
+}
+
+type CoronaMetrics {
+	country: String
+	total_cases: Int
+	total_deaths: Int
+	new_cases: Int
+	new_deaths: Int
+}
+
 type Query {
 	getArticles(criteria: ArticleCriteria): [Article]!
 	getTweets(criteria: TweetCriteria): [Tweet]!
+	getLatestCoronaStats: CoronaStats
 }
 
 type Gcm {
