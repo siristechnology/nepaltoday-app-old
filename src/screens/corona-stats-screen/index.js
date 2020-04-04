@@ -5,9 +5,9 @@ import environment from '../../environment'
 import AppLayout from '../../frame/app-layout'
 
 import { CircularSpinner } from '../../components/common'
-import { TwitterListContainer } from '../../layout/twitter/twitter-list.container'
+import StatsList from './components/stats.list'
 
-const TwitterComponent = ({}) => {
+export default CoronaStatsComponent = ({}) => {
 	const [refreshCounter, setRefreshCounter] = useState(0)
 
 	const handleRefresh = () => {
@@ -17,7 +17,7 @@ const TwitterComponent = ({}) => {
 		<QueryRenderer
 			environment={environment}
 			query={graphql`
-				query twitterScreenQuery {
+				query coronaStatsScreenQuery {
 					getTweets {
 						_id
 						text
@@ -51,7 +51,7 @@ const TwitterComponent = ({}) => {
 				}
 				return (
 					<AppLayout>
-						<TwitterListContainer
+						<StatsList
 							tweets={props.getTweets}
 							handleRefresh={handleRefresh}
 						/>
@@ -61,4 +61,3 @@ const TwitterComponent = ({}) => {
 		/>
 	)
 }
-export default TwitterComponent

@@ -6,6 +6,7 @@ import { BottomNavigation, BottomNavigationTab } from 'react-native-ui-kitten'
 import HomeScreen from '../home-screen/home.screen'
 import TwitterScreen from '../twitter-screen/twitter.screen'
 import HeadlineScreen from '../headline-screen/headline.screen'
+import CoronaStatsScreen from '../corona-stats-screen'
 
 export const ButtonNavigationComponent = props => {
 	const onTabSelect = selectedIndex => {
@@ -19,6 +20,7 @@ export const ButtonNavigationComponent = props => {
 			onSelect={onTabSelect}>
 			<BottomNavigationTab title="Home" />
 			<BottomNavigationTab title="Headline" />
+			<BottomNavigationTab title="CoronaStats" />
 			<BottomNavigationTab title="Twitter" />
 		</BottomNavigation>
 	)
@@ -28,10 +30,11 @@ export const BottomTabScreen = createBottomTabNavigator(
 	{
 		Home: HomeScreen,
 		Headline: HeadlineScreen,
+		CoronaStats: CoronaStatsScreen,
 		Twitter: TwitterScreen,
 	},
 	{
-		initialRouteName: 'Home',
+		initialRouteName: 'CoronaStats',
 		defaultNavigationOptions: ({ navigation }) => ({
 			tabBarIcon: ({ focused, horizontal, tintColor }) => {
 				const { routeName } = navigation.state
@@ -40,6 +43,8 @@ export const BottomTabScreen = createBottomTabNavigator(
 					iconName = 'home'
 				} else if (routeName === 'Headline') {
 					iconName = 'newspaper-o'
+				} else if (routeName === 'CoronaStats') {
+					iconName = 'twitter'
 				} else if (routeName === 'Twitter') {
 					iconName = 'twitter'
 				}
