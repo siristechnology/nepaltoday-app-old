@@ -7,7 +7,7 @@ import { textStyle } from '../../../components/common'
 import MetricComponent from './metric.component'
 
 const StatsComponent = (props) => {
-	const { style, hint, value, icon, themedStyle, statMetric } = props
+	const { themedStyle, statMetric } = props
 
 	return (
 		<Card>
