@@ -12,7 +12,7 @@ export default MetricComponent = (props) => {
 
 	let formattedNumber = numberFormatter({ round: 0 })(newValue)
 
-	if (isNumbersInK) formattedNumber += ' K'
+	if (isNumbersInK) formattedNumber += 'K'
 	return (
 		<View {...viewProps} style={[styles.container, style]}>
 			<Text category="h5">{formattedNumber}</Text>
