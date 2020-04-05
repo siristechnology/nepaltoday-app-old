@@ -25,6 +25,7 @@
 		"appcenter": "^3.0.0",
 		"appcenter-analytics": "^3.0.0",
 		"appcenter-crashes": "^3.0.0",
+		"format-number": "^3.0.0",
 		"graphql": "^14.6.0",
 		"jetifier": "^1.6.5",
 		"moment": "2.24.0",

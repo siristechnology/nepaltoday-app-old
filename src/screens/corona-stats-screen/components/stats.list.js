@@ -1,17 +1,21 @@
 import React from 'react'
 import { RefreshControl } from 'react-native'
-import { Layout, List } from 'react-native-ui-kitten/ui'
+import { Layout, List, Text } from 'react-native-ui-kitten/ui'
 import { withStyles } from 'react-native-ui-kitten/theme'
 
 import StatsCard from './stats.card'
+import { getRelativeTime } from '../../../helper/time'
 
 const StatsListComponent = ({ stats, themedStyle, handleRefresh }) => {
 	const renderItem = (statMetrics) => {
 		return <StatsCard style={themedStyle.item} statMetric={statMetrics.item} />
 	}
 
+	const lastUpdated = getRelativeTime(stats.createdDate)
+
 	return (
 		<Layout style={themedStyle.container} level="2">
+			<Text style={{ paddingBottom: 4 }}>अन्तिम अपडेट गरिएको : {lastUpdated}</Text>
 			<List
 				data={stats.stats}
 				renderItem={renderItem}
