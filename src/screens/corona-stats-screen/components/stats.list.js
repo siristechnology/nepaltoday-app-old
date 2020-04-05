@@ -33,12 +33,12 @@ const StatsListComponent = ({ stats, themedStyle, handleRefresh }) => {
 
 export default StatsList = withStyles(StatsListComponent, (theme) => ({
 	container: {
-		paddingVertical: 8,
 		backgroundColor: theme['background-basic-color-2'],
+		paddingBottom: 72,
 	},
 	headerStyle: {
 		alignItems: 'center',
-		paddingTop: 4,
+		paddingTop: 8,
 		paddingBottom: 6,
 		marginBottom: 4,
 		backgroundColor: theme['background-basic-color-1'],
