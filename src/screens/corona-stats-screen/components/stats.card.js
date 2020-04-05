@@ -9,7 +9,7 @@ const StatsComponent = (props) => {
 	const { themedStyle, statMetric } = props
 
 	return (
-		<Card style={{ borderWidth: 0 }}>
+		<Card style={themedStyle.container}>
 			<View>
 				<View style={themedStyle.headingContainer}>
 					<Text category="h5" style={{ fontWeight: 'bold' }}>
@@ -28,6 +28,11 @@ const StatsComponent = (props) => {
 }
 
 export default StatsCard = withStyles(StatsComponent, (theme) => ({
+	container: {
+		borderWidth: 1,
+		margin: 4,
+		borderRadius: 6,
+	},
 	headingContainer: {
 		paddingBottom: 5,
 		marginBottom: 5,
