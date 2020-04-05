@@ -12,7 +12,9 @@ const StatsComponent = (props) => {
 		<Card style={{ borderWidth: 0 }}>
 			<View>
 				<View style={themedStyle.headingContainer}>
-					<Text category="h6">{statMetric.country}</Text>
+					<Text category="h5" style={{ fontWeight: 'bold' }}>
+						{statMetric.country}
+					</Text>
 				</View>
 				<View style={themedStyle.metricsContainer}>
 					<MetricComponent hint="Total Cases" value={statMetric.total_cases} />
@@ -27,7 +29,6 @@ const StatsComponent = (props) => {
 
 export default StatsCard = withStyles(StatsComponent, (theme) => ({
 	headingContainer: {
-		alignItems: 'center',
 		paddingBottom: 5,
 		marginBottom: 5,
 		borderBottomWidth: 1,

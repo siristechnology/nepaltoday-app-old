@@ -15,7 +15,9 @@ const StatsListComponent = ({ stats, themedStyle, handleRefresh }) => {
 
 	return (
 		<Layout style={themedStyle.container} level="2">
-			<Text style={{ paddingBottom: 4 }}>अन्तिम अपडेट गरिएको : {lastUpdated}</Text>
+			<Text appearance="hint" style={{ paddingBottom: 4 }}>
+				अन्तिम अपडेट गरिएको : {lastUpdated}
+			</Text>
 			<List
 				data={stats.stats}
 				renderItem={renderItem}
