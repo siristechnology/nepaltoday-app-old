@@ -7,7 +7,7 @@
 
 ## Latest screenshot
 
-<img src="assets/images/screenshot.jpg" alt="drawing" height="400" />
+<img src="assets/images/screenshot-2.png" alt="drawing" height="400" />
 
 ## How to Run locally
 
