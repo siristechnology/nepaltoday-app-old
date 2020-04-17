@@ -55,9 +55,18 @@ input TweetCriteria {
 	lastQueryDate: String
 }
 
+type WeatherInfo {
+	ipAddress: String
+	temperature: Float!
+	condition: String
+	description: String
+	place: String
+}
+
 type Query {
 	getArticles(criteria: ArticleCriteria): [Article]!
 	getTweets(criteria: TweetCriteria): [Tweet]!
+	getWeatherInfo: WeatherInfo!
 }
 
 type Gcm {
