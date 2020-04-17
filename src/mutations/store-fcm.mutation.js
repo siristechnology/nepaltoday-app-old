@@ -13,11 +13,9 @@ const gcmMutation = graphql`
 `
 
 export const storeFcmToken = (data = {}) => {
-	const onSuccess = data => {
-		console.log('_______________on success data_______________', data)
-	}
+	const onSuccess = () => {}
 
-	const onError = error => {
+	const onError = (error) => {
 		console.log('_______________on error _______________', error)
 	}
 	const variables = {

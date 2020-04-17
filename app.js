@@ -23,15 +23,10 @@ class App extends Component {
 	componentDidMount() {
 		SplashScreen.hide()
 
-		fcmService.register(
-			this.onRegister,
-			this.onNotification,
-			this.onOpenNotification,
-		)
+		fcmService.register(this.onRegister, this.onNotification, this.onOpenNotification)
 	}
 
 	onRegister(token) {
-		console.log('[NotificationFCM] onRegister:', token)
 		storeFcmToken({
 			fcmToken: token,
 			countryCode: RNLocalize.getCountry(),
@@ -40,7 +35,6 @@ class App extends Component {
 	}
 
 	onNotification(notify) {
-		console.log('[NotificationFCM] onNotification: ', notify)
 		//For Android
 		const channelObj = {
 			channelId: 'SampleChannelId',
@@ -62,7 +56,6 @@ class App extends Component {
 	}
 
 	onOpenNotification(notify) {
-		console.log('[NotificationFCM] onOpenNotification: ', notify)
 		fetch(NEPALTODAY_SERVER, {
 			method: 'POST',
 			headers: {
@@ -86,9 +79,8 @@ class App extends Component {
                 `,
 			}),
 		})
-			.then(res => res.json())
-			.then(articleJson => {
-				console.log('article', articleJson.data.getArticle)
+			.then((res) => res.json())
+			.then((articleJson) => {
 				let article = articleJson.data.getArticle
 				NavigationService.navigate('ArticleDetail', { article })
 			})
@@ -100,10 +92,8 @@ class App extends Component {
 					<StatusBar barStyle="light-content" />
 					<ErrorBoundary>
 						<AppContainer
-							ref={navigatorRef => {
-								NavigationService.setTopLevelNavigator(
-									navigatorRef,
-								)
+							ref={(navigatorRef) => {
+								NavigationService.setTopLevelNavigator(navigatorRef)
 							}}
 						/>
 					</ErrorBoundary>

@@ -4,57 +4,52 @@ import AsyncStorage from '@react-native-community/async-storage'
 class FCMService {
 	register = (onRegister, onNotification, onOpenNotification) => {
 		this.checkPermission(onRegister)
-		this.createNotificationListeners(
-			onRegister,
-			onNotification,
-			onOpenNotification,
-		)
+		this.createNotificationListeners(onRegister, onNotification, onOpenNotification)
 	}
 
-	checkPermission = onRegister => {
+	checkPermission = (onRegister) => {
 		firebase
 			.messaging()
 			.hasPermission()
-			.then(enabled => {
+			.then((enabled) => {
 				if (enabled) {
 					this.getToken(onRegister)
 				} else {
 					this.requestPermission(onRegister)
 				}
 			})
-			.catch(error => console.log('Permission rejected', error))
+			.catch((error) => console.log('Permission rejected', error))
 	}
 
-	getToken = onRegister => {
-		AsyncStorage.getItem('fcmToken').then(token => {
+	getToken = (onRegister) => {
+		AsyncStorage.getItem('fcmToken').then((token) => {
 			if (token) {
-				console.log('Token From AsyncStorage:',token)
 				onRegister(token)
 			} else {
 				firebase
 					.messaging()
 					.getToken()
-					.then(fcmToken => {
+					.then((fcmToken) => {
 						if (fcmToken) {
-							AsyncStorage.setItem('fcmToken',fcmToken)
+							AsyncStorage.setItem('fcmToken', fcmToken)
 							onRegister(fcmToken)
 						} else {
 							console.log('User does not have a device token')
 						}
 					})
-					.catch(error => console.log('getToken rejected', error))
+					.catch((error) => console.log('getToken rejected', error))
 			}
 		})
 	}
 
-	requestPermission = onRegister => {
+	requestPermission = (onRegister) => {
 		firebase
 			.messaging()
 			.requestPermission()
 			.then(() => {
 				this.getToken(onRegister)
 			})
-			.catch(error => {
+			.catch((error) => {
 				console.log('Request Permission rejected', error)
 			})
 	}
@@ -63,53 +58,43 @@ class FCMService {
 		firebase
 			.messaging()
 			.deleteToken()
-			.catch(error => {
+			.catch((error) => {
 				console.log('Delete token error', error)
 			})
 	}
 
-	createNotificationListeners = (
-		onRegister,
-		onNotification,
-		onOpenNotification,
-	) => {
+	createNotificationListeners = (onRegister, onNotification, onOpenNotification) => {
 		//Triggered when a particular notification has been received in foreground
-		this.notificationListener = firebase
-			.notifications()
-			.onNotification(notification => {
-				onNotification(notification)
-			})
+		this.notificationListener = firebase.notifications().onNotification((notification) => {
+			onNotification(notification)
+		})
 
 		//If your app is in background
-		this.notificationOpenedListener = firebase
-			.notifications()
-			.onNotificationOpened(notificationOpened => {
-				onOpenNotification(notificationOpened)
-			})
+		this.notificationOpenedListener = firebase.notifications().onNotificationOpened((notificationOpened) => {
+			onOpenNotification(notificationOpened)
+		})
 
 		//If your app is closed, you can check if it was opened by a notification
 		//being clicked / tapped / opened
 		firebase
 			.notifications()
 			.getInitialNotification()
-			.then(notificationOpen => {
+			.then((notificationOpen) => {
 				if (notificationOpen) {
 					onOpenNotification(notificationOpen)
 				}
 			})
 
 		//Triggered for data only payload in foreground
-		this.messageListener = firebase.messaging().onMessage(message => {
+		this.messageListener = firebase.messaging().onMessage((message) => {
 			onNotification(message)
 		})
 
 		// Triggered when have new token
-		this.onTokenRefreshListener = firebase
-			.messaging()
-			.onTokenRefresh(fcmToken => {
-				console.log('New Token Refresh: ', fcmToken)
-				onRegister(fcmToken)
-			})
+		this.onTokenRefreshListener = firebase.messaging().onTokenRefresh((fcmToken) => {
+			console.log('New Token Refresh: ', fcmToken)
+			onRegister(fcmToken)
+		})
 	}
 
 	unRegister = () => {
@@ -119,7 +104,7 @@ class FCMService {
 		this.onTokenRefreshListener()
 	}
 
-	buildChannel = obj => {
+	buildChannel = (obj) => {
 		return new firebase.notifications.Android.Channel(
 			obj.channelId,
 			obj.channelName,
@@ -127,7 +112,7 @@ class FCMService {
 		).setDescription(obj.channelDes)
 	}
 
-	buildNotification = obj => {
+	buildNotification = (obj) => {
 		//For Android
 		firebase.notifications().android.createChannel(obj.channel)
 
@@ -144,9 +129,7 @@ class FCMService {
 				// .android.setLargeIcon(obj.largeIcon)
 				// .android.setSmallIcon(obj.smallIcon)
 				// .android.setColor(obj.colorBgIcon)
-				.android.setPriority(
-					firebase.notifications.Android.Priority.High,
-				)
+				.android.setPriority(firebase.notifications.Android.Priority.High)
 				.android.setVibrate(obj.vibrate)
 				.android.setAutoCancel(true)
 		)
@@ -167,17 +150,15 @@ class FCMService {
 		})
 	}
 
-	displayNotification = notification => {
+	displayNotification = (notification) => {
 		firebase
 			.notifications()
 			.displayNotification(notification)
-			.catch(error => console.log('Display Notification error: ', error))
+			.catch((error) => console.log('Display Notification error: ', error))
 	}
 
-	removeDeliveredNotification = notification => {
-		firebase
-			.notifications()
-			.removeDeliveredNotification(notification.notificationId)
+	removeDeliveredNotification = (notification) => {
+		firebase.notifications().removeDeliveredNotification(notification.notificationId)
 	}
 }
 
