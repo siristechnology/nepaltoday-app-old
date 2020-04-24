@@ -16,13 +16,13 @@
 -   Install concurrently globally. `yarn global add concurrently`
 -   Run Android emulator. (from Android Studio or Genymotion)
 -   Compile Relay Graphql. `yarn relay`
--   Run the app. `yarn start:dev`
+-   Run the app. `yarn start`
 
 ## Tips
 
 -   Run `yarn relay` to compile graphql in relay. [It needs to be compiled before running the app]
--   Run the app using concurrently. `yarn start:dev`
--   Run `yarn a` to run the app in android without concurrently
+-   Run the app using concurrently. `yarn start`
+-   Run `react-native run-android --variant unsigneddebug` to run the app in android without concurrently
 -   Run `yarn refresh` to reload android app quickly without rebuilding
 -   Run `yarn reset` to reset package manager cache
 -   Run `adb uninstall com.siristechnology.nepaltodayapp` to uninstall app from the android simulator
