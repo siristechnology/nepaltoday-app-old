@@ -1,6 +1,6 @@
 /**
  * @flow
- * @relayHash 5a4c8c9913f0e5f1d3b72e89658fbe17
+ * @relayHash 5f662456480aab80e1066791afd62369
  */
 
 /* eslint-disable */
@@ -26,13 +26,7 @@ export type homeScreenQueryResponse = {|
       +name: ?string,
       +logoLink: ?string,
     |},
-  |}>,
-  +getWeatherInfo: {|
-    +temperature: number,
-    +condition: ?string,
-    +description: ?string,
-    +place: ?string,
-  |},
+  |}>
 |};
 export type homeScreenQuery = {|
   variables: homeScreenQueryVariables,
@@ -58,12 +52,6 @@ query homeScreenQuery {
       name
       logoLink
     }
-  }
-  getWeatherInfo {
-    temperature
-    condition
-    description
-    place
   }
 }
 */
@@ -170,45 +158,6 @@ v1 = [
         ]
       }
     ]
-  },
-  {
-    "kind": "LinkedField",
-    "alias": null,
-    "name": "getWeatherInfo",
-    "storageKey": null,
-    "args": null,
-    "concreteType": "WeatherInfo",
-    "plural": false,
-    "selections": [
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "temperature",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "condition",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "description",
-        "args": null,
-        "storageKey": null
-      },
-      {
-        "kind": "ScalarField",
-        "alias": null,
-        "name": "place",
-        "args": null,
-        "storageKey": null
-      }
-    ]
   }
 ];
 return {
@@ -231,12 +180,12 @@ return {
     "operationKind": "query",
     "name": "homeScreenQuery",
     "id": null,
-    "text": "query homeScreenQuery {\n  getArticles {\n    _id\n    title\n    shortDescription\n    content\n    link\n    imageLink\n    publishedDate\n    modifiedDate\n    category\n    source {\n      _id\n      name\n      logoLink\n    }\n  }\n  getWeatherInfo {\n    temperature\n    condition\n    description\n    place\n  }\n}\n",
+    "text": "query homeScreenQuery {\n  getArticles {\n    _id\n    title\n    shortDescription\n    content\n    link\n    imageLink\n    publishedDate\n    modifiedDate\n    category\n    source {\n      _id\n      name\n      logoLink\n    }\n  }\n}\n",
     "metadata": {}
   }
 };
 })();
 // prettier-ignore
-(node/*: any*/).hash = '22a3265ca62205b453c61c672dcb88a2';
+(node/*: any*/).hash = '07c33419d36a5183f797d2bfa88c9a36';
 
 module.exports = node;

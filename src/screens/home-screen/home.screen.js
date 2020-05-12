@@ -56,13 +56,6 @@ const Home = ({ navigation }) => {
 							logoLink
 						}
 					}
-
-					getWeatherInfo {
-						temperature
-						condition
-						description
-						place
-					}
 				}
 			`}
 			variables={{
@@ -83,7 +76,7 @@ const Home = ({ navigation }) => {
 					<AppLayout>
 						<View style={style.headerStyle}>
 							<Text style={style.textStyle}>{nepaliDate}</Text>
-							<Weather weather={data.getWeatherInfo} />
+							<Weather />
 						</View>
 						<ArticleListContainer navigation={navigation} articles={data} handleRefresh={handleRefresh} />
 					</AppLayout>
