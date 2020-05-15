@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { StyleSheet, View, Text } from 'react-native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import { convertToNepaliDigit } from '../helper/utils'
+import { convertToNepaliDigit } from '../../../helper/utils'
 
 export const FETCH_WEATHER_INFO_QUERY = gql`
 	query getWeatherInfo {
@@ -17,7 +17,7 @@ export const FETCH_WEATHER_INFO_QUERY = gql`
 `
 
 const Weather = () => {
-	const { loading, error, data } = useQuery(FETCH_WEATHER_INFO_QUERY, {
+	const { loading, data } = useQuery(FETCH_WEATHER_INFO_QUERY, {
 		variables: {},
 	})
 

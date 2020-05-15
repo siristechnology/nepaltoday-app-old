@@ -9,6 +9,7 @@ const ArticleListComponent = ({
 	articles,
 	onItemPress,
 	themedStyle,
+	refreshing,
 	handleRefresh,
 }) => {
 	const _onItemPress = article => {
@@ -23,12 +24,14 @@ const ArticleListComponent = ({
 			/>
 		)
 	}
+
 	return (
 		<List
 			contentContainerStyle={themedStyle.container}
 			data={articles.getArticles}
 			renderItem={renderItem}
 			keyExtractor={item => item._id}
+			refreshing={refreshing}
 			refreshControl={
 				<RefreshControl
 					colors={['#0000ff', '#689F38']}
