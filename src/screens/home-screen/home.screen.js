@@ -1,6 +1,6 @@
-import { AppState, Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View } from 'react-native'
 import Analytics from 'appcenter-analytics'
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import AppLayout from '../../frame/app-layout'

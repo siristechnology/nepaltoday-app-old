@@ -3,11 +3,10 @@ import ScrollableTabView, {
 	ScrollableTabBar,
 } from 'react-native-scrollable-tab-view'
 import { Text } from 'react-native-ui-kitten/ui'
-import React, { useEffect, useState } from 'react'
-import { QueryRenderer, graphql } from 'react-relay'
-
+import React, { useState } from 'react'
+import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks'
 import { en } from '../../lang/en'
-import environment from '../../environment'
 import { getLocalName } from '../../helper/text'
 import { OfflineNotice } from '../../components'
 import { CircularSpinner } from '../../components/common'
@@ -15,95 +14,91 @@ import { HealineListContainer } from '../../layout/headline'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
+export const GET_ARTICLES_QUERY = gql`
+	query homeScreenQuery {
+		getArticles {
+			_id
+			title
+			shortDescription
+			content
+			link
+			imageLink
+			publishedDate
+			modifiedDate
+			category
+			source {
+				_id
+				name
+				logoLink
+			}
+		}
+	}
+`
+
 const HeadlineScreen = ({ navigation }) => {
-	const [refreshCounter, setRefreshCounter] = useState(0)
+	const [refreshing, setRefreshing] = useState(false);
 
 	const handleRefresh = () => {
-		setRefreshCounter(refreshCounter + 1)
+		setRefreshing(true);
+		refetch().then(() => setRefreshing(false));
 	}
 
-	const renderQuery = ({ error, props }) => {
-		if (!props) {
-			return <CircularSpinner />
-		} else if (error) {
-			console.log('error:' + JSON.stringify(error))
-			throw new Error(`Error occured here ${JSON.stringify(error)}`)
-		}
+	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
+		variables: {},
+	})
 
-		const renderTab = () => {
-			const tabNames = [
-				NEWS,
-				ENTERTAINMENT,
-				BUSINESS,
-				OPINION,
-				SOCIAL,
-				SPORTS,
-			]
+	if (loading) {
+		return <CircularSpinner />
+	} else if (error) {
+		console.log('error:' + JSON.stringify(error))
+		throw new Error(`Error occured here ${JSON.stringify(error)}`)
+	}
 
-			return tabNames.map((tabname, idx) => {
-				const localTabName = getLocalName(tabname)
+	const renderTab = () => {
+		const tabNames = [
+			NEWS,
+			ENTERTAINMENT,
+			BUSINESS,
+			OPINION,
+			SOCIAL,
+			SPORTS,
+		]
 
-				const dataArr = props.getArticles.filter(
-					a => a.category === tabname,
-				)
+		return tabNames.map((tabname, idx) => {
+			const localTabName = getLocalName(tabname)
 
-				if (dataArr.length <= 0) {
-					return (
-						<View tabLabel={localTabName} key={idx}>
-							<Text>Not available</Text>
-						</View>
-					)
-				}
+			const dataArr = data.getArticles.filter(
+				a => a.category === tabname,
+			)
 
+			if (dataArr.length <= 0) {
 				return (
 					<View tabLabel={localTabName} key={idx}>
-						<OfflineNotice />
-						<HealineListContainer
-							articles={dataArr}
-							navigation={navigation}
-							handleRefresh={handleRefresh}
-						/>
+						<Text>Not available</Text>
 					</View>
 				)
-			})
-		}
+			}
 
-		return (
-			<ScrollableTabView
-				initialPage={0}
-				renderTabBar={() => <ScrollableTabBar />}>
-				{renderTab()}
-			</ScrollableTabView>
-		)
+			return (
+				<View tabLabel={localTabName} key={idx}>
+					<OfflineNotice />
+					<HealineListContainer
+						articles={dataArr}
+						navigation={navigation}
+						refreshing={refreshing}
+						handleRefresh={handleRefresh}
+					/>
+				</View>
+			)
+		})
 	}
+
 	return (
-		<QueryRenderer
-			environment={environment}
-			query={graphql`
-				query headlineScreenQuery {
-					getArticles {
-						_id
-						title
-						shortDescription
-						content
-						link
-						imageLink
-						publishedDate
-						modifiedDate
-						category
-						source {
-							_id
-							name
-							logoLink
-						}
-					}
-				}
-			`}
-			variables={{
-				refreshCounter,
-			}}
-			render={renderQuery}
-		/>
+		<ScrollableTabView
+			initialPage={0}
+			renderTabBar={() => <ScrollableTabBar />}>
+			{renderTab()}
+		</ScrollableTabView>
 	)
 }
 

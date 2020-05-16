@@ -56,12 +56,9 @@
 		"react-navigation-stack": "2.3.1",
 		"react-navigation-tabs": "2.8.4",
 		"react-redux": "^7.2.0",
-		"react-relay": "^9.0.0",
 		"redux": "^4.0.5",
 		"redux-logger": "^3.0.6",
 		"redux-saga": "^1.0.1",
-		"relay-compiler": "^9.0.0",
-		"relay-runtime": "^9.0.0",
 		"styled-components": "^5.0.1"
 	},
 	"devDependencies": {
