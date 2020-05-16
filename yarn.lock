@@ -2338,7 +2338,7 @@ babel-plugin-jest-hoist@^25.1.0:
   dependencies:
     "@types/babel__traverse" "^7.0.6"
 
-babel-plugin-macros@2.8.0, babel-plugin-macros@^2.0.0:
+babel-plugin-macros@2.8.0:
   version "2.8.0"
   resolved "https://registry.yarnpkg.com/babel-plugin-macros/-/babel-plugin-macros-2.8.0.tgz#0f958a7cc6556b1e65344465d99111a1e5e10138"
   integrity sha512-SEP5kJpfGYqYKpBrj5XU3ahw5p5GOHJ0U5ssOSQ/WBVdwkD2Dzlce95exQTs3jOVWPPKLBN2rlEWkCK7dSmLvg==
@@ -2364,13 +2364,6 @@ babel-plugin-react-transform@^3.0.0:
   integrity sha512-4vJGddwPiHAOgshzZdGwYy4zRjjIr5SMY7gkOaCyIASjgpcsyLTlZNuB5rHOFoaTvGlhfo8/g4pobXPyHqm/3w==
   dependencies:
     lodash "^4.6.1"
-
-babel-plugin-relay@^9.0.0:
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/babel-plugin-relay/-/babel-plugin-relay-9.0.0.tgz#05b25bb7296151a9c7c91338a8e71f7d95a83b64"
-  integrity sha512-2v+7fPI8Iv/MKcutAma8iryVGkwe5Hfmb6rIo0B9USZpMnOYS3TamCq8SwaQLBR5R9RrkbHsx5vxz2cUvhSeOg==
-  dependencies:
-    babel-plugin-macros "^2.0.0"
 
 "babel-plugin-styled-components@>= 1":
   version "1.10.7"
