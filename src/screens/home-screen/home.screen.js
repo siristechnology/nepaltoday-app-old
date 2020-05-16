@@ -31,40 +31,22 @@ export const GET_ARTICLES_QUERY = gql`
 `
 
 const Home = ({ navigation }) => {
-	// const [isUpdated, setUpdated] = useState(false)
-	// const [appState, setAppState] = useState(AppState.currentState)
 	const [nepaliDate, setNepaliDate] = useState('')
-
 	const [refreshing, setRefreshing] = useState(false);
 
 	const handleRefresh = () => {
-		console.log('printing handleRefresh', handleRefresh);
-
 		setRefreshing(true);
 		refetch().then(() => setRefreshing(false));
 	}
 
-	// const updateAppState = (nextAppState) => {
-	// 	if (appState.match(/inactive|background/) && nextAppState === 'active') {
-	// 		handleRefresh()
-	// 	}
-	// 	setAppState(nextAppState)
-	// }
-
 	useEffect(() => {
 		Analytics.trackEvent('Home page loaded')
-		// AppState.addEventListener('change', updateAppState)
 		setNepaliDate(getFormattedCurrentNepaliDate())
-		// return () => {
-		// 	AppState.removeEventListener('change', updateAppState)
-		// }
 	}, [])
 
 	const { loading, data, refetch } = useQuery(GET_ARTICLES_QUERY, {
 		variables: {},
 	})
-
-	console.log('refetching data')
 
 	if (!loading) {
 		return (

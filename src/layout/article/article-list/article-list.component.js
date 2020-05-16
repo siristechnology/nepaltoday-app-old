@@ -31,11 +31,11 @@ const ArticleListComponent = ({
 			data={articles.getArticles}
 			renderItem={renderItem}
 			keyExtractor={item => item._id}
-			refreshing={refreshing}
 			refreshControl={
 				<RefreshControl
-					colors={['#0000ff', '#689F38']}
+					refreshing={refreshing}
 					onRefresh={handleRefresh}
+					colors={['#0000ff', '#689F38']}
 				/>
 			}
 		/>
