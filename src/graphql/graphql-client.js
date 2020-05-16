@@ -43,9 +43,11 @@ const client = new ApolloClient({
 	link: ApolloLink.from([
 		onError(({ graphQLErrors, networkError }) => {
 			if (graphQLErrors) {
+				console.log('printing graphQLErrors', graphQLErrors);
 				// sendToLoggingService(graphQLErrors)
 			}
 			if (networkError) {
+				console.log('printing networkError', networkError);
 				// logoutUser()
 			}
 		}),

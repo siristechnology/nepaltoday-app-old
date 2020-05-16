@@ -9,27 +9,6 @@ import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
 
-export const GET_ARTICLES_QUERY = gql`
-	query homeScreenQuery {
-		getArticles {
-			_id
-			title
-			shortDescription
-			content
-			link
-			imageLink
-			publishedDate
-			modifiedDate
-			category
-			source {
-				_id
-				name
-				logoLink
-			}
-		}
-	}
-`
-
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
 	const [refreshing, setRefreshing] = useState(false);
@@ -66,6 +45,27 @@ const Home = ({ navigation }) => {
 		)
 	}
 }
+
+export const GET_ARTICLES_QUERY = gql`
+	query homeScreenQuery {
+		getArticles {
+			_id
+			title
+			shortDescription
+			content
+			link
+			imageLink
+			publishedDate
+			modifiedDate
+			category
+			source {
+				_id
+				name
+				logoLink
+			}
+		}
+	}
+`
 
 const style = StyleSheet.create({
 	headerStyle: {
