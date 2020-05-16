@@ -5,6 +5,7 @@ import { ArticleList } from './article-list.component'
 export const ArticleListContainer = ({
 	navigation,
 	articles,
+	refreshing,
 	handleRefresh,
 }) => {
 	const onItemPress = article => {
@@ -15,6 +16,7 @@ export const ArticleListContainer = ({
 		<ArticleList
 			articles={articles}
 			onItemPress={onItemPress}
+			refreshing={refreshing}
 			handleRefresh={handleRefresh}
 		/>
 	)

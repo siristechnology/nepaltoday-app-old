@@ -1,40 +1,41 @@
+import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
 import { StatusBar } from 'react-native'
-import React, { Component } from 'react'
 import SplashScreen from 'react-native-splash-screen'
+import { ApplicationProvider } from 'react-native-ui-kitten'
+import { mapping, light as lightTheme } from '@eva-design/eva'
+import * as RNLocalize from 'react-native-localize'
+import gql from 'graphql-tag'
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 
 import { store } from './src/store'
 import AppContainer from './src/frame/app-container'
 import ErrorBoundary from './src/error/error-boundry'
-import { ApplicationProvider } from 'react-native-ui-kitten'
-
-import * as RNLocalize from 'react-native-localize'
-
-/* diable-eslint-line */
-import { mapping, light as lightTheme } from '@eva-design/eva'
-import { storeFcmToken } from './src/mutations/store-fcm.mutation'
-
 import { fcmService } from './src/services/FCMService'
 import NavigationService from './src/services/navigationService'
 
-import { NEPALTODAY_SERVER } from 'react-native-dotenv'
+const App = () => {
+	const [storeFcmToken, { error }] = useMutation(STORE_FCM_MUTATION)
+	const client = useApolloClient()
 
-class App extends Component {
-	componentDidMount() {
-		SplashScreen.hide()
-
-		fcmService.register(this.onRegister, this.onNotification, this.onOpenNotification)
-	}
-
-	onRegister(token) {
+	onRegister = (token) => {
 		storeFcmToken({
-			fcmToken: token,
-			countryCode: RNLocalize.getCountry(),
-			timeZone: RNLocalize.getTimeZone(),
-		})
+			variables: {
+				input: {
+					fcmToken: token,
+					countryCode: RNLocalize.getCountry(),
+					timeZone: RNLocalize.getTimeZone(),
+				},
+			},
+		}).catch((reason) => console.log(reason))
 	}
 
-	onNotification(notify) {
+	useEffect(() => {
+		SplashScreen.hide()
+		fcmService.register(onRegister, onNotification, onOpenNotification)
+	}, [])
+
+	onNotification = (notify) => {
 		//For Android
 		const channelObj = {
 			channelId: 'SampleChannelId',
@@ -55,52 +56,67 @@ class App extends Component {
 		fcmService.displayNotification(notification)
 	}
 
-	onOpenNotification(notify) {
-		fetch(NEPALTODAY_SERVER, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify({
-				query: `{
-                  getArticle(_id: "${notify.notification.data._id}") {
-                    title,
-                    content,
-                    imageLink,
-                    shortDescription,
-                    publishedDate,
-                    link,
-                    source {
-                    logoLink,
-                    name
-                     }
-                  }
-				}
-                `,
-			}),
-		})
-			.then((res) => res.json())
-			.then((articleJson) => {
-				let article = articleJson.data.getArticle
-				NavigationService.navigate('ArticleDetail', { article })
+	onOpenNotification = async (notify) => {
+		const { data, errors } = await client
+			.query({
+				query: GET_ARTICLE_QUERY,
+				variables: { _id: notify.notification.data._id },
 			})
+			.catch((reason) => console.log('printing reason', reason))
+
+		if (errors) console.log('printing errors', errors)
+		NavigationService.navigate('ArticleDetail', { article: data.getArticle })
 	}
-	render() {
-		return (
-			<ApplicationProvider mapping={mapping} theme={lightTheme}>
-				<Provider store={store}>
-					<StatusBar barStyle="light-content" />
-					<ErrorBoundary>
-						<AppContainer
-							ref={(navigatorRef) => {
-								NavigationService.setTopLevelNavigator(navigatorRef)
-							}}
-						/>
-					</ErrorBoundary>
-				</Provider>
-			</ApplicationProvider>
-		)
+
+	if (error) {
+		console.log('error:' + JSON.stringify(error))
 	}
+
+	return (
+		<ApplicationProvider mapping={mapping} theme={lightTheme}>
+			<Provider store={store}>
+				<StatusBar barStyle="light-content" />
+				<ErrorBoundary>
+					<AppContainer
+						ref={(navigatorRef) => {
+							NavigationService.setTopLevelNavigator(navigatorRef)
+						}}
+					/>
+				</ErrorBoundary>
+			</Provider>
+		</ApplicationProvider>
+	)
 }
+
+const STORE_FCM_MUTATION = gql`
+	mutation storeFcmMutation($input: StoreFcmInput!) {
+		storeFcmToken(input: $input) {
+			fcmToken
+			countryCode
+			timeZone
+		}
+	}
+`
+
+const GET_ARTICLE_QUERY = gql`
+	query articleQuery($_id: String!) {
+		getArticle(_id: $_id) {
+			_id
+			title
+			shortDescription
+			content
+			link
+			imageLink
+			publishedDate
+			modifiedDate
+			category
+			source {
+				_id
+				name
+				logoLink
+			}
+		}
+	}
+`
 
 export default App
