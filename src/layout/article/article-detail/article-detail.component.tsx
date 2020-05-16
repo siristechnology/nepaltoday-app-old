@@ -108,6 +108,7 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 		paddingVertical: 4,
 	},
 	dateContainer: {
+		marginTop: 2,
 		flexDirection: 'row',
 		alignItems: 'center',
 	},
@@ -136,8 +137,9 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 		fontSize: 18,
 	},
 	dateIcon: {
-		width: 16,
-		height: 16,
+		width: 13,
+		height: 13,
+		marginBottom: 2,
 		tintColor: theme['text-hint-color'],
 	},
 	dateLabel: {

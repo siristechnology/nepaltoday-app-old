@@ -8,39 +8,28 @@ import { ArticleActivityBar } from '../../components/articles'
 import { ClockIconOutline } from '../../assets/icons'
 import { getRelativeTime } from '../../helper/time'
 
-const TwitterListItemComponent = props => {
+const TwitterListItemComponent = (props) => {
 	const { style, themedStyle, tweet, ...restProps } = props
 	const handlePress = () => {
 		const handle = tweet.handle || tweet.twitterHandle.handle
 		const link = `https://twitter.com/${handle}/status/${tweet.tweetId}`
-		Linking.openURL(link).catch(error => {
+		Linking.openURL(link).catch((error) => {
 			throw new Error('Error opening twitter' + error)
 		})
 	}
 
 	return (
-		<TouchableOpacity
-			activeOpacity={0.95}
-			{...restProps}
-			style={[themedStyle.container]}
-			onPress={handlePress}>
+		<TouchableOpacity activeOpacity={0.95} {...restProps} style={[themedStyle.container]} onPress={handlePress}>
 			<View style={themedStyle.tweetWrapper}>
 				<View style={themedStyle.leftWrapper}>
-					<Avatar
-						source={{ uri: tweet.profileImage }}
-						style={themedStyle.avatar}
-						size="giant"
-					/>
+					<Avatar source={{ uri: tweet.profileImage }} style={themedStyle.avatar} size="giant" />
 				</View>
 				<View style={themedStyle.rightWrapper}>
 					<View style={themedStyle.headerWrapper}>
 						<Text style={themedStyle.titleLabel} category="h6">
 							{tweet.name}
 						</Text>
-						<Text
-							style={themedStyle.descriptionLabel}
-							appearance="hint"
-							category="s1">
+						<Text style={themedStyle.descriptionLabel} appearance="hint" category="s1">
 							{tweet.twitterHandle.handle}
 						</Text>
 					</View>
@@ -50,10 +39,7 @@ const TwitterListItemComponent = props => {
 					<ArticleActivityBar style={themedStyle.detailsContainer}>
 						<View style={themedStyle.dateContainer}>
 							{ClockIconOutline(themedStyle.dateIcon)}
-							<Text
-								style={themedStyle.dateLabel}
-								appearance="hint"
-								category="p2">
+							<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
 								{getRelativeTime(tweet.publishedDate)}
 							</Text>
 						</View>
@@ -64,7 +50,7 @@ const TwitterListItemComponent = props => {
 	)
 }
 
-export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
+export const TwitterListItem = withStyles(TwitterListItemComponent, (theme) => ({
 	container: {
 		marginVertical: 1,
 		backgroundColor: '#FFFFFF',
@@ -108,12 +94,13 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, theme => ({
 		marginTop: 4,
 	},
 	dateLabel: {
-		marginLeft: 4,
+		marginLeft: 2,
 		...textStyle.paragraph,
 	},
 	dateIcon: {
-		width: 16,
-		height: 16,
+		width: 13,
+		height: 13,
+		marginBottom: 2,
 		tintColor: theme['text-hint-color'],
 	},
 }))
