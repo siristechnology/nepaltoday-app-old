@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Provider } from 'react-redux'
-import { StatusBar, Text } from 'react-native'
+import { StatusBar } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import { ApplicationProvider } from 'react-native-ui-kitten'
 import { mapping, light as lightTheme } from '@eva-design/eva'
