@@ -5,7 +5,7 @@ import { withStyles } from 'react-native-ui-kitten/theme'
 
 import { TwitterListItem } from './twitter-list-item.component'
 
-const TwitterListComponent = ({ tweets, themedStyle, handleRefresh }) => {
+const TwitterListComponent = ({ tweets, themedStyle, refreshing, handleRefresh }) => {
 	const renderItem = info => {
 		return <TwitterListItem style={themedStyle.item} tweet={info.item} />
 	}
@@ -18,8 +18,9 @@ const TwitterListComponent = ({ tweets, themedStyle, handleRefresh }) => {
 			keyExtractor={item => item._id}
 			refreshControl={
 				<RefreshControl
-					colors={['#0000ff', '#689F38']}
+					refreshing={refreshing}
 					onRefresh={handleRefresh}
+					colors={['#0000ff', '#689F38']}
 				/>
 			}
 		/>

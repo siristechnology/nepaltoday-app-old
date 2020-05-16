@@ -3,14 +3,14 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome5'
 import { createBottomTabNavigator } from 'react-navigation-tabs'
 
 import HomeScreen from '../home-screen/home.screen'
-// import TwitterScreen from '../twitter-screen/twitter.screen'
+import TwitterScreen from '../twitter-screen/twitter.screen'
 import HeadlineScreen from '../headline-screen/headline.screen'
 
 export const BottomTabScreen = createBottomTabNavigator(
 	{
 		Home: HomeScreen,
 		Headline: HeadlineScreen,
-		// Twitter: TwitterScreen,
+		Twitter: TwitterScreen,
 	},
 	{
 		initialRouteName: 'Home',

@@ -14,27 +14,6 @@ import { HealineListContainer } from '../../layout/headline'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
-export const GET_ARTICLES_QUERY = gql`
-	query homeScreenQuery {
-		getArticles {
-			_id
-			title
-			shortDescription
-			content
-			link
-			imageLink
-			publishedDate
-			modifiedDate
-			category
-			source {
-				_id
-				name
-				logoLink
-			}
-		}
-	}
-`
-
 const HeadlineScreen = ({ navigation }) => {
 	const [refreshing, setRefreshing] = useState(false);
 
@@ -101,5 +80,26 @@ const HeadlineScreen = ({ navigation }) => {
 		</ScrollableTabView>
 	)
 }
+
+export const GET_ARTICLES_QUERY = gql`
+	query homeScreenQuery {
+		getArticles {
+			_id
+			title
+			shortDescription
+			content
+			link
+			imageLink
+			publishedDate
+			modifiedDate
+			category
+			source {
+				_id
+				name
+				logoLink
+			}
+		}
+	}
+`
 
 export default HeadlineScreen
