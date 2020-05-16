@@ -17,11 +17,13 @@ export const FETCH_WEATHER_INFO_QUERY = gql`
 `
 
 const Weather = () => {
-	const { loading, data } = useQuery(FETCH_WEATHER_INFO_QUERY, {
+	const { loading, data, error } = useQuery(FETCH_WEATHER_INFO_QUERY, {
 		variables: {},
 	})
 
-	if (!loading) {
+	if (error) console.log('printing error', error)
+
+	if (!loading && !error && !!data.getWeatherInfo) {
 		let { temperature } = data.getWeatherInfo
 		if (!temperature) return null
 
@@ -30,13 +32,11 @@ const Weather = () => {
 		return (
 			<View style={styles.weatherContainerStyle}>
 				<FontAwesome name="cloud" size={20} />
-				<Text style={styles.weatherTextStyle}>
-					{convertToNepaliDigit(temperature)} ˚C
-			</Text>
+				<Text style={styles.weatherTextStyle}>{convertToNepaliDigit(temperature)} ˚C</Text>
 			</View>
 		)
 	} else {
-		return null;
+		return null
 	}
 }
 
