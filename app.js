@@ -6,7 +6,7 @@ import { ApplicationProvider } from 'react-native-ui-kitten'
 import { mapping, light as lightTheme } from '@eva-design/eva'
 import * as RNLocalize from 'react-native-localize'
 import gql from 'graphql-tag'
-import { useMutation, useQuery } from "@apollo/react-hooks";
+import { useMutation, useApolloClient } from '@apollo/react-hooks'
 
 import { store } from './src/store'
 import AppContainer from './src/frame/app-container'
@@ -16,6 +16,7 @@ import NavigationService from './src/services/navigationService'
 
 const App = () => {
 	const [storeFcmToken, { error }] = useMutation(STORE_FCM_MUTATION)
+	const client = useApolloClient()
 
 	onRegister = (token) => {
 		storeFcmToken({
@@ -24,8 +25,8 @@ const App = () => {
 					fcmToken: token,
 					countryCode: RNLocalize.getCountry(),
 					timeZone: RNLocalize.getTimeZone(),
-				}
-			}
+				},
+			},
 		}).catch((reason) => console.log(reason))
 	}
 
@@ -55,13 +56,16 @@ const App = () => {
 		fcmService.displayNotification(notification)
 	}
 
-	onOpenNotification = (notify) => {
-		console.log('printing notify.notification.data._id', notify.notification.data._id);
+	onOpenNotification = async (notify) => {
+		const { data, errors } = await client
+			.query({
+				query: GET_ARTICLE_QUERY,
+				variables: { _id: notify.notification.data._id },
+			})
+			.catch((reason) => console.log('printing reason', reason))
 
-		const { data } = useQuery(GET_ARTICLE_QUERY, {
-			variables: { _id: notify.notification.data._id },
-		})
-		NavigationService.navigate('ArticleDetail', { article: data.getArticles })
+		if (errors) console.log('printing errors', errors)
+		NavigationService.navigate('ArticleDetail', { article: data.getArticle })
 	}
 
 	if (error) {
@@ -96,7 +100,7 @@ const STORE_FCM_MUTATION = gql`
 
 const GET_ARTICLE_QUERY = gql`
 	query articleQuery($_id: String!) {
-		getArticles(_id: $_id) {
+		getArticle(_id: $_id) {
 			_id
 			title
 			shortDescription
