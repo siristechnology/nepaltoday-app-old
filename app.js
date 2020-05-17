@@ -47,7 +47,6 @@ const App = () => {
 			dataId: notify._notificationId,
 			title: notify._title,
 			content: notify._body,
-			sound: 'default',
 			channel: channel,
 			data: notify._data,
 			vibrate: true,

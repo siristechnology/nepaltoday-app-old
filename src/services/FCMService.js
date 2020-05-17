@@ -108,7 +108,7 @@ class FCMService {
 		return new firebase.notifications.Android.Channel(
 			obj.channelId,
 			obj.channelName,
-			firebase.notifications.Android.Importance.High,
+			firebase.notifications.Android.Importance.Default,
 		).setDescription(obj.channelDes)
 	}
 
@@ -126,10 +126,9 @@ class FCMService {
 
 				//For Android
 				.android.setChannelId(obj.channel.channelId)
-				// .android.setLargeIcon(obj.largeIcon)
-				// .android.setSmallIcon(obj.smallIcon)
-				// .android.setColor(obj.colorBgIcon)
-				.android.setPriority(firebase.notifications.Android.Priority.High)
+				.android.setLargeIcon('ic_launcher_notification_large')
+				.android.setSmallIcon('ic_launcher_foreground')
+				.android.setColor('#a60509')
 				.android.setVibrate(obj.vibrate)
 				.android.setAutoCancel(true)
 		)
