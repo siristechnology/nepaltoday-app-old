@@ -1452,6 +1452,11 @@
   dependencies:
     stacktrace-js "^2.0.0"
 
+"@react-native-firebase/messaging@^7.0.1":
+  version "7.0.1"
+  resolved "https://devtools.devergage.com:4873/@react-native-firebase%2fmessaging/-/messaging-7.0.1.tgz#b18ae2852e6a26757f7bb602e1e8253476e4ee5a"
+  integrity sha512-d3daoHOXBHIBhn3McAcfD2tvenK1auLKfAld2U51/AFTf+6KDlcAMauCFXWSjZZR3dTo0boZf3EfWCRY1khBVQ==
+
 "@react-navigation/core@^3.7.0":
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/@react-navigation/core/-/core-3.7.0.tgz#e184d1336c437828968917a21b06114c981b5035"
@@ -6860,7 +6865,7 @@ open@^6.2.0:
   dependencies:
     is-wsl "^1.1.0"
 
-opencollective-postinstall@^2.0.0, opencollective-postinstall@^2.0.1:
+opencollective-postinstall@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.2.tgz#5657f1bede69b6e33a45939b061eb53d3c6c3a89"
   integrity sha512-pVOEP16TrAO2/fjej1IdOyupJY8KDUM1CvsaScRbw6oddvpQoOfGk4ywha0HKKVAD6RkW4x6Q+tNBwhf3Bgpuw==
@@ -7354,14 +7359,6 @@ react-native-dotenv@0.2.0:
   integrity sha1-MRVRy2o1o9z+3mSL3tVcDj7OV50=
   dependencies:
     babel-plugin-dotenv "0.1.1"
-
-react-native-firebase@5.6.0:
-  version "5.6.0"
-  resolved "https://registry.yarnpkg.com/react-native-firebase/-/react-native-firebase-5.6.0.tgz#6f6123f53cb73477915dd55c55f3e1de91db38d2"
-  integrity sha512-I+o3zNLdIz4pxWTCSZH70M1BcPl+SdqKQfurOT0sWcaMSL2ecDqVy0PCTmN7ORt7/Z879Er6PLgA/psjArQlmw==
-  dependencies:
-    opencollective-postinstall "^2.0.0"
-    prop-types "^15.7.2"
 
 react-native-gesture-handler@^1.6.0:
   version "1.6.0"
