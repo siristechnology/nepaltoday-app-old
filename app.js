@@ -91,9 +91,7 @@ const App = () => {
 const STORE_FCM_MUTATION = gql`
 	mutation storeFcmMutation($input: StoreFcmInput!) {
 		storeFcmToken(input: $input) {
-			fcmToken
-			countryCode
-			timeZone
+			success
 		}
 	}
 `
