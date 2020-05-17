@@ -32,7 +32,7 @@ const TwitterListItemComponent = (props) => {
 				<TouchableOpacity style={themedStyle.leftWrapper} onPress={handleTwitterHandlePress}>
 					<Avatar source={{ uri: tweet.profileImage }} style={themedStyle.avatar} size="giant" />
 				</TouchableOpacity>
-				<TouchableOpacity style={themedStyle.rightWrapper} onPress={handleTweetPress}>
+				<View style={themedStyle.rightWrapper}>
 					<View style={themedStyle.headerWrapper}>
 						<Text style={themedStyle.titleLabel} category="h6">
 							{tweet.name}
@@ -41,9 +41,9 @@ const TwitterListItemComponent = (props) => {
 							{tweet.twitterHandle.handle}
 						</Text>
 					</View>
-					<View>
+					<TouchableOpacity onPress={handleTweetPress}>
 						<Text>{tweet.text}</Text>
-					</View>
+					</TouchableOpacity>
 					<ArticleActivityBar style={themedStyle.detailsContainer}>
 						<View style={themedStyle.dateContainer}>
 							{ClockIconOutline(themedStyle.dateIcon)}
@@ -52,7 +52,7 @@ const TwitterListItemComponent = (props) => {
 							</Text>
 						</View>
 					</ArticleActivityBar>
-				</TouchableOpacity>
+				</View>
 			</View>
 		</View>
 	)

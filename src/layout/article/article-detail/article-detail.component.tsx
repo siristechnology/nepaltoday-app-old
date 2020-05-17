@@ -17,7 +17,7 @@ interface ComponentProps {
 
 export type ArticleDetailComponentProps = ThemedComponentProps & ComponentProps
 
-class ArticleDetailComponent extends React.Component<ArticleDetailComponentProps> {
+class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentProps> {
 	public render(): React.ReactNode {
 		const { themedStyle, article } = this.props
 		const { READ_MORE } = np.public

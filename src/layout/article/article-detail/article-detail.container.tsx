@@ -5,14 +5,7 @@ interface State {
 	article
 }
 
-export default class ArticleDetailContainer extends React.Component<
-	any,
-	State
-> {
-	private onCommentPress = () => {}
-
-	private onLikePress = () => {}
-
+export default class ArticleDetailContainer extends React.PureComponent<any, State> {
 	public render(): React.ReactNode {
 		const {
 			navigation: {
@@ -22,13 +15,6 @@ export default class ArticleDetailContainer extends React.Component<
 			},
 		} = this.props
 
-		return (
-			<ArticleDetail
-				article={article}
-				onCommentPress={this.onCommentPress}
-				onLikePress={this.onLikePress}
-				navigation={this.props.navigation}
-			/>
-		)
+		return <ArticleDetail article={article} navigation={this.props.navigation} />
 	}
 }
