@@ -1,5 +1,4 @@
 import { Text, StyleSheet, View } from 'react-native'
-import Analytics from 'appcenter-analytics'
 import React, { useState, useEffect } from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
@@ -8,19 +7,20 @@ import { CircularSpinner } from '../../components/common'
 import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
+import crashlytics from '@react-native-firebase/crashlytics'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
-	const [refreshing, setRefreshing] = useState(false);
+	const [refreshing, setRefreshing] = useState(false)
 
 	const handleRefresh = () => {
-		setRefreshing(true);
-		refetch().then(() => setRefreshing(false));
+		setRefreshing(true)
+		refetch().then(() => setRefreshing(false))
 	}
 
 	useEffect(() => {
-		Analytics.trackEvent('Home page loaded')
 		setNepaliDate(getFormattedCurrentNepaliDate())
+		crashlytics().log('Home page test log.')
 	}, [])
 
 	const { loading, data, refetch } = useQuery(GET_ARTICLES_QUERY, {
