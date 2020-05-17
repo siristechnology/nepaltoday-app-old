@@ -92,8 +92,8 @@ deprecated-type=warn
 unsafe-getters-setters=warn
 inexact-spread=warn
 unnecessary-invariant=warn
-signature-verification-failure=warn
-deprecated-utility=error
+; signature-verification-failure=warn
+; deprecated-utility=error
 [strict]
 deprecated-type
 nonstrict-import
@@ -105,4 +105,4 @@ untyped-type-import
 
 
 [version]
-^0.98.0
+^0.86.0
