@@ -1,4 +1,4 @@
-name: Android Apk - Build & Release
+name: Android Apk - Github Release
 
 on: [push]
 
@@ -8,7 +8,7 @@ jobs:
 
         strategy:
             matrix:
-                node-version: [10.x]
+                node-version: [12.x]
 
         steps:
             - uses: actions/checkout@v1
@@ -47,17 +47,3 @@ jobs:
                   automatic_release_tag: 'latest'
                   title: 'Beta Build'
                   prerelease: false
-
-            - name: Build Android Bundle to upload to Google Play
-              if: github.ref == 'refs/heads/master'
-              run: yarn bundle
-
-            - name: Publish Android Bundle to Google Play Store
-              uses: r0adkll/upload-google-play@v1
-              if: github.ref == 'refs/heads/master'
-              with:
-                  # The service account json private key file to authorize the upload request
-                  serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON_PLAIN_TEXT }}
-                  packageName: 'com.siristechnology.nepaltodayapp.beta'
-                  releaseFile: android/app/build/outputs/bundle/signedRelease/app-signed-release.aab
-                  track: internal
