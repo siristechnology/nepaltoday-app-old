@@ -11,7 +11,7 @@
 
 ## How to Run locally
 -   Install Android Studio
--   Install node (10.x), yarn (1.x)
+-   Install node (12.x), yarn (1.x)
 -   Run Android emulator. (from Android Studio or Genymotion)
 -   Run Metro bundler. `yarn start`
 -   Run Android app. `yarn android`
