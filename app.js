@@ -7,7 +7,6 @@ import { mapping, light as lightTheme } from '@eva-design/eva'
 import * as RNLocalize from 'react-native-localize'
 import gql from 'graphql-tag'
 import { useMutation, useApolloClient } from '@apollo/react-hooks'
-import crashlytics from '@react-native-firebase/crashlytics'
 
 import { store } from './src/store'
 import AppContainer from './src/frame/app-container'
@@ -20,8 +19,6 @@ const App = () => {
 	const client = useApolloClient()
 
 	onRegister = (token) => {
-		crashlytics().setUserId(token)
-
 		storeFcmToken({
 			variables: {
 				input: {
@@ -35,7 +32,6 @@ const App = () => {
 
 	useEffect(() => {
 		SplashScreen.hide()
-		crashlytics().log('App mounted.')
 
 		fcmService.register(onRegister, onNotification, onOpenNotification)
 	}, [])
@@ -70,7 +66,6 @@ const App = () => {
 
 		if (errors) {
 			console.log('printing errors', errors)
-			crashlytics().recordError(error)
 		}
 
 		NavigationService.navigate('ArticleDetail', { article: data.getArticle })

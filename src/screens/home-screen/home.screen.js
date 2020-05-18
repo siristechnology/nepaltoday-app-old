@@ -7,7 +7,6 @@ import { CircularSpinner } from '../../components/common'
 import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
-import crashlytics from '@react-native-firebase/crashlytics'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -20,7 +19,6 @@ const Home = ({ navigation }) => {
 
 	useEffect(() => {
 		setNepaliDate(getFormattedCurrentNepaliDate())
-		crashlytics().log('Home page test log.')
 	}, [])
 
 	const { loading, data, refetch } = useQuery(GET_ARTICLES_QUERY, {
