@@ -1,4 +1,4 @@
-
+#!/usr/bin/env bash
 
 PACKAGE_NAME="com.siristechnology.nepaltodayapp"
 APP_NAME="NepalToday"
@@ -15,4 +15,6 @@ sed -i '' 's/"app_name">[^<]*</"app_name">'$APP_NAME'</' $ANDROID_STRINGS_FILE
 sed -i '' 's/"@mipmap\/ic_launcher_prod"/"@mipmap\/ic_launcher"/' $ANDROID_MANIFEST_FILE
 
 sed -i '' 's/"package_name": "[^"]*"/"package_name": "'$PACKAGE_NAME'"/' $GOOGLE_SERVICES_FILE
+
+mv .env.release .env
 mv ./android/app/google-services.json.prod ./android/app/google-services.json
