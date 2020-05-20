@@ -1,4 +1,4 @@
-# Nepal Today App
+# NepalToday App
 
 ![Android Apk - Release & Google Play Publish](https://github.com/siristechnology/nepaltoday-app/workflows/Android%20Apk%20-%20Release%20&%20Google%20Play%20Publish/badge.svg)
 [![DeepScan grade](https://deepscan.io/api/teams/5348/projects/7146/branches/66889/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=5348&pid=7146&bid=66889)
