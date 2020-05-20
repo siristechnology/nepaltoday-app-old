@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.siristechnology.nepaltodayapp"
+        applicationId "com.siristechnology.nepaltodayapp.beta"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1582496178

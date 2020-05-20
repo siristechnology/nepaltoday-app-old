@@ -1,7 +1,9 @@
-package com.siristechnology.nepaltodayapp;
+package com.siristechnology.nepaltodayapp.beta;
 
 import android.app.Application;
 import android.util.Log;
+
+import com.facebook.react.BuildConfig;
 import com.facebook.react.PackageList;
 import com.facebook.hermes.reactexecutor.HermesExecutorFactory;
 import com.facebook.react.bridge.JavaScriptExecutorFactory;

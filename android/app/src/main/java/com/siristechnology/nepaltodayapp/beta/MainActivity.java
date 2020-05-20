@@ -1,4 +1,4 @@
-package com.siristechnology.nepaltodayapp;
+package com.siristechnology.nepaltodayapp.beta;
 
 import android.content.res.Configuration;
 import android.os.Build;

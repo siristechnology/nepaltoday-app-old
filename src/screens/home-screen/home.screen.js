@@ -23,9 +23,14 @@ const Home = ({ navigation }) => {
 		crashlytics().log('Home page test log.')
 	}, [])
 
-	const { loading, data, refetch } = useQuery(GET_ARTICLES_QUERY, {
+	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
 		variables: {},
 	})
+
+	if (error) {
+		console.log('printing error', error)
+		crashlytics().recordError(new Error(error))
+	}
 
 	if (!loading) {
 		return (
