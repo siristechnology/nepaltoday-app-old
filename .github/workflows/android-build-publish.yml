@@ -27,8 +27,9 @@ jobs:
               run: |
                   yarn
 
-            - name: Build with Gradle (--after renaming package)
+            - name: Gradle Build
               run: |
+                  sh prepare_beta.sh
                   yarn build
 
             - name: Upload APK artifact
