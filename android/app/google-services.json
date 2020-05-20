@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "145622808853-smqsp74etonttno56t8ecku1957sfv0d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.siristechnology.nepaltodayapp.beta",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "145622808853-ickj1cqv80dt7geu8v9lusot5muoh0pm.apps.googleusercontent.com",
           "client_type": 3
         }

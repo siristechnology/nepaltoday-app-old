@@ -1,6 +1,7 @@
 apply plugin: "com.android.application"
-apply plugin: 'com.google.gms.google-services'
-apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: "com.google.gms.google-services"
+//apply plugin: "com.google.firebase.crashlytics"
+apply plugin: 'io.fabric'
 
 import com.android.build.OutputFile
 
@@ -17,7 +18,9 @@ import com.android.build.OutputFile
  *   // the name of the generated asset file containing your JS bundle
  *   bundleAssetName: "index.android.bundle",
  *
- *   // the entry file for bundle generation
+ *   // the entry file for bundle generation. If none specified and
+ *   // "index.android.js" exists, it will be used. Otherwise "index.js" is
+ *   // default. Can be overridden with ENTRY_FILE environment variable.
  *   entryFile: "index.android.js",
  *
  *   // https://facebook.github.io/react-native/docs/performance#enable-the-ram-format
@@ -78,8 +81,8 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    entryFile: "index.js",
-    enableHermes: false,  // clean and rebuild if changing
+        entryFile: "index.js",
+        enableHermes: false,  // clean and rebuild if changing
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -97,7 +100,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 /**
  * Run Proguard to shrink the Java bytecode in release builds.
  */
-def enableProguardInReleaseBuilds = true
+def enableProguardInReleaseBuilds = false
 
 /**
  * The preferred build flavor of JavaScriptCore.
@@ -123,7 +126,6 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-	buildToolsVersion rootProject.ext.buildToolsVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -134,8 +136,9 @@ android {
         applicationId "com.siristechnology.nepaltodayapp.beta"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1582496178
-        versionName "0.0.9"
+        multiDexEnabled true
+        versionCode 1
+        versionName "1.0"
     }
     splits {
         abi {
@@ -147,32 +150,25 @@ android {
     }
     signingConfigs {
         debug {
-			storeFile file('beta.keystore')
+            storeFile file('debug.keystore')
             storePassword 'android'
-            keyAlias 'androidbetakey'
+            keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
     }
-
-	flavorDimensions "version"
-
-    productFlavors {
-        signed {
-            signingConfig signingConfigs.debug
-        }
-
-        unsigned {}
-    }
-
     buildTypes {
         debug {
+            signingConfig signingConfigs.debug
         }
         release {
+            // Caution! In production, you need to generate your own keystore file.
+            // see https://facebook.github.io/react-native/docs/signed-apk-android.
+            signingConfig signingConfigs.debug
             minifyEnabled enableProguardInReleaseBuilds
-            shrinkResources true
-            proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->
@@ -189,32 +185,47 @@ android {
     }
 
     packagingOptions {
-        pickFirst '**/armeabi-v7a/libc++_shared.so'
-        pickFirst '**/x86/libc++_shared.so'
-        pickFirst '**/arm64-v8a/libc++_shared.so'
-        pickFirst '**/x86_64/libc++_shared.so'
-        pickFirst '**/x86/libjsc.so'
-        pickFirst '**/armeabi-v7a/libjsc.so'
+        pickFirst "lib/armeabi-v7a/libc++_shared.so"
+        pickFirst "lib/arm64-v8a/libc++_shared.so"
+        pickFirst "lib/x86/libc++_shared.so"
+        pickFirst "lib/x86_64/libc++_shared.so"
     }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "com.facebook.react:react-native:+"  // From node_modules
-    implementation "com.google.android.gms:play-services-base:16.1.0"    
-    implementation 'me.leolin:ShortcutBadger:1.1.21@aar'
+    //noinspection GradleDynamicVersion
+    implementation 'com.facebook.react:react-native:0.20.1'  // From node_modules
+
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
+
+    debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
+        exclude group: 'com.facebook.fbjni'
+    }
+
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
+        exclude group: 'com.facebook.flipper'
+    }
+
+    debugImplementation("com.facebook.flipper:flipper-fresco-plugin:${FLIPPER_VERSION}") {
+        exclude group: 'com.facebook.flipper'
+    }
 
     if (enableHermes) {
-      def hermesPath = "../../node_modules/hermesvm/android/";
-      debugImplementation files(hermesPath + "hermes-debug.aar")
-      releaseImplementation files(hermesPath + "hermes-release.aar")
+        def hermesPath = "../../node_modules/hermes-engine/android/";
+        debugImplementation files(hermesPath + "hermes-debug.aar")
+        releaseImplementation files(hermesPath + "hermes-release.aar")
     } else {
-      implementation jscFlavor
+        implementation jscFlavor
     }
-    
+
+    // implementation "com.google.android.gms:play-services-base:16.1.0"
+    // implementation 'com.google.firebase:firebase-core:16.0.4'
+    implementation "com.google.firebase:firebase-core:17.2.0"
     implementation "com.google.firebase:firebase-messaging:20.1.7"
     implementation 'com.google.firebase:firebase-analytics:17.4.1'
     implementation 'com.google.firebase:firebase-crashlytics:17.0.0'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
 }
 
 // Run this once to be able to run the application with BUCK
@@ -225,4 +236,3 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-apply plugin: 'com.google.gms.google-services'
