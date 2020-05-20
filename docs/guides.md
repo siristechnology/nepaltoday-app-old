@@ -6,4 +6,4 @@
 
 ### How to generate bundle files (index.android.bundle)
 
-\_ `react-native bundle --platform android --dev false --entry-file index.js --bundle-output /path/to/index.android.bundle --assets-dest android/app/src/main/res`
+-   `react-native bundle --platform android --dev false --entry-file index.js --bundle-output /path/to/index.android.bundle --assets-dest android/app/src/main/res`

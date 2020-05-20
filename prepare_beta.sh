@@ -17,6 +17,6 @@ sed -i '' 's/"app_name">[^<]*</"app_name">'$BETA_APP_NAME'</' $ANDROID_STRINGS_F
 sed -i '' 's/"@mipmap\/ic_launcher"/"@mipmap\/ic_launcher_beta"/' $ANDROID_MANIFEST_FILE
 
 sed -i '' 's/"package_name": "[^"]*"/"package_name": "'$PACKAGE_NAME'"/' $GOOGLE_SERVICES_FILE
-
+mv ./android/app/google-services.json.beta ./android/app/google-services.json
 
 # plutil -replace CFBundleIdentifier -string $PACKAGE_NAME $INFO_PLIST_FILE
