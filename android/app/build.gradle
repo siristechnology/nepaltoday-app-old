@@ -1,6 +1,5 @@
 apply plugin: "com.android.application"
 apply plugin: "com.google.gms.google-services"
-//apply plugin: "com.google.firebase.crashlytics"
 apply plugin: 'io.fabric'
 
 import com.android.build.OutputFile
@@ -126,6 +125,7 @@ def enableHermes = project.ext.react.get("enableHermes", false);
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
+	buildToolsVersion rootProject.ext.buildToolsVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -137,8 +137,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
-        versionCode 1
-        versionName "1.0"
+        versionCode 1582496178
+        versionName "0.0.9"
     }
     splits {
         abi {
@@ -150,25 +150,32 @@ android {
     }
     signingConfigs {
         debug {
-            storeFile file('debug.keystore')
+			storeFile file('beta.keystore')
             storePassword 'android'
-            keyAlias 'androiddebugkey'
+            keyAlias 'androidbetakey'
             keyPassword 'android'
         }
     }
-    buildTypes {
-        debug {
+
+	flavorDimensions "version"
+
+    productFlavors {
+        signed {
             signingConfig signingConfigs.debug
         }
+
+        unsigned {}
+    }
+
+    buildTypes {
+        debug {
+        }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://facebook.github.io/react-native/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
-
     // applicationVariants are e.g. debug, release
     applicationVariants.all { variant ->
         variant.outputs.each { output ->

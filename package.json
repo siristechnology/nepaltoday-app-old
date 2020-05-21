@@ -3,7 +3,7 @@
 	"version": "0.0.2",
 	"private": true,
 	"scripts": {
-		"android": "react-native run-android",
+		"android": "react-native run-android --variant unsigneddebug",
 		"start": "react-native start",
 		"log:android": "react-native log-android",
 		"refresh": "adb shell input keyevent 46 46",
