@@ -9,8 +9,8 @@
 		"refresh": "adb shell input keyevent 46 46",
 		"reset": "react-native start --reset-cache",
 		"jetify": "npx jetify",
-		"build": "npx jetify && cd android && ./gradlew app:assembleSignedRelease && cd ..",
-		"bundle": "npx jetify && cd android && ./gradlew app:bundleSignedRelease && cd ..",
+		"build": "cd android && ./gradlew app:assembleSignedRelease && cd ..",
+		"bundle": "cd android && ./gradlew app:bundleSignedRelease && cd ..",
 		"test": "jest",
 		"lint": "eslint ."
 	},
