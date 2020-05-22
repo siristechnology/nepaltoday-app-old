@@ -24,6 +24,7 @@
 		"@react-native-firebase/auth": "^7.0.2",
 		"@react-native-firebase/crashlytics": "^7.0.1",
 		"@react-native-firebase/messaging": "^7.0.1",
+		"@react-native-firebase/perf": "^7.0.1",
 		"apollo-cache-inmemory": "^1.6.6",
 		"apollo-client": "^2.6.10",
 		"apollo-link": "^1.2.14",

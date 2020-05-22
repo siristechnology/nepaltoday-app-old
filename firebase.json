@@ -4,6 +4,7 @@
         "crashlytics_debug_enabled": true,
         "crashlytics_ndk_enabled": true,
         "messaging_auto_init_enabled": true,
-        "analytics_auto_collection_enabled": true
+        "analytics_auto_collection_enabled": true,
+        "perf_auto_collection_enabled": true
     }
 }
