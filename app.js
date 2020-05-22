@@ -10,12 +10,16 @@ import AppContainer from './src/frame/app-container'
 import ErrorBoundary from './src/error/error-boundry'
 import notificationHandler from './src/services/notification-handler'
 import NavigationService from './src/services/navigationService'
+import crashlytics from '@react-native-firebase/crashlytics'
+import auth from '@react-native-firebase/auth'
 
 const App = () => {
 	useEffect(() => {
 		SplashScreen.hide()
 
 		notificationHandler.register()
+
+		signInAnonymously()
 	}, [])
 
 	return (
@@ -32,6 +36,14 @@ const App = () => {
 			</Provider>
 		</ApplicationProvider>
 	)
+}
+
+const signInAnonymously = () => {
+	auth()
+		.signInAnonymously()
+		.catch((error) => {
+			crashlytics().recordError(error)
+		})
 }
 
 export default App

@@ -1358,11 +1358,6 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@react-native-community/async-storage@1.5.0":
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.5.0.tgz#647ffcd832272068b0be57332e08d73036ed391f"
-  integrity sha512-2yE4RzQ5IL+UTPhuMY0ykNRKHf1m90jOnmp8fcDPUun5U97cXlorjI4p66ovDgF0FuOv8ZpiUKvunGy3qqBxwg==
-
 "@react-native-community/async-storage@^1.8.1":
   version "1.10.3"
   resolved "https://registry.yarnpkg.com/@react-native-community/async-storage/-/async-storage-1.10.3.tgz#6974404a903a317f462bd0ac3fafa7c0291679df"
@@ -1534,6 +1529,11 @@
     "@react-native-firebase/app-types" "6.7.2"
     opencollective-postinstall "^2.0.1"
     superstruct "^0.6.2"
+
+"@react-native-firebase/auth@^7.0.2":
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/@react-native-firebase/auth/-/auth-7.0.2.tgz#032da9da7302461557edc0e3aae0806660efc43c"
+  integrity sha512-1JPgzeaNve5QXaZD4OrUtmstFEbuZBiAl50RSSgnRPNkMxgjHxMlZvGKX53OeOoOVaG6JDZoG8hTHjSn1G4VXA==
 
 "@react-native-firebase/crashlytics@^7.0.1":
   version "7.0.1"
@@ -7034,11 +7034,6 @@ plugin-error@^0.1.2:
     arr-union "^2.0.1"
     extend-shallow "^1.1.2"
 
-polygoat@1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/polygoat/-/polygoat-1.1.4.tgz#329f9a0d1b2d4a45149e2539523c6f7dfd850a5f"
-  integrity sha1-Mp+aDRstSkUUniU5Ujxvff2FCl8=
-
 posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
@@ -7299,14 +7294,6 @@ react-native-ui-kitten@^4.4.1:
     fecha "3.0.3"
     hoist-non-react-statics "^3.2.1"
     lodash.merge "^4.6.1"
-
-react-native-unique-id@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-unique-id/-/react-native-unique-id-2.0.0.tgz#7cb1dd7e7fc10cfb00c66b73bb916104ca12538f"
-  integrity sha512-sfPhqppzo91O1pKPSMcNFEM7altQUabpeWiiQ9GzIWm0YJ+AwuLTgaOzrBiwRyq0j51oORHGZw7Vo2iNtSvVZA==
-  dependencies:
-    "@react-native-community/async-storage" "1.5.0"
-    polygoat "1.1.4"
 
 react-native-vector-icons@^6.6.0:
   version "6.6.0"
