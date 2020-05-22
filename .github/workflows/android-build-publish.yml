@@ -19,15 +19,28 @@ jobs:
               with:
                   node-version: 12.x
 
-            - name: Yarn Install, (Test)
-              run: |
-                  yarn
-
-            - name: Build Android Bundle to upload to Google Play
-              if: github.ref == 'refs/heads/master'
+            - name: Yarn Install, Build, (Test)
               run: |
                   sh prepare_beta.sh
+                  yarn
+                  yarn build
                   yarn bundle
+
+            - name: Upload APK artifact
+              uses: actions/upload-artifact@v1
+              with:
+                  name: app-signed-release.apk
+                  path: android/app/build/outputs/apk/signed/release/app-signed-release.apk
+
+            - name: Publish Apk to Github Release
+              uses: marvinpinto/action-automatic-releases@latest
+              if: github.ref == 'refs/heads/master'
+              with:
+                  files: android/app/build/outputs/apk/signed/release/app-signed-release.apk
+                  repo_token: ${{ secrets.GITHUB_TOKEN }}
+                  automatic_release_tag: 'latest'
+                  title: 'Beta Build'
+                  prerelease: false
 
             - name: Publish Android Bundle to Google Play Store
               uses: r0adkll/upload-google-play@v1
