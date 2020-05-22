@@ -7,10 +7,10 @@ import * as RNLocalize from 'react-native-localize'
 import crashlytics from '@react-native-firebase/crashlytics'
 
 class NotificationHandler {
-	register = () => {
+	register = (user) => {
 		messaging()
 			.getToken()
-			.then((token) => this.storeFcmToken(token))
+			.then((token) => this.storeFcmToken(user, token))
 
 		messaging().setBackgroundMessageHandler(this.onBackgroundMessageReceived)
 
@@ -19,12 +19,13 @@ class NotificationHandler {
 		messaging().getInitialNotification().then(this.onOpenNotification)
 	}
 
-	storeFcmToken = async (token) => {
+	storeFcmToken = async (user, token) => {
 		client
 			.mutate({
 				mutation: STORE_FCM_MUTATION,
 				variables: {
 					input: {
+						nid: user.uid,
 						fcmToken: token,
 						countryCode: RNLocalize.getCountry(),
 						timeZone: RNLocalize.getTimeZone(),

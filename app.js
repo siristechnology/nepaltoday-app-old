@@ -17,9 +17,7 @@ const App = () => {
 	useEffect(() => {
 		SplashScreen.hide()
 
-		notificationHandler.register()
-
-		signInAnonymously()
+		signInAnonymously().then(() => notificationHandler.register(auth().currentUser))
 	}, [])
 
 	return (
@@ -39,7 +37,7 @@ const App = () => {
 }
 
 const signInAnonymously = () => {
-	auth()
+	return auth()
 		.signInAnonymously()
 		.catch((error) => {
 			crashlytics().recordError(error)
