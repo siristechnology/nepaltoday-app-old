@@ -5,11 +5,12 @@ import { onError } from 'apollo-link-error'
 import { withClientState } from 'apollo-link-state'
 import { ApolloLink, Observable } from 'apollo-link'
 import fetch from 'node-fetch'
-import { NEPALTODAY_SERVER } from 'react-native-dotenv';
+import crashlytics from '@react-native-firebase/crashlytics'
+import { NEPALTODAY_SERVER } from 'react-native-dotenv'
 
 const cache = new InMemoryCache()
 
-const request = async operation => {
+const request = async (operation) => {
 	const token = 'dummy-token'
 	operation.setContext({
 		headers: {
@@ -20,10 +21,10 @@ const request = async operation => {
 
 const requestLink = new ApolloLink(
 	(operation, forward) =>
-		new Observable(observer => {
+		new Observable((observer) => {
 			let handle
 			Promise.resolve(operation)
-				.then(oper => request(oper))
+				.then((oper) => request(oper))
 				.then(() => {
 					handle = forward(operation).subscribe({
 						next: observer.next.bind(observer),
@@ -42,13 +43,10 @@ const requestLink = new ApolloLink(
 const client = new ApolloClient({
 	link: ApolloLink.from([
 		onError(({ graphQLErrors, networkError }) => {
-			if (graphQLErrors) {
-				console.log('printing graphQLErrors', graphQLErrors);
-				// sendToLoggingService(graphQLErrors)
-			}
+			graphQLErrors.forEach((error) => crashlytics().recordError(new Error(error.message)))
+
 			if (networkError) {
-				console.log('printing networkError', networkError);
-				// logoutUser()
+				crashlytics().recordError(new Error(networkError.message))
 			}
 		}),
 		requestLink,

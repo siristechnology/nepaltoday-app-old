@@ -4,6 +4,7 @@ import client from '../../src/graphql/graphql-client'
 import navigationService from './navigationService'
 import gql from 'graphql-tag'
 import * as RNLocalize from 'react-native-localize'
+import crashlytics from '@react-native-firebase/crashlytics'
 
 class NotificationHandler {
 	register = () => {
@@ -15,9 +16,7 @@ class NotificationHandler {
 
 		messaging().onNotificationOpenedApp((msg) => console.log('inside onNotificationOpenedApp', msg))
 
-		messaging()
-			.getInitialNotification()
-			.then(this.onOpenNotification)
+		messaging().getInitialNotification().then(this.onOpenNotification)
 	}
 
 	storeFcmToken = async (token) => {
