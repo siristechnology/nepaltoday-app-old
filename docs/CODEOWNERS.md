@@ -1,1 +1,1 @@
-* @syuraj @shrijan-siris @siristechnology/siris-dev
+-   @syuraj @siristechnology/siris-dev
