@@ -7,4 +7,5 @@ then
 fi
 
 echo "Using release environment variables"
+
 sh prepare_release.sh

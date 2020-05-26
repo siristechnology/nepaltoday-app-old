@@ -8,11 +8,11 @@ ANDROID_STRINGS_FILE=./android/app/src/main/res/values/strings.xml
 ANDROID_MANIFEST_FILE=./android/app/src/main/AndroidManifest.xml
 GOOGLE_SERVICES_FILE=./android/app/google-services.json
 
-sed -i 's/applicationId "[^"]*"/applicationId "'$PACKAGE_NAME'"/' $BUILD_GRADLE
-sed -i 's/versionCode .*$/versionCode '$TIME_STAMP'/' $BUILD_GRADLE
-sed -i 's/"app_name">[^<]*</"app_name">'$APP_NAME'</' $ANDROID_STRINGS_FILE
+sed -i '' -e 's/applicationId "[^"]*"/applicationId "'$PACKAGE_NAME'"/' $BUILD_GRADLE
+sed -i '' -e 's/versionCode .*$/versionCode '$TIME_STAMP'/' $BUILD_GRADLE
+sed -i '' -e 's/"app_name">[^<]*</"app_name">'$APP_NAME'</' $ANDROID_STRINGS_FILE
 
-sed -i 's/"@mipmap\/ic_launcher"/"@mipmap\/ic_launcher_prod"/' $ANDROID_MANIFEST_FILE
+sed -i '' -e 's/"@mipmap\/ic_launcher"/"@mipmap\/ic_launcher_prod"/' $ANDROID_MANIFEST_FILE
 
 
 mv .env.release .env
