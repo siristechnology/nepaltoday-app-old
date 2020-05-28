@@ -15,6 +15,9 @@ export class ArticleWebviewComponent extends React.Component {
 						<Spinner />
 					</Layout>
 				)}
+				mediaPlaybackRequiresUserAction="true"
+				mixedContentMode="always"
+				allowsInlineMediaPlayback="false"
 				startInLoadingState
 				source={{ uri: link }}
 				style={{
