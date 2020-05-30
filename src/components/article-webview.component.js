@@ -1,13 +1,24 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { AppState, StyleSheet } from 'react-native'
 import { Layout, Spinner } from 'react-native-ui-kitten'
 import { WebView } from 'react-native-webview'
 
-export class ArticleWebviewComponent extends React.Component {
-	render() {
-		const { navigation } = this.props
-		const link = navigation.getParam('link')
+export const ArticleWebviewComponent = ({ navigation }) => {
+	const link = navigation.getParam('link')
+	const [appState, setAppState] = useState(AppState.currentState)
 
+	useEffect(() => {
+		AppState.addEventListener('change', updateAppState)
+		return () => {
+			AppState.removeEventListener('change', updateAppState)
+		}
+	}, [])
+
+	const updateAppState = (nextAppState) => {
+		setAppState(nextAppState)
+	}
+
+	if (appState == 'active') {
 		return (
 			<WebView
 				renderLoading={() => (
@@ -27,6 +38,8 @@ export class ArticleWebviewComponent extends React.Component {
 				}}
 			/>
 		)
+	} else {
+		return null
 	}
 }
 
