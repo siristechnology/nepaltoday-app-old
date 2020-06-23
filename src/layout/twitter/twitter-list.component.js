@@ -1,6 +1,7 @@
 import React from 'react'
 import { RefreshControl } from 'react-native'
-import { List } from 'react-native-ui-kitten/ui'
+// import { List } from 'react-native-ui-kitten/ui'
+import { FlatList } from 'react-navigation';
 import { withStyles } from 'react-native-ui-kitten/theme'
 
 import { TwitterListItem } from './twitter-list-item.component'
@@ -11,7 +12,7 @@ const TwitterListComponent = React.memo(({ tweets, themedStyle, refreshing, hand
 	}
 
 	return (
-		<List
+		<FlatList
 			contentContainerStyle={themedStyle.container}
 			data={tweets}
 			renderItem={renderItem}
