@@ -1,6 +1,7 @@
 import React from 'react'
 import { RefreshControl } from 'react-native'
-import { List } from 'react-native-ui-kitten/ui'
+// import { List } from 'react-native-ui-kitten/ui'
+import { FlatList } from 'react-navigation';
 import { withStyles } from 'react-native-ui-kitten/theme'
 import { ArticleListItem } from '../../article/article-list/article-list-item.component'
 
@@ -13,7 +14,7 @@ const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, 
 	}
 
 	return (
-		<List
+		<FlatList
 			contentContainerStyle={themedStyle.container}
 			data={articles}
 			renderItem={renderItem}
