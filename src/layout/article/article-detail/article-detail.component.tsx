@@ -45,37 +45,39 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 		)
 
 		return (
-			<ContainerView style={themedStyle.container}>
+			<View style={themedStyle.articleContainerView}>
 				<View style={themedStyle.headerStyle}>
 					{BackIcon}
 					{shareButton}
 				</View>
-				<ImageBackground style={themedStyle.image} source={{ uri: article.imageLink }}>
-					<Avatar style={themedStyle.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />
-				</ImageBackground>
+				<ContainerView style={themedStyle.container}>
+					<ImageBackground style={themedStyle.image} source={{ uri: article.imageLink }}>
+						<Avatar style={themedStyle.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />
+					</ImageBackground>
 
-				<View style={themedStyle.detailsContainer}>
-					<Text style={themedStyle.titleLabel} category="h5">
-						{article.title}
-					</Text>
-					<ArticleActivityBar>
-						<View style={themedStyle.dateContainer}>
-							{ClockIconOutline(themedStyle.dateIcon)}
-							<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
-								{getRelativeTime(article.publishedDate)}
-							</Text>
+					<View style={themedStyle.detailsContainer}>
+						<Text style={themedStyle.titleLabel} category="h5">
+							{article.title}
+						</Text>
+						<ArticleActivityBar>
+							<View style={themedStyle.dateContainer}>
+								{ClockIconOutline(themedStyle.dateIcon)}
+								<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+									{getRelativeTime(article.publishedDate)}
+								</Text>
+							</View>
+						</ArticleActivityBar>
+						<Text category="s1" style={themedStyle.contentLabel}>
+							{article.content}
+						</Text>
+						<View style={themedStyle.readMoreBtnWrapper}>
+							<Button onPress={this.handleLinkClick} style={themedStyle.readMoreBtn}>
+								{READ_MORE}
+							</Button>
 						</View>
-					</ArticleActivityBar>
-					<Text category="s1" style={themedStyle.contentLabel}>
-						{article.content}
-					</Text>
-					<View style={themedStyle.readMoreBtnWrapper}>
-						<Button onPress={this.handleLinkClick} style={themedStyle.readMoreBtn}>
-							{READ_MORE}
-						</Button>
 					</View>
-				</View>
-			</ContainerView>
+				</ContainerView>
+			</View>
 		)
 	}
 
@@ -99,6 +101,9 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 }
 
 export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeType) => ({
+	articleContainerView: {
+		flex: 1
+	},	
 	container: {
 		flex: 1,
 		backgroundColor: theme['background-basic-color-1'],

@@ -1,7 +1,7 @@
 import messaging from '@react-native-firebase/messaging'
 // import AsyncStorage from '@react-native-community/async-storage'
 import client from '../../src/graphql/graphql-client'
-import navigationService from './navigationService'
+// import navigationService from './navigationService'
 import gql from 'graphql-tag'
 import * as RNLocalize from 'react-native-localize'
 import crashlytics from '@react-native-firebase/crashlytics'
@@ -16,7 +16,21 @@ class NotificationHandler {
 
 		messaging().onNotificationOpenedApp((msg) => console.log('inside onNotificationOpenedApp', msg))
 
-		messaging().getInitialNotification().then(this.onOpenNotification)
+		// messaging().getInitialNotification().then(this.onOpenNotification)
+	}
+
+	checkForNotification(){
+		return new Promise((resolve,reject)=>{
+			messaging().getInitialNotification().then(notify=>{
+				if(notify!=null){
+					this.fetchArticle(notify).then(res=>{
+						resolve(res)
+					})
+				}else{
+					reject({message:'Notification not clicked'})
+				}
+			})
+		})
 	}
 
 	storeFcmToken = async (user, token) => {
@@ -37,22 +51,20 @@ class NotificationHandler {
 
 	onBackgroundMessageReceived = async () => {}
 
-	onOpenNotification = async (notify) => {
-		if (notify != null) {
-			const { data, errors } = await client
+	fetchArticle(notify){
+		return new Promise((resolve,reject)=>{
+			client
 				.query({
 					query: GET_ARTICLE_QUERY,
 					variables: { _id: notify.data._id },
 				})
-				.catch((reason) => console.log('printing reason', reason))
-
-			if (errors) {
-				console.log('printing errors', errors)
-				crashlytics().recordError(error)
-			}
-
-			navigationService.navigate('ArticleDetail', { article: data.getArticle })
-		}
+				.then(res=>{
+					resolve(res)
+				}).catch(err=>{
+					crashlytics().recordError(error)
+					reject(err)
+				})
+		})
 	}
 }
 
