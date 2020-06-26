@@ -1,7 +1,5 @@
 import messaging from '@react-native-firebase/messaging'
-// import AsyncStorage from '@react-native-community/async-storage'
 import client from '../../src/graphql/graphql-client'
-// import navigationService from './navigationService'
 import gql from 'graphql-tag'
 import * as RNLocalize from 'react-native-localize'
 import crashlytics from '@react-native-firebase/crashlytics'
@@ -16,7 +14,6 @@ class NotificationHandler {
 
 		messaging().onNotificationOpenedApp((msg) => console.log('inside onNotificationOpenedApp', msg))
 
-		// messaging().getInitialNotification().then(this.onOpenNotification)
 	}
 
 	checkForNotification(){
@@ -29,7 +26,7 @@ class NotificationHandler {
 				}else{
 					reject({message:'Notification not clicked'})
 				}
-			})
+			}).catch(err=>reject(err))
 		})
 	}
 
