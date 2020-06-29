@@ -20,6 +20,23 @@ const App = () => {
 	const [clicked, setClicked] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [article, setArticle] = useState({})
+	
+	const loadAppContainer = (article, clicked) => {
+		if(clicked && article._id){
+			return(
+				<AppContainer
+					ref={(navigatorRef)=>NavigationService.setTopLevelNavigator(navigatorRef,'ArticleDetail', { article: article })}
+				/>
+			)
+		}else{
+			return(
+				<AppContainer
+					ref={(navigatorRef)=>NavigationService.setTopLevelNavigator(navigatorRef)}
+				/>
+			)
+		}
+	}
+
 	useEffect(() => {
 		SplashScreen.hide()
 		setLoading(true)
@@ -28,12 +45,10 @@ const App = () => {
 			setClicked(true)
 			setLoading(false)
 			setArticle(res.data.getArticle)
-
 		}).catch(err=>{
 			setLoading(false)
 		})
-
-	}, [clicked])
+	}, [])
 
 	return (
 		<ApplicationProvider mapping={mapping} theme={lightTheme}>
@@ -43,15 +58,7 @@ const App = () => {
 					{loading && <AppLayout>
 						<CircularSpinner/>	
 					</AppLayout> ||
-					<AppContainer
-						ref={(navigatorRef) => {
-							if(!clicked){
-								NavigationService.setTopLevelNavigator(navigatorRef)
-							}else{
-								NavigationService.setTopLevelNavigator(navigatorRef,'ArticleDetail', { article: article })
-							}
-						}}
-					/>}
+					loadAppContainer(article, clicked)}
 				</ErrorBoundary>
 			</Provider>
 		</ApplicationProvider>
