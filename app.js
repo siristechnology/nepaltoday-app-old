@@ -20,7 +20,7 @@ const App = () => {
 	const [clicked, setClicked] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [article, setArticle] = useState({})
-  
+
 	const loadAppContainer = (article, clicked) => {
 		if(clicked && article._id){
 			return(
@@ -36,6 +36,7 @@ const App = () => {
 			)
 		}
 	}
+
 
   useEffect(() => {
 		SplashScreen.hide()
