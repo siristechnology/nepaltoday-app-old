@@ -14,6 +14,8 @@ import crashlytics from '@react-native-firebase/crashlytics'
 import auth from '@react-native-firebase/auth'
 import AppLayout from './src/frame/app-layout'
 import { CircularSpinner } from './src/components/common'
+import Realm from 'realm';
+let realm;
 
 const App = () => {
 
@@ -37,10 +39,42 @@ const App = () => {
 		}
 	}
 
+	const setMongoRealm=()=>{
+		realm = new Realm({
+			path: 'ArticleDatabase.realm',
+			schema: [
+				{
+					name: 'articles',
+					properties: {
+						'_id': 'string',
+						'title': 'string',
+						'shortDescription': 'string',
+						'imageLink': 'string',
+						'content': 'string',
+						'link': 'string',
+						'publishedDate': 'string',
+						'source': {
+							"type": "source"
+						},
+						'modifiedDate': 'string',
+					}
+				},{
+					name :'source',
+					properties: {
+						"_id":"string",
+						"name":"string",
+						"logoLink":"string"
+					}
+				}
+			]
+		})
+	}
 
-  useEffect(() => {
+
+  	useEffect(() => {
 		SplashScreen.hide()
 		setLoading(true)
+		setMongoRealm()
 		signInAnonymously().then(() => notificationHandler.register(auth().currentUser))
 		notificationHandler.checkForNotification().then(res=>{
 			setClicked(true)

@@ -10,10 +10,13 @@ import Weather from './components/weather.component'
 import crashlytics from '@react-native-firebase/crashlytics'
 import perf from '@react-native-firebase/perf'
 import auth from '@react-native-firebase/auth'
+import Realm from 'realm';
+let realm;
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
 	const [refreshing, setRefreshing] = useState(false)
+	const [localArticles, setLocalArticles] = useState([])
 
 	const handleRefresh = () => {
 		setRefreshing(true)
@@ -26,10 +29,16 @@ const Home = ({ navigation }) => {
 		await trace.stop()
 	}
 
+	const getLocalStoredArticles = () => {
+		realm = new Realm({ path: 'ArticleDatabase.realm' });
+		let storedArticles = realm.objects('articles');
+		setLocalArticles({getArticles:storedArticles})
+	}
+
 	useEffect(() => {
 		setNepaliDate(getFormattedCurrentNepaliDate())
 		crashlytics().log('Home page test log.')
-
+		getLocalStoredArticles()
 		customTrace()
 	}, [])
 
@@ -37,28 +46,39 @@ const Home = ({ navigation }) => {
 		variables: {},
 	})
 
+	if(!loading && data!=null && data.getArticles && data.getArticles.length){
+		let myArticles = data.getArticles || []
+		realm = new Realm({ path: 'ArticleDatabase.realm' })
+		realm.write(()=>{
+			const deletingArticles = realm.objects("articles")
+			realm.delete(deletingArticles)
+			myArticles.forEach(obj=>{
+				realm.create('articles',obj)
+			})
+		})
+	}
+
 	if (error) {
 		console.log('printing error', error)
 		crashlytics().recordError(new Error(error))
 	}
 
-	if (!loading) {
-		return (
-			<AppLayout>
-				<View style={style.headerStyle}>
-					<Text style={style.textStyle}>{nepaliDate}</Text>
-					<Weather />
-				</View>
-				<ArticleListContainer navigation={navigation} articles={data} refreshing={refreshing} handleRefresh={handleRefresh} />
-			</AppLayout>
-		)
-	} else {
-		return (
-			<AppLayout>
-				<CircularSpinner />
-			</AppLayout>
-		)
-	}
+	
+	return (
+		<AppLayout>
+			<View style={style.headerStyle}>
+				<Text style={style.textStyle}>{nepaliDate}</Text>
+				<Weather />
+			</View>
+			<ArticleListContainer 
+				navigation={navigation} 
+				articles={data && data.getArticles && data.getArticles.length && data || localArticles} 
+				refreshing={refreshing} 
+				handleRefresh={handleRefresh} 
+			/>
+		</AppLayout>
+	)
+	
 }
 
 export const GET_ARTICLES_QUERY = gql`
