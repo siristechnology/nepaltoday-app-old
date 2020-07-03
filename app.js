@@ -40,7 +40,7 @@ const App = () => {
 	}
 
 	const setMongoRealm=()=>{
-		realm = new Realm({
+		new Realm({
 			path: 'ArticleDatabase.realm',
 			schema: [
 				{

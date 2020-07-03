@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import AppLayout from '../../frame/app-layout'
-import { CircularSpinner } from '../../components/common'
 import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
@@ -47,7 +46,7 @@ const Home = ({ navigation }) => {
 	})
 
 	if(!loading && data!=null && data.getArticles && data.getArticles.length){
-		let myArticles = data.getArticles || []
+		let myArticles = data.getArticles
 		realm = new Realm({ path: 'ArticleDatabase.realm' })
 		realm.write(()=>{
 			const deletingArticles = realm.objects("articles")
