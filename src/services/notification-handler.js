@@ -3,6 +3,7 @@ import client from '../../src/graphql/graphql-client'
 import gql from 'graphql-tag'
 import * as RNLocalize from 'react-native-localize'
 import crashlytics from '@react-native-firebase/crashlytics'
+import moment from 'moment'
 
 class NotificationHandler {
 	register = (user) => {
@@ -41,6 +42,7 @@ class NotificationHandler {
 						fcmToken: token,
 						countryCode: RNLocalize.getCountry(),
 						timeZone: RNLocalize.getTimeZone(),
+						modifiedDate: moment.utc(),
 					},
 				},
 			})
