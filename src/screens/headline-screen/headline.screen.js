@@ -17,6 +17,8 @@ const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 const HeadlineScreen = ({ navigation }) => {
 	const [refreshing, setRefreshing] = useState(false);
 
+	const [touchEnable, setTouchEnable] = useState(true);
+
 	const handleRefresh = () => {
 		setRefreshing(true);
 		refetch().then(() => setRefreshing(false));
@@ -62,6 +64,7 @@ const HeadlineScreen = ({ navigation }) => {
 				<View tabLabel={localTabName} key={idx}>
 					<OfflineNotice />
 					<HealineListContainer
+						touchEnable={touchEnable}
 						articles={dataArr}
 						navigation={navigation}
 						refreshing={refreshing}
@@ -72,8 +75,17 @@ const HeadlineScreen = ({ navigation }) => {
 		})
 	}
 
+	const onScroll = (i) => {
+		if(i==(Math.floor(i)) || i==(Math.floor(i)-1) || i==(Math.floor(i)+1)){
+			setTouchEnable(true)
+		}else{
+			setTouchEnable(false)
+		}
+	}
+
 	return (
 		<ScrollableTabView
+			onScroll={i=>onScroll(i)}
 			initialPage={0}
 			renderTabBar={() => <ScrollableTabBar />}>
 			{renderTab()}
