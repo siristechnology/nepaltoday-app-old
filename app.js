@@ -44,8 +44,6 @@ const App = () => {
 			.catch(() => {
 				setLoading(false)
 			})
-
-		// return () => (NavigationService.isReadyRef.current = false)
 	}, [])
 
 	return (

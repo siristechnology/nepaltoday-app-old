@@ -10,8 +10,6 @@ class NotificationHandler {
 		messaging()
 			.getToken()
 			.then((token) => this.storeFcmToken(user, token))
-
-		messaging().onNotificationOpenedApp((msg) => console.log('inside onNotificationOpenedApp', msg))
 	}
 
 	checkForNotification() {
@@ -19,11 +17,12 @@ class NotificationHandler {
 			messaging()
 				.getInitialNotification()
 				.then((notify) => {
-					console.log('printing notify', notify)
 					if (notify != null) {
-						this.fetchArticle(notify).then((res) => {
-							resolve(res)
-						})
+						this.fetchArticle(notify)
+							.then((res) => {
+								resolve(res)
+							})
+							.catch((err) => reject(err))
 					} else {
 						resolve({ message: 'Notification not clicked' })
 					}
