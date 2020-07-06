@@ -74,6 +74,7 @@ const HeadlineScreen = ({ navigation }) => {
 
 	return (
 		<ScrollableTabView
+			locked={true}
 			initialPage={0}
 			renderTabBar={() => <ScrollableTabBar />}>
 			{renderTab()}
