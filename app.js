@@ -16,39 +16,34 @@ import AppLayout from './src/frame/app-layout'
 import { CircularSpinner } from './src/components/common'
 
 const App = () => {
-
 	const [clicked, setClicked] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [article, setArticle] = useState({})
 
 	const loadAppContainer = (article, clicked) => {
-		if(clicked && article._id){
-			return(
-				<AppContainer
-					ref={(navigatorRef)=>NavigationService.setTopLevelNavigator(navigatorRef,'ArticleDetail', { article: article })}
-				/>
+		if (clicked && article._id) {
+			return (
+				<AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'ArticleDetail', { article: article })} />
 			)
-		}else{
-			return(
-				<AppContainer
-					ref={(navigatorRef)=>NavigationService.setTopLevelNavigator(navigatorRef)}
-				/>
-			)
+		} else {
+			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)} />
 		}
 	}
 
-
-  useEffect(() => {
+	useEffect(() => {
 		SplashScreen.hide()
 		setLoading(true)
 		signInAnonymously().then(() => notificationHandler.register(auth().currentUser))
-		notificationHandler.checkForNotification().then(res=>{
-			setClicked(true)
-			setLoading(false)
-			setArticle(res.data.getArticle)
-		}).catch(err=>{
-			setLoading(false)
-		})
+		notificationHandler
+			.checkForNotification()
+			.then((res) => {
+				setClicked(true)
+				setLoading(false)
+				setArticle(res.data.getArticle)
+			})
+			.catch(() => {
+				setLoading(false)
+			})
 	}, [])
 
 	return (
@@ -56,10 +51,12 @@ const App = () => {
 			<Provider store={store}>
 				<StatusBar barStyle="light-content" />
 				<ErrorBoundary>
-					{loading && <AppLayout>
-						<CircularSpinner/>	
-					</AppLayout> ||
-					loadAppContainer(article, clicked)}
+					{(loading && (
+						<AppLayout>
+							<CircularSpinner />
+						</AppLayout>
+					)) ||
+						loadAppContainer(article, clicked)}
 				</ErrorBoundary>
 			</Provider>
 		</ApplicationProvider>
