@@ -10,6 +10,7 @@ import { en } from '../../lang/en'
 import { getLocalName } from '../../helper/text'
 import { OfflineNotice } from '../../components'
 import { HealineListContainer } from '../../layout/headline'
+import { getLocalStoredArticles } from '../../helper/realm'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
@@ -22,17 +23,11 @@ const HeadlineScreen = ({ navigation }) => {
 		refetch().then(() => setRefreshing(false));
 	}
 
-	const getLocalStoredArticles = () => {
-		realm = new Realm({ path: 'ArticleDatabase.realm' })
-		let storedArticles = realm.objects('articles')
-		setLocalArticles(storedArticles)
-	}
-
 	useEffect(()=>{
-		getLocalStoredArticles()
+		setLocalArticles(getLocalStoredArticles())
 	},[])
 
-	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
+	const { data, refetch } = useQuery(GET_ARTICLES_QUERY, {
 		variables: {},
 	})
 

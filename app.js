@@ -14,6 +14,7 @@ import crashlytics from '@react-native-firebase/crashlytics'
 import auth from '@react-native-firebase/auth'
 import AppLayout from './src/frame/app-layout'
 import { CircularSpinner } from './src/components/common'
+import {setMongoRealm} from './src/helper/realm'
 
 const App = () => {
 	const [clicked, setClicked] = useState(false)
@@ -28,38 +29,6 @@ const App = () => {
 		} else {
 			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)} />
 		}
-	}
-
-	const setMongoRealm=()=>{
-		new Realm({
-			path: 'ArticleDatabase.realm',
-			schema: [
-				{
-					name: 'articles',
-					properties: {
-						'_id': 'string',
-						'title': 'string',
-						'shortDescription': 'string',
-						'imageLink': 'string',
-						'content': 'string',
-						'link': 'string',
-						'publishedDate': 'string',
-						'category': 'string',
-						'source': {
-							"type": "source"
-						},
-						'modifiedDate': 'string',
-					}
-				},{
-					name :'source',
-					properties: {
-						"_id":"string",
-						"name":"string",
-						"logoLink":"string"
-					}
-				}
-			]
-		})
 	}
 
 	useEffect(() => {

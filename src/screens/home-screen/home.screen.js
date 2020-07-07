@@ -9,8 +9,7 @@ import Weather from './components/weather.component'
 import crashlytics from '@react-native-firebase/crashlytics'
 import perf from '@react-native-firebase/perf'
 import auth from '@react-native-firebase/auth'
-import Realm from 'realm';
-let realm;
+import { getLocalStoredArticles, setRealmArticles } from '../../helper/realm'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -28,16 +27,10 @@ const Home = ({ navigation }) => {
 		await trace.stop()
 	}
 
-	const getLocalStoredArticles = () => {
-		realm = new Realm({ path: 'ArticleDatabase.realm' });
-		let storedArticles = realm.objects('articles');
-		setLocalArticles({getArticles:storedArticles})
-	}
-
 	useEffect(() => {
 		setNepaliDate(getFormattedCurrentNepaliDate())
 		crashlytics().log('Home page test log.')
-		getLocalStoredArticles()
+		setLocalArticles({getArticles:getLocalStoredArticles()})
 		customTrace()
 	}, [])
 
@@ -47,14 +40,7 @@ const Home = ({ navigation }) => {
 
 	if(!loading && data!=null && data.getArticles && data.getArticles.length){
 		let myArticles = data.getArticles
-		realm = new Realm({ path: 'ArticleDatabase.realm' })
-		realm.write(()=>{
-			const deletingArticles = realm.objects("articles")
-			realm.delete(deletingArticles)
-			myArticles.forEach(obj=>{
-				realm.create('articles',obj)
-			})
-		})
+		setRealmArticles(myArticles)
 	}
 
 	if (error) {
