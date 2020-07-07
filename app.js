@@ -30,18 +30,52 @@ const App = () => {
 		}
 	}
 
+	const setMongoRealm=()=>{
+		new Realm({
+			path: 'ArticleDatabase.realm',
+			schema: [
+				{
+					name: 'articles',
+					properties: {
+						'_id': 'string',
+						'title': 'string',
+						'shortDescription': 'string',
+						'imageLink': 'string',
+						'content': 'string',
+						'link': 'string',
+						'publishedDate': 'string',
+						'category': 'string',
+						'source': {
+							"type": "source"
+						},
+						'modifiedDate': 'string',
+					}
+				},{
+					name :'source',
+					properties: {
+						"_id":"string",
+						"name":"string",
+						"logoLink":"string"
+					}
+				}
+			]
+		})
+	}
+
 	useEffect(() => {
-		SplashScreen.hide()
 		setLoading(true)
+		setMongoRealm()
 		signInAnonymously().then(() => notificationHandler.register(auth().currentUser))
 		notificationHandler
 			.checkForNotification()
 			.then((res) => {
 				setClicked(true)
 				setLoading(false)
+				SplashScreen.hide()
 				setArticle(res.data.getArticle)
 			})
 			.catch(() => {
+				SplashScreen.hide()
 				setLoading(false)
 			})
 	}, [])
