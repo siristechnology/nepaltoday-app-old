@@ -3,30 +3,31 @@ import client from '../../src/graphql/graphql-client'
 import gql from 'graphql-tag'
 import * as RNLocalize from 'react-native-localize'
 import crashlytics from '@react-native-firebase/crashlytics'
+import moment from 'moment'
 
 class NotificationHandler {
 	register = (user) => {
 		messaging()
 			.getToken()
 			.then((token) => this.storeFcmToken(user, token))
-
-		messaging().setBackgroundMessageHandler(this.onBackgroundMessageReceived)
-
-		messaging().onNotificationOpenedApp((msg) => console.log('inside onNotificationOpenedApp', msg))
-
 	}
 
-	checkForNotification(){
-		return new Promise((resolve,reject)=>{
-			messaging().getInitialNotification().then(notify=>{
-				if(notify!=null){
-					this.fetchArticle(notify).then(res=>{
-						resolve(res)
-					})
-				}else{
-					reject({message:'Notification not clicked'})
-				}
-			}).catch(err=>reject(err))
+	checkForNotification() {
+		return new Promise((resolve, reject) => {
+			messaging()
+				.getInitialNotification()
+				.then((notify) => {
+					if (notify != null) {
+						this.fetchArticle(notify)
+							.then((res) => {
+								resolve(res)
+							})
+							.catch((err) => reject(err))
+					} else {
+						resolve({ message: 'Notification not clicked' })
+					}
+				})
+				.catch((err) => reject(err))
 		})
 	}
 
@@ -40,26 +41,28 @@ class NotificationHandler {
 						fcmToken: token,
 						countryCode: RNLocalize.getCountry(),
 						timeZone: RNLocalize.getTimeZone(),
+						modifiedDate: moment.utc(),
 					},
 				},
 			})
 			.catch((reason) => console.log(reason))
 	}
 
-	onBackgroundMessageReceived = async () => {}
-
-	fetchArticle(notify){
-		return new Promise((resolve,reject)=>{
+	fetchArticle(notify) {
+		return new Promise((resolve, reject) => {
 			client
 				.query({
 					query: GET_ARTICLE_QUERY,
 					variables: { _id: notify.data._id },
 				})
-				.then(res=>{
+				.then((res) => {
+					console.log('printing res', res)
 					resolve(res)
-				}).catch(err=>{
+				})
+				.catch((error) => {
+					console.log('printing error', error)
 					crashlytics().recordError(error)
-					reject(err)
+					reject(error)
 				})
 		})
 	}
@@ -94,4 +97,4 @@ const GET_ARTICLE_QUERY = gql`
 	}
 `
 
-export default notificationHandler = new NotificationHandler()
+export default new NotificationHandler()

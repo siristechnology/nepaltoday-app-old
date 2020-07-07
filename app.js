@@ -17,24 +17,17 @@ import { CircularSpinner } from './src/components/common'
 import Realm from 'realm';
 
 const App = () => {
-
 	const [clicked, setClicked] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [article, setArticle] = useState({})
 
 	const loadAppContainer = (article, clicked) => {
-		if(clicked && article._id){
-			return(
-				<AppContainer
-					ref={(navigatorRef)=>NavigationService.setTopLevelNavigator(navigatorRef,'ArticleDetail', { article: article })}
-				/>
+		if (clicked && article._id) {
+			return (
+				<AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'ArticleDetail', { article: article })} />
 			)
-		}else{
-			return(
-				<AppContainer
-					ref={(navigatorRef)=>NavigationService.setTopLevelNavigator(navigatorRef)}
-				/>
-			)
+		} else {
+			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)} />
 		}
 	}
 
@@ -70,13 +63,11 @@ const App = () => {
 		})
 	}
 
-
-  	useEffect(() => {
+	useEffect(() => {
 		setLoading(true)
 		setMongoRealm()
-		signInAnonymously().then(() => notificationHandler.register(auth().currentUser))
 		notificationHandler.checkForNotification().then(res=>{
-			SplashScreen.hide();
+			SplashScreen.hide()
 			setClicked(true)
 			setLoading(false)
 			setArticle(res.data.getArticle)
@@ -91,10 +82,12 @@ const App = () => {
 			<Provider store={store}>
 				<StatusBar barStyle="light-content" />
 				<ErrorBoundary>
-					{loading && <AppLayout>
-						<CircularSpinner/>	
-					</AppLayout> ||
-					loadAppContainer(article, clicked)}
+					{(loading && (
+						<AppLayout>
+							<CircularSpinner />
+						</AppLayout>
+					)) ||
+						loadAppContainer(article, clicked)}
 				</ErrorBoundary>
 			</Provider>
 		</ApplicationProvider>
