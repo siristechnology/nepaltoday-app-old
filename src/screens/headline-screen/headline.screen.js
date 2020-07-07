@@ -3,35 +3,38 @@ import ScrollableTabView, {
 	ScrollableTabBar,
 } from 'react-native-scrollable-tab-view'
 import { Text } from 'react-native-ui-kitten/ui'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { en } from '../../lang/en'
 import { getLocalName } from '../../helper/text'
 import { OfflineNotice } from '../../components'
-import { CircularSpinner } from '../../components/common'
 import { HealineListContainer } from '../../layout/headline'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
 const HeadlineScreen = ({ navigation }) => {
 	const [refreshing, setRefreshing] = useState(false);
+	const [localArticles, setLocalArticles] = useState([])
 
 	const handleRefresh = () => {
 		setRefreshing(true);
 		refetch().then(() => setRefreshing(false));
 	}
 
+	const getLocalStoredArticles = () => {
+		realm = new Realm({ path: 'ArticleDatabase.realm' })
+		let storedArticles = realm.objects('articles')
+		setLocalArticles(storedArticles)
+	}
+
+	useEffect(()=>{
+		getLocalStoredArticles()
+	},[])
+
 	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
 		variables: {},
 	})
-
-	if (loading) {
-		return <CircularSpinner />
-	} else if (error) {
-		console.log('error:' + JSON.stringify(error))
-		throw new Error(`Error occured here ${JSON.stringify(error)}`)
-	}
 
 	const renderTab = () => {
 		const tabNames = [
@@ -46,7 +49,9 @@ const HeadlineScreen = ({ navigation }) => {
 		return tabNames.map((tabname, idx) => {
 			const localTabName = getLocalName(tabname)
 
-			const dataArr = data.getArticles.filter(
+			let myArr = data && data.getArticles && data.getArticles.length && data.getArticles || localArticles;
+
+			const dataArr = myArr.filter(
 				a => a.category === tabname,
 			)
 
@@ -74,6 +79,7 @@ const HeadlineScreen = ({ navigation }) => {
 
 	return (
 		<ScrollableTabView
+			locked={true}
 			initialPage={0}
 			renderTabBar={() => <ScrollableTabBar />}>
 			{renderTab()}

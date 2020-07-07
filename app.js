@@ -52,6 +52,7 @@ const App = () => {
 						'content': 'string',
 						'link': 'string',
 						'publishedDate': 'string',
+						'category': 'string',
 						'source': {
 							"type": "source"
 						},
@@ -71,15 +72,16 @@ const App = () => {
 
 
   	useEffect(() => {
-		SplashScreen.hide()
 		setLoading(true)
 		setMongoRealm()
 		signInAnonymously().then(() => notificationHandler.register(auth().currentUser))
 		notificationHandler.checkForNotification().then(res=>{
+			SplashScreen.hide();
 			setClicked(true)
 			setLoading(false)
 			setArticle(res.data.getArticle)
 		}).catch(err=>{
+			SplashScreen.hide()
 			setLoading(false)
 		})
 	}, [])
