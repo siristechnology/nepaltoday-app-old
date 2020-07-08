@@ -1,4 +1,7 @@
 import { Text, StyleSheet, View } from 'react-native'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+
 import React, { useState, useEffect } from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
@@ -8,29 +11,22 @@ import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
 import crashlytics from '@react-native-firebase/crashlytics'
-import perf from '@react-native-firebase/perf'
-import auth from '@react-native-firebase/auth'
+import actionCreators from '../../ducks/actions'
 
-const Home = ({ navigation }) => {
+const Home = ({ navigation, articles, actions }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
 	const [refreshing, setRefreshing] = useState(false)
+
+	actions.startToOpenArticle()
 
 	const handleRefresh = () => {
 		setRefreshing(true)
 		refetch().then(() => setRefreshing(false))
 	}
 
-	async function customTrace() {
-		const trace = await perf().startTrace('custom_trace_beta')
-		trace.putAttribute('user', auth().currentUser.uid)
-		await trace.stop()
-	}
-
 	useEffect(() => {
 		setNepaliDate(getFormattedCurrentNepaliDate())
 		crashlytics().log('Home page test log.')
-
-		customTrace()
 	}, [])
 
 	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
@@ -42,7 +38,7 @@ const Home = ({ navigation }) => {
 		crashlytics().recordError(new Error(error))
 	}
 
-	if (!loading) {
+	if (!loading && !articles) {
 		return (
 			<AppLayout>
 				<View style={style.headerStyle}>
@@ -104,4 +100,12 @@ const style = StyleSheet.create({
 	},
 })
 
-export default Home
+function mapStateToProps(state) {
+	return { articles: state.articles }
+}
+
+function mapDispatchToProps(dispatch) {
+	return { actions: bindActionCreators(actionCreators, dispatch) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
