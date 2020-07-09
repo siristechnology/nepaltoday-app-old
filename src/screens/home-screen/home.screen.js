@@ -10,10 +10,12 @@ import Weather from './components/weather.component'
 import crashlytics from '@react-native-firebase/crashlytics'
 import perf from '@react-native-firebase/perf'
 import auth from '@react-native-firebase/auth'
+import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
 	const [refreshing, setRefreshing] = useState(false)
+	const [localArticles, setLocalArticles] = useState({getArticles:[]})
 
 	const handleRefresh = () => {
 		setRefreshing(true)
@@ -26,10 +28,19 @@ const Home = ({ navigation }) => {
 		await trace.stop()
 	}
 
+	fetchArticlesFromAsyncStorage = () => {
+		fetchfromAsync().then(res=>{
+			setLocalArticles({getArticles: res})
+		}).catch(err=>{
+			console.log(err)
+			setLocalArticles([])
+		})
+	}
+
 	useEffect(() => {
 		setNepaliDate(getFormattedCurrentNepaliDate())
 		crashlytics().log('Home page test log.')
-
+		fetchArticlesFromAsyncStorage()
 		customTrace()
 	}, [])
 
@@ -37,19 +48,31 @@ const Home = ({ navigation }) => {
 		variables: {},
 	})
 
+	if(!loading && data!=null && data.getArticles && data.getArticles.length){
+		let myArticles = data.getArticles
+		storetoAsync(myArticles)
+	}
+
 	if (error) {
 		console.log('printing error', error)
 		crashlytics().recordError(new Error(error))
 	}
 
-	if (!loading) {
+	let dataArticles = data && data.getArticles && data.getArticles || []
+
+	if (dataArticles.length || localArticles.getArticles.length) {
 		return (
 			<AppLayout>
 				<View style={style.headerStyle}>
 					<Text style={style.textStyle}>{nepaliDate}</Text>
 					<Weather />
 				</View>
-				<ArticleListContainer navigation={navigation} articles={data} refreshing={refreshing} handleRefresh={handleRefresh} />
+				<ArticleListContainer 
+					navigation={navigation} 
+					articles={data && data.getArticles && data.getArticles.length && data || localArticles} 
+					refreshing={refreshing} 
+					handleRefresh={handleRefresh} 
+				/>
 			</AppLayout>
 		)
 	} else {

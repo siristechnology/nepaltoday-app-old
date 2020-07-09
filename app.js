@@ -39,14 +39,15 @@ const App = () => {
 
 
   useEffect(() => {
-		SplashScreen.hide()
 		setLoading(true)
 		signInAnonymously().then(() => notificationHandler.register(auth().currentUser))
 		notificationHandler.checkForNotification().then(res=>{
+			SplashScreen.hide()
 			setClicked(true)
 			setLoading(false)
 			setArticle(res.data.getArticle)
 		}).catch(err=>{
+			SplashScreen.hide()
 			setLoading(false)
 		})
 	}, [])
