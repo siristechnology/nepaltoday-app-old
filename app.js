@@ -14,7 +14,6 @@ import crashlytics from '@react-native-firebase/crashlytics'
 import auth from '@react-native-firebase/auth'
 import AppLayout from './src/frame/app-layout'
 import { CircularSpinner } from './src/components/common'
-import {setMongoRealm} from './src/helper/realm'
 
 const App = () => {
 	const [clicked, setClicked] = useState(false)
@@ -31,22 +30,19 @@ const App = () => {
 		}
 	}
 
-	useEffect(() => {
+
+  useEffect(() => {
 		setLoading(true)
-		setMongoRealm()
 		signInAnonymously().then(() => notificationHandler.register(auth().currentUser))
-		notificationHandler
-			.checkForNotification()
-			.then((res) => {
-				setClicked(true)
-				setLoading(false)
-				SplashScreen.hide()
-				setArticle(res.data.getArticle)
-			})
-			.catch(() => {
-				SplashScreen.hide()
-				setLoading(false)
-			})
+		notificationHandler.checkForNotification().then(res=>{
+			SplashScreen.hide()
+			setClicked(true)
+			setLoading(false)
+			setArticle(res.data.getArticle)
+		}).catch(err=>{
+			SplashScreen.hide()
+			setLoading(false)
+		})
 	}, [])
 
 	return (

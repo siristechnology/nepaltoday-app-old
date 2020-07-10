@@ -10,7 +10,8 @@ import { en } from '../../lang/en'
 import { getLocalName } from '../../helper/text'
 import { OfflineNotice } from '../../components'
 import { HealineListContainer } from '../../layout/headline'
-import { getLocalStoredArticles } from '../../helper/realm'
+import { fetchfromAsync } from '../../helper/cacheStorage'
+import { CircularSpinner } from '../../components/common'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
@@ -23,13 +24,29 @@ const HeadlineScreen = ({ navigation }) => {
 		refetch().then(() => setRefreshing(false));
 	}
 
+	fetchArticlesFromAsyncStorage = () => {
+		fetchfromAsync().then(res=>{
+			setLocalArticles({getArticles: res})
+		}).catch(err=>{
+			console.log(err)
+			setLocalArticles([])
+		})
+	}
+
 	useEffect(()=>{
-		setLocalArticles(getLocalStoredArticles())
+		fetchArticlesFromAsyncStorage()
 	},[])
 
-	const { data, refetch } = useQuery(GET_ARTICLES_QUERY, {
+	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
 		variables: {},
 	})
+
+	if (loading && !localArticles.length) {
+		return <CircularSpinner />
+	} else if (error) {
+		console.log('error:' + JSON.stringify(error))
+		throw new Error(`Error occured here ${JSON.stringify(error)}`)
+	}
 
 	const renderTab = () => {
 		const tabNames = [
