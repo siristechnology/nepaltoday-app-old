@@ -11,7 +11,11 @@ const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, r
 		onItemPress(article)
 	}
 	const renderItem = (info) => {
-		return <ArticleListItem style={themedStyle.item} article={info.item} onPress={() => _onItemPress(info.item)} />
+		return <ArticleListItem 
+			style={themedStyle.item} 
+			article={info.item} 
+			onPress={() => _onItemPress(info.item)} 
+		/>
 	}
 
 	return (

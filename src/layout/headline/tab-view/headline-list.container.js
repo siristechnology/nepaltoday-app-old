@@ -8,7 +8,7 @@ export const HealineListContainer = ({
 	handleRefresh,
 }) => {
 	const onItemPress = article => {
-		navigation.navigate('ArticleDetail', { article })
+		navigation.navigate('ArticleDetail', { article,articles })
 	}
 
 	return (
