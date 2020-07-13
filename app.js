@@ -23,7 +23,7 @@ const App = () => {
 	const loadAppContainer = (article, clicked) => {
 		if (clicked && article._id) {
 			return (
-				<AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'ArticleDetail', { article: article })} />
+				<AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'ArticleDetail', { article: article, articles: [] })} />
 			)
 		} else {
 			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)} />

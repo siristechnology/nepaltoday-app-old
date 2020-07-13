@@ -5,7 +5,9 @@ import ViewPager from '@react-native-community/viewpager';
 
 interface State {
 	article,
-	articles
+	articles,
+	articleIndex,
+	slicedArticles
 }
 
 export default class ArticleDetailContainer extends React.PureComponent<any, State> {
@@ -17,9 +19,11 @@ export default class ArticleDetailContainer extends React.PureComponent<any, Sta
 		}else{
 			articles = this.props.navigation.state.params?.articles || []
 		}
+		let articleIndex =  articles.indexOf(article)
+		let slicedArticles = articles.slice(articleIndex-5, articleIndex+6)
 		return (
-		<ViewPager style={{flex:1}} initialPage={articles.indexOf(article)} pageMargin={5}>
-			{articles.map((iArticle,i)=>(
+		<ViewPager style={{flex:1}} initialPage={slicedArticles.indexOf(article)} pageMargin={5}>
+			{slicedArticles.map((iArticle,i)=>(
 				<View key={i}>
 					<ArticleDetail
 						article={iArticle}
