@@ -20,7 +20,7 @@ export default class ArticleDetailContainer extends React.PureComponent<any, Sta
 			articles = this.props.navigation.state.params?.articles || []
 		}
 		let articleIndex =  articles.indexOf(article)
-		let slicedArticles = articles.slice(articleIndex-5, articleIndex+6)
+		let slicedArticles = articles.slice((articleIndex-5)>0 && (articleIndex-5) || 0 , articleIndex+6)
 		return (
 		<ViewPager style={{flex:1}} initialPage={slicedArticles.indexOf(article)} pageMargin={5}>
 			{slicedArticles.map((iArticle,i)=>(
