@@ -1,11 +1,12 @@
 import React from 'react'
 import { Text } from 'react-native-ui-kitten/ui'
 import { withStyles } from 'react-native-ui-kitten/theme'
-import { ImageBackground, TouchableOpacity, View } from 'react-native'
+import { ImageBackground, View } from 'react-native'
 
 import { getRelativeTime } from '../../../helper/time'
 import { ArticleActivityBar } from '../../../components/articles'
 import { ActivityAuthoring, textStyle } from '../../../components/common'
+import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const ArticleListItemComponent = React.memo((props) => {
 	const { style, themedStyle, article, ...restProps } = props
