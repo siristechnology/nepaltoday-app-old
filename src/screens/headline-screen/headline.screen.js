@@ -18,6 +18,7 @@ const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 const HeadlineScreen = ({ navigation }) => {
 	const [refreshing, setRefreshing] = useState(false);
 	const [localArticles, setLocalArticles] = useState([])
+	const [touchEnable, setTouchEnable] = useState(true)
 
 	const handleRefresh = () => {
 		setRefreshing(true);
@@ -26,7 +27,7 @@ const HeadlineScreen = ({ navigation }) => {
 
 	fetchArticlesFromAsyncStorage = () => {
 		fetchfromAsync().then(res=>{
-			setLocalArticles({getArticles: res})
+			setLocalArticles(res)
 		}).catch(err=>{
 			console.log(err)
 			setLocalArticles([])
@@ -79,6 +80,7 @@ const HeadlineScreen = ({ navigation }) => {
 				<View tabLabel={localTabName} key={idx}>
 					<OfflineNotice />
 					<HealineListContainer
+						touchEnable={touchEnable}
 						articles={dataArr}
 						navigation={navigation}
 						refreshing={refreshing}
@@ -89,12 +91,20 @@ const HeadlineScreen = ({ navigation }) => {
 		})
 	}
 
+	const onPageScrollStateChanged = (evt) => {
+		if(evt=='idle'){
+			setTouchEnable(true)
+		}else{
+			setTouchEnable(false)
+		}
+	}
+
 	return (
 		<ScrollableTabView
-			locked={true}
+			onPageScrollStateChanged={onPageScrollStateChanged}
 			initialPage={0}
 			renderTabBar={() => <ScrollableTabBar />}>
-			{renderTab()}
+			{renderTab(touchEnable)}
 		</ScrollableTabView>
 	)
 }

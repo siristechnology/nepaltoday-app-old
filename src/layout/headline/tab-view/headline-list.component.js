@@ -5,12 +5,16 @@ import { FlatList } from 'react-navigation';
 import { withStyles } from 'react-native-ui-kitten/theme'
 import { ArticleListItem } from '../../article/article-list/article-list-item.component'
 
-const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh }) => {
+const HeadlineListComponent = React.memo(({ touchEnable, articles, onItemPress, themedStyle, refreshing, handleRefresh }) => {
 	const _onItemPress = (article) => {
 		onItemPress(article)
 	}
 	const renderItem = (info) => {
-		return <ArticleListItem style={themedStyle.item} article={info.item} onPress={() => _onItemPress(info.item)} />
+		return <ArticleListItem 
+			style={themedStyle.item} 
+			article={info.item} 
+			onPress={() => touchEnable && _onItemPress(info.item)} 
+		/>
 	}
 
 	return (

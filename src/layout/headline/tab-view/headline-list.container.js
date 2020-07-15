@@ -6,6 +6,7 @@ export const HealineListContainer = ({
 	articles,
 	refreshing,
 	handleRefresh,
+	touchEnable
 }) => {
 	const onItemPress = article => {
 		navigation.navigate('ArticleDetail', { article,articles })
@@ -13,6 +14,7 @@ export const HealineListContainer = ({
 
 	return (
 		<HeadlineList
+			touchEnable={touchEnable}
 			articles={articles}
 			onItemPress={onItemPress}
 			refreshing={refreshing}
