@@ -26,7 +26,7 @@ const HeadlineScreen = ({ navigation }) => {
 
 	fetchArticlesFromAsyncStorage = () => {
 		fetchfromAsync().then(res=>{
-			setLocalArticles({getArticles: res})
+			setLocalArticles(res)
 		}).catch(err=>{
 			console.log(err)
 			setLocalArticles([])
@@ -91,7 +91,7 @@ const HeadlineScreen = ({ navigation }) => {
 
 	return (
 		<ScrollableTabView
-			locked={true}
+			style={{flex:1}}
 			initialPage={0}
 			renderTabBar={() => <ScrollableTabBar />}>
 			{renderTab()}
