@@ -69,14 +69,14 @@ const HeadlineScreen = ({ navigation }) => {
 
 			if (dataArr.length <= 0) {
 				return (
-					<View tabLabel={localTabName} key={idx}>
+					<View style={{flex:1}} tabLabel={localTabName} key={idx}>
 						<Text>Not available</Text>
 					</View>
 				)
 			}
 
 			return (
-				<View tabLabel={localTabName} key={idx}>
+				<View style={{flex:1}} tabLabel={localTabName} key={idx}>
 					<OfflineNotice />
 					<HealineListContainer
 						articles={dataArr}
@@ -93,6 +93,7 @@ const HeadlineScreen = ({ navigation }) => {
 		<ScrollableTabView
 			style={{flex:1}}
 			initialPage={0}
+			prerenderingSiblingsNumber={1}
 			renderTabBar={() => <ScrollableTabBar />}>
 			{renderTab()}
 		</ScrollableTabView>
