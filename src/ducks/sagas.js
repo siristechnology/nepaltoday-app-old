@@ -1,16 +1,61 @@
-import { all } from 'redux-saga/effects'
-// import { commitMutation, graphql } from 'react-relay';
-// import environment from '../../environment.js';
-// import types from './types.js';
+import { all, takeEvery, put } from 'redux-saga/effects'
+import types from './types.js';
+import client from '../graphql/graphql-client'
+import gql from 'graphql-tag'
+import { fetchfromAsync, storetoAsync } from '../helper/cacheStorage.js';
 
-const watchOpenArticle = function* watchOpenArticle() {
-	// yield takeEvery(types.OPEN_ARTICLE_START, function* (input) {
-	// use it to make call to get article detail
-	// });
+const watchFetchFromCache = function* watchFetchFromCache(){
+	console.log("Saga running")
+	yield takeEvery(types.FETCH_FROM_CACHE_START, function* (input){
+		let fetchArticles = yield fetchfromAsync()
+		yield put({
+			type: types.FETCH_FROM_CACHE_END,
+			articles: fetchArticles
+		})
+	})
+}
+
+const watchRefreshCache = function* watchRefreshCache(){
+	yield takeEvery(types.REFRESH_CACHE_START, function* (input){
+		console.log("I m called")
+		const articles = yield client.query({
+			query: gql`
+				query homeScreenQuery {
+					getArticles {
+						_id
+						title
+						shortDescription
+						content
+						link
+						imageLink
+						publishedDate
+						modifiedDate
+						category
+						source {
+							_id
+							name
+							logoLink
+						}
+					}
+				}
+			`,
+		})
+
+		storetoAsync(articles)
+
+		yield put({
+			type: types.REFRESH_CACHE_END,
+			articles: articles
+		})
+
+	})
 }
 
 const homeSaga = function* homeSaga() {
-	yield all([watchOpenArticle()])
+	yield all([
+		watchFetchFromCache(),
+		watchRefreshCache()
+	])
 }
 
 export default homeSaga
