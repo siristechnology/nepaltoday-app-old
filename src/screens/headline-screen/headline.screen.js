@@ -20,6 +20,7 @@ const HeadlineScreen = (props) => {
 	const handleRefresh = () => {
 		setRefreshing(true);
 		props.getOnlineArticles()
+		setRefreshing(false)
 	}
 
 	useEffect(()=>{
