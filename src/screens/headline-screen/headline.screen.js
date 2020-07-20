@@ -4,48 +4,35 @@ import ScrollableTabView, {
 } from 'react-native-scrollable-tab-view'
 import { Text } from 'react-native-ui-kitten/ui'
 import React, { useState, useEffect } from 'react'
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
 import { en } from '../../lang/en'
 import { getLocalName } from '../../helper/text'
 import { OfflineNotice } from '../../components'
 import { HealineListContainer } from '../../layout/headline'
-import { fetchfromAsync } from '../../helper/cacheStorage'
 import { CircularSpinner } from '../../components/common'
+import { connect } from 'react-redux'
+import types from './../../ducks/types';
 
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
-const HeadlineScreen = ({ navigation }) => {
+const HeadlineScreen = (props) => {
 	const [refreshing, setRefreshing] = useState(false);
-	const [localArticles, setLocalArticles] = useState([])
 
 	const handleRefresh = () => {
 		setRefreshing(true);
-		refetch().then(() => setRefreshing(false));
-	}
-
-	fetchArticlesFromAsyncStorage = () => {
-		fetchfromAsync().then(res=>{
-			setLocalArticles(res)
-		}).catch(err=>{
-			console.log(err)
-			setLocalArticles([])
-		})
+		props.getOnlineArticles()
+		setRefreshing(false)
 	}
 
 	useEffect(()=>{
-		fetchArticlesFromAsyncStorage()
+		props.getArticles()
 	},[])
 
-	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
-		variables: {},
-	})
+	let data = props.articles.data;
 
-	if (loading && !localArticles.length) {
+	let dataArticles = data && data.getArticles && data.getArticles || []
+
+	if (!dataArticles.length) {
 		return <CircularSpinner />
-	} else if (error) {
-		console.log('error:' + JSON.stringify(error))
-		throw new Error(`Error occured here ${JSON.stringify(error)}`)
 	}
 
 	const renderTab = () => {
@@ -61,9 +48,7 @@ const HeadlineScreen = ({ navigation }) => {
 		return tabNames.map((tabname, idx) => {
 			const localTabName = getLocalName(tabname)
 
-			let myArr = data && data.getArticles && data.getArticles.length && data.getArticles || localArticles;
-
-			const dataArr = myArr.filter(
+			const dataArr = dataArticles.filter(
 				a => a.category === tabname,
 			)
 
@@ -80,7 +65,7 @@ const HeadlineScreen = ({ navigation }) => {
 					<OfflineNotice />
 					<HealineListContainer
 						articles={dataArr}
-						navigation={navigation}
+						navigation={props.navigation}
 						refreshing={refreshing}
 						handleRefresh={handleRefresh}
 					/>
@@ -100,25 +85,13 @@ const HeadlineScreen = ({ navigation }) => {
 	)
 }
 
-export const GET_ARTICLES_QUERY = gql`
-	query homeScreenQuery {
-		getArticles {
-			_id
-			title
-			shortDescription
-			content
-			link
-			imageLink
-			publishedDate
-			modifiedDate
-			category
-			source {
-				_id
-				name
-				logoLink
-			}
-		}
-	}
-`
+function mapStateToProps(state) {
+	return { articles: state.homeReducer.articles }
+}
 
-export default HeadlineScreen
+const mapDispatchToProps = dispatch => ({
+	getArticles: () => dispatch({ type: types.FETCH_FROM_CACHE_START }),
+	getOnlineArticles: () => dispatch({type: types.REFRESH_CACHE_START})
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeadlineScreen)
