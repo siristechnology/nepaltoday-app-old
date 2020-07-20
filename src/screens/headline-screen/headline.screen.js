@@ -33,11 +33,7 @@ const HeadlineScreen = (props) => {
 
 	if (!dataArticles.length) {
 		return <CircularSpinner />
-	} 
-	// else if (error) {
-	// 	console.log('error:' + JSON.stringify(error))
-	// 	throw new Error(`Error occured here ${JSON.stringify(error)}`)
-	// }
+	}
 
 	const renderTab = () => {
 		const tabNames = [
