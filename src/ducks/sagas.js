@@ -5,7 +5,6 @@ import gql from 'graphql-tag'
 import { fetchfromAsync, storetoAsync } from '../helper/cacheStorage.js';
 
 const watchFetchFromCache = function* watchFetchFromCache(){
-	console.log("Saga running")
 	yield takeEvery(types.FETCH_FROM_CACHE_START, function* (input){
 		let fetchArticles = yield fetchfromAsync()
 		yield put({
@@ -17,7 +16,6 @@ const watchFetchFromCache = function* watchFetchFromCache(){
 
 const watchRefreshCache = function* watchRefreshCache(){
 	yield takeEvery(types.REFRESH_CACHE_START, function* (input){
-		console.log("I m called")
 		const articles = yield client.query({
 			query: gql`
 				query homeScreenQuery {
