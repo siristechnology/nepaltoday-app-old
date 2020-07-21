@@ -5,12 +5,14 @@ import { createBottomTabNavigator } from 'react-navigation-tabs'
 import HomeScreen from '../home-screen/home.screen'
 import TwitterScreen from '../twitter-screen/twitter.screen'
 import HeadlineScreen from '../headline-screen/headline.screen'
+import CoronaScreen from '../corona-screen/corona.screen'
 
 export const BottomTabScreen = createBottomTabNavigator(
 	{
 		Home: HomeScreen,
 		Headline: HeadlineScreen,
-		Twitter: TwitterScreen,
+		Corona: CoronaScreen,
+		Twitter: TwitterScreen
 	},
 	{
 		initialRouteName: 'Home',
@@ -24,8 +26,9 @@ export const BottomTabScreen = createBottomTabNavigator(
 					iconName = 'newspaper'
 				} else if (routeName === 'Twitter') {
 					iconName = 'twitter'
+				} else if(routeName === 'Corona'){
+					iconName = 'skull'
 				}
-
 				return <FontAwesome name={iconName} size={25} color={tintColor} />
 			},
 		}),
