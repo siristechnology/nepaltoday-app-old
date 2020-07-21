@@ -7,7 +7,7 @@ import { HealineListContainer } from '../../layout/headline'
 import { CircularSpinner } from '../../components/common'
 import { connect } from 'react-redux'
 import types from './../../ducks/types';
-import { Container, Tab, Tabs } from 'native-base';
+import { Container, Tab, Tabs, ScrollableTab } from 'native-base';
 
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
@@ -39,7 +39,7 @@ const HeadlineScreen = (props) => {
 			BUSINESS,
 			OPINION,
 			SOCIAL,
-			SPORTS,
+			SPORTS
 		]
 
 		return tabNames.map((tabname, idx) => {
@@ -89,7 +89,12 @@ const HeadlineScreen = (props) => {
 
 	return (
 		<Container>
-			<Tabs tabBarUnderlineStyle={{backgroundColor:'#ff0000'}}>
+			<Tabs
+				tabBarUnderlineStyle={{backgroundColor:'#ff0000'}} 
+				renderTabBar={()=> <ScrollableTab 
+					tabsContainerStyle={{backgroundColor:'#fff'}}
+				/>}
+			>
 				{renderTab()}
 			</Tabs>
 		</Container>
