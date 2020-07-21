@@ -1,7 +1,3 @@
-import { View } from 'react-native'
-import ScrollableTabView, {
-	ScrollableTabBar,
-} from 'react-native-scrollable-tab-view'
 import { Text } from 'react-native-ui-kitten/ui'
 import React, { useState, useEffect } from 'react'
 import { en } from '../../lang/en'
@@ -11,6 +7,7 @@ import { HealineListContainer } from '../../layout/headline'
 import { CircularSpinner } from '../../components/common'
 import { connect } from 'react-redux'
 import types from './../../ducks/types';
+import { Container, Tab, Tabs, ScrollableTab } from 'native-base';
 
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
@@ -42,7 +39,7 @@ const HeadlineScreen = (props) => {
 			BUSINESS,
 			OPINION,
 			SOCIAL,
-			SPORTS,
+			SPORTS
 		]
 
 		return tabNames.map((tabname, idx) => {
@@ -54,14 +51,30 @@ const HeadlineScreen = (props) => {
 
 			if (dataArr.length <= 0) {
 				return (
-					<View style={{flex:1}} tabLabel={localTabName} key={idx}>
+					<Tab 
+						style={{flex:1}} 
+						heading={localTabName} 
+						key={idx}
+						tabStyle={{backgroundColor:'#fff'}} 
+						activeTabStyle={{backgroundColor:'#fff'}} 
+						textStyle={{color:'#000'}} 
+						activeTextStyle={{color:'#000'}}
+					>
 						<Text>Not available</Text>
-					</View>
+					</Tab>
 				)
 			}
 
 			return (
-				<View style={{flex:1}} tabLabel={localTabName} key={idx}>
+				<Tab 
+					style={{flex:1}} 
+					heading={localTabName} 
+					key={idx} 
+					tabStyle={{backgroundColor:'#fff'}} 
+					activeTabStyle={{backgroundColor:'#fff'}} 
+					textStyle={{color:'#000'}} 
+					activeTextStyle={{color:'#000'}}
+				>
 					<OfflineNotice />
 					<HealineListContainer
 						articles={dataArr}
@@ -69,19 +82,22 @@ const HeadlineScreen = (props) => {
 						refreshing={refreshing}
 						handleRefresh={handleRefresh}
 					/>
-				</View>
+				</Tab>
 			)
 		})
 	}
 
 	return (
-		<ScrollableTabView
-			style={{flex:1}}
-			initialPage={0}
-			prerenderingSiblingsNumber={1}
-			renderTabBar={() => <ScrollableTabBar />}>
-			{renderTab()}
-		</ScrollableTabView>
+		<Container>
+			<Tabs
+				tabBarUnderlineStyle={{backgroundColor:'#ff0000'}} 
+				renderTabBar={()=> <ScrollableTab 
+					tabsContainerStyle={{backgroundColor:'#fff'}}
+				/>}
+			>
+				{renderTab()}
+			</Tabs>
+		</Container>
 	)
 }
 
