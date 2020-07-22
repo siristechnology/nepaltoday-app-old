@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-const CountryCard = (props) => {
+const DistrictCard = (props) => {
 
     const Divider = () => {
         return(
@@ -33,20 +33,20 @@ const CountryCard = (props) => {
     return(
         <View style={styles.container}>
             <Text style={styles.title}>
-                {props.stat.country}
+                {props.stat.name}
             </Text>
             <Divider/>
             <View style={styles.statContainer}>
-                {renderStatView('Total Cases', props.stat.total_cases)}
-                {renderStatView('Total Deaths', props.stat.total_deaths)}
-                {renderStatView('New Cases', props.stat.new_cases)}
-                {renderStatView('New Deaths', props.stat.new_deaths)}
+                {renderStatView('Total Cases', props.stat.totalCases)}
+                {renderStatView('Active Cases', props.stat.activeCases)}
+                {renderStatView('Recovered', props.stat.recovered)}
+                {renderStatView('Deaths', props.stat.deaths)}
             </View>
         </View>
     )
 }
 
-export default CountryCard
+export default DistrictCard
 
 const styles = StyleSheet.create({
     container: {

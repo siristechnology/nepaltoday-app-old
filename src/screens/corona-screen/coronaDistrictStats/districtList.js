@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { View, RefreshControl, Text, StyleSheet } from 'react-native'
 import { FlatList } from 'react-navigation'
 import { getRelativeTime } from './../../../helper/time'
-import CountryCard from './countryCard'
+import DistrictCard from './districtCard'
 import { useQuery } from '@apollo/react-hooks'
 import { CircularSpinner } from '../../../components/common'
 import gql from 'graphql-tag'
 import AppLayout from '../../../frame/app-layout'
 
-const CountryList = () => {
+const DistrictList = () => {
 
     const [refreshing, setRefreshing] = useState(false)
 
@@ -19,7 +19,7 @@ const CountryList = () => {
             .catch(err=>console.log("refetch error",err))
     } 
 
-    const { loading, data, refetch, error } = useQuery(GET_CORONA_STATS, {
+    const { loading, data, refetch, error } = useQuery(GET_DISTRICT_CORONA_STATS, {
 		variables: {},
     })
 
@@ -27,10 +27,10 @@ const CountryList = () => {
         console.log("Error here",error)
     }
 
-    const lastUpdated = data && data.getLatestCoronaStats && getRelativeTime(data.getLatestCoronaStats.stats.createdDate)
+    const lastUpdated = data && data.getDistrictCoronaStats && getRelativeTime(data.getDistrictCoronaStats.createdDate)
 
     const renderItem = (info) => {
-        return <CountryCard
+        return <DistrictCard
             stat={info.item}
         />
     }
@@ -50,8 +50,8 @@ const CountryList = () => {
                     </Text>
                     <FlatList
                         contentContainerStyle={styles.listContainer}
-                        keyExtractor={(item) => item.country}
-                        data={data.getLatestCoronaStats.stats}
+                        keyExtractor={(item) => item.name}
+                        data={data.getDistrictCoronaStats.districts}
                         renderItem={renderItem}
                         refreshControl={
                             <RefreshControl 
@@ -68,16 +68,16 @@ const CountryList = () => {
 
 }
 
-const GET_CORONA_STATS = gql`
+const GET_DISTRICT_CORONA_STATS = gql`
 	query coronaScreenQuery {
-		getLatestCoronaStats {
+		getDistrictCoronaStats {
             createdDate
-            stats {
-                country
-                total_cases
-                total_deaths
-                new_cases
-                new_deaths
+            districts{
+                name,
+                totalCases,
+                activeCases,
+                recovered,
+                deaths
             }
         }
     }`
@@ -97,4 +97,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default CountryList
+export default DistrictList

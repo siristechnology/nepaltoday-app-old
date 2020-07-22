@@ -1,63 +1,42 @@
-import { Text, StyleSheet, View } from 'react-native'
-import React, { useState } from 'react'
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
-import AppLayout from '../../frame/app-layout'
-import { CircularSpinner } from '../../components/common'
-import CountryList from './coronaCountryStats/countryList'
+import React from 'react'
+import { StyleSheet, View, Text } from 'react-native'
+import { Container, Tab, Tabs, ScrollableTab } from 'native-base';
+import DistrictList from './coronaDistrictStats/districtList';
+import CountryList from './coronaCountryStats/countryList';
 
-const CoronaScreen = (props) => {
-    const [refreshing, setRefreshing] = useState(false)
-
-    const handleRefresh = () => {
-		setRefreshing(true)
-		refetch().then(() => setRefreshing(false))
-    } 
-
-    const { loading, data, refetch, error } = useQuery(GET_CORONA_STATS, {
-		variables: {},
-    })
-
-    if(error){
-        console.log("Error here",error)
-    }
-
-    if(loading){
-        return (
-			<AppLayout>
-				<CircularSpinner />
-			</AppLayout>
-		)
-    }else{
-        return(
-            <AppLayout>
-                <View style={style.headerStyle}>
-					<Text style={style.textStyle}>कोरोना तथ्याङ्क</Text>
-				</View>
-                <CountryList
-                    stats = {data.getLatestCoronaStats}
-                    refreshing={refreshing} 
-					handleRefresh={handleRefresh}
-                />
-            </AppLayout>
-        )
-    }
-
+const CoronaScreen = () => {
+    return(
+        <Container>
+            <View style={style.headerStyle}>
+		        <Text style={style.textStyle}>कोरोना तथ्याङ्क</Text>
+ 			</View>
+            <Tabs
+                tabBarUnderlineStyle={{backgroundColor:'#ff0000'}} 
+            >
+                <Tab
+                    style={{flex:1}}
+                    heading="अन्तर्राष्ट्रिय"
+                    tabStyle={{backgroundColor:'#fff'}} 
+					activeTabStyle={{backgroundColor:'#fff'}} 
+					textStyle={{color:'#000'}} 
+					activeTextStyle={{color:'#000'}}
+                >
+                    <CountryList/>
+                </Tab>
+                <Tab
+                    style={{flex:1}}
+                    heading="राष्ट्रिय"
+                    tabStyle={{backgroundColor:'#fff'}} 
+					activeTabStyle={{backgroundColor:'#fff'}} 
+					textStyle={{color:'#000'}} 
+					activeTextStyle={{color:'#000'}}
+                >
+                    <DistrictList/>
+                </Tab>
+            </Tabs>
+        </Container>
+    )
 }
-
-const GET_CORONA_STATS = gql`
-	query coronaScreenQuery {
-		getLatestCoronaStats {
-            createdDate
-            stats {
-                country
-                total_cases
-                total_deaths
-                new_cases
-                new_deaths
-            }
-        }
-    }`
 
 const style = StyleSheet.create({
     headerStyle: {
@@ -74,5 +53,5 @@ const style = StyleSheet.create({
         paddingTop: 5,
     }
 })
-    
+
 export default CoronaScreen
