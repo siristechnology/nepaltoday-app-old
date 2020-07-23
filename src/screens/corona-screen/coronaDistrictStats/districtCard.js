@@ -2,7 +2,6 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 const DistrictCard = (props) => {
-
     const Divider = () => {
         return(
             <View
@@ -33,7 +32,7 @@ const DistrictCard = (props) => {
     return(
         <View style={styles.container}>
             <Text style={styles.title}>
-                {props.stat.name}
+                {props.stat.nepaliName}
             </Text>
             <Divider/>
             <View style={styles.statContainer}>
@@ -54,7 +53,8 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 5,
         backgroundColor:'#fff',
-        elevation: 0.9
+        elevation: 0.9,
+        marginHorizontal:10
     },
     title: {
         fontSize: 18,
