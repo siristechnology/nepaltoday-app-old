@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-import { Container, Tab, Tabs, ScrollableTab } from 'native-base';
+import { Container, Tab, Tabs } from 'native-base';
 import DistrictList from './coronaDistrictStats/districtList';
 import CountryList from './coronaCountryStats/countryList';
 
