@@ -3,11 +3,15 @@ import { View, StyleSheet, Text } from 'react-native'
 
 const CoronaSummary = (props) => {
 
+    const getCommaAddedNumber = (number) =>{
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     const Card = (title, number) => {
         return(
             <View style={styles.individualCard}>
                 <Text style={styles.valueText}>
-                    {number}
+                    {getCommaAddedNumber(number)}
                 </Text>
                 <Text style={styles.valueTitle}>
                     {title}

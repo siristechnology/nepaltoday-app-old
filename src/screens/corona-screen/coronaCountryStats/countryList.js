@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
-import { View, RefreshControl, Text, StyleSheet } from 'react-native'
-import { FlatList } from 'react-navigation'
+import { View, RefreshControl, TextInput, ScrollView, Text, StyleSheet } from 'react-native'
 import { getRelativeTime } from './../../../helper/time'
 import CountryCard from './countryCard'
 import { useQuery } from '@apollo/react-hooks'
 import { CircularSpinner } from '../../../components/common'
 import gql from 'graphql-tag'
 import AppLayout from '../../../frame/app-layout'
+import CoronaSummary from '../coronaDistrictStats/coronaSummary'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const CountryList = () => {
 
     const [refreshing, setRefreshing] = useState(false)
+
+    const [searchText, setSearchText] = useState('')
 
     const handleRefresh = () => {
 		setRefreshing(true)
@@ -29,9 +32,10 @@ const CountryList = () => {
 
     const lastUpdated = data && data.getLatestCoronaStats && getRelativeTime(data.getLatestCoronaStats.stats.createdDate)
 
-    const renderItem = (info) => {
+    const renderItem = (info, i) => {
         return <CountryCard
-            stat={info.item}
+            stat={info}
+            key={i}
         />
     }
 
@@ -42,26 +46,51 @@ const CountryList = () => {
 			</AppLayout>
 		)
     }else{
+        let originalData = data && data.getLatestCoronaStats && data.getLatestCoronaStats.stats
+        let filteredData = originalData.filter(x=>x.country.toLowerCase().includes(searchText.toLowerCase()))
+        let sortedData = filteredData.sort((a,b) => (a.total_cases > b.total_cases) ? -1 : ((b.total_cases > a.total_cases) ? 1 : 0));
         return(
             <AppLayout>
-                <View style={styles.container}>
+                <ScrollView 
+                    style={styles.container}
+                    keyboardShouldPersistTaps="handled"
+                    refreshControl={
+                        <RefreshControl 
+                            refreshing={refreshing} 
+                            onRefresh={handleRefresh} 
+                            colors={['#0000ff', '#689F38']} 
+                        />
+                    }
+                >
                     <Text style={styles.text}>
                         अन्तिम अपडेट गरिएको : {lastUpdated}
                     </Text>
-                    <FlatList
-                        contentContainerStyle={styles.listContainer}
-                        keyExtractor={(item) => item.country}
-                        data={data.getLatestCoronaStats.stats}
-                        renderItem={renderItem}
-                        refreshControl={
-                            <RefreshControl 
-                                refreshing={refreshing} 
-                                onRefresh={handleRefresh} 
-                                colors={['#0000ff', '#689F38']} 
-                            />
-                        }
+                    <CoronaSummary
+                        stats={data && data.getLatestCoronaStats && data.getLatestCoronaStats.worldSummary}
                     />
-                </View>
+                    <View style={styles.textInputView}>
+                        <Icon
+                            style={{flex:0.09}}
+                            name="search"
+                            size={20}
+                        />
+                        <TextInput
+                            value={searchText}
+                            placeholder="Search by country"
+                            style={{flex:searchText && 0.82 || 0.91,padding:4,fontSize:15}}
+                            onChangeText={(text)=>setSearchText(text)}
+                        />
+                        {searchText && <Icon
+                            style={{flex:0.09, zIndex:111}}
+                            name="close"
+                            size={20}
+                            onPress={()=>setSearchText('')}
+                        /> || <View/>}
+                    </View>
+                    {sortedData.map((country,i)=>(
+                        renderItem(country,i)
+                    ))}
+                </ScrollView>
             </AppLayout>
         )
     }
@@ -72,6 +101,12 @@ const GET_CORONA_STATS = gql`
 	query coronaScreenQuery {
 		getLatestCoronaStats {
             createdDate
+            worldSummary{
+                totalCases,
+                newCases,
+                totalDeaths,
+                newDeaths
+            }
             stats {
                 country
                 total_cases
@@ -94,6 +129,16 @@ const styles = StyleSheet.create({
     listContainer: {
         padding: 8,
         paddingBottom:72
+    },
+    textInputView: {
+        backgroundColor: '#fff',
+        flexDirection: 'row',
+        alignItems: 'center',
+        borderRadius: 5,
+        margin: 10,
+        elevation:1,
+        padding:5,
+        paddingHorizontal:7
     }
 })
 

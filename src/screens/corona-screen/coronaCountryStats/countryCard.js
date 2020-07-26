@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
         padding: 10,
         margin: 5,
         backgroundColor:'#fff',
-        elevation: 0.9
+        elevation: 0.9,
+        marginHorizontal:10
     },
     title: {
         fontSize: 18,
