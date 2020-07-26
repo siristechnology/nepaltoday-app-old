@@ -48,6 +48,7 @@ const DistrictList = () => {
     }else{
         let originalData = data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.districts || []
         let filteredData = originalData.filter(x=>x.name.toLowerCase().includes(searchText.toLowerCase()) || x.nepaliName.includes(searchText))
+        let sortedData = filteredData.sort((a,b) => (a.totalCases > b.totalCases) ? -1 : ((b.totalCases > a.totalCases) ? 1 : 0));
         return(
             <AppLayout>
                 <ScrollView 
@@ -86,7 +87,7 @@ const DistrictList = () => {
                             onPress={()=>setSearchText('')}
                         /> || <View/>}
                     </View>
-                    {filteredData.map((district,i)=>(
+                    {sortedData.map((district,i)=>(
                         renderItem(district,i)
                     ))}
                 </ScrollView>

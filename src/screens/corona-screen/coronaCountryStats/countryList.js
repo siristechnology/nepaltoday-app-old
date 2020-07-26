@@ -48,6 +48,7 @@ const CountryList = () => {
     }else{
         let originalData = data && data.getLatestCoronaStats && data.getLatestCoronaStats.stats
         let filteredData = originalData.filter(x=>x.country.toLowerCase().includes(searchText.toLowerCase()))
+        let sortedData = filteredData.sort((a,b) => (a.total_cases > b.total_cases) ? -1 : ((b.total_cases > a.total_cases) ? 1 : 0));
         return(
             <AppLayout>
                 <ScrollView 
@@ -86,7 +87,7 @@ const CountryList = () => {
                             onPress={()=>setSearchText('')}
                         /> || <View/>}
                     </View>
-                    {filteredData.map((country,i)=>(
+                    {sortedData.map((country,i)=>(
                         renderItem(country,i)
                     ))}
                 </ScrollView>
