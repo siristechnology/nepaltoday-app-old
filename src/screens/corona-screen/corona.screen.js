@@ -15,16 +15,6 @@ const CoronaScreen = () => {
             >
                 <Tab
                     style={{flex:1}}
-                    heading="अन्तर्राष्ट्रिय"
-                    tabStyle={{backgroundColor:'#fff'}} 
-					activeTabStyle={{backgroundColor:'#fff'}} 
-					textStyle={{color:'#000'}} 
-					activeTextStyle={{color:'#000'}}
-                >
-                    <CountryList/>
-                </Tab>
-                <Tab
-                    style={{flex:1}}
                     heading="राष्ट्रिय"
                     tabStyle={{backgroundColor:'#fff'}} 
 					activeTabStyle={{backgroundColor:'#fff'}} 
@@ -32,6 +22,16 @@ const CoronaScreen = () => {
 					activeTextStyle={{color:'#000'}}
                 >
                     <DistrictList/>
+                </Tab>
+                <Tab
+                    style={{flex:1}}
+                    heading="अन्तर्राष्ट्रिय"
+                    tabStyle={{backgroundColor:'#fff'}} 
+					activeTabStyle={{backgroundColor:'#fff'}} 
+					textStyle={{color:'#000'}} 
+					activeTextStyle={{color:'#000'}}
+                >
+                    <CountryList/>
                 </Tab>
             </Tabs>
         </Container>
