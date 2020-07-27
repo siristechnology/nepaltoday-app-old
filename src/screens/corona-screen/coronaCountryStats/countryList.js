@@ -87,7 +87,7 @@ const CountryList = () => {
                             onPress={()=>setSearchText('')}
                         /> || <View/>}
                     </View>
-                    {sortedData.map((country,i)=>(
+                    {sortedData.filter(x=>x.country!='Nepal').map((country,i)=>(
                         renderItem(country,i)
                     ))}
                 </ScrollView>
