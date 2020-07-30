@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 import { StatusBar } from 'react-native'
-import SplashScreen from 'react-native-splash-screen'
 import { ApplicationProvider } from 'react-native-ui-kitten'
 import { mapping, light as lightTheme } from '@eva-design/eva'
 
 import { store } from './src/store'
 import AppContainer from './src/frame/app-container'
+import ClickedAppContainer from './src/frame/clicked-app-container'
 import ErrorBoundary from './src/error/error-boundry'
 import notificationHandler from './src/services/notification-handler'
 import NavigationService from './src/services/navigationService'
@@ -14,6 +14,7 @@ import crashlytics from '@react-native-firebase/crashlytics'
 import auth from '@react-native-firebase/auth'
 import AppLayout from './src/frame/app-layout'
 import { CircularSpinner } from './src/components/common'
+import RNBootSplash from "react-native-bootsplash";
 
 const App = () => {
 	const [clicked, setClicked] = useState(false)
@@ -23,7 +24,7 @@ const App = () => {
 	const loadAppContainer = (article, clicked) => {
 		if (clicked && article._id) {
 			return (
-				<AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'ArticleDetail', { article: article, articles: [article] })} />
+				<ClickedAppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'ArticleDetail', { article: article, articles: [article] })} />
 			)
 		} else {
 			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)} />
@@ -35,13 +36,13 @@ const App = () => {
 		setLoading(true)
 		signInAnonymously().then(() => notificationHandler.register(auth().currentUser))
 		notificationHandler.checkForNotification().then(res=>{
-			SplashScreen.hide()
 			setClicked(true)
 			setLoading(false)
+			RNBootSplash.hide();
 			setArticle(res.data.getArticle)
 		}).catch(err=>{
-			SplashScreen.hide()
 			setLoading(false)
+			RNBootSplash.hide();
 		})
 	}, [])
 

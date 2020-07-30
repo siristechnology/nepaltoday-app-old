@@ -24,7 +24,7 @@ class NotificationHandler {
 							})
 							.catch((err) => reject(err))
 					} else {
-						resolve({ message: 'Notification not clicked' })
+						reject({ message: 'Notification not clicked' })
 					}
 				})
 				.catch((err) => reject(err))

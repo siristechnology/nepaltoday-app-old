@@ -1,7 +1,8 @@
 package com.siristechnology.nepaltodayapp.beta;
 
 import com.facebook.react.ReactActivity;
-import org.devio.rn.splashscreen.SplashScreen;
+import android.os.Bundle;
+import com.zoontek.rnbootsplash.RNBootSplash;
 
 public class MainActivity extends ReactActivity {
 
@@ -10,10 +11,15 @@ public class MainActivity extends ReactActivity {
    * rendering of the component.
    */
 
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    RNBootSplash.init(R.drawable.bootsplash, MainActivity.this); // <- display the generated bootsplash.xml drawable over our MainActivity
+  }
+
 
   @Override
   protected String getMainComponentName() {
-    SplashScreen.show(this);
     return "nepaltodayapp";
   }
 }

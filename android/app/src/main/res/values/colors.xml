@@ -6,4 +6,5 @@
 	<color name="launch_screen_background">#FFFFFF</color>	
 	<color name="splashscreen_bg">#FFFFFF</color>
     <color name="app_bg">#FFFFFF</color>
+	<color name="white">#FFF</color>
 </resources>
