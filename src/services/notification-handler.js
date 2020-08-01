@@ -1,4 +1,3 @@
-import messaging from '@react-native-firebase/messaging'
 import client from '../../src/graphql/graphql-client'
 import gql from 'graphql-tag'
 import * as RNLocalize from 'react-native-localize'
@@ -6,28 +5,19 @@ import crashlytics from '@react-native-firebase/crashlytics'
 import moment from 'moment'
 
 class NotificationHandler {
-	register = (user) => {
-		messaging()
-			.getToken()
-			.then((token) => this.storeFcmToken(user, token))
+	register = (user,token) => {
+		this.storeFcmToken(user,token)
 	}
 
-	checkForNotification() {
-		return new Promise((resolve, reject) => {
-			messaging()
-				.getInitialNotification()
-				.then((notify) => {
-					if (notify != null) {
-						this.fetchArticle(notify)
-							.then((res) => {
-								resolve(res)
-							})
-							.catch((err) => reject(err))
-					} else {
-						reject({ message: 'Notification not clicked' })
-					}
-				})
-				.catch((err) => reject(err))
+	handleNotificationClick(articleId){
+		return new Promise((resolve,reject)=> {
+			if(articleId){
+				this.fetchArticle(articleId).then(res=>{
+					resolve(res)
+				}).catch(err=>reject(err))
+			}else{
+				reject({message:'Not found'})
+			}
 		})
 	}
 
@@ -48,15 +38,14 @@ class NotificationHandler {
 			.catch((reason) => console.log(reason))
 	}
 
-	fetchArticle(notify) {
+	fetchArticle(id) {
 		return new Promise((resolve, reject) => {
 			client
 				.query({
 					query: GET_ARTICLE_QUERY,
-					variables: { _id: notify.data._id },
+					variables: { _id: id },
 				})
 				.then((res) => {
-					console.log('printing res', res)
 					resolve(res)
 				})
 				.catch((error) => {
