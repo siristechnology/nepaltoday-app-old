@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
-import { StatusBar, Alert } from 'react-native'
+import { StatusBar } from 'react-native'
 import { ApplicationProvider } from 'react-native-ui-kitten'
 import { mapping, light as lightTheme } from '@eva-design/eva'
 

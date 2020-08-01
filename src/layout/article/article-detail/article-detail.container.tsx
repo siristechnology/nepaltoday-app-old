@@ -15,9 +15,9 @@ export default class ArticleDetailContainer extends React.PureComponent<any, Sta
 		let article = this.props.navigation.state.params?.article
 		let articles = [] 
 		if(this.props.navigation.state.params && this.props.navigation.state.params.articles && this.props.navigation.state.params.articles.getArticles){
-			articles = this.props.navigation.state.params?.articles.getArticles || []
+			articles = this.props.navigation.state.params.articles.getArticles
 		}else{
-			articles = this.props.navigation.state.params && this.props.navigation.state.params.articles || []
+			articles = this.props.navigation.state.params && this.props.navigation.state.params.articles && this.props.navigation.state.params.articles || []
 		}
 		let articleIndex =  articles.indexOf(article)
 		let slicedArticles = articles.slice((articleIndex-5)>0 && (articleIndex-5) || 0 , articleIndex+6)
