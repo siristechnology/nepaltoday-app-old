@@ -5,30 +5,40 @@ import { getLocalName } from '../../helper/text'
 import { OfflineNotice } from '../../components'
 import { HealineListContainer } from '../../layout/headline'
 import { CircularSpinner } from '../../components/common'
-import { connect } from 'react-redux'
-import types from './../../ducks/types';
+import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { Container, Tab, Tabs, ScrollableTab } from 'native-base';
+import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS } = en.menu
 
 const HeadlineScreen = (props) => {
 	const [refreshing, setRefreshing] = useState(false);
+	const [articles, setArticles] = useState([])
 
 	const handleRefresh = () => {
 		setRefreshing(true);
-		props.getOnlineArticles()
-		setRefreshing(false)
+		refetch().then((res)=>{
+			storetoAsync(res.data.getArticles)
+			setArticles(res.data.getArticles)
+			setRefreshing(false)
+		})
 	}
 
 	useEffect(()=>{
-		props.getArticles()
+		fetchfromAsync().then(res=>{
+			setArticles(res)
+		}).catch(err=>{
+			console.log(err)
+			setArticles([])
+		})
 	},[])
 
-	let data = props.articles.data;
+	const { refetch } = useQuery(GET_ARTICLES_QUERY, {
+		variables: {},
+	})
 
-	let dataArticles = data && data.getArticles && data.getArticles || []
-
-	if (!dataArticles.length) {
+	if (!articles.length) {
 		return <CircularSpinner />
 	}
 
@@ -45,7 +55,7 @@ const HeadlineScreen = (props) => {
 		return tabNames.map((tabname, idx) => {
 			const localTabName = getLocalName(tabname)
 
-			const dataArr = dataArticles.filter(
+			const dataArr = articles.filter(
 				a => a.category === tabname,
 			)
 
@@ -101,13 +111,25 @@ const HeadlineScreen = (props) => {
 	)
 }
 
-function mapStateToProps(state) {
-	return { articles: state.homeReducer.articles }
-}
+export default HeadlineScreen
 
-const mapDispatchToProps = dispatch => ({
-	getArticles: () => dispatch({ type: types.FETCH_FROM_CACHE_START }),
-	getOnlineArticles: () => dispatch({type: types.REFRESH_CACHE_START})
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(HeadlineScreen)
+const GET_ARTICLES_QUERY = gql`
+	query homeScreenQuery {
+		getArticles {
+			_id
+			title
+			shortDescription
+			content
+			link
+			imageLink
+			publishedDate
+			modifiedDate
+			category
+			source {
+				_id
+				name
+				logoLink
+			}
+		}
+	}
+`
