@@ -2,11 +2,11 @@ import React, { useState } from 'react'
 import { View, Text, StyleSheet } from 'react-native';
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import AppLayout from './../../frame/app-layout'
+import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common';
-import PoliticianListContainer from './components/politicianListContainer';
+import TrendingListContainer from './components/trendingListContainer';
 
-const PoliticianComponent = ({}) => {
+const TrendingComponent = ({}) => {
     const [refreshing, setRefreshing] = useState(false)
 
     const handleRefresh = () => {
@@ -14,7 +14,7 @@ const PoliticianComponent = ({}) => {
         refetch().then(()=>setRefreshing(false))
     }
 
-    const { loading, data, refetch, error } = useQuery(GET_TRENDING_POLITICIANS, {
+    const { loading, data, refetch, error } = useQuery(GET_TRENDING, {
 		variables: {},
     })
 
@@ -32,15 +32,15 @@ const PoliticianComponent = ({}) => {
 		console.log('error:' + JSON.stringify(error))
     }
     
-    let politicians = data && data.getTrendingPoliticians && data.getTrendingPoliticians || []
+    let trending = data && data.getTrending && data.getTrending.counts || []
 
     return (
         <AppLayout>
             <View style={style.headerStyle}>
-				<Text style={style.textStyle}>Trending Politicians</Text>
+				<Text style={style.textStyle}>Trending</Text>
 			</View>
-            <PoliticianListContainer
-                politicians={politicians}
+            <TrendingListContainer
+                trending={trending}
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
             />
@@ -65,14 +65,19 @@ const style = StyleSheet.create({
 	},
 })
 
-const GET_TRENDING_POLITICIANS = gql`
-    query politicianScreenQuery {
-        getTrendingPoliticians{
-            name,
-            count,
-            handle
+const GET_TRENDING = gql`
+    query TrendingScreenQuery {
+        getTrending{
+            createdDate,
+            createdAt,
+            counts{
+                name,
+                handle,
+                count,
+                image
+            }
         }
     }
 `
 
-export default PoliticianComponent
+export default TrendingComponent

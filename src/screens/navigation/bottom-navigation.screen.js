@@ -7,14 +7,14 @@ import HomeScreen from '../home-screen/home.screen'
 import TwitterScreen from '../twitter-screen/twitter.screen'
 import HeadlineScreen from '../headline-screen/headline.screen'
 import CoronaScreen from '../corona-screen/corona.screen'
-import PoliticianScreen from './../politician-screen/politician.screen'
+import TrendingScreen from './../trending-screen/trending.screen'
 
 export const BottomTabScreen = createBottomTabNavigator(
 	{
 		Home: HomeScreen,
 		Headline: HeadlineScreen,
 		Corona: CoronaScreen,
-		Politician: PoliticianScreen,
+		Trending: TrendingScreen,
 		Twitter: TwitterScreen
 	},
 	{
@@ -31,10 +31,10 @@ export const BottomTabScreen = createBottomTabNavigator(
 					iconName = 'twitter'
 				} else if(routeName === 'Corona'){
 					iconName = 'skull'
-				}else if(routeName === 'Politician'){
+				}else if(routeName === 'Trending'){
 					iconName = 'fire'
 				}
-				if(routeName === 'Politician'){
+				if(routeName === 'Trending'){
 					return <SimpleLine name={iconName} size={25} color={tintColor} />
 				}else{
 					return <FontAwesome name={iconName} size={25} color={tintColor} />

@@ -1,21 +1,21 @@
 import React from 'react'
-import { RefreshControl, StyleSheet } from 'react-native'
+import { RefreshControl } from 'react-native'
 import { FlatList } from 'react-navigation'
-import PoliticianCard from './politicianCard'
+import TrendingCard from './trendingCard'
 
-const PoliticianListContainer = (props) => {
+const TrendingListContainer = (props) => {
     
     const renderItem = (info) => {
         return(
-            <PoliticianCard
-                politician={info.item}
+            <TrendingCard
+                trending={info.item}
             />
         )
     }
 
     return(
         <FlatList
-            data={props.politicians}
+            data={props.trending}
             renderItem={renderItem}
             keyExtractor={(item) => item._id}
             refreshControl={<RefreshControl
@@ -26,6 +26,4 @@ const PoliticianListContainer = (props) => {
     )
 }
 
-export default PoliticianListContainer
-
-// const styles = StyleShee
+export default TrendingListContainer
