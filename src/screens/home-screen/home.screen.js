@@ -1,5 +1,7 @@
 import { Text, StyleSheet, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
+import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks'
 import AppLayout from '../../frame/app-layout'
 import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
@@ -7,18 +9,17 @@ import Weather from './components/weather.component'
 import crashlytics from '@react-native-firebase/crashlytics'
 import perf from '@react-native-firebase/perf'
 import auth from '@react-native-firebase/auth'
+import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { CircularSpinner } from '../../components/common'
-import { connect } from 'react-redux'
-import types from './../../ducks/types';
 
-const Home = (props) => {
+const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
 	const [refreshing, setRefreshing] = useState(false)
+	const [localArticles, setLocalArticles] = useState({getArticles:[]})
 
 	const handleRefresh = () => {
 		setRefreshing(true)
-		props.getOnlineArticles()
-		setRefreshing(false)
+		refetch().then(() => setRefreshing(false))
 	}
 
 	async function customTrace() {
@@ -27,19 +28,39 @@ const Home = (props) => {
 		await trace.stop()
 	}
 
+	fetchArticlesFromAsyncStorage = () => {
+		fetchfromAsync().then(res=>{
+			setLocalArticles({getArticles: res})
+		}).catch(err=>{
+			console.log(err)
+			setLocalArticles([])
+		})
+	}
+
 	useEffect(() => {
 		setNepaliDate(getFormattedCurrentNepaliDate())
 		crashlytics().log('Home page test log.')
-		props.getArticles()
-		props.getOnlineArticles()
+		fetchArticlesFromAsyncStorage()
 		customTrace()
 	}, [])
 
-	let data = props.articles.data;
+	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
+		variables: {},
+	})
+
+	if(!loading && data!=null && data.getArticles && data.getArticles.length){
+		let myArticles = data.getArticles
+		storetoAsync(myArticles)
+	}
+
+	if (error) {
+		console.log('printing error', error)
+		crashlytics().recordError(new Error(error))
+	}
 
 	let dataArticles = data && data.getArticles && data.getArticles || []
 
-	if (dataArticles.length) {
+	if (dataArticles.length || localArticles.getArticles.length) {
 		return (
 			<AppLayout>
 				<View style={style.headerStyle}>
@@ -47,8 +68,8 @@ const Home = (props) => {
 					<Weather />
 				</View>
 				<ArticleListContainer 
-					navigation={props.navigation} 
-					articles={data} 
+					navigation={navigation} 
+					articles={data && data.getArticles && data.getArticles.length && data || localArticles} 
 					refreshing={refreshing} 
 					handleRefresh={handleRefresh} 
 				/>
@@ -62,6 +83,27 @@ const Home = (props) => {
 		)
 	}
 }
+
+export const GET_ARTICLES_QUERY = gql`
+	query homeScreenQuery {
+		getArticles {
+			_id
+			title
+			shortDescription
+			content
+			link
+			imageLink
+			publishedDate
+			modifiedDate
+			category
+			source {
+				_id
+				name
+				logoLink
+			}
+		}
+	}
+`
 
 const style = StyleSheet.create({
 	headerStyle: {
@@ -85,13 +127,4 @@ const style = StyleSheet.create({
 	},
 })
 
-function mapStateToProps(state) {
-	return { articles: state.homeReducer.articles }
-}
-
-const mapDispatchToProps = dispatch => ({
-	getArticles: () => dispatch({ type: types.FETCH_FROM_CACHE_START }),
-	getOnlineArticles: () => dispatch({type: types.REFRESH_CACHE_START})
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default Home
