@@ -49,8 +49,8 @@
       android:configChanges="keyboard|keyboardHidden|orientation|screenSize" 
       android:windowSoftInputMode="adjustResize"
       android:exported="true"
+      android:launchMode="singleTask"
     >
-      
     </activity>
     <activity
       android:name="com.zoontek.rnbootsplash.RNBootSplashActivity"

@@ -15,12 +15,14 @@ import AppLayout from './src/frame/app-layout'
 import { CircularSpinner } from './src/components/common'
 import RNBootSplash from "react-native-bootsplash";
 import PushNotification from 'react-native-push-notification';
+import { storeCoronaInfo } from './src/helper/cacheStorage'
 
 const App = () => {
 
 	const [clicked, setClicked] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [article, setArticle] = useState({})
+	const [coronaNotif, setCoronaNotif] = useState(false)
 
 	const onRegister = (token) => {
 		signInAnonymously().then(()=>notificationHandler.register(auth().currentUser, token.token))
@@ -34,15 +36,20 @@ const App = () => {
 				setClicked(true)
 				setLoading(false)
 			}).catch(err=>setLoading(false))
+		}else if(notif.notifType=='corona' && notif.foreground==false){
+			setClicked(true)
+			setCoronaNotif(true)
 		}
 	}
 
-	const loadAppContainer = (article, clicked) => {
+	const loadAppContainer = (article, clicked, coronaNotif) => {
 		if (clicked && article._id) {
 			return (
 				<AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'ArticleDetail', { article: article, articles: [article] })} />
 			)
-		} else {
+		} else if(clicked && coronaNotif){
+			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'Corona', { type: 'Corona' })} />
+		} else{
 			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)} />
 		}
 	}
@@ -66,7 +73,7 @@ const App = () => {
 							<CircularSpinner />
 						</AppLayout>
 					) ||
-						loadAppContainer(article, clicked)}
+						loadAppContainer(article, clicked, coronaNotif)}
 				</ErrorBoundary>
 			</Provider>
 		</ApplicationProvider>
