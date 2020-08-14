@@ -15,7 +15,6 @@ import AppLayout from './src/frame/app-layout'
 import { CircularSpinner } from './src/components/common'
 import RNBootSplash from "react-native-bootsplash";
 import PushNotification from 'react-native-push-notification';
-import { storeCoronaInfo } from './src/helper/cacheStorage'
 
 const App = () => {
 
