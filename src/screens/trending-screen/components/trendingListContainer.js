@@ -1,22 +1,34 @@
 import React from 'react'
-import { RefreshControl } from 'react-native'
+import { RefreshControl, View, Text, StyleSheet } from 'react-native'
 import { FlatList } from 'react-navigation'
 import TrendingCard from './trendingCard'
 
 const TrendingListContainer = (props) => {
     
-    const renderItem = (info) => {
+    const renderCategory = (info) => {
         return(
-            <TrendingCard
-                trending={info.item}
-            />
+            <View style={styles.catCard}>
+                <View style={styles.textView}>
+                    <Text style={styles.textStyle}>
+                        {info.item.category}
+                    </Text>
+                </View>
+                {info.item.counts.map((iItem,i)=>(
+                    <View key={i}>
+                        <TrendingCard
+                            trending={iItem}
+                        />
+                    </View>
+                ))}
+            </View>
         )
     }
 
     return(
         <FlatList
+            style={{marginBottom:50}}
             data={props.trending}
-            renderItem={renderItem}
+            renderItem={renderCategory}
             keyExtractor={(item) => item._id}
             refreshControl={<RefreshControl
                 onRefresh={props.onRefresh}
@@ -25,5 +37,19 @@ const TrendingListContainer = (props) => {
         />
     )
 }
+
+const styles = StyleSheet.create({
+    textView: {
+        margin: 5,
+        marginVertical: 5
+    },
+    textStyle: {
+        fontSize: 17,
+    },
+    catCard: {
+        backgroundColor:'#FAFAFA',
+        margin: 5
+    }
+})
 
 export default TrendingListContainer
