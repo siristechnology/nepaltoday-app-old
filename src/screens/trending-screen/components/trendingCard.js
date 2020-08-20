@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         margin: 3,
         backgroundColor:'#fff',
         elevation: 0.9,
-        marginHorizontal:10,
+        marginHorizontal:6,
         flexDirection: 'row',
         alignItems: 'center'
     },

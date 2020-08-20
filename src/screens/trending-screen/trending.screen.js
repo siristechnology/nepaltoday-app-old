@@ -32,7 +32,7 @@ const TrendingComponent = ({}) => {
 		console.log('error:' + JSON.stringify(error))
     }
     
-    let trending = data && data.getTrending && data.getTrending.counts || []
+    let trendings = data && data.getTrending && data.getTrending.trendings || []
 
     return (
         <AppLayout>
@@ -40,7 +40,7 @@ const TrendingComponent = ({}) => {
 				<Text style={style.textStyle}>Trending</Text>
 			</View>
             <TrendingListContainer
-                trending={trending}
+                trending={trendings}
                 refreshing={refreshing}
                 onRefresh={handleRefresh}
             />
@@ -70,11 +70,14 @@ const GET_TRENDING = gql`
         getTrending{
             createdDate,
             createdAt,
-            counts{
-                name,
-                handle,
-                count,
-                image
+            trendings{
+                category
+                counts{
+                    name
+                    handle
+                    count
+                    image
+                }
             }
         }
     }
