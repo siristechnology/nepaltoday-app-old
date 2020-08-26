@@ -29,7 +29,7 @@ const TrendingListContainer = (props) => {
             style={{marginBottom:50}}
             data={props.trending}
             renderItem={renderCategory}
-            keyExtractor={(item) => item._id}
+            keyExtractor={(item,i) => (`${i}`)}
             refreshControl={<RefreshControl
                 onRefresh={props.onRefresh}
                 refreshing={props.refreshing}
