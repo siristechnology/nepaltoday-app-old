@@ -61,11 +61,6 @@ const HeadlineScreen = (props) => {
 			const dataArr = articles.filter(
 				a => a.category === tabname,
 			)
-			if(tabname=='health'){
-				let b = articles.map(x=>x.category)
-				console.log(b)
-				console.log(tabname,dataArr.length)
-			}
 			
 			if (dataArr.length <= 0) {
 				return (
