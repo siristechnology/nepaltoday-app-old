@@ -11,12 +11,14 @@ function setTopLevelNavigator(navigatorRef, routeName, params) {
 }
 
 function navigate(routeName, params) {
-	_navigator.dispatch(
-		NavigationActions.navigate({
-			routeName,
-			params,
-		}),
-	)
+	if(_navigator){
+		_navigator.dispatch(
+			NavigationActions.navigate({
+				routeName,
+				params,
+			}),
+		)
+	}
 }
 
 // add other navigation functions that you need and export them
