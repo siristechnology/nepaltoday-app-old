@@ -2,7 +2,7 @@ import { np } from '../lang/np'
 import { en } from '../lang/en'
 
 const {
-	menu: { POLITICS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, NEWS, SPORTS }
+	menu: { POLITICS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, NEWS, SPORTS, HEALTH }
 } = en
 
 const { menu } = np
@@ -23,6 +23,8 @@ export const getLocalName = name => {
 			return menu.SPORTS
 		case NEWS:
 			return menu.NEWS
+		case HEALTH:
+			return menu.HEALTH
 		default:
 			return menu.NEWS
 	}
