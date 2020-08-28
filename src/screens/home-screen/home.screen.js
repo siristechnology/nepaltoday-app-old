@@ -97,7 +97,6 @@ export const GET_ARTICLES_QUERY = gql`
 			modifiedDate
 			category
 			source {
-				_id
 				name
 				logoLink
 			}
