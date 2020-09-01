@@ -11,7 +11,7 @@ import { getRelativeTime } from '../../helper/time'
 const TwitterListItemComponent = (props) => {
 	const { themedStyle, tweet } = props
 	const handleTweetPress = () => {
-		const handle = tweet.handle || tweet.twitterHandle.handle
+		const handle = tweet.handle
 		const link = `https://twitter.com/${handle}/status/${tweet.tweetId}`
 		Linking.openURL(link).catch((error) => {
 			throw new Error('Error opening twitter' + error)
@@ -19,7 +19,7 @@ const TwitterListItemComponent = (props) => {
 	}
 
 	const handleTwitterHandlePress = () => {
-		const handle = tweet.handle || tweet.twitterHandle.handle
+		const handle = tweet.handle
 		const link = `https://twitter.com/${handle}`
 		Linking.openURL(link).catch((error) => {
 			throw new Error('Error opening twitter handle: ' + error)
@@ -38,7 +38,7 @@ const TwitterListItemComponent = (props) => {
 							{tweet.name}
 						</Text>
 						<Text style={themedStyle.descriptionLabel} appearance="hint" category="s1">
-							{tweet.twitterHandle.handle}
+							{tweet.handle}
 						</Text>
 					</View>
 					<TouchableOpacity onPress={handleTweetPress}>

@@ -49,12 +49,6 @@ const GET_TWEETS_QUERY = gql`
 			profileImage
 			description
 			publishedDate
-			twitterHandle {
-				_id
-				name
-				handle
-				category
-			}
 		}
 	}
 `
