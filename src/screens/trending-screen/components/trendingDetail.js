@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { View, ScrollView, TouchableOpacity, Image, Text, StyleSheet, ActivityIndicator, RefreshControl } from 'react-native'
+import { View, ScrollView, Image, Text, StyleSheet, ActivityIndicator, RefreshControl } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
