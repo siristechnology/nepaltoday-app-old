@@ -1,9 +1,13 @@
 import React from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native'
 
 const TrendingCard = (props) => {
     return(
-        <View style={styles.container}>
+        <TouchableOpacity 
+            activeOpacity={0.8}
+            style={styles.container}
+            onPress={()=>props.onCardClick(props.trending)}
+        >
             <Image
                 source={{uri:props.trending.image}}
                 style={styles.imageStyle}
@@ -16,7 +20,7 @@ const TrendingCard = (props) => {
                     {props.trending.handle}
                 </Text>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 
 }

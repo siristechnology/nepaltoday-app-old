@@ -63,7 +63,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 							<View style={themedStyle.dateContainer}>
 								{ClockIconOutline(themedStyle.dateIcon)}
 								<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
-									{getRelativeTime(article.publishedDate)}
+									{getRelativeTime(article.createdDate)}
 								</Text>
 							</View>
 						</ArticleActivityBar>
