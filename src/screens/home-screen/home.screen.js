@@ -93,7 +93,7 @@ export const GET_ARTICLES_QUERY = gql`
 			content
 			link
 			imageLink
-			publishedDate
+			createdDate
 			modifiedDate
 			category
 			source {
