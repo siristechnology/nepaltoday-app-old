@@ -21,7 +21,7 @@ const ArticleListItemComponent = React.memo((props) => {
 				<ActivityAuthoring
 					photo={{ uri: article.source.logoLink }}
 					name={`${article.source.name}`}
-					date={getRelativeTime(article.publishedDate)}
+					date={getRelativeTime(article.createdDate)}
 				/>
 			</ArticleActivityBar>
 			<View style={themedStyle.infoContainer}>
