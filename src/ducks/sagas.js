@@ -26,7 +26,7 @@ const watchRefreshCache = function* watchRefreshCache(){
 						content
 						link
 						imageLink
-						publishedDate
+						createdDate
 						modifiedDate
 						category
 						source {
