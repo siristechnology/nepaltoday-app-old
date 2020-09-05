@@ -7,7 +7,7 @@
     <item
         android:width="300dp"
         android:height="300dp"
-        android:drawable="@mipmap/launch_screen"
+        android:drawable="@mipmap/splash_logo"
         android:gravity="center" />
 
 </layer-list>
