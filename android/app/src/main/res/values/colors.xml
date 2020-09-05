@@ -4,7 +4,7 @@
 	<color name="ic_launcher_background">#FFFFFF</color>
 	<color name="ic_launcher_beta_background">#000000</color>
 	<color name="launch_screen_background">#FFFFFF</color>
-	<color name="splashscreen_bg">#FFFFFF</color>
+	<color name="splashscreen_bg">#87C3FF</color>
 	<color name="app_bg">#FFFFFF</color>
 	<color name="white">#FFF</color>
 </resources>
