@@ -45,55 +45,62 @@ const DistrictList = () => {
 				<CircularSpinner />
 			</AppLayout>
 		)
-    }else{
-        let originalData = data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.districts || []
-        let filteredData = originalData.filter(x=>x.name.toLowerCase().includes(searchText.toLowerCase()) || x.nepaliName.includes(searchText))
-        let sortedData = filteredData.sort((a,b) => (a.totalCases > b.totalCases) ? -1 : ((b.totalCases > a.totalCases) ? 1 : 0));
-        return(
+    } else if (error) {
+		return (
             <AppLayout>
-                <ScrollView 
-                    keyboardShouldPersistTaps="handled"
-                    style={styles.container}
-                    refreshControl={
-                        <RefreshControl 
-                            refreshing={refreshing} 
-                            onRefresh={handleRefresh} 
-                            colors={['#0000ff', '#689F38']} 
-                        />
-                    }
-                >
-                    <Text style={styles.text}>
-                        अन्तिम अपडेट गरिएको : {lastUpdated}
-                    </Text>
-                    <CoronaSummary
-                        stats={data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.timeLine}
-                    />
-                    <View style={styles.textInputView}>
-                        <Icon
-                            style={{flex:0.09}}
-                            name="search"
-                            size={20}
-                        />
-                        <TextInput
-                            value={searchText}
-                            placeholder="Search by district"
-                            style={{flex:searchText && 0.82 || 0.91,padding:4,fontSize:15}}
-                            onChangeText={(text)=>setSearchText(text)}
-                        />
-                        {searchText && <Icon
-                            style={{flex:0.09, zIndex:111}}
-                            name="close"
-                            size={20}
-                            onPress={()=>setSearchText('')}
-                        /> || <View/>}
-                    </View>
-                    {sortedData.map((district,i)=>(
-                        renderItem(district,i)
-                    ))}
-                </ScrollView>
+                
             </AppLayout>
         )
     }
+
+    let originalData = data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.districts || []
+    let filteredData = originalData.filter(x=>x.name.toLowerCase().includes(searchText.toLowerCase()) || x.nepaliName.includes(searchText))
+    let sortedData = filteredData.sort((a,b) => (a.totalCases > b.totalCases) ? -1 : ((b.totalCases > a.totalCases) ? 1 : 0));
+    return(
+        <AppLayout>
+            <ScrollView 
+                keyboardShouldPersistTaps="handled"
+                style={styles.container}
+                refreshControl={
+                    <RefreshControl 
+                        refreshing={refreshing} 
+                        onRefresh={handleRefresh} 
+                        colors={['#0000ff', '#689F38']} 
+                    />
+                }
+            >
+                <Text style={styles.text}>
+                    अन्तिम अपडेट गरिएको : {lastUpdated}
+                </Text>
+                <CoronaSummary
+                    stats={data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.timeLine}
+                />
+                <View style={styles.textInputView}>
+                    <Icon
+                        style={{flex:0.09}}
+                        name="search"
+                        size={20}
+                    />
+                    <TextInput
+                        value={searchText}
+                        placeholder="Search by district"
+                        style={{flex:searchText && 0.82 || 0.91,padding:4,fontSize:15}}
+                        onChangeText={(text)=>setSearchText(text)}
+                    />
+                    {searchText && <Icon
+                        style={{flex:0.09, zIndex:111}}
+                        name="close"
+                        size={20}
+                        onPress={()=>setSearchText('')}
+                    /> || <View/>}
+                </View>
+                {sortedData.map((district,i)=>(
+                    renderItem(district,i)
+                ))}
+            </ScrollView>
+        </AppLayout>
+    )
+    
 
 }
 
