@@ -9,14 +9,18 @@ import { TwitterListContainer } from '../../layout/twitter/twitter-list.containe
 const TwitterComponent = ({}) => {
 	const [refreshing, setRefreshing] = useState(false)
 
-	const { loading, data, refetch, error } = useQuery(GET_TWEETS_QUERY, {
-		variables: {},
-	})
-
 	const handleRefresh = () => {
 		setRefreshing(true)
 		refetch().then(() => setRefreshing(false))
 	}
+
+	const { loading, data, refetch, error } = useQuery(GET_TWEETS_QUERY, {
+		variables: {},
+	})
+
+	if(error){
+        console.log("Error here",error)
+    }
 
 	if (loading) {
 		return (
@@ -28,12 +32,13 @@ const TwitterComponent = ({}) => {
 		console.log('error:' + JSON.stringify(error))
 	}
 
+	let tweets = data && data.getTweets && data.getTweets || []
 	return (
 		<AppLayout>
 			<View style={style.headerStyle}>
 				<Text style={style.textStyle}>Trending Tweets</Text>
 			</View>
-			<TwitterListContainer tweets={data.getTweets} refreshing={refreshing} handleRefresh={handleRefresh} />
+			<TwitterListContainer tweets={tweets} refreshing={refreshing} handleRefresh={handleRefresh} />
 		</AppLayout>
 	)
 }
