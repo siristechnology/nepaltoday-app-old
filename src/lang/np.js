@@ -7,7 +7,9 @@ export const np = {
 		OPINION: 'बिचार',
 		SOCIAL: 'समाज ',
 		SPORTS: 'खेलकुद',
-		HEALTH: 'स्वास्थ्य'
+		HEALTH: 'स्वास्थ्य',
+		TECHNOLOGY: 'सूचना प्रविधि',
+		AGRICULTURE: 'कृषि'
 	},
 	public: {
 		APP_NAME: 'नेपाल आज',
