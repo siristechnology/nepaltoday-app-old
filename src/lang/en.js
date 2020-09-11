@@ -7,6 +7,8 @@ export const en = {
 		OPINION: 'opinion',
 		SOCIAL: 'social',
 		SPORTS: 'sports',
-		HEALTH: 'health'
+		HEALTH: 'health',
+		TECHNOLOGY: 'technology',
+		AGRICULTURE: 'agriculture'
 	}
 }
