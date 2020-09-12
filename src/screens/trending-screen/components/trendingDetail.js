@@ -38,7 +38,7 @@ const TrendingDetail = (props) => {
 			<View style={styles.headerView}>
 				<Icon name="back" size={24} color="#000" onPress={props.closeDetail} />
 				<Text style={styles.headerText}>{props.trending.name}</Text>
-				<View style={{ width: 25 }} />
+				<View />
 			</View>
 			<ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}>
 				<View style={styles.imageContainer}>
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
 		padding: 10,
 		backgroundColor: '#fff',
 		flexDirection: 'row',
-		alignItems: 'center',
 		justifyContent: 'space-between',
 	},
 	headerText: {

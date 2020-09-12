@@ -6,7 +6,7 @@ import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
 import { TwitterListContainer } from '../../layout/twitter/twitter-list.container'
 
-const TwitterComponent = ({}) => {
+const TwitterComponent = () => {
 	const [refreshing, setRefreshing] = useState(false)
 
 	const handleRefresh = () => {

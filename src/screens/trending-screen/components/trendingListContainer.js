@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
 		fontSize: 17,
 	},
 	catCard: {
-		backgroundColor: '#FAFAFA',
 		margin: 5,
 	},
 })
