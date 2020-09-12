@@ -6,12 +6,23 @@ import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
 import { TwitterListContainer } from '../../layout/twitter/twitter-list.container'
 
-const TwitterComponent = ({}) => {
+const TwitterComponent = () => {
 	const [refreshing, setRefreshing] = useState(false)
 
 	const handleRefresh = () => {
 		setRefreshing(true)
 		refetch().then(() => setRefreshing(false))
+<<<<<<< HEAD
+=======
+	}
+
+	const { loading, data, refetch, error } = useQuery(GET_TWEETS_QUERY, {
+		variables: {},
+	})
+
+	if (error) {
+		console.log('Error here', error)
+>>>>>>> 6e520ab238d2097d11c5859ef66caaec79b7e787
 	}
 
 	const { loading, data, refetch, error } = useQuery(GET_TWEETS_QUERY, {
@@ -32,7 +43,11 @@ const TwitterComponent = ({}) => {
 		console.log('error:' + JSON.stringify(error))
 	}
 
+<<<<<<< HEAD
 	let tweets = data && data.getTweets && data.getTweets || []
+=======
+	const tweets = (data && data.getTweets && data.getTweets) || []
+>>>>>>> 6e520ab238d2097d11c5859ef66caaec79b7e787
 	return (
 		<AppLayout>
 			<View style={style.headerStyle}>

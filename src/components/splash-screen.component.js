@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native'
 
 import { np } from '../lang/np'
 
-const SplashScreenComponent = ({ onRefresh = f => f }) => {
+const SplashScreenComponent = ({ onRefresh = (f) => f }) => {
 	const {
 		public: { REFRESH, APP_NAME },
 	} = np

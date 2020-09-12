@@ -5,18 +5,20 @@ import crashlytics from '@react-native-firebase/crashlytics'
 import moment from 'moment'
 
 class NotificationHandler {
-	register = (user,token) => {
-		this.storeFcmToken(user,token)
+	register = (user, token) => {
+		this.storeFcmToken(user, token)
 	}
 
-	handleNotificationClick(articleId){
-		return new Promise((resolve,reject)=> {
-			if(articleId){
-				this.fetchArticle(articleId).then(res=>{
-					resolve(res)
-				}).catch(err=>reject(err))
-			}else{
-				reject({message:'Not found'})
+	handleNotificationClick(articleId) {
+		return new Promise((resolve, reject) => {
+			if (articleId) {
+				this.fetchArticle(articleId)
+					.then((res) => {
+						resolve(res)
+					})
+					.catch((err) => reject(err))
+			} else {
+				reject({ message: 'Not found' })
 			}
 		})
 	}

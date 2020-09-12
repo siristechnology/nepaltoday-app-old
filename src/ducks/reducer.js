@@ -1,7 +1,7 @@
 import types from './types.js'
 
 export const initialState = {
-	articles: {}
+	articles: {},
 }
 
 export default function reducer(state = initialState, action) {

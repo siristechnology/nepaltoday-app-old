@@ -6,33 +6,35 @@ import { OfflineNotice } from '../../components'
 import { HealineListContainer } from '../../layout/headline'
 import { CircularSpinner } from '../../components/common'
 import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
-import { Container, Tab, Tabs, ScrollableTab } from 'native-base';
+import { Container, Tab, Tabs, ScrollableTab } from 'native-base'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE, SHARE } = en.menu
 
 const HeadlineScreen = (props) => {
-	const [refreshing, setRefreshing] = useState(false);
+	const [refreshing, setRefreshing] = useState(false)
 	const [articles, setArticles] = useState([])
 
 	const handleRefresh = () => {
-		setRefreshing(true);
-		refetch().then((res)=>{
+		setRefreshing(true)
+		refetch().then((res) => {
 			storetoAsync(res.data.getArticles)
 			setArticles(res.data.getArticles)
 			setRefreshing(false)
 		})
 	}
 
-	useEffect(()=>{
-		fetchfromAsync().then(res=>{
-			setArticles(res)
-		}).catch(err=>{
-			console.log(err)
-			setArticles([])
-		})
-	},[])
+	useEffect(() => {
+		fetchfromAsync()
+			.then((res) => {
+				setArticles(res)
+			})
+			.catch((err) => {
+				console.log(err)
+				setArticles([])
+			})
+	}, [])
 
 	const { refetch } = useQuery(GET_ARTICLES_QUERY, {
 		variables: {},
@@ -57,24 +59,20 @@ const HeadlineScreen = (props) => {
 		]
 
 		return tabNames.map((tabname, idx) => {
-			
-			
 			const localTabName = getLocalName(tabname)
 
-			const dataArr = articles.filter(
-				a => a.category === tabname,
-			)
-			
+			const dataArr = articles.filter((a) => a.category === tabname)
+
 			if (dataArr.length <= 0) {
 				return (
-					<Tab 
-						style={{flex:1}} 
-						heading={localTabName} 
+					<Tab
+						style={{ flex: 1 }}
+						heading={localTabName}
 						key={idx}
-						tabStyle={{backgroundColor:'#fff'}} 
-						activeTabStyle={{backgroundColor:'#fff'}} 
-						textStyle={{color:'#000'}} 
-						activeTextStyle={{color:'#000'}}
+						tabStyle={{ backgroundColor: '#fff' }}
+						activeTabStyle={{ backgroundColor: '#fff' }}
+						textStyle={{ color: '#000' }}
+						activeTextStyle={{ color: '#000' }}
 					>
 						<Text>Not available</Text>
 					</Tab>
@@ -82,22 +80,17 @@ const HeadlineScreen = (props) => {
 			}
 
 			return (
-				<Tab 
-					style={{flex:1}} 
-					heading={localTabName} 
-					key={idx} 
-					tabStyle={{backgroundColor:'#fff'}} 
-					activeTabStyle={{backgroundColor:'#fff'}} 
-					textStyle={{color:'#000'}} 
-					activeTextStyle={{color:'#000'}}
+				<Tab
+					style={{ flex: 1 }}
+					heading={localTabName}
+					key={idx}
+					tabStyle={{ backgroundColor: '#fff' }}
+					activeTabStyle={{ backgroundColor: '#fff' }}
+					textStyle={{ color: '#000' }}
+					activeTextStyle={{ color: '#000' }}
 				>
 					<OfflineNotice />
-					<HealineListContainer
-						articles={dataArr}
-						navigation={props.navigation}
-						refreshing={refreshing}
-						handleRefresh={handleRefresh}
-					/>
+					<HealineListContainer articles={dataArr} navigation={props.navigation} refreshing={refreshing} handleRefresh={handleRefresh} />
 				</Tab>
 			)
 		})
@@ -106,10 +99,8 @@ const HeadlineScreen = (props) => {
 	return (
 		<Container>
 			<Tabs
-				tabBarUnderlineStyle={{backgroundColor:'#ff0000'}} 
-				renderTabBar={()=> <ScrollableTab 
-					tabsContainerStyle={{backgroundColor:'#fff'}}
-				/>}
+				tabBarUnderlineStyle={{ backgroundColor: '#ff0000' }}
+				renderTabBar={() => <ScrollableTab tabsContainerStyle={{ backgroundColor: '#fff' }} />}
 			>
 				{renderTab()}
 			</Tabs>

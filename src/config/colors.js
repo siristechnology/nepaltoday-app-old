@@ -13,6 +13,6 @@ const colors = {
 	PURPLE: '#7e38b6',
 	SUCCESS: '#00D592',
 	TWITTER_SAT: '#00b9ff',
-	WHITE: '#FFFFFF'
+	WHITE: '#FFFFFF',
 }
 export default colors

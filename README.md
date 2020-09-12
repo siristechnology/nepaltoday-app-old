@@ -4,13 +4,21 @@
 [![DeepScan grade](https://deepscan.io/api/teams/5348/projects/7146/branches/66889/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=5348&pid=7146&bid=66889)
 [![Known Vulnerabilities](https://snyk.io/test/github/siristechnology/nepaltoday-app/badge.svg?targetFile=android/app/build.gradle)](https://snyk.io/test/github/siristechnology/nepaltoday-app?targetFile=android/app/build.gradle)
 
-<a href='https://play.google.com/store/apps/details?id=com.siristechnology.nepaltodayapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' target='_blank'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80"/></a>
-
+<br/>
+<div>
+<img src="android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png" alt="screenshot-1" height="80" style="margin-right:10px"/>
+<a href='https://play.google.com/store/apps/details?id=com.siristechnology.nepaltodayapp&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1' target='_blank' rel="noopener noreferrer"><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' height="80"/></a>
+</div>
+  
 ## Latest screenshot
 
-<img src="assets/images/screenshot-2.png" alt="drawing" height="400" />
+<div>
+<img src="assets/images/screenshot-1.png" alt="screenshot-1" width="300" style="margin-right:20px"/>
+<img src="assets/images/screenshot-2.png" alt="screenshot-2" width="300"/>
+</div>
 
 ## How to Run locally
+
 -   Install Android Studio
 -   Install node (12.x), yarn (1.x)
 -   Run Android emulator. (from Android Studio or Genymotion)
@@ -18,6 +26,7 @@
 -   Run Android app. `yarn android`
 
 ## Tips
+
 -   Run `yarn refresh` to reload android app quickly without rebuilding
 -   Run `yarn reset` to reset package manager cache
 -   Run `adb uninstall com.siristechnology.nepaltodayapp` to uninstall app from the android simulator

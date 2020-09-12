@@ -1,9 +1,9 @@
-export const addLeadingZero = val => {
+export const addLeadingZero = (val) => {
 	return '0' + val
 }
 
-export const convertToNepaliDigit = val => {
-	let num = val + ''
+export const convertToNepaliDigit = (val) => {
+	const num = val + ''
 	let result = ''
 
 	for (let i = 0; i < num.length; i++) {

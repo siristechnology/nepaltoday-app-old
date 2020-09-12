@@ -15,7 +15,7 @@ export const CoronaBottomTabScreen = createBottomTabNavigator(
 		Headline: HeadlineScreen,
 		Corona: CoronaScreen,
 		Trending: TrendingScreen,
-		Twitter: TwitterScreen
+		Twitter: TwitterScreen,
 	},
 	{
 		initialRouteName: 'Corona',
@@ -29,14 +29,14 @@ export const CoronaBottomTabScreen = createBottomTabNavigator(
 					iconName = 'newspaper'
 				} else if (routeName === 'Twitter') {
 					iconName = 'twitter'
-				} else if(routeName === 'Corona'){
+				} else if (routeName === 'Corona') {
 					iconName = 'skull'
-				}else if(routeName === 'Trending'){
+				} else if (routeName === 'Trending') {
 					iconName = 'fire'
 				}
-				if(routeName === 'Trending'){
+				if (routeName === 'Trending') {
 					return <SimpleLine name={iconName} size={25} color={tintColor} />
-				}else{
+				} else {
 					return <FontAwesome name={iconName} size={25} color={tintColor} />
 				}
 			},

@@ -19,7 +19,7 @@ const AppNavigator = createStackNavigator(
 		Tab: { screen: BottomTabScreen },
 		Article: { screen: ArticleWebviewComponent },
 		ArticleDetail: { screen: ArticleDetailScreen },
-		Corona: {screen: CoronaBottomTabScreen}
+		Corona: { screen: CoronaBottomTabScreen },
 	},
 	{
 		headerMode: 'none',

@@ -7,7 +7,7 @@ const {
 
 const { menu } = np
 
-export const getLocalName = name => {
+export const getLocalName = (name) => {
 	switch (name) {
 		case POLITICS:
 			return menu.POLITICS

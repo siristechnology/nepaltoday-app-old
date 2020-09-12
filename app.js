@@ -13,29 +13,31 @@ import crashlytics from '@react-native-firebase/crashlytics'
 import auth from '@react-native-firebase/auth'
 import AppLayout from './src/frame/app-layout'
 import { CircularSpinner } from './src/components/common'
-import RNBootSplash from "react-native-bootsplash";
-import PushNotification from 'react-native-push-notification';
+import RNBootSplash from 'react-native-bootsplash'
+import PushNotification from 'react-native-push-notification'
 
 const App = () => {
-
 	const [clicked, setClicked] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [article, setArticle] = useState({})
 	const [coronaNotif, setCoronaNotif] = useState(false)
 
 	const onRegister = (token) => {
-		signInAnonymously().then(()=>notificationHandler.register(auth().currentUser, token.token))
+		signInAnonymously().then(() => notificationHandler.register(auth().currentUser, token.token))
 	}
 
 	const onNotif = (notif) => {
-		if(notif._id && notif.foreground==false){
+		if (notif._id && notif.foreground === false) {
 			setLoading(true)
-			notificationHandler.handleNotificationClick(notif._id).then(res=>{
-				setArticle(res.data.getArticle)
-				setClicked(true)
-				setLoading(false)
-			}).catch(err=>setLoading(false))
-		}else if(notif.notifType=='corona' && notif.foreground==false){
+			notificationHandler
+				.handleNotificationClick(notif._id)
+				.then((res) => {
+					setArticle(res.data.getArticle)
+					setClicked(true)
+					setLoading(false)
+				})
+				.catch((err) => setLoading(false))
+		} else if (notif.notifType === 'corona' && notif.foreground === false) {
 			setClicked(true)
 			setCoronaNotif(true)
 		}
@@ -44,22 +46,25 @@ const App = () => {
 	const loadAppContainer = (article, clicked, coronaNotif) => {
 		if (clicked && article._id) {
 			return (
-				<AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'ArticleDetail', { article: article, articles: [article] })} />
+				<AppContainer
+					ref={(navigatorRef) =>
+						NavigationService.setTopLevelNavigator(navigatorRef, 'ArticleDetail', { article: article, articles: [article] })
+					}
+				/>
 			)
-		} else if(clicked && coronaNotif){
+		} else if (clicked && coronaNotif) {
 			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'Corona', { type: 'Corona' })} />
-		} else{
+		} else {
 			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)} />
 		}
 	}
 
-
-  	useEffect(() => {
-		RNBootSplash.hide();
+	useEffect(() => {
+		RNBootSplash.hide()
 		PushNotification.configure({
 			onRegister: onRegister,
-			onNotification: onNotif
-		});
+			onNotification: onNotif,
+		})
 	}, [])
 
 	return (
@@ -67,11 +72,11 @@ const App = () => {
 			<Provider store={store}>
 				<StatusBar barStyle="light-content" />
 				<ErrorBoundary>
-					{loading && (
+					{(loading && (
 						<AppLayout>
 							<CircularSpinner />
 						</AppLayout>
-					) ||
+					)) ||
 						loadAppContainer(article, clicked, coronaNotif)}
 				</ErrorBoundary>
 			</Provider>
