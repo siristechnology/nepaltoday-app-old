@@ -2,10 +2,6 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 const DistrictCard = (props) => {
-	const Divider = () => {
-		return <View style={styles.divider} />
-	}
-
 	const renderStatView = (text, number) => {
 		const isNumberInK = number > 10000
 		let newValue = number
@@ -24,13 +20,13 @@ const DistrictCard = (props) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.title}>{props.stat.nepaliName}</Text>
-			<Divider />
 			<View style={styles.statContainer}>
 				{renderStatView('Total Cases', props.stat.totalCases)}
 				{renderStatView('Active Cases', props.stat.activeCases)}
 				{renderStatView('Recovered', props.stat.recovered)}
 				{renderStatView('Deaths', props.stat.deaths)}
 			</View>
+			<View style={styles.divider} />
 		</View>
 	)
 }
@@ -39,11 +35,8 @@ export default DistrictCard
 
 const styles = StyleSheet.create({
 	container: {
-		borderRadius: 8,
-		padding: 10,
+		padding: 4,
 		margin: 5,
-		backgroundColor: '#fff',
-		elevation: 0.9,
 		marginHorizontal: 10,
 	},
 	title: {
@@ -52,9 +45,8 @@ const styles = StyleSheet.create({
 		opacity: 0.7,
 	},
 	divider: {
-		width: '100%',
 		borderBottomWidth: 1,
-		borderBottomColor: '#F5F5F5',
+		borderBottomColor: '#F5F0F0',
 		marginVertical: 10,
 	},
 	statContainer: {
