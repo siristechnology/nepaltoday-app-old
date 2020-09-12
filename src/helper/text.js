@@ -2,12 +2,12 @@ import { np } from '../lang/np'
 import { en } from '../lang/en'
 
 const {
-	menu: { POLITICS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, NEWS, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE }
+	menu: { POLITICS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, NEWS, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE },
 } = en
 
 const { menu } = np
 
-export const getLocalName = name => {
+export const getLocalName = (name) => {
 	switch (name) {
 		case POLITICS:
 			return menu.POLITICS

@@ -8,7 +8,7 @@ const OfflineNotice = () => {
 	const [isConnected, setConnected] = useState(true)
 
 	useEffect(() => {
-		NetInfo.fetch().then(state => {
+		NetInfo.fetch().then((state) => {
 			setConnected(state.isConnected)
 		})
 	})
@@ -16,9 +16,7 @@ const OfflineNotice = () => {
 	if (!isConnected) {
 		return (
 			<View style={styles.offlineContainer}>
-				<Text style={styles.offlineText}>
-					कृपया इन्टरनेट जाँच गर्नुहोस्
-				</Text>
+				<Text style={styles.offlineText}>कृपया इन्टरनेट जाँच गर्नुहोस्</Text>
 			</View>
 		)
 	} else {

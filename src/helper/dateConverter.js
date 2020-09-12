@@ -1,18 +1,5 @@
 function getNepaliMonthsInNepali() {
-	return [
-		'बैशाख',
-		'जेठ',
-		'अषाढ',
-		'श्रावण',
-		'भाद्र',
-		'आश्विन',
-		'कार्तिक',
-		'मङ्सिर',
-		'पौष',
-		'माघ',
-		'फाल्गुन',
-		'चैत्र',
-	]
+	return ['बैशाख', 'जेठ', 'अषाढ', 'श्रावण', 'भाद्र', 'आश्विन', 'कार्तिक', 'मङ्सिर', 'पौष', 'माघ', 'फाल्गुन', 'चैत्र']
 }
 function getNepaliMonth(t) {
 	t = parseInt(t, 10)
@@ -207,12 +194,7 @@ function count_ad_days(t, e) {
 	var n = 864e5,
 		a = t.split('/'),
 		s = e.split('/')
-	;(a[2] = +a[2]),
-		(a[1] = +a[1]),
-		(a[0] = +a[0]),
-		(s[2] = +s[2]),
-		(s[1] = +s[1]),
-		(s[0] = +s[0])
+	;(a[2] = +a[2]), (a[1] = +a[1]), (a[0] = +a[0]), (s[2] = +s[2]), (s[1] = +s[1]), (s[0] = +s[0])
 	var r = new Date(a[2], a[0] - 1, a[1]),
 		i = new Date(s[2], s[0] - 1, s[1]),
 		d = Math.ceil((i.getTime() - r.getTime()) / n)
@@ -231,7 +213,7 @@ function count_bs_days(t, e) {
 		l = 0
 	for (l = s; d >= l; l++) p += arraySum(this.bs[l])
 	for (l = 0; r > l; l++) p -= this.bs[s][l]
-	for (p += this.bs[s][11], l = o - 1; 12 > l; l++) p -= this.bs[d][l]
+	for (p += this.bs[s][11], l = o - 1; l < 12; l++) p -= this.bs[d][l]
 	return (p -= i + 1), (p += h - 1)
 }
 function add_ad_days(t, e) {
@@ -240,11 +222,7 @@ function add_ad_days(t, e) {
 		n.setDate(n.getDate() + e),
 		(ad_month = n.getMonth() + 1),
 		(ad_day = n.getDate()),
-		n.getFullYear() +
-			'-' +
-			(ad_month < 10 ? '0' + ad_month : ad_month) +
-			'-' +
-			(ad_day < 10 ? '0' + ad_day : ad_day)
+		n.getFullYear() + '-' + (ad_month < 10 ? '0' + ad_month : ad_month) + '-' + (ad_day < 10 ? '0' + ad_day : ad_day)
 	)
 }
 function add_bs_days(t, e) {
@@ -252,21 +230,14 @@ function add_bs_days(t, e) {
 		a = +n[2],
 		s = +n[0],
 		r = +n[1]
-	for (r += e; r > this.bs[a][s - 1]; )
-		(r -= this.bs[a][s - 1]), s++, s > 12 && ((s = 1), a++)
-	return a + '-' + (10 > s ? '0' + s : s) + '-' + (10 > r ? '0' + r : r)
+	for (r += e; r > this.bs[a][s - 1]; ) (r -= this.bs[a][s - 1]), s++, s > 12 && ((s = 1), a++)
+	return a + '-' + (s < 10 ? '0' + s : s) + '-' + (r < 10 ? '0' + r : r)
 }
 function bs2ad(t) {
-	return (
-		(days_count = this.count_bs_days(this.bs_date_eq, t)),
-		this.add_ad_days(this.ad_date_eq, days_count)
-	)
+	return (days_count = this.count_bs_days(this.bs_date_eq, t)), this.add_ad_days(this.ad_date_eq, days_count)
 }
 function ad2bs(t) {
-	return (
-		(days_count = this.count_ad_days(this.ad_date_eq, t)),
-		this.add_bs_days(this.bs_date_eq, days_count)
-	)
+	return (days_count = this.count_ad_days(this.ad_date_eq, t)), this.add_bs_days(this.bs_date_eq, days_count)
 }
 
 module.exports = {

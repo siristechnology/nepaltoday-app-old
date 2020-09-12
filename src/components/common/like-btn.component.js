@@ -5,7 +5,7 @@ import { withStyles } from 'react-native-ui-kitten/theme'
 
 import { HeartIconFill } from '../../assets/icons'
 
-const LikeButtonComponent = props => {
+const LikeButtonComponent = (props) => {
 	const { style, themedStyle, textStyle, children, ...restProps } = props
 	return (
 		<TouchableOpacity style={[themedStyle.container, style]} {...restProps}>
@@ -17,7 +17,7 @@ const LikeButtonComponent = props => {
 	)
 }
 
-export const LikeButton = withStyles(LikeButtonComponent, theme => ({
+export const LikeButton = withStyles(LikeButtonComponent, (theme) => ({
 	container: {
 		flexDirection: 'row',
 		alignItems: 'center',

@@ -18,9 +18,9 @@ const TwitterComponent = ({}) => {
 		variables: {},
 	})
 
-	if(error){
-        console.log("Error here",error)
-    }
+	if (error) {
+		console.log('Error here', error)
+	}
 
 	if (loading) {
 		return (
@@ -32,7 +32,7 @@ const TwitterComponent = ({}) => {
 		console.log('error:' + JSON.stringify(error))
 	}
 
-	let tweets = data && data.getTweets && data.getTweets || []
+	const tweets = (data && data.getTweets && data.getTweets) || []
 	return (
 		<AppLayout>
 			<View style={style.headerStyle}>

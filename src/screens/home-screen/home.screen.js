@@ -15,7 +15,7 @@ import { CircularSpinner } from '../../components/common'
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
 	const [refreshing, setRefreshing] = useState(false)
-	const [localArticles, setLocalArticles] = useState({getArticles:[]})
+	const [localArticles, setLocalArticles] = useState({ getArticles: [] })
 
 	const handleRefresh = () => {
 		setRefreshing(true)
@@ -29,12 +29,14 @@ const Home = ({ navigation }) => {
 	}
 
 	fetchArticlesFromAsyncStorage = () => {
-		fetchfromAsync().then(res=>{
-			setLocalArticles({getArticles: res})
-		}).catch(err=>{
-			console.log(err)
-			setLocalArticles([])
-		})
+		fetchfromAsync()
+			.then((res) => {
+				setLocalArticles({ getArticles: res })
+			})
+			.catch((err) => {
+				console.log(err)
+				setLocalArticles([])
+			})
 	}
 
 	useEffect(() => {
@@ -48,8 +50,8 @@ const Home = ({ navigation }) => {
 		variables: {},
 	})
 
-	if(!loading && data!=null && data.getArticles && data.getArticles.length){
-		let myArticles = data.getArticles
+	if (!loading && data != null && data.getArticles && data.getArticles.length) {
+		const myArticles = data.getArticles
 		storetoAsync(myArticles)
 	}
 
@@ -58,7 +60,7 @@ const Home = ({ navigation }) => {
 		crashlytics().recordError(new Error(error))
 	}
 
-	let dataArticles = data && data.getArticles && data.getArticles || []
+	const dataArticles = (data && data.getArticles && data.getArticles) || []
 
 	if (dataArticles.length || localArticles.getArticles.length) {
 		return (
@@ -67,11 +69,11 @@ const Home = ({ navigation }) => {
 					<Text style={style.textStyle}>{nepaliDate}</Text>
 					<Weather />
 				</View>
-				<ArticleListContainer 
-					navigation={navigation} 
-					articles={data && data.getArticles && data.getArticles.length && data || localArticles} 
-					refreshing={refreshing} 
-					handleRefresh={handleRefresh} 
+				<ArticleListContainer
+					navigation={navigation}
+					articles={(data && data.getArticles && data.getArticles.length && data) || localArticles}
+					refreshing={refreshing}
+					handleRefresh={handleRefresh}
 				/>
 			</AppLayout>
 		)

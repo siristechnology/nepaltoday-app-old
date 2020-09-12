@@ -9,7 +9,7 @@ export const np = {
 		SPORTS: 'खेलकुद',
 		HEALTH: 'स्वास्थ्य',
 		TECHNOLOGY: 'सूचना प्रविधि',
-		AGRICULTURE: 'कृषि'
+		AGRICULTURE: 'कृषि',
 	},
 	public: {
 		APP_NAME: 'नेपाल आज',

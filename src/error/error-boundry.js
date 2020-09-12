@@ -9,14 +9,10 @@ class ErrorBoundary extends React.Component {
 	static getDerivedStateFromError() {
 		return { hasError: true }
 	}
+
 	componentDidCatch() {
 		if (this.state.hasError) {
-			Alert.alert(
-				'Error!!',
-				'Something went wrong please refresh your app !!',
-				[],
-				{ cancelable: true },
-			)
+			Alert.alert('Error!!', 'Something went wrong please refresh your app !!', [], { cancelable: true })
 		}
 	}
 

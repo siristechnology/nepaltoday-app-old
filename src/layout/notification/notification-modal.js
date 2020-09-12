@@ -3,10 +3,7 @@ import { Text } from 'react-native-ui-kitten'
 import { ModalComponent } from '../../components/common/modal.component'
 
 export const NotificationModal = ({ notification }) => {
-	console.log(
-		'_______________notification-modal on nodal and modal data_______________',
-		notification,
-	)
+	console.log('_______________notification-modal on nodal and modal data_______________', notification)
 	if (!notification) {
 		return null
 	}
