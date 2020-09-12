@@ -40,7 +40,7 @@ const TrendingDetail = (props) => {
 				<Text style={styles.headerText}>{props.trending.name}</Text>
 				<View />
 			</View>
-			<ScrollView refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}>
+			<View refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}>
 				<View style={styles.imageContainer}>
 					<Image source={{ uri: props.trending.image }} style={styles.imageStyle} />
 					<Text style={{ marginTop: 10, fontSize: 14 }}>{props.trending.handle}</Text>
@@ -50,7 +50,7 @@ const TrendingDetail = (props) => {
 						<ActivityIndicator size="large" color="#000" />
 					</View>
 				)) || <TwitterListContainer tweets={data.getTweetByHandle} />}
-			</ScrollView>
+			</View>
 		</View>
 	)
 }
