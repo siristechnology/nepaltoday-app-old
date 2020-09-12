@@ -10,7 +10,7 @@ import { Container, Tab, Tabs, ScrollableTab } from 'native-base'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 
-const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE } = en.menu
+const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE, SHARE } = en.menu
 
 const HeadlineScreen = (props) => {
 	const [refreshing, setRefreshing] = useState(false)
@@ -45,7 +45,18 @@ const HeadlineScreen = (props) => {
 	}
 
 	const renderTab = () => {
-		const tabNames = [NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE]
+		const tabNames = [
+			NEWS,
+			ENTERTAINMENT,
+			BUSINESS,
+			SHARE,
+			OPINION,
+			SOCIAL,
+			HEALTH,
+			TECHNOLOGY,
+			AGRICULTURE,
+			SPORTS
+		]
 
 		return tabNames.map((tabname, idx) => {
 			const localTabName = getLocalName(tabname)

@@ -21,7 +21,7 @@ const TwitterComponent = () => {
 	if (error) {
 		console.log('Error here', error)
 	}
-
+	
 	if (loading) {
 		return (
 			<AppLayout>

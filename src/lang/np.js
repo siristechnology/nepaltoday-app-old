@@ -10,6 +10,7 @@ export const np = {
 		HEALTH: 'स्वास्थ्य',
 		TECHNOLOGY: 'सूचना प्रविधि',
 		AGRICULTURE: 'कृषि',
+		SHARE: 'सेयर'
 	},
 	public: {
 		APP_NAME: 'नेपाल आज',

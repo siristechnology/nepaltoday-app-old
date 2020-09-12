@@ -10,5 +10,6 @@ export const en = {
 		HEALTH: 'health',
 		TECHNOLOGY: 'technology',
 		AGRICULTURE: 'agriculture',
-	},
+		SHARE: 'share'
+	}
 }
