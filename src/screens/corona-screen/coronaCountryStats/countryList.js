@@ -41,63 +41,6 @@ const CountryList = () => {
 				<CircularSpinner />
 			</AppLayout>
 		)
-<<<<<<< HEAD
-    } else if (error) {
-		return (
-            <AppLayout>
-                
-            </AppLayout>
-        )
-    }
-    let originalData = data && data.getLatestCoronaStats && data.getLatestCoronaStats.stats
-    let filteredData = originalData.filter(x=>x.country.toLowerCase().includes(searchText.toLowerCase()))
-    let sortedData = filteredData.sort((a,b) => (a.total_cases > b.total_cases) ? -1 : ((b.total_cases > a.total_cases) ? 1 : 0));
-    return(
-        <AppLayout>
-            <ScrollView 
-                style={styles.container}
-                keyboardShouldPersistTaps="handled"
-                refreshControl={
-                    <RefreshControl 
-                        refreshing={refreshing} 
-                        onRefresh={handleRefresh} 
-                        colors={['#0000ff', '#689F38']} 
-                    />
-                }
-            >
-                <Text style={styles.text}>
-                    अन्तिम अपडेट गरिएको : {lastUpdated}
-                </Text>
-                <CoronaSummary
-                    stats={data && data.getLatestCoronaStats && data.getLatestCoronaStats.worldSummary}
-                />
-                <View style={styles.textInputView}>
-                    <Icon
-                        style={{flex:0.09}}
-                        name="search"
-                        size={20}
-                    />
-                    <TextInput
-                        value={searchText}
-                        placeholder="Search by country"
-                        style={{flex:searchText && 0.82 || 0.91,padding:4,fontSize:15}}
-                        onChangeText={(text)=>setSearchText(text)}
-                    />
-                    {searchText && <Icon
-                        style={{flex:0.09, zIndex:111}}
-                        name="close"
-                        size={20}
-                        onPress={()=>setSearchText('')}
-                    /> || <View/>}
-                </View>
-                {sortedData.filter(x=>x.country!='Nepal').map((country,i)=>(
-                    renderItem(country,i)
-                ))}
-            </ScrollView>
-        </AppLayout>
-    )
-
-=======
 	} else if (error) {
 		return <AppLayout />
 	}
@@ -129,7 +72,6 @@ const CountryList = () => {
 			</ScrollView>
 		</AppLayout>
 	)
->>>>>>> 6e520ab238d2097d11c5859ef66caaec79b7e787
 }
 
 const GET_CORONA_STATS = gql`
