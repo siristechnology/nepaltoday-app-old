@@ -9,6 +9,7 @@ export const en = {
 		SPORTS: 'sports',
 		HEALTH: 'health',
 		TECHNOLOGY: 'technology',
-		AGRICULTURE: 'agriculture'
+		AGRICULTURE: 'agriculture',
+		SHARE: 'share'
 	}
 }
