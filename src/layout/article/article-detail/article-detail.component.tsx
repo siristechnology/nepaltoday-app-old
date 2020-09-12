@@ -102,8 +102,8 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 
 export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeType) => ({
 	articleContainerView: {
-		flex: 1
-	},	
+		flex: 1,
+	},
 	container: {
 		flex: 1,
 		backgroundColor: theme['background-basic-color-1'],
@@ -128,7 +128,8 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 		bottom: -32,
 		margin: 0,
 		borderWidth: 2,
-		borderColor: theme['border-basic-color-2'],
+		backgroundColor: theme['background-basic-color-1'],
+		borderColor: theme['border-basic-color-4'],
 	},
 	titleLabel: {
 		marginTop: 30,
