@@ -37,7 +37,7 @@ const TrendingComponent = () => {
 	return (
 		<AppLayout>
 			<View style={style.headerStyle}>
-				<Text style={style.textStyle}>Trending</Text>
+				<Text style={style.textStyle}>Trending Figures</Text>
 			</View>
 			<TrendingListContainer trending={trendings} refreshing={refreshing} onRefresh={handleRefresh} />
 		</AppLayout>
