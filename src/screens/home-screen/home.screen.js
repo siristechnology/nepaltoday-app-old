@@ -58,7 +58,7 @@ const Home = ({ navigation }) => {
 		return (
 			<AppLayout>
 				<View style={style.headerStyle}>
-					<Text style={style.textStyle}>{nepaliDate}</Text>
+					<Text style={style.nepaliDateStyle}>{nepaliDate}</Text>
 					<Weather />
 				</View>
 				<ArticleListContainer
@@ -107,16 +107,14 @@ const style = StyleSheet.create({
 		paddingHorizontal: 20,
 		paddingBottom: 10,
 	},
-	textStyle: {
+	nepaliDateStyle: {
 		fontWeight: 'bold',
 		fontSize: 26,
 		paddingTop: 5,
 	},
-	timeTextStyle: {
-		fontWeight: 'bold',
-		fontSize: 22,
-		paddingTop: 5,
-		paddingLeft: 20,
+	screenStyle: {
+		backgroundColor: '#000000',
+		paddingTop: 500,
 	},
 })
 
