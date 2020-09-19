@@ -10,7 +10,8 @@ import { getRelativeTime } from '../../helper/time'
 
 const TwitterListItemComponent = (props) => {
 	const { themedStyle, tweet } = props
-	const handleTweetPress = () => {
+
+	const handleTwitterHandlePress = () => {
 		const handle = tweet.handle
 		const link = `https://twitter.com/${handle}/status/${tweet.tweetId}`
 		Linking.openURL(link).catch((error) => {
@@ -18,18 +19,10 @@ const TwitterListItemComponent = (props) => {
 		})
 	}
 
-	const handleTwitterHandlePress = () => {
-		const handle = tweet.handle
-		const link = `https://twitter.com/${handle}`
-		Linking.openURL(link).catch((error) => {
-			throw new Error('Error opening twitter handle: ' + error)
-		})
-	}
-
 	return (
 		<View style={[themedStyle.container]}>
 			<View style={themedStyle.tweetWrapper}>
-				<TouchableOpacity style={themedStyle.leftWrapper} onPress={handleTwitterHandlePress}>
+				<TouchableOpacity onPress={handleTwitterHandlePress} style={themedStyle.leftWrapper}>
 					<Avatar source={{ uri: tweet.profileImage }} style={themedStyle.avatar} size="giant" />
 				</TouchableOpacity>
 				<View style={themedStyle.rightWrapper}>
@@ -41,9 +34,7 @@ const TwitterListItemComponent = (props) => {
 							{tweet.handle}
 						</Text>
 					</View>
-					<TouchableOpacity onPress={handleTweetPress}>
-						<Text>{tweet.text}</Text>
-					</TouchableOpacity>
+					<Text>{tweet.text}</Text>
 					<ArticleActivityBar style={themedStyle.detailsContainer}>
 						<View style={themedStyle.dateContainer}>
 							{ClockIconOutline(themedStyle.dateIcon)}
