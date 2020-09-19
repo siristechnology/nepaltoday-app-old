@@ -7,7 +7,6 @@ import { ApolloLink, Observable } from 'apollo-link'
 import fetch from 'node-fetch'
 import crashlytics from '@react-native-firebase/crashlytics'
 import { NEPALTODAY_SERVER } from 'react-native-dotenv'
-// const NEPALTODAY_SERVER = 'http://192.168.1.41:8080/graphql'
 
 const cache = new InMemoryCache()
 

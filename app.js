@@ -61,10 +61,14 @@ const App = () => {
 
 	useEffect(() => {
 		RNBootSplash.hide()
-		PushNotification.configure({
-			onRegister: onRegister,
-			onNotification: onNotif,
-		})
+
+		const configureNotification = async () => {
+			PushNotification.configure({
+				onRegister: onRegister,
+				onNotification: onNotif,
+			})
+		}
+		configureNotification()
 	}, [])
 
 	return (
