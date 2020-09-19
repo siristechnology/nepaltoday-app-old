@@ -22,13 +22,7 @@ const Home = ({ navigation }) => {
 		refetch().then(() => setRefreshing(false))
 	}
 
-	async function customTrace() {
-		const trace = await perf().startTrace('custom_trace_beta')
-		trace.putAttribute('user', auth().currentUser.uid)
-		await trace.stop()
-	}
-
-	fetchArticlesFromAsyncStorage = () => {
+	const fetchArticlesFromAsyncStorage = async () => {
 		fetchfromAsync()
 			.then((res) => {
 				setLocalArticles({ getArticles: res })
@@ -41,9 +35,7 @@ const Home = ({ navigation }) => {
 
 	useEffect(() => {
 		setNepaliDate(getFormattedCurrentNepaliDate())
-		crashlytics().log('Home page test log.')
 		fetchArticlesFromAsyncStorage()
-		customTrace()
 	}, [])
 
 	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
