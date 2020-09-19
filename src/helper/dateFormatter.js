@@ -29,7 +29,7 @@ const getCurrentDayNameInNepali = () => {
 	return currentDayNameInNepali
 }
 
-const getFormattedCurrentNepaliDate = () => {
+const getFormattedCurrentNepaliDate = async () => {
 	const currentDate = new Date()
 	let dateString = currentDate.toISOString()
 	dateString = dateString.slice(0, 10)

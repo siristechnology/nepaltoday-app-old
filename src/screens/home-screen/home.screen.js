@@ -7,8 +7,6 @@ import { ArticleListContainer } from '../../layout/article'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
 import crashlytics from '@react-native-firebase/crashlytics'
-import perf from '@react-native-firebase/perf'
-import auth from '@react-native-firebase/auth'
 import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { CircularSpinner } from '../../components/common'
 
@@ -34,7 +32,9 @@ const Home = ({ navigation }) => {
 	}
 
 	useEffect(() => {
-		setNepaliDate(getFormattedCurrentNepaliDate())
+		getFormattedCurrentNepaliDate().then((npDate) => {
+			setNepaliDate(npDate)
+		})
 		fetchArticlesFromAsyncStorage()
 	}, [])
 
