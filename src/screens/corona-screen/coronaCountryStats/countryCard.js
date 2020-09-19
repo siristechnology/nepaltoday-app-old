@@ -1,14 +1,11 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
+import { formatCoronaNumber } from '../../../helper/numberFormatter'
 
 const CountryCard = (props) => {
 	const renderStatView = (text, number) => {
-		const isNumberInK = number > 10000
-		let newValue = number
-		if (isNumberInK) {
-			newValue = Math.round(number / 1000)
-		}
-		const formattedValue = (isNumberInK && newValue + 'k') || newValue
+		const formattedValue = formatCoronaNumber(number)
+
 		return (
 			<View style={styles.statView}>
 				<Text style={styles.valueText}>{formattedValue}</Text>

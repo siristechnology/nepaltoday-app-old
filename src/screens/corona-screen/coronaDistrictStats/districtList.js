@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { View, TextInput, ScrollView, RefreshControl, Text, StyleSheet } from 'react-native'
+import { View, TextInput, RefreshControl, Text, StyleSheet } from 'react-native'
+import { FlatList } from 'react-navigation'
 import { getRelativeTime } from './../../../helper/time'
 import DistrictCard from './districtCard'
 import { useQuery } from '@apollo/react-hooks'
@@ -31,8 +32,8 @@ const DistrictList = () => {
 
 	const lastUpdated = data && data.getDistrictCoronaStats && getRelativeTime(data.getDistrictCoronaStats.createdDate)
 
-	const renderItem = (info, i) => {
-		return <DistrictCard key={i} stat={info} />
+	const renderItem = ({ item, index }) => {
+		return <DistrictCard key={index} stat={item} />
 	}
 
 	if (loading) {
@@ -50,27 +51,32 @@ const DistrictList = () => {
 	const sortedData = filteredData.sort((a, b) => (a.totalCases > b.totalCases ? -1 : b.totalCases > a.totalCases ? 1 : 0))
 	return (
 		<AppLayout>
-			<ScrollView
+			<FlatList
 				keyboardShouldPersistTaps="handled"
-				style={styles.container}
+				ListHeaderComponent={
+					<>
+						<Text style={styles.text}>अन्तिम अपडेट गरिएको : {lastUpdated}</Text>
+						<CoronaSummary stats={data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.timeLine} />
+						<View style={styles.textInputView}>
+							<Icon style={{ flex: 0.09 }} name="search" size={20} />
+							<TextInput
+								value={searchText}
+								placeholder="Search by district"
+								style={{ flex: (searchText && 0.82) || 0.91, padding: 4, fontSize: 15 }}
+								onChangeText={(text) => setSearchText(text)}
+							/>
+							{(searchText && (
+								<Icon style={{ flex: 0.09, zIndex: 111 }} name="close" size={20} onPress={() => setSearchText('')} />
+							)) || <View />}
+						</View>
+					</>
+				}
+				data={sortedData}
+				renderItem={renderItem}
+				keyExtractor={(item) => item.name}
+				contentContainerStyle={styles.container}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
-			>
-				<Text style={styles.text}>अन्तिम अपडेट गरिएको : {lastUpdated}</Text>
-				<CoronaSummary stats={data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.timeLine} />
-				<View style={styles.textInputView}>
-					<Icon style={{ flex: 0.09 }} name="search" size={20} />
-					<TextInput
-						value={searchText}
-						placeholder="Search by district"
-						style={{ flex: (searchText && 0.82) || 0.91, padding: 4, fontSize: 15 }}
-						onChangeText={(text) => setSearchText(text)}
-					/>
-					{(searchText && <Icon style={{ flex: 0.09, zIndex: 111 }} name="close" size={20} onPress={() => setSearchText('')} />) || (
-						<View />
-					)}
-				</View>
-				{sortedData.map((district, i) => renderItem(district, i))}
-			</ScrollView>
+			/>
 		</AppLayout>
 	)
 }
