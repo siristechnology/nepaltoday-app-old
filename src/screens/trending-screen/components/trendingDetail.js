@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, ScrollView, Image, Text, StyleSheet, ActivityIndicator, RefreshControl } from 'react-native'
+import { View, Image, Text, StyleSheet, ActivityIndicator, RefreshControl } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
@@ -41,15 +41,21 @@ const TrendingDetail = (props) => {
 				<View />
 			</View>
 			<View refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}>
-				<View style={styles.imageContainer}>
-					<Image source={{ uri: props.trending.image }} style={styles.imageStyle} />
-					<Text style={{ marginTop: 10, fontSize: 14 }}>{props.trending.handle}</Text>
-				</View>
 				{(loading && (
 					<View style={styles.loaderContainer}>
 						<ActivityIndicator size="large" color="#000" />
 					</View>
-				)) || <TwitterListContainer tweets={data.getTweetByHandle} />}
+				)) || (
+					<TwitterListContainer
+						tweets={data.getTweetByHandle}
+						header={
+							<View style={styles.imageContainer}>
+								<Image source={{ uri: props.trending.image }} style={styles.imageStyle} />
+								<Text style={{ marginTop: 10, fontSize: 14 }}>{props.trending.handle}</Text>
+							</View>
+						}
+					/>
+				)}
 			</View>
 		</View>
 	)
