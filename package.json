@@ -37,7 +37,7 @@
 		"jetifier": "^1.6.5",
 		"moment": "^2.26.0",
 		"native-base": "^2.13.12",
-		"node-fetch": "^2.6.0",
+		"node-fetch": "^2.6.1",
 		"react": "^16.13.1",
 		"react-native": "0.63.2",
 		"react-native-bootsplash": "^2.2.5",
