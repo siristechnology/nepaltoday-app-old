@@ -38,13 +38,11 @@ const ArticleListItemComponent = React.memo((props) => {
 
 export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => ({
 	container: {
-		borderRadius: 12,
+		borderRadius: 8,
 	},
 	infoContainer: {
 		paddingHorizontal: 16,
 		paddingVertical: 8,
-		borderBottomWidth: 1,
-		borderBottomColor: theme['border-basic-color-2'],
 	},
 	activityContainer: {
 		paddingHorizontal: 16,
@@ -54,10 +52,8 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => (
 		height: 220,
 	},
 	image: {
-		borderTopLeftRadius: 12,
-		borderTopRightRadius: 12,
-		borderWidth: 1,
-		borderColor: '#f5f7fa',
+		borderTopLeftRadius: 8,
+		borderTopRightRadius: 8,
 	},
 	titleLabel: textStyle.headline,
 	descriptionLabel: {
