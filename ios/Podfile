@@ -23,11 +23,3 @@ target 'nepaltodayapp' do
   end
 end
 
-target 'nepaltodayapp-tvOS' do
-  # Pods for nepaltodayapp-tvOS
-
-  target 'nepaltodayapp-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-end
