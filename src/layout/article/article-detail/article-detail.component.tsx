@@ -70,6 +70,13 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 						<Text category="s1" style={themedStyle.contentLabel}>
 							{article.content}
 						</Text>
+						{article.tags && article.tags.length>0 && <View style={themedStyle.tagsView}>
+							{article.tags.map((tag,i)=>(
+								<Text key={i} style={themedStyle.tags}>
+									#{tag}
+								</Text>
+							))}
+						</View>}
 						<View style={themedStyle.readMoreBtnWrapper}>
 							<Button onPress={this.handleLinkClick} style={themedStyle.readMoreBtn}>
 								{READ_MORE}
@@ -142,6 +149,12 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 		...textStyle.paragraph,
 		fontSize: 18,
 	},
+	tags: {
+		marginVertical:7,
+		fontSize: 16,
+		fontWeight: 'bold',
+		marginRight: 2
+	},
 	dateIcon: {
 		width: 13,
 		height: 13,
@@ -167,4 +180,9 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 	readMoreBtn: {
 		width: 200,
 	},
+	tagsView: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		marginVertical: 7
+	}
 }))

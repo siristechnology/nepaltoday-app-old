@@ -90,6 +90,7 @@ export const GET_ARTICLES_QUERY = gql`
 			createdDate
 			modifiedDate
 			category
+			tags
 			source {
 				name
 				logoLink
