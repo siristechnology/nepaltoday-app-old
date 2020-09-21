@@ -3,7 +3,6 @@ import { createStackNavigator } from 'react-navigation-stack'
 
 import { ArticleWebviewComponent, SplashScreenComponent } from '../components'
 import { BottomTabScreen } from '../screens/navigation/bottom-navigation.screen'
-import { CoronaBottomTabScreen } from '../screens/navigation/corona-bottom-navigation.screen'
 import ArticleDetailScreen from '../layout/article/article-detail/article-detail.container'
 
 const AppNavigator = createStackNavigator(
@@ -19,7 +18,6 @@ const AppNavigator = createStackNavigator(
 		Tab: { screen: BottomTabScreen },
 		Article: { screen: ArticleWebviewComponent },
 		ArticleDetail: { screen: ArticleDetailScreen },
-		Corona: { screen: CoronaBottomTabScreen },
 	},
 	{
 		headerMode: 'none',
