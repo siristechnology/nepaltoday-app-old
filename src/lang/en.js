@@ -4,7 +4,6 @@ export const en = {
 		ENTERTAINMENT: 'entertainment',
 		BUSINESS: 'business',
 		NEWS: 'news',
-		OPINION: 'opinion',
 		SOCIAL: 'social',
 		SPORTS: 'sports',
 		HEALTH: 'health',

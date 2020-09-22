@@ -4,7 +4,6 @@ export const np = {
 		ENTERTAINMENT: 'मनोरन्जन',
 		BUSINESS: 'अर्थ',
 		NEWS: 'समाचार',
-		OPINION: 'बिचार',
 		SOCIAL: 'समाज ',
 		SPORTS: 'खेलकुद',
 		HEALTH: 'स्वास्थ्य',

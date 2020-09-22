@@ -10,7 +10,7 @@ import { Container, Tab, Tabs, ScrollableTab } from 'native-base'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 
-const { NEWS, ENTERTAINMENT, BUSINESS, OPINION, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE, SHARE } = en.menu
+const { NEWS, ENTERTAINMENT, BUSINESS, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE, SHARE } = en.menu
 
 const HeadlineScreen = (props) => {
 	const [refreshing, setRefreshing] = useState(false)
@@ -50,7 +50,6 @@ const HeadlineScreen = (props) => {
 			ENTERTAINMENT,
 			BUSINESS,
 			SHARE,
-			OPINION,
 			SOCIAL,
 			HEALTH,
 			TECHNOLOGY,
