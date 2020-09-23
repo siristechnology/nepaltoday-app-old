@@ -55,6 +55,9 @@ const DistrictList = () => {
 				keyboardShouldPersistTaps="handled"
 				ListHeaderComponent={
 					<>
+						<Text style={styles.sourceText}>
+							Source: {data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.source}
+						</Text>
 						<Text style={styles.text}>अन्तिम अपडेट गरिएको : {lastUpdated}</Text>
 						<CoronaSummary stats={data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.timeLine} />
 						<View style={styles.textInputView}>
@@ -102,6 +105,7 @@ const GET_DISTRICT_CORONA_STATS = gql`
 				recovered
 				deaths
 			}
+			source
 		}
 	}
 `
@@ -114,6 +118,12 @@ const styles = StyleSheet.create({
 		padding: 5,
 		paddingTop: 10,
 		paddingHorizontal: 15,
+	},
+	sourceText: {
+		alignSelf: 'flex-end',
+		marginRight: 10,
+		marginTop: 3,
+		fontSize: 13,
 	},
 	listContainer: {
 		padding: 8,
