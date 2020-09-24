@@ -55,9 +55,6 @@ const DistrictList = () => {
 				keyboardShouldPersistTaps="handled"
 				ListHeaderComponent={
 					<>
-						<Text style={styles.sourceText}>
-							Source: {data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.source}
-						</Text>
 						<Text style={styles.text}>अन्तिम अपडेट गरिएको : {lastUpdated}</Text>
 						<CoronaSummary stats={data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.timeLine} />
 						<View style={styles.textInputView}>
@@ -79,6 +76,11 @@ const DistrictList = () => {
 				keyExtractor={(item) => item.name}
 				contentContainerStyle={styles.container}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
+				ListFooterComponent={
+					<Text style={styles.sourceText}>
+						{data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.source}
+					</Text>
+				}
 			/>
 		</AppLayout>
 	)
@@ -120,9 +122,9 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 15,
 	},
 	sourceText: {
-		alignSelf: 'flex-end',
+		alignSelf: 'center',
 		marginRight: 10,
-		marginTop: 3,
+		marginBottom: 5,
 		fontSize: 13,
 	},
 	listContainer: {

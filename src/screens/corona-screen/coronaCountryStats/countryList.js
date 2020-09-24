@@ -75,6 +75,11 @@ const CountryList = () => {
 				renderItem={renderItem}
 				keyExtractor={(item) => item.country}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
+				ListFooterComponent={
+					<Text style={styles.sourceText}>
+						{data && data.getLatestCoronaStats && data.getLatestCoronaStats.source}
+					</Text>
+				}
 			/>
 		</AppLayout>
 	)
@@ -97,6 +102,7 @@ const GET_CORONA_STATS = gql`
 				new_cases
 				new_deaths
 			}
+			source
 		}
 	}
 `
@@ -109,6 +115,12 @@ const styles = StyleSheet.create({
 		padding: 5,
 		paddingTop: 10,
 		paddingHorizontal: 15,
+	},
+	sourceText: {
+		alignSelf: 'center',
+		marginRight: 10,
+		marginBottom: 5,
+		fontSize: 13,
 	},
 	listContainer: {
 		padding: 8,
