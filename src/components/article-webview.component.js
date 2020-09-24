@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { AppState, StyleSheet } from 'react-native'
+import { AppState, StyleSheet, Text, View } from 'react-native'
 import { Layout, Spinner } from 'react-native-ui-kitten'
 import { WebView } from 'react-native-webview'
+import AntDesign from 'react-native-vector-icons/AntDesign'
 
-export const ArticleWebviewComponent = ({ navigation }) => {
+export const ArticleWebviewComponent = ({navigation}) => {
 	const link = navigation.getParam('link')
 	const [appState, setAppState] = useState(AppState.currentState)
 
@@ -18,25 +19,42 @@ export const ArticleWebviewComponent = ({ navigation }) => {
 		setAppState(nextAppState)
 	}
 
+	const BackIcon = (
+		<AntDesign
+			name="back"
+			size={24}
+			color="grey"
+			onPress={()=>navigation.goBack()}
+			style={{
+				padding: 8,
+			}}
+		/>
+	)
+
 	if (appState == 'active') {
 		return (
-			<WebView
-				renderLoading={() => (
-					<Layout style={styles.container}>
-						<Spinner />
-					</Layout>
-				)}
-				mediaPlaybackRequiresUserAction={true}
-				mixedContentMode="always"
-				allowsInlineMediaPlayback="false"
-				startInLoadingState
-				source={{ uri: link }}
-				style={{
-					flex: 1,
-					alignItems: 'center',
-					justifyContent: 'center',
-				}}
-			/>
+			<View style={{flex:1}}>
+				<View style={{paddingLeft:10}}>
+					{BackIcon}
+				</View>
+				<WebView
+					renderLoading={() => (
+						<Layout style={styles.container}>
+							<Spinner />
+						</Layout>
+					)}
+					mediaPlaybackRequiresUserAction={true}
+					mixedContentMode="always"
+					allowsInlineMediaPlayback="false"
+					startInLoadingState
+					source={{ uri: link }}
+					style={{
+						flex: 1,
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}
+				/>
+			</View>
 		)
 	} else {
 		return null
