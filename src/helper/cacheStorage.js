@@ -2,7 +2,9 @@ import AsyncStorage from '@react-native-community/async-storage'
 const ASYNC_NAME = 'LOCAL_ARTICLES'
 
 const storetoAsync = (articles) => {
-	AsyncStorage.setItem(ASYNC_NAME, JSON.stringify(articles))
+	if(articles){
+		AsyncStorage.setItem(ASYNC_NAME, JSON.stringify(articles))
+	}
 }
 
 const fetchfromAsync = () => {
