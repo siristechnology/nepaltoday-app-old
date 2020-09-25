@@ -55,9 +55,6 @@ const DistrictList = () => {
 				keyboardShouldPersistTaps="handled"
 				ListHeaderComponent={
 					<>
-						<Text style={styles.sourceText}>
-							Source: {data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.source}
-						</Text>
 						<Text style={styles.text}>अन्तिम अपडेट गरिएको : {lastUpdated}</Text>
 						<CoronaSummary stats={data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.timeLine} />
 						<View style={styles.textInputView}>

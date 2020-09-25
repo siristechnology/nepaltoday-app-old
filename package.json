@@ -70,6 +70,7 @@
 		"babel-plugin-module-resolver": "^4.0.0",
 		"babel-preset-react-app": "^9.1.2",
 		"babel-preset-react-native": "^4.0.1",
+		"detox": "^17.6.0",
 		"eslint": "^7.0.0",
 		"eslint-config-prettier": "^6.11.0",
 		"eslint-config-standard": "^14.1.1",
@@ -84,6 +85,23 @@
 		"prettier": "^2.0.5",
 		"react-native-dotenv": "^0.2.0",
 		"react-test-renderer": "^16.13.1"
+	},
+	"detox": {
+		"configurations": {
+		  "android.emu.debug": {
+			"binaryPath": "android/app/build/outputs/apk/debug/app-debug.apk",
+			"build": "cd android && ./gradlew assembleDebug assembleAndroidTest -DtestBuildType=debug && cd ..",
+			"type": "android.emulator",
+			"name": "S9_API_29"
+		  },
+		  "android.emu.release": {
+			"binaryPath": "android/app/build/outputs/apk/release/app-release.apk",
+			"build": "cd android && ./gradlew assembleRelease assembleAndroidTest -DtestBuildType=release && cd ..",
+			"type": "android.emulator",
+			"name": "S9_API_29"
+		  }
+		},
+		"test-runner": "jest"
 	},
 	"jest": {
 		"preset": "react-native",
