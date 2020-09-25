@@ -10,7 +10,7 @@ const TrendingDetail = (props) => {
 
 	const GET_TWEETS_BY_HANDLE = gql`
         query trendingDetail{
-            getTweetByHandle(handle: "${props.trending.handle.slice(1)}"){
+            getTweetByHandle(handle: "${props.trending.handle}"){
                 _id,
                 text,
                 tweetId,
