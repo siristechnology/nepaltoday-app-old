@@ -63,7 +63,6 @@ const style = StyleSheet.create({
 const GET_TRENDING = gql`
 	query TrendingScreenQuery {
 		getTrending {
-			createdDate
 			createdAt
 			trendings {
 				category
