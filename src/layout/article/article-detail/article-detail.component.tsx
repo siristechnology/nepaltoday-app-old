@@ -9,6 +9,7 @@ import { getRelativeTime } from '../../../helper/time'
 import { ClockIconOutline } from '../../../assets/icons'
 import { ArticleActivityBar } from '../../../components/articles'
 import { ContainerView, textStyle } from '../../../components/common'
+const NEPALTODAY_URL = "https://tinyurl.com/NepalTodayApp"
 
 interface ComponentProps {
 	article
@@ -95,7 +96,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 	private shareButtonClick = () => {
 		const { title, link } = this.props.article
 		Share.share({
-			message: title + '  ' + link,
+			message: title + '  ' + link + '  '+'#NEPALTODAY #NEPALTODAYAPP'+'  '+ NEPALTODAY_URL,
 			url: link,
 			title: title,
 		})
