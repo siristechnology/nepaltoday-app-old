@@ -96,7 +96,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 	private shareButtonClick = () => {
 		const { title, link } = this.props.article
 		Share.share({
-			message: title + '  ' + link + '  '+'#NEPALTODAY #NEPALTODAYAPP'+'  '+ NEPALTODAY_URL,
+			message: title + '  ' + link +' #NEPALTODAYAPP ' +  NEPALTODAY_URL,
 			url: link,
 			title: title,
 		})
