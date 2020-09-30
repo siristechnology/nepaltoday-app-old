@@ -8,6 +8,7 @@ import TwitterScreen from '../twitter-screen/twitter.screen'
 import HeadlineScreen from '../headline-screen/headline.screen'
 import CoronaScreen from '../corona-screen/corona.screen'
 import TrendingScreen from './../trending-screen/trending.screen'
+import RadioScreen from './../radio-screen/radio.screen'
 
 export const BottomTabScreen = createBottomTabNavigator(
 	{
@@ -16,6 +17,7 @@ export const BottomTabScreen = createBottomTabNavigator(
 		Corona: CoronaScreen,
 		Trending: TrendingScreen,
 		Twitter: TwitterScreen,
+		Radio: RadioScreen
 	},
 	{
 		initialRouteName: 'Home',
@@ -33,6 +35,8 @@ export const BottomTabScreen = createBottomTabNavigator(
 					iconName = 'skull'
 				} else if (routeName === 'Trending') {
 					iconName = 'fire'
+				} else if(routeName === 'Radio') {
+					iconName = 'headphones'
 				}
 				if (routeName === 'Trending') {
 					return <SimpleLine name={iconName} size={25} color={tintColor} />
