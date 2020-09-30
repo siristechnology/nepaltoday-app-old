@@ -49,7 +49,7 @@ const RadioScreen = () => {
     // const [currentChannel, setCurrentChannel] = useState({})
 
     const onFMSelect = (channel) => {
-        setCurrentChannel(channel)
+        // setCurrentChannel(channel)
         TrackPlayer.play();
         TrackPlayer.skip(channel.id)
         setIsPlaying(true);
