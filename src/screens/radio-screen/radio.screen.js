@@ -42,11 +42,11 @@ const trackPlayerInit = async () => {
 
 const RadioScreen = () => {
 
-    const [isTrackPlayerInit, setIsTrackPlayerInit] = useState(false);
+    // const [isTrackPlayerInit, setIsTrackPlayerInit] = useState(false);
 
     const [isPlaying, setIsPlaying] = useState(false);
 
-    const [currentChannel, setCurrentChannel] = useState({})
+    // const [currentChannel, setCurrentChannel] = useState({})
 
     const onFMSelect = (channel) => {
         setCurrentChannel(channel)
@@ -60,7 +60,8 @@ const RadioScreen = () => {
     useEffect(() => {
         const startPlayer = async () => {
           let isInit =  await trackPlayerInit();
-          setIsTrackPlayerInit(isInit);
+        //   setIsTrackPlayerInit(isInit);
+            console.log(isInit)
         }
         startPlayer();
     }, []);
