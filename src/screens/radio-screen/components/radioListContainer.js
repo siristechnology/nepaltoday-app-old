@@ -1,5 +1,5 @@
 import React from 'react'
-import { FlatList, ScrollView } from 'react-navigation'
+import { ScrollView } from 'react-navigation'
 import RadioCard from './radioCard'
 
 const RadioListContainer = (props) => {

@@ -26,7 +26,7 @@ const trackPlayerInit = async () => {
         TrackPlayer.CAPABILITY_SKIP_TO_PREVIOUS
       ],
     });
-    for(fmDetail of fmDetails){
+    for(let fmDetail of fmDetails){
       await TrackPlayer.add({
         id: fmDetail.id,
         url: fmDetail.url,
