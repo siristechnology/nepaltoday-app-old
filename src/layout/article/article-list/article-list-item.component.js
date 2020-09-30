@@ -43,6 +43,7 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => (
 	infoContainer: {
 		paddingHorizontal: 16,
 		paddingVertical: 8,
+		marginTop: -12
 	},
 	activityContainer: {
 		paddingHorizontal: 16,
