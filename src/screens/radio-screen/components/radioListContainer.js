@@ -10,6 +10,7 @@ const RadioListContainer = (props) => {
                     key={i}
                     channel={fm}
                     onFMSelect={props.onFMSelect}
+                    initSuccess={props.initSuccess}
                 />
             ))}
         </ScrollView>

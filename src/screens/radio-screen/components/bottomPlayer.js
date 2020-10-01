@@ -11,34 +11,34 @@ const BottomPlayer = (props) => {
                 size={30}
                 color="#000"
                 style={styles.icon}
-                onPress={()=>TrackPlayer.skipToPrevious()}
+                onPress={()=>props.initSuccess && TrackPlayer.skipToPrevious()}
             />
             {props.isPlaying && <Icon
                 name="pause-circle"
                 size={35}
                 color="#000"
                 style={styles.icon}
-                onPress={()=>TrackPlayer.pause()}
+                onPress={()=>props.initSuccess && TrackPlayer.pause()}
             /> || <Icon
                 name="play-circle"
                 size={35}
                 color="#000"
                 style={styles.icon}
-                onPress={()=>TrackPlayer.play()}
+                onPress={()=>props.initSuccess && TrackPlayer.play()}
             />}
             <Icon
                 name="stop-circle"
                 size={35}
                 color="#000"
                 style={styles.icon}
-                onPress={()=>TrackPlayer.stop()}
+                onPress={()=>props.initSuccess && TrackPlayer.stop()}
             />
             <Icon
                 name="fast-forward"
                 size={30}
                 color="#000"
                 style={styles.icon}
-                onPress={()=>TrackPlayer.skipToNext()}
+                onPress={()=>props.initSuccess && TrackPlayer.skipToNext()}
             />
         </View>
     )

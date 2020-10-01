@@ -8,6 +8,7 @@ const RadioCard = (props) => {
             activeOpacity={0.9}
             style={styles.cardContainer}
             onPress={()=>props.onFMSelect(channel)}
+            disabled={!props.initSuccess}
         >
             <Image
                 source={{uri: channel.artwork}}

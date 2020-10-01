@@ -42,7 +42,7 @@ const trackPlayerInit = async () => {
 
 const RadioScreen = () => {
 
-    // const [isTrackPlayerInit, setIsTrackPlayerInit] = useState(false);
+    const [isTrackPlayerInit, setIsTrackPlayerInit] = useState(false);
 
     const [isPlaying, setIsPlaying] = useState(false);
 
@@ -60,8 +60,7 @@ const RadioScreen = () => {
     useEffect(() => {
         const startPlayer = async () => {
           let isInit =  await trackPlayerInit();
-        //   setIsTrackPlayerInit(isInit);
-            console.log(isInit)
+          setIsTrackPlayerInit(isInit);
         }
         startPlayer();
     }, []);
@@ -84,9 +83,11 @@ const RadioScreen = () => {
             <RadioListContainer
                 fmList={fmDetails}
                 onFMSelect={onFMSelect}
+                initSuccess={isTrackPlayerInit}
             />
             <BottomPlayer
                 isPlaying={isPlaying}
+                initSuccess={isTrackPlayerInit}
             />
         </AppLayout>
     )
