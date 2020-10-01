@@ -4,6 +4,27 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 import TrackPlayer from 'react-native-track-player';
 
 const BottomPlayer = (props) => {
+
+    const skipToPrevious = async() => {
+        await TrackPlayer.skipToPrevious()
+    }
+
+    const pause = async() => {
+        await TrackPlayer.pause()
+    }
+
+    const play = async() => {
+        await TrackPlayer.play()
+    }
+
+    const stop = async() => {
+        await TrackPlayer.stop()
+    }
+
+    const skipToNext = async() => {
+        await TrackPlayer.skipToNext()
+    }
+
     return(
         <View style={styles.playerContainer}>
             <Icon
@@ -11,34 +32,34 @@ const BottomPlayer = (props) => {
                 size={30}
                 color="#000"
                 style={styles.icon}
-                onPress={()=>props.initSuccess && TrackPlayer.skipToPrevious()}
+                onPress={()=>props.initSuccess && skipToPrevious()}
             />
             {props.isPlaying && <Icon
                 name="pause-circle"
                 size={35}
                 color="#000"
                 style={styles.icon}
-                onPress={()=>props.initSuccess && TrackPlayer.pause()}
+                onPress={()=>props.initSuccess && pause()}
             /> || <Icon
                 name="play-circle"
                 size={35}
                 color="#000"
                 style={styles.icon}
-                onPress={()=>props.initSuccess && TrackPlayer.play()}
+                onPress={()=>props.initSuccess && play()}
             />}
             <Icon
                 name="stop-circle"
                 size={35}
                 color="#000"
                 style={styles.icon}
-                onPress={()=>props.initSuccess && TrackPlayer.stop()}
+                onPress={()=>props.initSuccess && stop()}
             />
             <Icon
                 name="fast-forward"
                 size={30}
                 color="#000"
                 style={styles.icon}
-                onPress={()=>props.initSuccess && TrackPlayer.skipToNext()}
+                onPress={()=>props.initSuccess && skipToNext()}
             />
         </View>
     )

@@ -48,10 +48,10 @@ const RadioScreen = () => {
 
     // const [currentChannel, setCurrentChannel] = useState({})
 
-    const onFMSelect = (channel) => {
+    const onFMSelect = async (channel) => {
         // setCurrentChannel(channel)
-        TrackPlayer.play();
-        TrackPlayer.skip(channel.id)
+        await TrackPlayer.play();
+        await TrackPlayer.skip(channel.id)
         setIsPlaying(true);
         // TrackPlayer.pause();
         // setIsPlaying(false);
