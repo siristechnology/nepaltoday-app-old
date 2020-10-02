@@ -66,5 +66,6 @@ android/app/signed/*
 /ios/Pods/
 
 # vscode
-.vscode/
+.vscode/**
+!.vscode/extensions.json
 **/*.prefs
