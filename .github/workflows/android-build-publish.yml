@@ -14,16 +14,15 @@ jobs:
               with:
                   java-version: '11.0.7'
 
-            - name: Use Node.js 12.x
+            - name: Use Node.js 14.11.0
               uses: actions/setup-node@v1
               with:
-                  node-version: 12.x
+                  node-version: '14.11.0'
 
             - name: Yarn Install, Build, (Test)
               run: |
                   sh prepare_beta.sh
                   yarn
-                  yarn build
                   yarn bundle
 
             - name: Upload APK artifact
