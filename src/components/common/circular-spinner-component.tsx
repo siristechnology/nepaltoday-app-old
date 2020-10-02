@@ -4,16 +4,15 @@ import { Layout, Spinner } from 'react-native-ui-kitten/ui'
 
 export const CircularSpinner = () => (
 	<Layout style={styles.container}>
-		<Spinner />
+		<Spinner style={styles.spinner} />
 	</Layout>
 )
 
 const styles = StyleSheet.create({
 	container: {
-		flexDirection: 'row',
+		height: '100%',
 		justifyContent: 'center',
-		flexWrap: 'wrap',
-		paddingVertical: 16,
-		paddingHorizontal: 16,
+		alignItems: 'center',
 	},
+	spinner: {},
 })
