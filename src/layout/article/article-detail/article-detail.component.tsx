@@ -9,7 +9,7 @@ import { getRelativeTime } from '../../../helper/time'
 import { ClockIconOutline } from '../../../assets/icons'
 import { ArticleActivityBar } from '../../../components/articles'
 import { ContainerView, textStyle } from '../../../components/common'
-const NEPALTODAY_URL = "https://tinyurl.com/NepalTodayApp"
+const NEPALTODAY_URL = 'https://tinyurl.com/NepalTodayApp'
 
 interface ComponentProps {
 	article
@@ -71,13 +71,15 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 						<Text category="s1" style={themedStyle.contentLabel}>
 							{article.content}
 						</Text>
-						{article.tags && article.tags.length>0 && <View style={themedStyle.tagsView}>
-							{article.tags.map((tag,i)=>(
-								<Text key={i} style={themedStyle.tags}>
-									#{tag}
-								</Text>
-							))}
-						</View>}
+						{article.tags && article.tags.length > 0 && (
+							<View style={themedStyle.tagsView}>
+								{article.tags.map((tag, i) => (
+									<Text key={i} style={themedStyle.tags}>
+										#{tag}{' '}
+									</Text>
+								))}
+							</View>
+						)}
 						<View style={themedStyle.readMoreBtnWrapper}>
 							<Button onPress={this.handleLinkClick} style={themedStyle.readMoreBtn}>
 								{READ_MORE}
@@ -96,7 +98,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 	private shareButtonClick = () => {
 		const { title, link } = this.props.article
 		Share.share({
-			message: title + '  ' + link +' #NEPALTODAYAPP ' +  NEPALTODAY_URL,
+			message: title + '  ' + link + ' #NEPALTODAYAPP ' + NEPALTODAY_URL,
 			url: link,
 			title: title,
 		})
@@ -151,10 +153,10 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 		fontSize: 18,
 	},
 	tags: {
-		marginVertical:7,
+		marginVertical: 7,
 		fontSize: 16,
 		fontWeight: 'bold',
-		marginRight: 2
+		marginRight: 2,
 	},
 	dateIcon: {
 		width: 13,
@@ -184,6 +186,6 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 	tagsView: {
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginVertical: 7
-	}
+		marginVertical: 7,
+	},
 }))

@@ -75,11 +75,7 @@ const CountryList = () => {
 				renderItem={renderItem}
 				keyExtractor={(item) => item.country}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
-				ListFooterComponent={
-					<Text style={styles.sourceText}>
-						{data && data.getLatestCoronaStats && data.getLatestCoronaStats.source}
-					</Text>
-				}
+				ListFooterComponent={<Text style={styles.sourceText}>{data && data.getLatestCoronaStats && data.getLatestCoronaStats.source}</Text>}
 			/>
 		</AppLayout>
 	)
@@ -118,8 +114,7 @@ const styles = StyleSheet.create({
 	},
 	sourceText: {
 		alignSelf: 'center',
-		marginRight: 10,
-		marginBottom: 5,
+		marginBottom: 10,
 		fontSize: 13,
 	},
 	listContainer: {

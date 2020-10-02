@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import { formatCoronaNumber } from '../../../helper/numberFormatter'
 
 const CoronaSummary = (props) => {
 	const getCommaAddedNumber = (number) => {
@@ -19,12 +18,12 @@ const CoronaSummary = (props) => {
 	return (
 		<View>
 			<View style={styles.rowView}>
-				{Card('Total Cases', formatCoronaNumber(props.stats.totalCases))}
-				{Card('New Cases', formatCoronaNumber(props.stats.newCases))}
+				{Card('Total Cases', props.stats.totalCases)}
+				{Card('New Cases', props.stats.newCases)}
 			</View>
 			<View style={styles.rowView}>
-				{Card('Total Deaths', formatCoronaNumber(props.stats.totalDeaths))}
-				{Card('New Deaths', formatCoronaNumber(props.stats.newDeaths))}
+				{Card('Total Deaths', props.stats.totalDeaths)}
+				{Card('New Deaths', props.stats.newDeaths)}
 			</View>
 		</View>
 	)
