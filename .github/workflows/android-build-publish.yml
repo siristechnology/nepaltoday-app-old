@@ -39,7 +39,7 @@ jobs:
                   files: android/app/build/outputs/apk/signed/release/app-signed-release.apk
                   repo_token: ${{ secrets.GITHUB_TOKEN }}
                   automatic_release_tag: 'latest'
-                  title: 'Beta Build'
+                  title: 'Nepaltoday - Beta Build'
                   prerelease: false
 
             - name: Publish Android Bundle to Google Play Store
