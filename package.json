@@ -99,5 +99,20 @@
 		"testPathIgnorePatterns": [
 			"<rootDir>/node_modules/"
 		]
+	},
+	"engines": {
+		"node": "14.11.0",
+		"npm": ">=6.2.0"
+	},
+	"keywords": [
+		"NepalToday",
+		"Nepal News",
+		"Nepal Politician",
+		"Nepal Celebrities"
+	],
+	"author": "Siris Technology",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/siristechnology/nepaltoday-app/issues"
 	}
 }
