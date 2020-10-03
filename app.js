@@ -36,7 +36,10 @@ const App = () => {
 					setClicked(true)
 					setLoading(false)
 				})
-				.catch((err) => setLoading(false))
+				.catch((err) => {
+					crashlytics().recordError(err)
+					setLoading(false)
+				})
 		} else if (notif.notifType === 'corona' && notif.foreground === false) {
 			setClicked(true)
 			setCoronaNotif(true)

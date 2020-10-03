@@ -18,7 +18,7 @@ class NotificationHandler {
 					})
 					.catch((err) => reject(err))
 			} else {
-				reject({ message: 'Not found' })
+				reject(new Error('FCMToken Not found'))
 			}
 		})
 	}
