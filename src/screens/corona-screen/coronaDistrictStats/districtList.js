@@ -1,19 +1,23 @@
 import React, { useState } from 'react'
 import { View, TextInput, RefreshControl, Text, StyleSheet, FlatList } from 'react-native'
-import { getRelativeTime } from './../../../helper/time'
-import DistrictCard from './districtCard'
 import { useQuery } from '@apollo/react-hooks'
-import { CircularSpinner } from '../../../components/common'
 import gql from 'graphql-tag'
-import AppLayout from '../../../frame/app-layout'
-import CoronaSummary from './coronaSummary'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import crashlytics from '@react-native-firebase/crashlytics'
+import { useScrollToTop } from '@react-navigation/native'
+
+import { getRelativeTime } from './../../../helper/time'
+import DistrictCard from './districtCard'
+import { CircularSpinner } from '../../../components/common'
+import AppLayout from '../../../frame/app-layout'
+import CoronaSummary from './coronaSummary'
 
 const DistrictList = () => {
 	const [refreshing, setRefreshing] = useState(false)
-
 	const [searchText, setSearchText] = useState('')
+
+	const ref = React.useRef(null)
+	useScrollToTop(ref)
 
 	const handleRefresh = () => {
 		setRefreshing(true)
@@ -75,6 +79,7 @@ const DistrictList = () => {
 				renderItem={renderItem}
 				keyExtractor={(item) => item.name}
 				contentContainerStyle={styles.container}
+				ref={ref}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 				ListFooterComponent={
 					<Text style={styles.sourceText}>{data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.source}</Text>

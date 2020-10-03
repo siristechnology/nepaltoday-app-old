@@ -1,13 +1,16 @@
 import React from 'react'
 import { FlatList, RefreshControl } from 'react-native'
 import { withStyles } from 'react-native-ui-kitten/theme'
-
+import { useScrollToTop } from '@react-navigation/native'
 import { TwitterListItem } from './twitter-list-item.component'
 
 const TwitterListComponent = React.memo(({ tweets, themedStyle, refreshing, handleRefresh, header }) => {
 	const renderItem = (info) => {
 		return <TwitterListItem style={themedStyle.item} tweet={info.item} />
 	}
+
+	const ref = React.useRef(null)
+	useScrollToTop(ref)
 
 	return (
 		<FlatList
@@ -16,6 +19,7 @@ const TwitterListComponent = React.memo(({ tweets, themedStyle, refreshing, hand
 			data={tweets}
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}
+			ref={ref}
 			refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 		/>
 	)

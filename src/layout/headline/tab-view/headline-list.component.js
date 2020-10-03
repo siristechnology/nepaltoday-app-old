@@ -1,6 +1,7 @@
 import React from 'react'
 import { RefreshControl, FlatList } from 'react-native'
 import { withStyles } from 'react-native-ui-kitten/theme'
+import { useScrollToTop } from '@react-navigation/native'
 import { ArticleListItem } from '../../article/article-list/article-list-item.component'
 
 const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh }) => {
@@ -11,12 +12,16 @@ const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, 
 		return <ArticleListItem style={themedStyle.item} article={info.item} onPress={() => _onItemPress(info.item)} />
 	}
 
+	const ref = React.useRef(null)
+	useScrollToTop(ref)
+
 	return (
 		<FlatList
 			contentContainerStyle={themedStyle.container}
 			data={articles}
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}
+			ref={ref}
 			refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 		/>
 	)

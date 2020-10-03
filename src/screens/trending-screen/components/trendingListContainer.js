@@ -1,11 +1,15 @@
 import React, { useState } from 'react'
 import { FlatList, RefreshControl, View, Text, StyleSheet, Modal } from 'react-native'
+import { useScrollToTop } from '@react-navigation/native'
 import TrendingCard from './trendingCard'
 import TrendingDetail from './trendingDetail'
 
 const TrendingListContainer = (props) => {
 	const [showDetail, setShowDetail] = useState(false)
 	const [clickedHandle, setClickedHandle] = useState({})
+
+	const ref = React.useRef(null)
+	useScrollToTop(ref)
 
 	const onCardClick = (trending) => {
 		setClickedHandle(trending)
@@ -36,6 +40,7 @@ const TrendingListContainer = (props) => {
 			data={props.trending}
 			renderItem={renderCategory}
 			keyExtractor={(item, i) => `${i}`}
+			ref={ref}
 			refreshControl={<RefreshControl onRefresh={props.onRefresh} refreshing={props.refreshing} />}
 		/>
 	)

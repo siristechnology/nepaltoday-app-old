@@ -1,19 +1,23 @@
 import React, { useState } from 'react'
 import { View, RefreshControl, TextInput, Text, StyleSheet, FlatList } from 'react-native'
-import { getRelativeTime } from './../../../helper/time'
-import CountryCard from './countryCard'
-import { useQuery } from '@apollo/react-hooks'
-import { CircularSpinner } from '../../../components/common'
-import gql from 'graphql-tag'
-import AppLayout from '../../../frame/app-layout'
-import CoronaSummary from '../coronaDistrictStats/coronaSummary'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import crashlytics from '@react-native-firebase/crashlytics'
+import { useQuery } from '@apollo/react-hooks'
+import gql from 'graphql-tag'
+import { useScrollToTop } from '@react-navigation/native'
+
+import { getRelativeTime } from './../../../helper/time'
+import CountryCard from './countryCard'
+import { CircularSpinner } from '../../../components/common'
+import AppLayout from '../../../frame/app-layout'
+import CoronaSummary from '../coronaDistrictStats/coronaSummary'
 
 const CountryList = () => {
 	const [refreshing, setRefreshing] = useState(false)
-
 	const [searchText, setSearchText] = useState('')
+
+	const ref = React.useRef(null)
+	useScrollToTop(ref)
 
 	const handleRefresh = () => {
 		setRefreshing(true)
@@ -74,6 +78,7 @@ const CountryList = () => {
 				data={sortedData.filter((x) => x.country !== 'Nepal')}
 				renderItem={renderItem}
 				keyExtractor={(item) => item.country}
+				ref={ref}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 				ListFooterComponent={<Text style={styles.sourceText}>{data && data.getLatestCoronaStats && data.getLatestCoronaStats.source}</Text>}
 			/>
