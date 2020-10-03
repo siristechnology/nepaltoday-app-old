@@ -8,7 +8,6 @@ import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
 import crashlytics from '@react-native-firebase/crashlytics'
 import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
-import { CircularSpinner } from '../../components/common'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -53,28 +52,20 @@ const Home = ({ navigation }) => {
 
 	const dataArticles = (data && data.getArticles) || []
 
-	if (dataArticles.length || localArticles.getArticles.length) {
-		return (
-			<AppLayout>
-				<View style={style.headerStyle}>
-					<Text style={style.nepaliDateStyle}>{nepaliDate}</Text>
-					<Weather />
-				</View>
-				<ArticleListContainer
-					navigation={navigation}
-					articles={dataArticles || localArticles.getArticles}
-					refreshing={refreshing}
-					handleRefresh={handleRefresh}
-				/>
-			</AppLayout>
-		)
-	} else {
-		return (
-			<AppLayout>
-				<CircularSpinner />
-			</AppLayout>
-		)
-	}
+	return (
+		<AppLayout>
+			<View style={style.headerStyle}>
+				<Text style={style.nepaliDateStyle}>{nepaliDate}</Text>
+				<Weather />
+			</View>
+			<ArticleListContainer
+				navigation={navigation}
+				articles={dataArticles || localArticles.getArticles}
+				refreshing={refreshing}
+				handleRefresh={handleRefresh}
+			/>
+		</AppLayout>
+	)
 }
 
 export const GET_ARTICLES_QUERY = gql`

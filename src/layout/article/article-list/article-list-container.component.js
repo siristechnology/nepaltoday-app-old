@@ -1,4 +1,5 @@
 import React from 'react'
+import { CircularSpinner } from '../../../components/common'
 
 import { ArticleList } from './article-list.component'
 
@@ -7,5 +8,9 @@ export const ArticleListContainer = ({ navigation, articles, refreshing, handleR
 		navigation.navigate('ArticleDetail', { article, articles })
 	}
 
-	return <ArticleList articles={articles} onItemPress={onItemPress} refreshing={refreshing} handleRefresh={handleRefresh} />
+	return (
+		((!articles || articles.length === 0) && <CircularSpinner />) || (
+			<ArticleList articles={articles} onItemPress={onItemPress} refreshing={refreshing} handleRefresh={handleRefresh} />
+		)
+	)
 }
