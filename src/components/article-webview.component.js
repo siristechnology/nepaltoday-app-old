@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { AppState, StyleSheet, Text, View } from 'react-native'
+import { AppState, StyleSheet, View } from 'react-native'
 import { Layout, Spinner } from 'react-native-ui-kitten'
 import { WebView } from 'react-native-webview'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-export const ArticleWebviewComponent = ({ navigation }) => {
-	const link = navigation.getParam('link')
+export const ArticleWebviewComponent = ({ navigation, route }) => {
+	const link = route.params.link
 	const [appState, setAppState] = useState(AppState.currentState)
 
 	useEffect(() => {
