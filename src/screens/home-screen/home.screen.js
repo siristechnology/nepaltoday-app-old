@@ -26,7 +26,7 @@ const Home = ({ navigation }) => {
 				setLocalArticles({ getArticles: res })
 			})
 			.catch((err) => {
-				console.log(err)
+				crashlytics().recordError(err)
 				setLocalArticles([])
 			})
 	}
@@ -48,7 +48,6 @@ const Home = ({ navigation }) => {
 	}
 
 	if (error) {
-		console.log('printing error', error)
 		crashlytics().recordError(new Error(error))
 	}
 

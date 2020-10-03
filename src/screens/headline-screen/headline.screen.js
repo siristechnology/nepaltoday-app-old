@@ -9,6 +9,7 @@ import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { Container, Tab, Tabs, ScrollableTab } from 'native-base'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
+import crashlytics from '@react-native-firebase/crashlytics'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE, SHARE } = en.menu
 
@@ -31,7 +32,7 @@ const HeadlineScreen = (props) => {
 				setArticles(res)
 			})
 			.catch((err) => {
-				console.log(err)
+				crashlytics().recordError(err)
 				setArticles([])
 			})
 	}, [])
@@ -45,17 +46,7 @@ const HeadlineScreen = (props) => {
 	}
 
 	const renderTab = () => {
-		const tabNames = [
-			NEWS,
-			ENTERTAINMENT,
-			BUSINESS,
-			SHARE,
-			SOCIAL,
-			HEALTH,
-			TECHNOLOGY,
-			AGRICULTURE,
-			SPORTS
-		]
+		const tabNames = [NEWS, ENTERTAINMENT, BUSINESS, SHARE, SOCIAL, HEALTH, TECHNOLOGY, AGRICULTURE, SPORTS]
 
 		return tabNames.map((tabname, idx) => {
 			const localTabName = getLocalName(tabname)

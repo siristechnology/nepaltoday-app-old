@@ -4,6 +4,7 @@ import { useQuery } from '@apollo/react-hooks'
 import { StyleSheet, View, Text } from 'react-native'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import { convertToNepaliDigit } from '../../../helper/utils'
+import crashlytics from '@react-native-firebase/crashlytics'
 
 export const FETCH_WEATHER_INFO_QUERY = gql`
 	query getWeatherInfo {
@@ -21,7 +22,9 @@ const Weather = () => {
 		variables: {},
 	})
 
-	if (error) console.log('printing error', error)
+	if (error) {
+		crashlytics().recordError(new Error('Weather Api error' + error.message))
+	}
 
 	if (!loading && !error && !!data.getWeatherInfo) {
 		let { temperature } = data.getWeatherInfo

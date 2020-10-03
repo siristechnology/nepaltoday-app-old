@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks'
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
 import { TwitterListContainer } from '../../layout/twitter/twitter-list.container'
+import crashlytics from '@react-native-firebase/crashlytics'
 
 const TwitterComponent = () => {
 	const [refreshing, setRefreshing] = useState(false)
@@ -19,7 +20,7 @@ const TwitterComponent = () => {
 	})
 
 	if (error) {
-		console.log('Error here', error)
+		crashlytics().recordError(new Error('Twitter Api error' + error.message))
 	}
 
 	if (loading) {
@@ -28,8 +29,6 @@ const TwitterComponent = () => {
 				<CircularSpinner />
 			</AppLayout>
 		)
-	} else if (error) {
-		console.log('error:' + JSON.stringify(error))
 	}
 
 	const tweets = (data && data.getTweets && data.getTweets) || []

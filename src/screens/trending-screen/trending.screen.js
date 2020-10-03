@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks'
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from '../../components/common'
 import TrendingListContainer from './components/trendingListContainer'
+import crashlytics from '@react-native-firebase/crashlytics'
 
 const TrendingComponent = () => {
 	const [refreshing, setRefreshing] = useState(false)
@@ -19,7 +20,7 @@ const TrendingComponent = () => {
 	})
 
 	if (error) {
-		console.log('Error here', error)
+		crashlytics().recordError(new Error('Trending Api error' + error.message))
 	}
 
 	if (loading) {
@@ -28,8 +29,6 @@ const TrendingComponent = () => {
 				<CircularSpinner />
 			</AppLayout>
 		)
-	} else if (error) {
-		console.log('error:' + JSON.stringify(error))
 	}
 
 	const trendings = (data && data.getTrending && data.getTrending.trendings) || []

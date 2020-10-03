@@ -9,6 +9,7 @@ import gql from 'graphql-tag'
 import AppLayout from '../../../frame/app-layout'
 import CoronaSummary from './coronaSummary'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import crashlytics from '@react-native-firebase/crashlytics'
 
 const DistrictList = () => {
 	const [refreshing, setRefreshing] = useState(false)
@@ -19,7 +20,7 @@ const DistrictList = () => {
 		setRefreshing(true)
 		refetch()
 			.then(() => setRefreshing(false))
-			.catch((err) => console.log('refetch error', err))
+			.catch((err) => crashlytics().recordError(new Error('refetch error' + err.message)))
 	}
 
 	const { loading, data, refetch, error } = useQuery(GET_DISTRICT_CORONA_STATS, {
@@ -27,7 +28,7 @@ const DistrictList = () => {
 	})
 
 	if (error) {
-		console.log('Error here', error)
+		crashlytics().recordError(new Error('Fetch error' + error.message))
 	}
 
 	const lastUpdated = data && data.getDistrictCoronaStats && getRelativeTime(data.getDistrictCoronaStats.createdDate)
