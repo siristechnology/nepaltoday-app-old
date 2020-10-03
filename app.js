@@ -8,7 +8,6 @@ import { store } from './src/store'
 import AppContainer from './src/frame/app-container'
 import ErrorBoundary from './src/error/error-boundry'
 import notificationHandler from './src/services/notification-handler'
-import NavigationService from './src/services/navigationService'
 import crashlytics from '@react-native-firebase/crashlytics'
 import auth from '@react-native-firebase/auth'
 import AppLayout from './src/frame/app-layout'
@@ -48,17 +47,11 @@ const App = () => {
 
 	const loadAppContainer = (article, clicked, coronaNotif) => {
 		if (clicked && article._id) {
-			return (
-				<AppContainer
-					ref={(navigatorRef) =>
-						NavigationService.setTopLevelNavigator(navigatorRef, 'ArticleDetail', { article: article, articles: [article] })
-					}
-				/>
-			)
+			return <AppContainer initialScreenName="ArticleDetail" initialParams={{ article }} />
 		} else if (clicked && coronaNotif) {
-			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef, 'Corona', { type: 'Corona' })} />
+			return <AppContainer initialScreenName="Corona" />
 		} else {
-			return <AppContainer ref={(navigatorRef) => NavigationService.setTopLevelNavigator(navigatorRef)} />
+			return <AppContainer />
 		}
 	}
 

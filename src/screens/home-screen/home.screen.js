@@ -51,7 +51,7 @@ const Home = ({ navigation }) => {
 		crashlytics().recordError(new Error(error))
 	}
 
-	const dataArticles = (data && data.getArticles && data.getArticles) || []
+	const dataArticles = (data && data.getArticles) || []
 
 	if (dataArticles.length || localArticles.getArticles.length) {
 		return (
@@ -62,7 +62,7 @@ const Home = ({ navigation }) => {
 				</View>
 				<ArticleListContainer
 					navigation={navigation}
-					articles={(data && data.getArticles && data.getArticles.length && data) || localArticles}
+					articles={dataArticles || localArticles.getArticles}
 					refreshing={refreshing}
 					handleRefresh={handleRefresh}
 				/>

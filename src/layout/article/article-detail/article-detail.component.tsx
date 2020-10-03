@@ -92,7 +92,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 	}
 
 	private navigateBack = () => {
-		this.props.navigation.goBack()
+		this.props.navigation.navigate('Tab', { screen: 'Home' })
 	}
 
 	private shareButtonClick = () => {

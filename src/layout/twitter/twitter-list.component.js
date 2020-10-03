@@ -1,7 +1,6 @@
 import React from 'react'
-import { RefreshControl } from 'react-native'
+import { FlatList, RefreshControl } from 'react-native'
 import { withStyles } from 'react-native-ui-kitten/theme'
-import { FlatList } from 'react-navigation'
 
 import { TwitterListItem } from './twitter-list-item.component'
 

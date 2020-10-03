@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { RefreshControl, View, Text, StyleSheet, Modal } from 'react-native'
-import { FlatList } from 'react-navigation'
+import { FlatList, RefreshControl, View, Text, StyleSheet, Modal } from 'react-native'
 import TrendingCard from './trendingCard'
 import TrendingDetail from './trendingDetail'
 

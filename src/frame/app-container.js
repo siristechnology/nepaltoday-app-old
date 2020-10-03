@@ -1,28 +1,24 @@
-import { createAppContainer } from 'react-navigation'
-import { createStackNavigator } from 'react-navigation-stack'
+import React from 'react'
+import 'react-native-gesture-handler'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator } from '@react-navigation/stack'
 
-import { ArticleWebviewComponent, SplashScreenComponent } from '../components'
 import { BottomTabScreen } from '../screens/navigation/bottom-navigation.screen'
 import ArticleDetailScreen from '../layout/article/article-detail/article-detail.container'
+import { ArticleWebviewComponent } from '../components'
 
-const AppNavigator = createStackNavigator(
-	{
-		Splash: {
-			screen: SplashScreenComponent,
-			navigationOptions: {
-				header: {
-					visible: false,
-				},
-			},
-		},
-		Tab: { screen: BottomTabScreen },
-		Article: { screen: ArticleWebviewComponent },
-		ArticleDetail: { screen: ArticleDetailScreen },
-	},
-	{
-		headerMode: 'none',
-		initialRouteName: 'Tab',
-	},
-)
+const Stack = createStackNavigator()
 
-export default createAppContainer(AppNavigator)
+const Container = ({ initialScreenName, initialParams }) => {
+	return (
+		<NavigationContainer>
+			<Stack.Navigator initialRouteName={initialScreenName || 'Tab'} screenOptions={{ headerShown: false }}>
+				<Stack.Screen name="Tab" component={BottomTabScreen} initialParams={{ initialScreenName }} />
+				<Stack.Screen name="ArticleDetail" component={ArticleDetailScreen} initialParams={initialParams} />
+				<Stack.Screen name="Article" component={ArticleWebviewComponent} />
+			</Stack.Navigator>
+		</NavigationContainer>
+	)
+}
+
+export default Container

@@ -4,7 +4,7 @@ import { Layout, Spinner } from 'react-native-ui-kitten'
 import { WebView } from 'react-native-webview'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
-export const ArticleWebviewComponent = ({navigation}) => {
+export const ArticleWebviewComponent = ({ navigation }) => {
 	const link = navigation.getParam('link')
 	const [appState, setAppState] = useState(AppState.currentState)
 
@@ -24,7 +24,7 @@ export const ArticleWebviewComponent = ({navigation}) => {
 			name="back"
 			size={24}
 			color="grey"
-			onPress={()=>navigation.goBack()}
+			onPress={() => navigation.goBack()}
 			style={{
 				padding: 8,
 			}}
@@ -33,10 +33,8 @@ export const ArticleWebviewComponent = ({navigation}) => {
 
 	if (appState == 'active') {
 		return (
-			<View style={{flex:1}}>
-				<View style={{paddingLeft:10}}>
-					{BackIcon}
-				</View>
+			<View style={{ flex: 1 }}>
+				<View style={{ paddingLeft: 10 }}>{BackIcon}</View>
 				<WebView
 					renderLoading={() => (
 						<Layout style={styles.container}>

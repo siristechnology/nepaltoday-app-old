@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import { View, RefreshControl, TextInput, Text, StyleSheet } from 'react-native'
-import { FlatList } from 'react-navigation'
+import { View, RefreshControl, TextInput, Text, StyleSheet, FlatList } from 'react-native'
 import { getRelativeTime } from './../../../helper/time'
 import CountryCard from './countryCard'
 import { useQuery } from '@apollo/react-hooks'
