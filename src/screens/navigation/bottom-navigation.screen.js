@@ -19,38 +19,38 @@ export const BottomTabScreen = ({ route }) => {
 			tabBarOptions={{
 				activeTintColor: '#ff0000',
 				inactiveTintColor: 'gray',
-				showLabel: true,
+				showLabel: false,
 			}}
 		>
 			<Tab.Screen
 				name="Home"
 				component={HomeScreen}
-				options={{ tabBarIcon: ({ focused, horizontal, tintColor }) => <FontAwesome name={'home'} size={25} /> }}
+				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'home'} size={25} color={color} /> }}
 			/>
 			<Tab.Screen
 				name="Headline"
 				component={HeadlineScreen}
-				options={{ tabBarIcon: ({ focused, horizontal, tintColor }) => <FontAwesome name={'newspaper'} size={25} color={tintColor} /> }}
+				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'newspaper'} size={25} color={color} /> }}
 			/>
 			<Tab.Screen
 				name="Corona"
 				component={CoronaScreen}
-				options={{ tabBarIcon: ({ focused, horizontal, tintColor }) => <FontAwesome name={'skull'} size={25} color={tintColor} /> }}
+				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'skull'} size={25} color={color} /> }}
 			/>
 			<Tab.Screen
 				name="Trending"
 				component={TrendingScreen}
-				options={{ tabBarIcon: ({ focused, horizontal, tintColor }) => <SimpleLine name={'fire'} size={25} color={tintColor} /> }}
+				options={{ tabBarIcon: ({ color }) => <SimpleLine name={'fire'} size={25} color={color} /> }}
 			/>
 			<Tab.Screen
 				name="Twitter"
 				component={TwitterScreen}
-				options={{ tabBarIcon: ({ focused, horizontal, tintColor }) => <FontAwesome name={'twitter'} size={25} color={tintColor} /> }}
+				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'twitter'} size={25} color={color} /> }}
 			/>
 			<Tab.Screen
 				name="Radio"
 				component={RadioScreen}
-				options={{ tabBarIcon: ({ focused, horizontal, tintColor }) => <FontAwesome name={'headphones'} size={25} color={tintColor} /> }}
+				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'headphones'} size={25} color={color} /> }}
 			/>
 		</Tab.Navigator>
 	)
