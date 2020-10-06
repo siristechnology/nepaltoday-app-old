@@ -11,7 +11,7 @@ import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import crashlytics from '@react-native-firebase/crashlytics'
 
-const { NEWS, ENTERTAINMENT, BUSINESS, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE, SHARE } = en.menu
+const { NEWS, ENTERTAINMENT, BUSINESS, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE, SHARE, CARTOON } = en.menu
 
 const HeadlineScreen = (props) => {
 	const [refreshing, setRefreshing] = useState(false)
@@ -46,7 +46,7 @@ const HeadlineScreen = (props) => {
 	}
 
 	const renderTab = () => {
-		const tabNames = [NEWS, ENTERTAINMENT, BUSINESS, SHARE, SOCIAL, HEALTH, TECHNOLOGY, AGRICULTURE, SPORTS]
+		const tabNames = [NEWS, ENTERTAINMENT, BUSINESS, SHARE, SOCIAL, HEALTH, TECHNOLOGY, AGRICULTURE, SPORTS, CARTOON]
 
 		return tabNames.map((tabname, idx) => {
 			const localTabName = getLocalName(tabname)
