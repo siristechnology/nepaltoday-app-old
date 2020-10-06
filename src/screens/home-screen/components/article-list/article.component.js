@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, TouchableOpacity, ImageBackground } from 'react-native'
-import { Text } from 'react-native-ui-kitten/ui'
+import { Avatar, Text } from 'react-native-ui-kitten/ui'
 import { withStyles } from 'react-native-ui-kitten/theme'
 
 import { textStyle } from '../../../../components/common'
@@ -28,17 +28,21 @@ const ArticleListItemCompoent = (props) => {
 								{article.title}
 							</Text>
 						</View>
-						<Text>{article.shortDescription.substring(0, 100)}</Text>
-						<ArticleActivityBar style={themedStyle.detailsContainer}>
-							<View style={themedStyle.dateContainer}>
-								{ClockIconOutline(themedStyle.dateIcon)}
-								<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
-									{getRelativeTime(article.createdDate)}
-								</Text>
-							</View>
-						</ArticleActivityBar>
+						<Text appearance="hint">{article.shortDescription.substring(0, 100)}</Text>
 					</View>
 				</View>
+				<ArticleActivityBar style={themedStyle.activityBar}>
+					<Avatar source={{ uri: article.source.logoLink }} size="tiny" />
+					<View style={themedStyle.articleSourceName}>
+						<Text appearance="hint">{article.source.name}</Text>
+					</View>
+					<View style={themedStyle.dateContainer}>
+						{ClockIconOutline(themedStyle.dateIcon)}
+						<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+							{getRelativeTime(article.createdDate)}
+						</Text>
+					</View>
+				</ArticleActivityBar>
 			</View>
 		</TouchableOpacity>
 	)
@@ -46,19 +50,10 @@ const ArticleListItemCompoent = (props) => {
 
 export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 	container: {
-		marginVertical: 0.5,
+		marginVertical: 8,
 		backgroundColor: '#FFFFFF',
 	},
-	imageContainer: {
-		height: 100,
-		margin: 10,
-	},
-	image: {
-		borderRadius: 8,
-	},
 	articleWrapper: {
-		padding: 4,
-		marginVertical: 6,
 		flexDirection: 'row',
 	},
 	leftWrapper: {
@@ -66,7 +61,14 @@ export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 	},
 	rightWrapper: {
 		flex: 1,
-		margin: 4,
+		marginLeft: 8,
+	},
+	imageContainer: {
+		height: 100,
+		marginRight: 8,
+	},
+	image: {
+		borderRadius: 6,
 	},
 	headerWrapper: {
 		flexDirection: 'row',
@@ -74,29 +76,18 @@ export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 		paddingBottom: 4,
 		alignItems: 'center',
 	},
-	avatar: {
-		minWidth: 40,
-		margin: 10,
-	},
 	titleLabel: {
-		...textStyle.caption1,
-		fontWeight: 'bold',
+		...textStyle.caption2,
 	},
-	descriptionLabel: {
-		marginLeft: 4,
-		...textStyle.subtitle,
+	activityBar: {
+		justifyContent: 'flex-start',
+		marginTop: 4,
 	},
-	detailsContainer: {
-		paddingTop: 2,
-	},
-	tweetText: {
-		flex: 1,
-		flexWrap: 'wrap',
-	},
+	articleSourceName: { marginLeft: 10 },
 	dateContainer: {
+		marginLeft: 10,
 		flexDirection: 'row',
 		alignItems: 'center',
-		marginTop: 4,
 	},
 	dateLabel: {
 		marginLeft: 2,

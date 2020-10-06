@@ -36,8 +36,8 @@ const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, r
 
 export const ArticleList = withStyles(ArticleListComponent, (theme) => ({
 	container: {
-		paddingHorizontal: 16,
-		paddingVertical: 8,
+		paddingHorizontal: 12,
+		paddingVertical: 4,
 		backgroundColor: theme['background-basic-color-1'],
 	},
 	item: {
