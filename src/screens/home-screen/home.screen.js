@@ -52,7 +52,7 @@ const Home = ({ navigation }) => {
 
 	const dataArticles = (data && data.getArticles) || []
 
-	const homeArticles = (dataArticles || localArticles.getArticles).filter(x=>x.category!='cartoon') 
+	const homeArticles = (dataArticles.length && dataArticles || localArticles.getArticles).filter(x=>x.category!='cartoon') 
 
 	return (
 		<AppLayout>
