@@ -50,7 +50,7 @@ const ArticleListItemCompoent = (props) => {
 
 export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 	container: {
-		marginVertical: 8,
+		marginVertical: 4,
 		backgroundColor: '#FFFFFF',
 	},
 	articleWrapper: {
@@ -69,6 +69,7 @@ export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 	},
 	image: {
 		borderRadius: 6,
+		marginTop: 4,
 	},
 	headerWrapper: {
 		flexDirection: 'row',
