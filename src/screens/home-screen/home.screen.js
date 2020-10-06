@@ -52,6 +52,8 @@ const Home = ({ navigation }) => {
 
 	const dataArticles = (data && data.getArticles) || []
 
+	const homeArticles = (dataArticles || localArticles.getArticles).filter(x=>x.category!='cartoon') 
+
 	return (
 		<AppLayout>
 			<View style={style.headerStyle}>
@@ -60,7 +62,7 @@ const Home = ({ navigation }) => {
 			</View>
 			<ArticleListContainer
 				navigation={navigation}
-				articles={dataArticles || localArticles.getArticles}
+				articles={homeArticles}
 				refreshing={refreshing}
 				handleRefresh={handleRefresh}
 			/>

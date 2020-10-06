@@ -9,6 +9,7 @@ export const en = {
 		HEALTH: 'health',
 		TECHNOLOGY: 'technology',
 		AGRICULTURE: 'agriculture',
-		SHARE: 'share'
+		SHARE: 'share',
+		CARTOON: 'cartoon'
 	}
 }

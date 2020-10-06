@@ -15,8 +15,8 @@ const ArticleListItemComponent = React.memo((props) => {
 	}
 
 	return (
-		<TouchableOpacity activeOpacity={0.8} {...restProps} style={[themedStyle.container, style]} onPress={onPress}>
-			<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
+		<TouchableOpacity activeOpacity={0.8} {...restProps} style={[themedStyle.container, style]} onPress={onPress} disabled={article.category=='cartoon'}>
+			<ImageBackground style={{height: article.category=='cartoon' && 300 || 220}} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
 			<ArticleActivityBar style={themedStyle.activityContainer}>
 				<ActivityAuthoring
 					photo={{ uri: article.source.logoLink }}
@@ -24,14 +24,14 @@ const ArticleListItemComponent = React.memo((props) => {
 					date={getRelativeTime(article.createdDate)}
 				/>
 			</ArticleActivityBar>
-			<View style={themedStyle.infoContainer}>
+			{article.category!='cartoon' && <View style={themedStyle.infoContainer}>
 				<Text style={themedStyle.titleLabel} category="h5">
 					{article.title}
 				</Text>
 				<Text style={themedStyle.descriptionLabel} appearance="hint" category="s1">
 					{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}
 				</Text>
-			</View>
+			</View>}
 		</TouchableOpacity>
 	)
 })
