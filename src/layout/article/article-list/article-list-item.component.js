@@ -15,8 +15,8 @@ const ArticleListItemComponent = React.memo((props) => {
 	}
 
 	return (
-		<TouchableOpacity activeOpacity={0.8} {...restProps} style={[themedStyle.container, style]} onPress={onPress} disabled={article.category=='cartoon'}>
-			<ImageBackground style={{height: article.category=='cartoon' && 300 || 220}} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
+		<TouchableOpacity activeOpacity={0.8} {...restProps} style={[themedStyle.container, style]} onPress={onPress}>
+			<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
 			<ArticleActivityBar style={themedStyle.activityContainer}>
 				<ActivityAuthoring
 					photo={{ uri: article.source.logoLink }}
