@@ -105,7 +105,7 @@ const RadioScreen = () => {
                 fmList={fmList}
                 onFMSelect={onFMSelect}
                 initSuccess={isTrackPlayerInit}
-            />
+            /> 
             <BottomPlayer
                 isPlaying={isPlaying}
                 initSuccess={isTrackPlayerInit}
