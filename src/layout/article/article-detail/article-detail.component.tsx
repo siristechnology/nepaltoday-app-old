@@ -52,11 +52,11 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 					{shareButton}
 				</View>
 				<ContainerView style={themedStyle.container}>
-					<ImageBackground style={themedStyle.image} source={{ uri: article.imageLink }}>
+					<ImageBackground style={[themedStyle.image,{height: article.category=='cartoon' && 350 || 175}]} source={{ uri: article.imageLink }} imageStyle={{resizeMode:article.category=='cartoon' && 'stretch' || 'cover'}}>
 						<Avatar style={themedStyle.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />
 					</ImageBackground>
 
-					<View style={themedStyle.detailsContainer}>
+					{article.category!='cartoon' && <View style={themedStyle.detailsContainer}>
 						<Text style={themedStyle.titleLabel} category="h5">
 							{article.title}
 						</Text>
@@ -85,14 +85,23 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 								{READ_MORE}
 							</Button>
 						</View>
-					</View>
+					</View> || <View style={themedStyle.detailsContainer}>
+						<ArticleActivityBar>
+							<View style={[themedStyle.dateContainer,{marginTop: 30}]}>
+								{ClockIconOutline(themedStyle.dateIcon)}
+								<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+									{getRelativeTime(article.createdDate)}
+								</Text>
+							</View>
+						</ArticleActivityBar>
+					</View>}
 				</ContainerView>
 			</View>
 		)
 	}
 
 	private navigateBack = () => {
-		this.props.navigation.navigate('Tab', { screen: 'Home' })
+		this.props.navigation.goBack()
 	}
 
 	private shareButtonClick = () => {
@@ -130,7 +139,7 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 	image: {
 		minHeight: 175,
 		borderWidth: 1,
-		borderColor: '#f5f7fa',
+		borderColor: '#f5f7fa'
 	},
 	authorPhoto: {
 		position: 'absolute',
