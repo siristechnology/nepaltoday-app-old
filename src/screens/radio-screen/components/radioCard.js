@@ -2,7 +2,7 @@ import React from 'react'
 import { TouchableOpacity, Text, StyleSheet, Image, View } from 'react-native'
 
 const RadioCard = (props) => {
-    const {channel} = props
+    const {channel, currentChannelId} = props
     return(
         <TouchableOpacity
             activeOpacity={0.9}
@@ -15,10 +15,10 @@ const RadioCard = (props) => {
                 style={styles.imageStyle}
             />
             <View style={styles.textView}>
-                <Text style={styles.titleText}>
+                <Text style={[styles.titleText,{fontWeight:currentChannelId==channel.id && 'bold' || '600'}]}>
                     {channel.title}
                 </Text>
-                <Text style={styles.artistText}>
+                <Text style={[styles.artistText,{fontWeight:currentChannelId==channel.id && 'bold' || '600'}]}>
                     {channel.artist}
                 </Text>
             </View>

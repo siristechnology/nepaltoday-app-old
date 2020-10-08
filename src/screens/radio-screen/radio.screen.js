@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from './../../components/common'
+import gql from 'graphql-tag'
+import { useQuery } from '@apollo/react-hooks'
+
 import TrackPlayer, {
     TrackPlayerEvents,
     STATE_PLAYING,
@@ -9,12 +12,7 @@ import TrackPlayer, {
 import {useTrackPlayerEvents} from 'react-native-track-player/lib/hooks';
 
 import RadioListContainer from './components/radioListContainer'
-
 import BottomPlayer from './components/bottomPlayer';
-import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
-
-TrackPlayer.registerPlaybackService(() => require('./service.js'));
 
 const trackPlayerInit = async () => {
     await TrackPlayer.setupPlayer();
@@ -37,14 +35,64 @@ const RadioScreen = () => {
 
     const [isPlaying, setIsPlaying] = useState(false);
 
-    // const [currentChannel, setCurrentChannel] = useState({})
+    const [currentChannelId, setCurrentChannelId] = useState({})
 
     const onFMSelect = async (channel) => {
-        // setCurrentChannel(channel)
         await TrackPlayer.play();
         await TrackPlayer.skip(channel.id)
+        setCurrentChannelId(channel.id)
         setIsPlaying(true);
     }
+
+    const play = async () => {
+      await TrackPlayer.play()
+      const currentId = await TrackPlayer.getCurrentTrack()
+      setCurrentChannelId(currentId)
+    }
+
+    const pause = async () => {
+      await TrackPlayer.pause()
+    }
+
+    const stop = async () => {
+      await TrackPlayer.stop()
+    }
+
+    const skipNext = async () => {
+      await TrackPlayer.skipToNext();
+      const currentId = await TrackPlayer.getCurrentTrack()
+      setCurrentChannelId(currentId)
+    }
+
+    const skipPrevious = async () => {
+      await TrackPlayer.skipToPrevious();
+      const currentId = await TrackPlayer.getCurrentTrack()
+      setCurrentChannelId(currentId)
+    }
+
+    useEffect(() => {
+      TrackPlayer.registerPlaybackService(() => async function() {
+        TrackPlayer.addEventListener('remote-play', () => {
+          play()
+        });
+      
+        TrackPlayer.addEventListener('remote-pause', () => {
+          pause()
+        });
+      
+        TrackPlayer.addEventListener('remote-stop', () => {
+          stop()
+        });
+      
+        TrackPlayer.addEventListener('remote-next',() => {
+          skipNext()
+        })
+      
+        TrackPlayer.addEventListener('remote-previous',() => {
+          skipPrevious()
+        })
+      })
+    },[])
 
     useEffect(() => {
       const startPlayer = async () => {
@@ -94,6 +142,7 @@ const RadioScreen = () => {
     } else if (error) {
       return <AppLayout />
     }
+    const currentChannel = fmList.filter(x=>x.id==currentChannelId)[0]
     return(
         <AppLayout>
             <View style={style.headerStyle}>
@@ -105,10 +154,17 @@ const RadioScreen = () => {
                 fmList={fmList}
                 onFMSelect={onFMSelect}
                 initSuccess={isTrackPlayerInit}
+                currentChannelId={currentChannelId}
             /> 
             <BottomPlayer
                 isPlaying={isPlaying}
                 initSuccess={isTrackPlayerInit}
+                onSkipPrevious={skipPrevious}
+                onPause={pause}
+                onPlay={play}
+                onStop={stop}
+                onSkipNext={skipNext}
+                currentChannel={currentChannel}
             />
         </AppLayout>
     )
@@ -116,14 +172,14 @@ const RadioScreen = () => {
 
 const style = StyleSheet.create({
     headerStyle: {
-        paddingHorizontal: 20,
-        paddingBottom: 10,
-        backgroundColor: '#fff',
+      paddingHorizontal: 20,
+      paddingBottom: 10,
+      backgroundColor: '#fff',
     },
     headerText: {
-        fontWeight: 'bold',
-		fontSize: 26,
-		paddingTop: 5
+      fontWeight: 'bold',
+		  fontSize: 26,
+		  paddingTop: 5
     }
 })
 
