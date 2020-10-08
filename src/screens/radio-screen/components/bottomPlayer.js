@@ -1,81 +1,78 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
-import TrackPlayer from 'react-native-track-player';
 
 const BottomPlayer = (props) => {
-
-    const skipToPrevious = async() => {
-        await TrackPlayer.skipToPrevious()
-    }
-
-    const pause = async() => {
-        await TrackPlayer.pause()
-    }
-
-    const play = async() => {
-        await TrackPlayer.play()
-    }
-
-    const stop = async() => {
-        await TrackPlayer.stop()
-    }
-
-    const skipToNext = async() => {
-        await TrackPlayer.skipToNext()
-    }
-
+    const {currentChannel, isPlaying} = props
     return(
         <View style={styles.playerContainer}>
-            <Icon
-                name="fast-backward"
-                size={30}
-                color="#000"
-                style={styles.icon}
-                onPress={()=>props.initSuccess && skipToPrevious()}
-            />
-            {props.isPlaying && <Icon
-                name="pause-circle"
-                size={35}
-                color="#000"
-                style={styles.icon}
-                onPress={()=>props.initSuccess && pause()}
-            /> || <Icon
-                name="play-circle"
-                size={35}
-                color="#000"
-                style={styles.icon}
-                onPress={()=>props.initSuccess && play()}
+            {currentChannel && currentChannel.artwork && <Image
+                source={{uri: currentChannel.artwork}}
+                style={styles.imageStyle}
             />}
-            <Icon
-                name="stop-circle"
-                size={35}
-                color="#000"
-                style={styles.icon}
-                onPress={()=>props.initSuccess && stop()}
-            />
-            <Icon
-                name="fast-forward"
-                size={30}
-                color="#000"
-                style={styles.icon}
-                onPress={()=>props.initSuccess && skipToNext()}
-            />
+            <View style={styles.iconContainer}>
+                <Icon
+                    name="fast-backward"
+                    size={30}
+                    color="#000"
+                    style={styles.icon}
+                    onPress={()=>props.initSuccess && props.onSkipPrevious()}
+                />
+                {isPlaying && <Icon
+                    name="pause-circle"
+                    size={35}
+                    color="#000"
+                    style={styles.icon}
+                    onPress={()=>props.initSuccess && props.onPause()}
+                /> || <Icon
+                    name="play-circle"
+                    size={35}
+                    color="#000"
+                    style={styles.icon}
+                    onPress={()=>props.initSuccess && props.onPlay()}
+                />}
+                <Icon
+                    name="stop-circle"
+                    size={35}
+                    color="#000"
+                    style={styles.icon}
+                    onPress={()=>props.initSuccess && props.onStop()}
+                />
+                <Icon
+                    name="fast-forward"
+                    size={30}
+                    color="#000"
+                    style={styles.icon}
+                    onPress={()=>props.initSuccess && props.onSkipNext()}
+                />
+            </View>
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     playerContainer: {
-        backgroundColor: '#fff',
-        paddingVertical: 10,
+        backgroundColor: '#ECEFF1',
+        paddingVertical: 1,
         paddingHorizontal: 20,
+        paddingRight: 40,
         flexDirection: 'row',
-        justifyContent: 'space-evenly',
         position: 'absolute',
         width: '100%',
         bottom: 50,
-        alignItems:'center'
+        alignItems:'center',
+        elevation: 2
+    },
+    iconContainer: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        alignItems: 'center',
+        padding: 15
+    },
+    imageStyle: {
+        width: 60,
+        height: 60
     },
     icon: {
         opacity:0.7
