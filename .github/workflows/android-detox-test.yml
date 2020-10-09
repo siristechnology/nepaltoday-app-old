@@ -3,6 +3,7 @@ name: Android Detox Test
 on:
     schedule:
         - cron: 0 13 * * *
+    workflow_dispatch:
 
 jobs:
     build:
