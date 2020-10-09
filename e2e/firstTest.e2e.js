@@ -3,17 +3,12 @@ describe('Example', () => {
 		await device.reloadReactNative()
 	})
 
-	it('should have welcome screen', async () => {
-		await expect(element(by.id('welcome'))).toBeVisible()
+	it('should have weather component', async () => {
+		await expect(element(by.id('weatherComponent'))).toBeVisible()
 	})
 
-	it('should show hello screen after tap', async () => {
-		await element(by.id('hello_button')).tap()
-		await expect(element(by.text('Hello!!!'))).toBeVisible()
-	})
-
-	it('should show world screen after tap', async () => {
-		await element(by.id('world_button')).tap()
-		await expect(element(by.text('World!!!'))).toBeVisible()
+	it('should go to corona screen', async () => {
+		await element(by.id('coronaScreen')).tap()
+		await expect(element(by.text('राष्ट्रिय'))).toBeVisible()
 	})
 })
