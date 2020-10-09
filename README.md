@@ -1,6 +1,7 @@
 # NepalToday App
 
-![Android Apk - Release & Google Play Publish](https://github.com/siristechnology/nepaltoday-app/workflows/Android%20Apk%20-%20Release%20&%20Google%20Play%20Publish/badge.svg)
+![Android Apk - Build & Release](https://github.com/siristechnology/nepaltoday-app/workflows/Android%20Apk%20-%20Build%20&%20Release/badge.svg)
+![Android Detox Test](https://github.com/siristechnology/nepaltoday-app/workflows/Android%20Detox%20Test/badge.svg)
 [![DeepScan grade](https://deepscan.io/api/teams/5348/projects/7146/branches/66889/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=5348&pid=7146&bid=66889)
 [![Known Vulnerabilities](https://snyk.io/test/github/siristechnology/nepaltoday-app/badge.svg?targetFile=android/app/build.gradle)](https://snyk.io/test/github/siristechnology/nepaltoday-app?targetFile=android/app/build.gradle)
 
