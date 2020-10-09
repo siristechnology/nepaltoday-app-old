@@ -21,15 +21,16 @@
 ## How to Run locally
 
 -   Install Android Studio
--   Install node (12.x), yarn (1.x)
+-   Install node (14.x), yarn (1.x)
 -   Run Android emulator. (from Android Studio or Genymotion)
 -   Run Metro bundler. `yarn start`
 -   Run Android app. `yarn android`
 
-## Run Detox
+## How to Run Detox test on Android Emulator
 
--   detox build --configuration android.emu.debug
--   detox test --configuration android.emu.debug
+-   Install detox cli. `yarn global add detox-cli`
+-   Build apk for testing. `yarn build-detox-android`
+-   Run detox test on apk. `yarn test-detox-android`
 
 ## Tips
 
