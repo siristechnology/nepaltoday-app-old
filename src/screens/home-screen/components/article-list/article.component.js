@@ -32,11 +32,13 @@ const ArticleListItemCompoent = (props) => {
 					</View>
 				</View>
 				<ArticleActivityBar style={themedStyle.activityBar}>
-					<Avatar source={{ uri: article.source.logoLink }} size="tiny" />
-					<View style={themedStyle.articleSourceName}>
-						<Text appearance="hint">{article.source.name}</Text>
+					<View style={themedStyle.activityBarContent}>
+						<Avatar source={{ uri: article.source.logoLink }} size="tiny" />
+						<View style={themedStyle.articleSourceName}>
+							<Text appearance="hint">{article.source.name}</Text>
+						</View>
 					</View>
-					<View style={themedStyle.dateContainer}>
+					<View style={themedStyle.activityBarContent}>
 						{ClockIconOutline(themedStyle.dateIcon)}
 						<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
 							{getRelativeTime(article.createdDate)}
@@ -81,12 +83,11 @@ export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 		...textStyle.caption2,
 	},
 	activityBar: {
-		justifyContent: 'flex-start',
-		marginTop: 4,
+		justifyContent: 'space-between',
+		marginVertical: 8,
 	},
-	articleSourceName: { marginLeft: 10 },
-	dateContainer: {
-		marginLeft: 10,
+	articleSourceName: { marginLeft: 4 },
+	activityBarContent: {
 		flexDirection: 'row',
 		alignItems: 'center',
 	},
