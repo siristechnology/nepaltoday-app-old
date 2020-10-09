@@ -46,7 +46,7 @@ const HeadlineScreen = (props) => {
 	}
 
 	const renderTab = () => {
-		const tabNames = [NEWS, ENTERTAINMENT, BUSINESS, SHARE, SOCIAL, HEALTH, TECHNOLOGY, AGRICULTURE, SPORTS, CARTOON]
+		const tabNames = [NEWS, ENTERTAINMENT, SPORTS, CARTOON, BUSINESS, SOCIAL, HEALTH, TECHNOLOGY, SHARE, AGRICULTURE]
 
 		return tabNames.map((tabname, idx) => {
 			const localTabName = getLocalName(tabname)
