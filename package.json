@@ -10,6 +10,8 @@
 		"reset": "react-native start --reset-cache",
 		"build": "cd android && ./gradlew app:assembleSignedRelease && cd ..",
 		"bundle": "cd android && ./gradlew app:bundleSignedRelease && cd ..",
+		"build-detox-android": "detox build -c android.emu.debug",
+		"test-detox-android": "detox test -c android.emu.debug",
 		"test": "jest",
 		"lint": "eslint ."
 	},
