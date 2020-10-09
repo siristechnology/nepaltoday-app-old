@@ -25,6 +25,11 @@
 -   Run Metro bundler. `yarn start`
 -   Run Android app. `yarn android`
 
+## Run Detox
+
+-   detox build --configuration android.emu.debug
+-   detox test --configuration android.emu.debug
+
 ## Tips
 
 -   Run `yarn refresh` to reload android app quickly without rebuilding

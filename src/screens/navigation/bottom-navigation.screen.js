@@ -35,7 +35,7 @@ export const BottomTabScreen = ({ route }) => {
 			<Tab.Screen
 				name="Corona"
 				component={CoronaScreen}
-				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'skull'} size={25} color={color} /> }}
+				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'skull'} size={25} color={color} />, tabBarTestID: 'coronaScreen' }}
 			/>
 			<Tab.Screen
 				name="Trending"
