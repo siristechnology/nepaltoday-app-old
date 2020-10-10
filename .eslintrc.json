@@ -5,6 +5,7 @@
 		"jest": true
 	},
 	"extends": ["standard", "plugin:prettier/recommended", "@react-native-community"],
+	"plugins": ["react", "prettier", "@typescript-eslint/eslint-plugin"],
 	"globals": {
 		"Atomics": "readonly",
 		"SharedArrayBuffer": "readonly",
@@ -18,7 +19,6 @@
 		"ecmaVersion": 2018,
 		"sourceType": "module"
 	},
-	"plugins": ["react", "prettier"],
 	"rules": {
 		"prettier/prettier": ["error"],
 		"no-console": "warn"
