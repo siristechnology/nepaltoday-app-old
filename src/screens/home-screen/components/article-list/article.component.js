@@ -28,7 +28,7 @@ const ArticleListItemCompoent = (props) => {
 								{article.title}
 							</Text>
 						</View>
-						<Text appearance="hint">{article.shortDescription.substring(0, 100)}</Text>
+						<Text appearance="hint">{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}</Text>
 					</View>
 				</View>
 				<ArticleActivityBar style={themedStyle.activityBar}>
