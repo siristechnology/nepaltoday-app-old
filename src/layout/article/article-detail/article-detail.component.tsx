@@ -52,56 +52,64 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 					{shareButton}
 				</View>
 				<ContainerView style={themedStyle.container}>
-					<ImageBackground style={[themedStyle.image,{height: article.category=='cartoon' && 350 || 175}]} source={{ uri: article.imageLink }} imageStyle={{resizeMode:article.category=='cartoon' && 'stretch' || 'cover'}}>
+					<ImageBackground
+						style={[themedStyle.image, { height: (article.category == 'cartoon' && 350) || 175 }]}
+						source={{ uri: article.imageLink }}
+						imageStyle={{ resizeMode: (article.category == 'cartoon' && 'stretch') || 'cover' }}
+					>
 						<Avatar style={themedStyle.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />
 					</ImageBackground>
 
-					{article.category!='cartoon' && <View style={themedStyle.detailsContainer}>
-						<Text style={themedStyle.titleLabel} category="h5">
-							{article.title}
-						</Text>
-						<ArticleActivityBar>
-							<View style={themedStyle.dateContainer}>
-								{ClockIconOutline(themedStyle.dateIcon)}
-								<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
-									{getRelativeTime(article.createdDate)}
-								</Text>
-							</View>
-						</ArticleActivityBar>
-						<Text category="s1" style={themedStyle.contentLabel}>
-							{article.content}
-						</Text>
-						{article.tags && article.tags.length > 0 && (
-							<View style={themedStyle.tagsView}>
-								{article.tags.map((tag, i) => (
-									<Text key={i} style={themedStyle.tags}>
-										#{tag}{' '}
+					{(article.category != 'cartoon' && (
+						<View style={themedStyle.detailsContainer}>
+							<Text style={themedStyle.titleLabel} category="h5">
+								{article.title}
+							</Text>
+							<ArticleActivityBar>
+								<View style={themedStyle.dateContainer}>
+									{ClockIconOutline(themedStyle.dateIcon)}
+									<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+										{getRelativeTime(article.createdDate)}
 									</Text>
-								))}
+								</View>
+							</ArticleActivityBar>
+							<Text category="s1" style={themedStyle.contentLabel}>
+								{article.content}
+							</Text>
+							{article.tags && article.tags.length > 0 && (
+								<View style={themedStyle.tagsView}>
+									{article.tags.map((tag, i) => (
+										<Text key={i} style={themedStyle.tags}>
+											#{tag}{' '}
+										</Text>
+									))}
+								</View>
+							)}
+							<View style={themedStyle.readMoreBtnWrapper}>
+								<Button onPress={this.handleLinkClick} style={themedStyle.readMoreBtn}>
+									{READ_MORE}
+								</Button>
 							</View>
-						)}
-						<View style={themedStyle.readMoreBtnWrapper}>
-							<Button onPress={this.handleLinkClick} style={themedStyle.readMoreBtn}>
-								{READ_MORE}
-							</Button>
 						</View>
-					</View> || <View style={themedStyle.detailsContainer}>
-						<ArticleActivityBar>
-							<View style={[themedStyle.dateContainer,{marginTop: 30}]}>
-								{ClockIconOutline(themedStyle.dateIcon)}
-								<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
-									{getRelativeTime(article.createdDate)}
-								</Text>
-							</View>
-						</ArticleActivityBar>
-					</View>}
+					)) || (
+						<View style={themedStyle.detailsContainer}>
+							<ArticleActivityBar>
+								<View style={[themedStyle.dateContainer, { marginTop: 30 }]}>
+									{ClockIconOutline(themedStyle.dateIcon)}
+									<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+										{getRelativeTime(article.createdDate)}
+									</Text>
+								</View>
+							</ArticleActivityBar>
+						</View>
+					)}
 				</ContainerView>
 			</View>
 		)
 	}
 
 	private navigateBack = () => {
-		this.props.navigation.goBack()
+		this.props.navigation.navigate('Tab', { screen: 'Home' })
 	}
 
 	private shareButtonClick = () => {
@@ -139,7 +147,7 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 	image: {
 		minHeight: 175,
 		borderWidth: 1,
-		borderColor: '#f5f7fa'
+		borderColor: '#f5f7fa',
 	},
 	authorPhoto: {
 		position: 'absolute',
