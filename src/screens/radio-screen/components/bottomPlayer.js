@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image, Text } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome5'
 
 const BottomPlayer = (props) => {
@@ -9,42 +9,47 @@ const BottomPlayer = (props) => {
             {currentChannel && currentChannel.artwork && <Image
                 source={{uri: currentChannel.artwork}}
                 style={styles.imageStyle}
-            />}
-            <View style={styles.iconContainer}>
-                <Icon
-                    name="fast-backward"
-                    size={30}
-                    color="#000"
-                    style={styles.icon}
-                    onPress={()=>props.initSuccess && props.onSkipPrevious()}
-                />
-                {isPlaying && <Icon
-                    name="pause-circle"
-                    size={35}
-                    color="#000"
-                    style={styles.icon}
-                    onPress={()=>props.initSuccess && props.onPause()}
-                /> || <Icon
-                    name="play-circle"
-                    size={35}
-                    color="#000"
-                    style={styles.icon}
-                    onPress={()=>props.initSuccess && props.onPlay()}
-                />}
-                <Icon
-                    name="stop-circle"
-                    size={35}
-                    color="#000"
-                    style={styles.icon}
-                    onPress={()=>props.initSuccess && props.onStop()}
-                />
-                <Icon
-                    name="fast-forward"
-                    size={30}
-                    color="#000"
-                    style={styles.icon}
-                    onPress={()=>props.initSuccess && props.onSkipNext()}
-                />
+            /> || <View style={styles.imageStyle}/>}
+            <View style={styles.playerInnerView}>
+                <View style={styles.iconContainer}>
+                    <Icon
+                        name="fast-backward"
+                        size={25}
+                        color="#000"
+                        style={styles.icon}
+                        onPress={()=>props.initSuccess && props.onSkipPrevious()}
+                    />
+                    {isPlaying && <Icon
+                        name="pause-circle"
+                        size={30}
+                        color="#000"
+                        style={styles.icon}
+                        onPress={()=>props.initSuccess && props.onPause()}
+                    /> || <Icon
+                        name="play-circle"
+                        size={30}
+                        color="#000"
+                        style={styles.icon}
+                        onPress={()=>props.initSuccess && props.onPlay()}
+                    />}
+                    <Icon
+                        name="stop-circle"
+                        size={30}
+                        color="#000"
+                        style={styles.icon}
+                        onPress={()=>props.initSuccess && props.onStop()}
+                    />
+                    <Icon
+                        name="fast-forward"
+                        size={25}
+                        color="#000"
+                        style={styles.icon}
+                        onPress={()=>props.initSuccess && props.onSkipNext()}
+                    />
+                </View>
+                {currentChannel && <Text style={styles.currentTrack}>
+                    {currentChannel.title}
+                </Text>}
             </View>
         </View>
     )
@@ -53,7 +58,7 @@ const BottomPlayer = (props) => {
 const styles = StyleSheet.create({
     playerContainer: {
         backgroundColor: '#ECEFF1',
-        paddingVertical: 1,
+        paddingVertical: 3,
         paddingHorizontal: 20,
         paddingRight: 40,
         flexDirection: 'row',
@@ -64,11 +69,11 @@ const styles = StyleSheet.create({
         elevation: 2
     },
     iconContainer: {
-        width: '100%',
+        width: '95%',
         flexDirection: 'row',
         justifyContent: 'space-evenly',
         alignItems: 'center',
-        padding: 15
+        paddingHorizontal: 15
     },
     imageStyle: {
         width: 60,
@@ -76,6 +81,14 @@ const styles = StyleSheet.create({
     },
     icon: {
         opacity:0.7
+    },
+    playerInnerView: {
+        alignItems: 'center'
+    },
+    currentTrack: {
+        marginTop: 3,
+        fontSize: 14,
+        fontWeight: 'bold'
     }
 })
 
