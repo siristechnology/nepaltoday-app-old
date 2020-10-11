@@ -8,6 +8,7 @@ import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
 import crashlytics from '@react-native-firebase/crashlytics'
 import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
+import { HeadlineComponent } from './components/headline.component'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -52,7 +53,19 @@ const Home = ({ navigation }) => {
 
 	const dataArticles = (data && data.getArticles) || []
 
-	const homeArticles = (dataArticles.length && dataArticles || localArticles.getArticles).filter(x=>x.category!='cartoon') 
+	const homeArticles = ((dataArticles.length && dataArticles) || localArticles.getArticles).filter((x) => x.category !== 'cartoon')
+
+	const topHeadline = homeArticles.find((a) => a.category === 'headline') || homeArticles[0]
+
+	const headerComponent = (
+		<View>
+			<HeadlineComponent
+				article={topHeadline}
+				style={style.headline}
+				onPress={() => navigation.navigate('ArticleDetail', { article: topHeadline, articles: homeArticles })}
+			/>
+		</View>
+	)
 
 	return (
 		<AppLayout>
@@ -61,8 +74,9 @@ const Home = ({ navigation }) => {
 				<Weather />
 			</View>
 			<ArticleListContainer
+				headerComponent={headerComponent}
 				navigation={navigation}
-				articles={homeArticles}
+				articles={homeArticles.filter((a) => a._id !== topHeadline._id)}
 				refreshing={refreshing}
 				handleRefresh={handleRefresh}
 			/>
@@ -108,6 +122,11 @@ const style = StyleSheet.create({
 	screenStyle: {
 		backgroundColor: '#000000',
 		paddingTop: 500,
+	},
+	headline: {
+		marginVertical: 4,
+		borderBottomWidth: 1,
+		borderBottomColor: '#F5F0F0',
 	},
 })
 

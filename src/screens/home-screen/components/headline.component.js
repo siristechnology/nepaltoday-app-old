@@ -3,9 +3,9 @@ import { Text } from 'react-native-ui-kitten/ui'
 import { withStyles } from 'react-native-ui-kitten/theme'
 import { ImageBackground, View } from 'react-native'
 
-import { getRelativeTime } from '../../../../helper/time'
-import { ArticleActivityBar } from '../../../../components/articles'
-import { ActivityAuthoring, textStyle } from '../../../../components/common'
+import { getRelativeTime } from '../../../helper/time'
+import { ArticleActivityBar } from '../../../components/articles'
+import { ActivityAuthoring, textStyle } from '../../../components/common'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const HeadlineItemComponent = React.memo((props) => {

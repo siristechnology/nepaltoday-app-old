@@ -4,19 +4,14 @@ import { withStyles } from 'react-native-ui-kitten/theme'
 import { useScrollToTop } from '@react-navigation/native'
 
 import { ArticleListItem } from './article.component'
-import { HeadlineComponent } from './headline.component'
 
-const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh }) => {
+const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh, headerComponent }) => {
 	const _onItemPress = (article) => {
 		onItemPress(article)
 	}
 
 	const renderItem = ({ item, index }) => {
-		if (index === 0) {
-			return <HeadlineComponent style={themedStyle.item} article={item} onPress={() => _onItemPress(item)} />
-		} else {
-			return <ArticleListItem style={themedStyle.item} article={item} onPress={() => _onItemPress(item)} />
-		}
+		return <ArticleListItem style={themedStyle.item} article={item} onPress={() => _onItemPress(item)} />
 	}
 
 	const ref = React.useRef(null)
@@ -29,6 +24,7 @@ const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, r
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}
 			ref={ref}
+			ListHeaderComponent={headerComponent}
 			refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 		/>
 	)
