@@ -10,9 +10,11 @@ import { ArticleWebviewComponent } from '../components'
 const Stack = createStackNavigator()
 
 const Container = ({ initialScreenName, initialParams }) => {
+	const initialRoute = initialScreenName === 'ArticleDetail' ? 'ArticleDetail' : 'Tab'
+
 	return (
 		<NavigationContainer>
-			<Stack.Navigator initialRouteName={initialScreenName || 'Tab'} screenOptions={{ headerShown: false }}>
+			<Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
 				<Stack.Screen name="Tab" component={BottomTabScreen} initialParams={{ initialScreenName }} />
 				<Stack.Screen name="ArticleDetail" component={ArticleDetailScreen} initialParams={initialParams} />
 				<Stack.Screen name="Article" component={ArticleWebviewComponent} />

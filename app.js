@@ -40,8 +40,10 @@ const App = () => {
 					setLoading(false)
 				})
 		} else if (notif.notifType === 'corona' && notif.foreground === false) {
+			setLoading(true)
 			setClicked(true)
 			setCoronaNotif(true)
+			setLoading(false)
 		}
 	}
 
