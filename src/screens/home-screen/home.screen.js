@@ -86,7 +86,18 @@ const Home = ({ navigation }) => {
 
 export const GET_ARTICLES_QUERY = gql`
 	query homeScreenQuery {
-		getArticles {
+		getArticles(
+			criteria: {
+				categories: [
+					{ name: "headline", count: 5 }
+					{ name: "politics", count: 5 }
+					{ name: "entertainment", count: 5 }
+					{ name: "news", count: 5 }
+					{ name: "business", count: 2 }
+					{ name: "sports", count: 5 }
+				]
+			}
+		) {
 			_id
 			title
 			shortDescription
