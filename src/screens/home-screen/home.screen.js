@@ -53,7 +53,7 @@ const Home = ({ navigation }) => {
 
 	const dataArticles = (data && data.getArticles) || []
 
-	const homeArticles = ((dataArticles.length && dataArticles) || localArticles.getArticles).filter((x) => x.category !== 'cartoon')
+	const homeArticles = (dataArticles.length && dataArticles) || localArticles.getArticles
 
 	const topHeadline = homeArticles.find((a) => a.category === 'headline') || homeArticles[0]
 
@@ -90,11 +90,12 @@ export const GET_ARTICLES_QUERY = gql`
 			criteria: {
 				categories: [
 					{ name: "headline", count: 5 }
-					{ name: "politics", count: 5 }
-					{ name: "entertainment", count: 5 }
+					{ name: "politics", count: 10 }
+					{ name: "entertainment", count: 10 }
 					{ name: "news", count: 5 }
-					{ name: "business", count: 2 }
-					{ name: "sports", count: 5 }
+					{ name: "business", count: 5 }
+					{ name: "sports", count: 10 }
+					{ name: "social", count: 5 }
 				]
 			}
 		) {
