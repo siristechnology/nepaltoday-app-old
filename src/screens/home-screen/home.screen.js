@@ -1,7 +1,7 @@
 import { Text, StyleSheet, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import AppLayout from '../../frame/app-layout'
 import { ArticleListContainer } from './components'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
@@ -14,6 +14,10 @@ const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
 	const [refreshing, setRefreshing] = useState(false)
 	const [localArticles, setLocalArticles] = useState({ getArticles: [] })
+
+	const [fetchNews, { loading, data, refetch, error }] = useLazyQuery(GET_ARTICLES_QUERY, {
+		variables: {},
+	})
 
 	const handleRefresh = () => {
 		setRefreshing(true)
@@ -36,11 +40,8 @@ const Home = ({ navigation }) => {
 			setNepaliDate(npDate)
 		})
 		fetchArticlesFromAsyncStorage()
-	}, [])
-
-	const { loading, data, refetch, error } = useQuery(GET_ARTICLES_QUERY, {
-		variables: {},
-	})
+		fetchNews()
+	}, [fetchNews])
 
 	if (!loading && data != null && data.getArticles && data.getArticles.length) {
 		const myArticles = data.getArticles
@@ -52,10 +53,13 @@ const Home = ({ navigation }) => {
 	}
 
 	const dataArticles = (data && data.getArticles) || []
-
 	const homeArticles = (dataArticles.length && dataArticles) || localArticles.getArticles
-
 	const topHeadline = homeArticles.find((a) => a.category === 'headline') || homeArticles[0]
+
+	const topNews = homeArticles
+		.filter((a) => a._id !== topHeadline._id)
+		.sort((a, b) => b.totalWeight - a.totalWeight)
+		.slice(0, 100)
 
 	const headerComponent = (
 		<View>
@@ -76,7 +80,7 @@ const Home = ({ navigation }) => {
 			<ArticleListContainer
 				headerComponent={headerComponent}
 				navigation={navigation}
-				articles={homeArticles.filter((a) => a._id !== topHeadline._id)}
+				articles={topNews}
 				refreshing={refreshing}
 				handleRefresh={handleRefresh}
 			/>
@@ -109,6 +113,7 @@ export const GET_ARTICLES_QUERY = gql`
 			modifiedDate
 			category
 			tags
+			totalWeight
 			source {
 				name
 				logoLink
