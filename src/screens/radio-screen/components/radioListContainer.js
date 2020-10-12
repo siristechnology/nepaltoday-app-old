@@ -9,7 +9,7 @@ const RadioListContainer = (props) => {
 	useScrollToTop(ref)
 
 	return (
-		<ScrollView ref={ref} style={{ marginBottom: 110, paddingTop: 10 }}>
+		<ScrollView ref={ref} style={{ paddingTop: 10 }}>
 			{props.fmList.map((fm, i) => (
 				<RadioCard 
 					key={i} 

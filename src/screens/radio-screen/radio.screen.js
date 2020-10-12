@@ -4,6 +4,7 @@ import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from './../../components/common'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
+import { Container, Tab, Tabs } from 'native-base'
 
 import TrackPlayer, {
     TrackPlayerEvents,
@@ -13,6 +14,8 @@ import {useTrackPlayerEvents} from 'react-native-track-player/lib/hooks';
 
 import RadioListContainer from './components/radioListContainer'
 import BottomPlayer from './components/bottomPlayer';
+import FavoriteRadio from './favoriteRadio'
+import AllRadio from './allRadio'
 
 const trackPlayerInit = async () => {
     await TrackPlayer.setupPlayer();
@@ -102,28 +105,28 @@ const RadioScreen = () => {
       startPlayer();
     }, []);
 
-    const { data, loading, error } = useQuery(GET_FM_QUERY, {
-      variables: {},
-    })
+    // const { data, loading, error } = useQuery(GET_FM_QUERY, {
+    //   variables: {},
+    // })
 
-    const fmList = data && data.getFmList || []
+    // const fmList = data && data.getFmList || []
 
-    useEffect(() => {
-      const addFmList = async () => {
-        for(let fmDetail of fmList){
-          await TrackPlayer.add({
-            id: fmDetail.id,
-            url: fmDetail.url,
-            type: 'default',
-            title: fmDetail.title,
-            album: fmDetail.album,
-            artist: fmDetail.artist,
-            artwork: fmDetail.artwork,
-          });
-        }
-      }
-      addFmList();
-    },[loading])
+    // useEffect(() => {
+    //   const addFmList = async () => {
+    //     for(let fmDetail of fmList){
+    //       await TrackPlayer.add({
+    //         id: fmDetail.id,
+    //         url: fmDetail.url,
+    //         type: 'default',
+    //         title: fmDetail.title,
+    //         album: fmDetail.album,
+    //         artist: fmDetail.artist,
+    //         artwork: fmDetail.artwork,
+    //       });
+    //     }
+    //   }
+    //   addFmList();
+    // },[loading])
 
     useTrackPlayerEvents([TrackPlayerEvents.PLAYBACK_STATE], event => {
         if (event.state === STATE_PLAYING) {
@@ -133,41 +136,76 @@ const RadioScreen = () => {
         }
     });
 
-    if (loading) {
-      return (
-        <AppLayout>
-          <CircularSpinner />
-        </AppLayout>
-      )
-    } else if (error) {
-      return <AppLayout />
-    }
-    const currentChannel = fmList.filter(x=>x.id==currentChannelId)[0]
-    return(
-        <AppLayout>
-            <View style={style.headerStyle}>
-                <Text style={style.headerText}>
-                    NepalToday FM
-                </Text>
-            </View>
-            <RadioListContainer
-                fmList={fmList}
-                onFMSelect={onFMSelect}
-                initSuccess={isTrackPlayerInit}
-                currentChannelId={currentChannelId}
-            /> 
-            <BottomPlayer
-                isPlaying={isPlaying}
-                initSuccess={isTrackPlayerInit}
-                onSkipPrevious={skipPrevious}
-                onPause={pause}
-                onPlay={play}
-                onStop={stop}
-                onSkipNext={skipNext}
-                currentChannel={currentChannel}
+    return (
+      <Container>
+        <View style={style.headerStyle}>
+          <Text style={style.headerText}>
+            NepalToday FM
+          </Text>
+        </View>
+        <Tabs tabBarUnderlineStyle={{ backgroundColor: '#ff0000' }}>
+          <Tab
+            style={{ flex: 1 }}
+            heading="Favorite FM"
+            tabStyle={{ backgroundColor: '#fff' }}
+            activeTabStyle={{ backgroundColor: '#fff' }}
+            textStyle={{ color: '#000' }}
+            activeTextStyle={{ color: '#000' }}
+          >
+            <FavoriteRadio 
+              onFMSelect={onFMSelect}
+              initSuccess={isTrackPlayerInit}
             />
-        </AppLayout>
+          </Tab>
+          <Tab
+            style={{ flex: 1 }}
+            heading="All FM"
+            tabStyle={{ backgroundColor: '#fff' }}
+            activeTabStyle={{ backgroundColor: '#fff' }}
+            textStyle={{ color: '#000' }}
+            activeTextStyle={{ color: '#000' }}
+          >
+            <AllRadio />
+          </Tab>
+        </Tabs>
+      </Container>
     )
+
+    // if (loading) {
+    //   return (
+    //     <AppLayout>
+    //       <CircularSpinner />
+    //     </AppLayout>
+    //   )
+    // } else if (error) {
+    //   return <AppLayout />
+    // }
+    // const currentChannel = fmList.filter(x=>x.id==currentChannelId)[0]
+    // return(
+    //     <AppLayout>
+    //         <View style={style.headerStyle}>
+    //             <Text style={style.headerText}>
+    //                 NepalToday FM
+    //             </Text>
+    //         </View>
+    //         <RadioListContainer
+    //             fmList={fmList}
+    //             onFMSelect={onFMSelect}
+    //             initSuccess={isTrackPlayerInit}
+    //             currentChannelId={currentChannelId}
+    //         /> 
+    //         <BottomPlayer
+    //             isPlaying={isPlaying}
+    //             initSuccess={isTrackPlayerInit}
+    //             onSkipPrevious={skipPrevious}
+    //             onPause={pause}
+    //             onPlay={play}
+    //             onStop={stop}
+    //             onSkipNext={skipNext}
+    //             currentChannel={currentChannel}
+    //         />
+    //     </AppLayout>
+    // )
 }
 
 const style = StyleSheet.create({
@@ -183,16 +221,16 @@ const style = StyleSheet.create({
     }
 })
 
-export const GET_FM_QUERY = gql`
-	query fmScreenQuery{
-    getFmList {
-      id
-      title
-      url
-      artist
-      artwork
-    }
-  }
-`
+// export const GET_FM_QUERY = gql`
+// 	query fmScreenQuery{
+//     getFmList {
+//       id
+//       title
+//       url
+//       artist
+//       artwork
+//     }
+//   }
+// `
 
 export default RadioScreen
