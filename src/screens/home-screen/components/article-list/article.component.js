@@ -66,7 +66,7 @@ export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 		marginLeft: 8,
 	},
 	imageContainer: {
-		height: 100,
+		height: 120,
 		marginRight: 8,
 	},
 	image: {
@@ -83,13 +83,14 @@ export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 		...textStyle.caption2,
 	},
 	activityBar: {
-		justifyContent: 'space-between',
-		marginVertical: 8,
+		justifyContent: 'flex-start',
+		marginTop: 8,
 	},
 	articleSourceName: { marginLeft: 4 },
 	activityBarContent: {
 		flexDirection: 'row',
 		alignItems: 'center',
+		marginRight: 8,
 	},
 	dateLabel: {
 		marginLeft: 2,
