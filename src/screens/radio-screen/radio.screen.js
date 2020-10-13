@@ -5,14 +5,12 @@ import { CircularSpinner } from './../../components/common'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { Container, Tab, Tabs } from 'native-base'
-
+import auth from '@react-native-firebase/auth'
 import TrackPlayer, {
     TrackPlayerEvents,
     STATE_PLAYING,
 } from 'react-native-track-player';
 import {useTrackPlayerEvents} from 'react-native-track-player/lib/hooks';
-
-import RadioListContainer from './components/radioListContainer'
 import BottomPlayer from './components/bottomPlayer';
 import FavoriteRadio from './favoriteRadio'
 import AllRadio from './allRadio'
@@ -40,11 +38,36 @@ const RadioScreen = () => {
 
     const [currentChannelId, setCurrentChannelId] = useState({})
 
-    const onFMSelect = async (channel) => {
-        await TrackPlayer.play();
-        await TrackPlayer.skip(channel.id)
-        setCurrentChannelId(channel.id)
-        setIsPlaying(true);
+    const GET_FAVOURITE_FM_QUERY = gql`
+        query fmScreenQuery{
+          getMyFavoriteFm(nid: "${auth().currentUser.uid}") {
+            id
+            title
+            url
+            artist
+            artwork
+            province
+          }
+        }
+    `
+
+    const onFMSelect = async (channel, fmList) => {
+      await TrackPlayer.reset()
+      for(let fmDetail of fmList){
+        await TrackPlayer.add({
+          id: fmDetail.id,
+          url: fmDetail.url,
+          type: 'default',
+          title: fmDetail.title,
+          album: fmDetail.album,
+          artist: fmDetail.artist,
+          artwork: fmDetail.artwork,
+        });
+      }
+      await TrackPlayer.play();
+      await TrackPlayer.skip(channel.id)
+      setCurrentChannelId(channel.id)
+      setIsPlaying(true);
     }
 
     const play = async () => {
@@ -105,28 +128,17 @@ const RadioScreen = () => {
       startPlayer();
     }, []);
 
-    // const { data, loading, error } = useQuery(GET_FM_QUERY, {
-    //   variables: {},
-    // })
+    const { data, loading, error } = useQuery(GET_FM_QUERY, {
+      variables: {},
+    })
 
-    // const fmList = data && data.getFmList || []
+    const { data: data1, refetch, loading: loading2, error: error2 } = useQuery(GET_FAVOURITE_FM_QUERY, {
+      variables: {},
+    }) 
+    
+    const favoriteList = data1 && data1.getMyFavoriteFm || []
 
-    // useEffect(() => {
-    //   const addFmList = async () => {
-    //     for(let fmDetail of fmList){
-    //       await TrackPlayer.add({
-    //         id: fmDetail.id,
-    //         url: fmDetail.url,
-    //         type: 'default',
-    //         title: fmDetail.title,
-    //         album: fmDetail.album,
-    //         artist: fmDetail.artist,
-    //         artwork: fmDetail.artwork,
-    //       });
-    //     }
-    //   }
-    //   addFmList();
-    // },[loading])
+    const fmList = data && data.getFmList || []
 
     useTrackPlayerEvents([TrackPlayerEvents.PLAYBACK_STATE], event => {
         if (event.state === STATE_PLAYING) {
@@ -135,6 +147,18 @@ const RadioScreen = () => {
           setIsPlaying(false);
         }
     });
+
+    if (loading || loading2) {
+      return (
+        <AppLayout>
+          <CircularSpinner />
+        </AppLayout>
+      )
+    } else if (error || error2) {
+      return <AppLayout />
+    }
+
+    const currentChannel = fmList.filter(x=>x.id==currentChannelId)[0]
 
     return (
       <Container>
@@ -145,7 +169,7 @@ const RadioScreen = () => {
         </View>
         <Tabs tabBarUnderlineStyle={{ backgroundColor: '#ff0000' }}>
           <Tab
-            style={{ flex: 1 }}
+            style={{ flex: 1, marginBottom: 125 }}
             heading="Favorite FM"
             tabStyle={{ backgroundColor: '#fff' }}
             activeTabStyle={{ backgroundColor: '#fff' }}
@@ -155,57 +179,44 @@ const RadioScreen = () => {
             <FavoriteRadio 
               onFMSelect={onFMSelect}
               initSuccess={isTrackPlayerInit}
+              allFm={fmList}
+              refetchFavorite={refetch}
+              favoriteList={favoriteList}
+              currentChannelId={currentChannelId}
+              isPlaying={isPlaying}
             />
           </Tab>
           <Tab
-            style={{ flex: 1 }}
+            style={{ flex: 1, marginBottom: 67 }}
             heading="All FM"
             tabStyle={{ backgroundColor: '#fff' }}
             activeTabStyle={{ backgroundColor: '#fff' }}
             textStyle={{ color: '#000' }}
             activeTextStyle={{ color: '#000' }}
           >
-            <AllRadio />
+            <AllRadio
+              allFm={fmList}
+              favoriteList={favoriteList}
+              onFMSelect={onFMSelect}
+              refetchFavorite={refetch}
+              initSuccess={isTrackPlayerInit}
+              currentChannelId={currentChannelId}
+              isPlaying={isPlaying}
+            />
           </Tab>
         </Tabs>
+        <BottomPlayer
+          isPlaying={isPlaying}
+          initSuccess={isTrackPlayerInit}
+          onSkipPrevious={skipPrevious}
+          onPause={pause}
+          onPlay={play}
+          onStop={stop}
+          onSkipNext={skipNext}
+          currentChannel={currentChannel}
+        />
       </Container>
     )
-
-    // if (loading) {
-    //   return (
-    //     <AppLayout>
-    //       <CircularSpinner />
-    //     </AppLayout>
-    //   )
-    // } else if (error) {
-    //   return <AppLayout />
-    // }
-    // const currentChannel = fmList.filter(x=>x.id==currentChannelId)[0]
-    // return(
-    //     <AppLayout>
-    //         <View style={style.headerStyle}>
-    //             <Text style={style.headerText}>
-    //                 NepalToday FM
-    //             </Text>
-    //         </View>
-    //         <RadioListContainer
-    //             fmList={fmList}
-    //             onFMSelect={onFMSelect}
-    //             initSuccess={isTrackPlayerInit}
-    //             currentChannelId={currentChannelId}
-    //         /> 
-    //         <BottomPlayer
-    //             isPlaying={isPlaying}
-    //             initSuccess={isTrackPlayerInit}
-    //             onSkipPrevious={skipPrevious}
-    //             onPause={pause}
-    //             onPlay={play}
-    //             onStop={stop}
-    //             onSkipNext={skipNext}
-    //             currentChannel={currentChannel}
-    //         />
-    //     </AppLayout>
-    // )
 }
 
 const style = StyleSheet.create({
@@ -221,16 +232,16 @@ const style = StyleSheet.create({
     }
 })
 
-// export const GET_FM_QUERY = gql`
-// 	query fmScreenQuery{
-//     getFmList {
-//       id
-//       title
-//       url
-//       artist
-//       artwork
-//     }
-//   }
-// `
+export const GET_FM_QUERY = gql`
+	query fmScreenQuery{
+    getFmList {
+      id
+      title
+      url
+      artist
+      artwork
+    }
+  }
+`
 
 export default RadioScreen
