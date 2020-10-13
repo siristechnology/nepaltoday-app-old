@@ -19,9 +19,7 @@ const DistrictCard = (props) => {
 			<Text style={styles.title}>{props.stat.nepaliName}</Text>
 			<View style={styles.statContainer}>
 				{renderStatView('Total Cases', props.stat.totalCases)}
-				{renderStatView('Active Cases', props.stat.activeCases)}
-				{renderStatView('Recovered', props.stat.recovered)}
-				{renderStatView('Deaths', props.stat.deaths)}
+				{renderStatView('New Cases', props.stat.newCases)}
 			</View>
 			<View style={styles.divider} />
 		</View>
@@ -48,7 +46,7 @@ const styles = StyleSheet.create({
 	},
 	statContainer: {
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'space-evenly',
 		paddingVertical: 5,
 	},
 	statView: {

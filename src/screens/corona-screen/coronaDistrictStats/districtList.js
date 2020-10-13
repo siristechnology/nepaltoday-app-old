@@ -106,9 +106,7 @@ const GET_DISTRICT_CORONA_STATS = gql`
 				name
 				nepaliName
 				totalCases
-				activeCases
-				recovered
-				deaths
+				newCases
 			}
 			source
 		}
