@@ -1,13 +1,26 @@
 import React from 'react'
 import { TouchableOpacity, Text, StyleSheet, Image, View } from 'react-native'
+import FAIcon from 'react-native-vector-icons/FontAwesome'
+import RadioService from './../radio.services'
+import auth from '@react-native-firebase/auth'
 
 const RadioCard = (props) => {
-    const {channel, currentChannelId} = props
+
+    const onIconPress = (isFav, channel) => {
+        const nid = auth().currentUser.uid
+        if(isFav){
+            RadioService.deleteFavorite(nid, channel.id).then(()=>props.refreshFav())
+        }else{
+            RadioService.saveFavorite(nid, channel.id).then(()=>props.refreshFav())
+        }
+    } 
+
+    const {channel, currentChannelId, fmList, isFavorite} = props
     return(
         <TouchableOpacity
             activeOpacity={0.9}
             style={styles.cardContainer}
-            onPress={()=>props.onFMSelect(channel)}
+            onPress={()=>props.onFMSelect(channel, fmList)}
             disabled={!props.initSuccess}
         >
             <Image
@@ -22,6 +35,13 @@ const RadioCard = (props) => {
                     {channel.artist}
                 </Text>
             </View>
+            <FAIcon
+                name={isFavorite && "heart" || "heart-o"}
+                color="#f44336"
+                size={23}
+                style={{position:'absolute',right:10}}
+                onPress={()=>onIconPress(isFavorite, channel)}
+            />
         </TouchableOpacity>
     )
 }
@@ -42,10 +62,10 @@ const styles = StyleSheet.create({
         height: 80
     },
     textView:{
-       marginLeft:20 
+       marginLeft:12
     },
     titleText: {
-       fontSize: 18,
+       fontSize: 17,
        opacity: 0.9 
     },
     artistText: {
