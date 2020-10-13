@@ -5,47 +5,38 @@ import { getLocalName } from '../../helper/text'
 import { OfflineNotice } from '../../components'
 import { HealineListContainer } from '../../layout/headline'
 import { CircularSpinner } from '../../components/common'
-import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { Container, Tab, Tabs, ScrollableTab } from 'native-base'
 import gql from 'graphql-tag'
-import { useQuery } from '@apollo/react-hooks'
+import { useLazyQuery } from '@apollo/react-hooks'
 import crashlytics from '@react-native-firebase/crashlytics'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE, SHARE, CARTOON } = en.menu
 
-const HeadlineScreen = (props) => {
+const HeadlineScreen = ({ navigation }) => {
 	const [refreshing, setRefreshing] = useState(false)
-	const [articles, setArticles] = useState([])
-
-	const handleRefresh = () => {
-		setRefreshing(true)
-		refetch().then((res) => {
-			storetoAsync(res.data.getArticles)
-			setArticles(res.data.getArticles)
-			setRefreshing(false)
-		})
-	}
-
-	useEffect(() => {
-		fetchfromAsync()
-			.then((res) => {
-				setArticles(res)
-			})
-			.catch((err) => {
-				crashlytics().recordError(err)
-				setArticles([])
-			})
-	}, [])
-
-	const { refetch } = useQuery(GET_ARTICLES_QUERY, {
+	const [fetchNews, { loading, data, refetch, error }] = useLazyQuery(GET_ARTICLES_QUERY, {
 		variables: {},
 	})
 
-	if (!articles.length) {
+	const handleRefresh = () => {
+		setRefreshing(true)
+		refetch().then(() => setRefreshing(false))
+	}
+
+	useEffect(() => {
+		fetchNews()
+	}, [fetchNews])
+
+	if (error) {
+		console.log('printing error', error)
+		crashlytics().recordError(new Error(error))
+	}
+
+	if (loading || data == null) {
 		return <CircularSpinner />
 	}
 
-	const renderTab = () => {
+	const CategoryTabs = ({ articles, navigation }) => {
 		const tabNames = [NEWS, ENTERTAINMENT, SPORTS, CARTOON, BUSINESS, SOCIAL, HEALTH, TECHNOLOGY, SHARE, AGRICULTURE]
 
 		return tabNames.map((tabname, idx) => {
@@ -80,7 +71,7 @@ const HeadlineScreen = (props) => {
 					activeTextStyle={{ color: '#000' }}
 				>
 					<OfflineNotice />
-					<HealineListContainer articles={dataArr} navigation={props.navigation} refreshing={refreshing} handleRefresh={handleRefresh} />
+					<HealineListContainer articles={dataArr} refreshing={refreshing} handleRefresh={handleRefresh} navigation={navigation} />
 				</Tab>
 			)
 		})
@@ -92,7 +83,8 @@ const HeadlineScreen = (props) => {
 				tabBarUnderlineStyle={{ backgroundColor: '#ff0000' }}
 				renderTabBar={() => <ScrollableTab tabsContainerStyle={{ backgroundColor: '#fff' }} />}
 			>
-				{renderTab()}
+				{CategoryTabs({ articles: data.getArticles, navigation })}
+				{/* <CategoryTabs articles={data.getArticles} navigation={navigation} /> */}
 			</Tabs>
 		</Container>
 	)
@@ -101,7 +93,7 @@ const HeadlineScreen = (props) => {
 export default HeadlineScreen
 
 const GET_ARTICLES_QUERY = gql`
-	query homeScreenQuery {
+	query headlineScreenQuery {
 		getArticles {
 			_id
 			title
@@ -113,6 +105,7 @@ const GET_ARTICLES_QUERY = gql`
 			modifiedDate
 			category
 			tags
+			totalWeight
 			source {
 				name
 				logoLink
