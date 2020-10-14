@@ -28,7 +28,6 @@ const HeadlineScreen = ({ navigation }) => {
 	}, [fetchNews])
 
 	if (error) {
-		console.log('printing error', error)
 		crashlytics().recordError(new Error(error))
 	}
 
