@@ -18,7 +18,7 @@ const saveReadArticles = (articleId) => {
 }
 
 const getReadArticles = async () => {
-    readArticles = await AsyncStorage.getItem(READ_ARTICLES)
+    let readArticles = await AsyncStorage.getItem(READ_ARTICLES)
     readArticles = JSON.parse(readArticles) || []
     return readArticles
 }
