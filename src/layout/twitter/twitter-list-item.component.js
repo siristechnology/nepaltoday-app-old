@@ -71,6 +71,8 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, (theme) => (
 	avatar: {
 		minWidth: 40,
 		margin: 10,
+		borderWidth: 1,
+		borderColor: '#d5e7f2',
 	},
 	titleLabel: {
 		...textStyle.caption1,

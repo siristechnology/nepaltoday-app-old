@@ -17,7 +17,7 @@ export const BottomTabScreen = ({ route }) => {
 		<Tab.Navigator
 			initialRouteName={route.params.initialScreenName}
 			tabBarOptions={{
-				activeTintColor: '#ff0000',
+				activeTintColor: '#1da1f2',
 				inactiveTintColor: 'gray',
 				showLabel: false,
 			}}

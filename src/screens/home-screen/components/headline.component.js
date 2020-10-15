@@ -55,6 +55,8 @@ export const HeadlineComponent = withStyles(HeadlineItemComponent, (theme) => ({
 	image: {
 		borderTopLeftRadius: 8,
 		borderTopRightRadius: 8,
+		borderWidth: 1,
+		borderColor: '#e5edf2',
 	},
 	titleLabel: textStyle.headline,
 	descriptionLabel: {
