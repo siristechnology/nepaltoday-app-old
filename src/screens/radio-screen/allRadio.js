@@ -1,6 +1,6 @@
 import React from 'react'
 import AppLayout from '../../frame/app-layout'
-import RadioListContainer from './components/radioListContainer'
+import RadioListContainer from './components/allRadioListContainer'
 
 const AllRadio = (props) => {
     return(

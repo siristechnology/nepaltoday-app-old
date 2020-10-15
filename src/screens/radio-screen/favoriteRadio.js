@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { View, TextInput, StyleSheet } from 'react-native'
 import AppLayout from '../../frame/app-layout'
-import RadioListContainer from './components/radioListContainer'
+import FavoriteRadioListContainer from './components/favoriteRadioListContainer'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 const FavoriteRadio = (props) => {
@@ -29,7 +29,7 @@ const FavoriteRadio = (props) => {
               <Icon style={{ flex: 0.09, zIndex: 111 }} name="close" size={20} onPress={() => setSearchText('')} />
             )) || <View />}
           </View>
-          <RadioListContainer
+          <FavoriteRadioListContainer
             fmList={toShowList}
             favoriteList={props.favoriteList}
             onFMSelect={props.onFMSelect}

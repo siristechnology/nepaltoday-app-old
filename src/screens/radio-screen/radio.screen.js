@@ -240,6 +240,7 @@ export const GET_FM_QUERY = gql`
       url
       artist
       artwork
+      province
     }
   }
 `
