@@ -9,13 +9,13 @@ import { ActivityAuthoring, textStyle } from '../../../components/common'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
 const ArticleListItemComponent = React.memo((props) => {
-	const { style, themedStyle, article, ...restProps } = props
+	const { style, themedStyle, article, isRead, ...restProps } = props
 	const onPress = () => {
 		props.onPress(article)
 	}
 
 	return (
-		<TouchableOpacity activeOpacity={0.8} {...restProps} style={[themedStyle.container, style]} onPress={onPress}>
+		<TouchableOpacity activeOpacity={0.8} {...restProps} style={[themedStyle.container, style, isRead && {backgroundColor:'#f5f5f5'}]} onPress={onPress}>
 			<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
 			<ArticleActivityBar style={themedStyle.activityContainer}>
 				<ActivityAuthoring
