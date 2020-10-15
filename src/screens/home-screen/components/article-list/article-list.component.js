@@ -1,17 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FlatList, RefreshControl } from 'react-native'
 import { withStyles } from 'react-native-ui-kitten/theme'
 import { useScrollToTop } from '@react-navigation/native'
 
 import { ArticleListItem } from './article.component'
+import { getReadArticles } from '../../../../services/asyncStorageService'
 
 const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh, headerComponent }) => {
+	
+	const [readArticles, setReadArticles] = useState([])
+
+	useEffect(() => {
+		getReadArticles().then(res=>{
+			setReadArticles(res)
+		})		
+	},[])
+	
 	const _onItemPress = (article) => {
 		onItemPress(article)
 	}
 
 	const renderItem = ({ item, index }) => {
-		return <ArticleListItem style={themedStyle.item} article={item} onPress={() => _onItemPress(item)} />
+		return <ArticleListItem 
+			isRead={readArticles.includes(item._id)}
+			style={themedStyle.item} 
+			article={item} 
+			onPress={() => _onItemPress(item)} 
+		/>
 	}
 
 	const ref = React.useRef(null)

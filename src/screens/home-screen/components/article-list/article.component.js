@@ -9,15 +9,14 @@ import { ClockIconOutline } from '../../../../assets/icons'
 import { getRelativeTime } from '../../../../helper/time'
 
 const ArticleListItemCompoent = (props) => {
-	const { article, themedStyle, style } = props
-
+	const { article, themedStyle, style, isRead } = props
 	const onPress = () => {
 		props.onPress(article)
 	}
 
 	return (
-		<TouchableOpacity onPress={onPress} activeOpacity={0.8} style={[themedStyle.container, style]}>
-			<View style={[themedStyle.container]}>
+		<TouchableOpacity onPress={onPress} activeOpacity={0.8} style={[themedStyle.container, style, isRead && {backgroundColor:'#F5F5F5'}]}>
+			<View style={[themedStyle.container, isRead && {backgroundColor: '#F5F5F5'}]}>
 				<View style={themedStyle.articleWrapper}>
 					<View style={themedStyle.leftWrapper}>
 						<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
