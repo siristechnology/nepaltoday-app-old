@@ -66,12 +66,14 @@ export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 		marginLeft: 8,
 	},
 	imageContainer: {
-		height: 120,
+		height: 110,
 		marginRight: 8,
 	},
 	image: {
 		borderRadius: 6,
 		marginTop: 4,
+		borderWidth: 1,
+		borderColor: '#e5edf2',
 	},
 	headerWrapper: {
 		flexDirection: 'row',
