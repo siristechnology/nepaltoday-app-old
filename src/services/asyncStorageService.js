@@ -1,17 +1,21 @@
 import AsyncStorage from '@react-native-community/async-storage'
 const READ_ARTICLES = "READ_ARTICLES"
 
-const saveReadArticles = (articleId) => {
+const saveReadArticles = (article) => {
     AsyncStorage.getItem(READ_ARTICLES).then(res=>{
-        let oldArticleIds = []
+        let oldArticles = []
         let articles = []
         if(res!=null){
-            articles = oldArticleIds.concat(JSON.parse(res))
-            articles.push(articleId)
-            articles = [...new Set(articles)]
+            articles = oldArticles.concat(JSON.parse(res))
+            articles.push(article)
+            articles = articles.filter((thing, index, self) =>
+                index === self.findIndex((t) => (
+                    t.id === thing.id
+                ))
+            )
             AsyncStorage.setItem(READ_ARTICLES, JSON.stringify(articles))
         }else{
-            articles.push(articleId)
+            articles.push(article)
             AsyncStorage.setItem(READ_ARTICLES, JSON.stringify(articles))
         }
     })
@@ -20,15 +24,25 @@ const saveReadArticles = (articleId) => {
 const getReadArticles = async () => {
     let readArticles = await AsyncStorage.getItem(READ_ARTICLES)
     readArticles = JSON.parse(readArticles) || []
-    return readArticles
+    let articles = readArticles.map(article=> article.id)
+    return articles
 }
 
-const clearReadArticles = () => {
-    AsyncStorage.removeItem(READ_ARTICLES)
+const clearOldArticles = async () => {
+    let readArticles = await AsyncStorage.getItem(READ_ARTICLES)
+    readArticles = JSON.parse(readArticles) || []
+    let currentTimeStamp = Date.now()
+    let newArticles = []
+    readArticles.forEach(article=>{
+        if(currentTimeStamp - article.timeStamp < 432000000){
+            newArticles.push(article)
+        }
+    })
+    AsyncStorage.setItem(READ_ARTICLES, JSON.stringify(newArticles))
 }
 
 export {
     saveReadArticles,
     getReadArticles,
-    clearReadArticles
+    clearOldArticles
 }
