@@ -14,7 +14,7 @@ import AppLayout from './src/frame/app-layout'
 import { CircularSpinner } from './src/components/common'
 import RNBootSplash from 'react-native-bootsplash'
 import PushNotification from 'react-native-push-notification'
-import { getReadArticles } from './src/services/asyncStorageService'
+import { getReadArticles, clearOldArticles } from './src/services/asyncStorageService'
 import readArticlesService from './src/services/readArticles.service'
 
 const App = () => {
@@ -73,7 +73,7 @@ const App = () => {
 		const addReadArticles = async () => {
 			const readArticles = await getReadArticles()
 			readArticlesService.saveReadArticle(auth().currentUser.uid, readArticles)
-			// clearReadArticles()
+			clearOldArticles()
 		}
 
 		addReadArticles()
