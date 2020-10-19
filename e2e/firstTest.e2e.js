@@ -3,9 +3,9 @@ describe('Example', () => {
 		await device.reloadReactNative()
 	})
 
-	// it('should have weather component', async () => {
-	// 	await expect(element(by.id('weatherComponent'))).toBeVisible()
-	// })
+	it('should have weather component', async () => {
+		await expect(element(by.id('weatherComponent'))).toBeVisible()
+	})
 
 	it('should have nepali date', async () => {
 		await expect(element(by.id('nepaliDate'))).toBeVisible()
