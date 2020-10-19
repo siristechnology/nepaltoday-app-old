@@ -37,7 +37,7 @@ const CountryList = () => {
 	const lastUpdated = data && data.getLatestCoronaStats && getRelativeTime(data.getLatestCoronaStats.stats.createdDate)
 
 	const renderItem = ({ item, index }) => {
-		return <CountryCard stat={item} key={index} />
+		return <CountryCard stat={item} index={index} />
 	}
 
 	if (loading) {

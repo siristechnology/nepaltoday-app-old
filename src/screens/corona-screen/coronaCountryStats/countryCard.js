@@ -3,12 +3,12 @@ import { View, Text, StyleSheet } from 'react-native'
 import { formatCoronaNumber } from '../../../helper/numberFormatter'
 
 const CountryCard = (props) => {
-	const renderStatView = (text, number) => {
+	const renderStatView = (text, number, test) => {
 		const formattedValue = formatCoronaNumber(number)
 
 		return (
 			<View style={styles.statView}>
-				<Text style={styles.valueText}>{formattedValue}</Text>
+				<Text testID={test+props.stat.country} style={styles.valueText}>{formattedValue}</Text>
 				<Text style={styles.valueTitle}>{text}</Text>
 			</View>
 		)
@@ -18,7 +18,7 @@ const CountryCard = (props) => {
 		<View style={styles.container}>
 			<Text style={styles.title}>{props.stat.country}</Text>
 			<View style={styles.statContainer}>
-				{renderStatView('Total Cases', props.stat.total_cases)}
+				{renderStatView('Total Cases', props.stat.total_cases, 'worldTotalCase')}
 				{renderStatView('Total Deaths', props.stat.total_deaths)}
 				{renderStatView('New Cases', props.stat.new_cases)}
 				{renderStatView('New Deaths', props.stat.new_deaths)}

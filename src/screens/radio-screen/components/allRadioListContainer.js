@@ -34,7 +34,7 @@ const RadioListContainer = (props) => {
                         {province}
                     </Text>
                     {formattedFmList[province].map((fm,j)=>(
-                        <RadioCard 
+                        <RadioCard
                             key={j} 
                             isFavorite={checkFavorite(fm)}
                             channel={fm} 

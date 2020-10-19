@@ -5,8 +5,8 @@ import { useScrollToTop } from '@react-navigation/native'
 import { TwitterListItem } from './twitter-list-item.component'
 
 const TwitterListComponent = React.memo(({ tweets, themedStyle, refreshing, handleRefresh, header }) => {
-	const renderItem = (info) => {
-		return <TwitterListItem style={themedStyle.item} tweet={info.item} />
+	const renderItem = ({item, index}) => {
+		return <TwitterListItem index={index} style={themedStyle.item} tweet={item} />
 	}
 
 	const ref = React.useRef(null)

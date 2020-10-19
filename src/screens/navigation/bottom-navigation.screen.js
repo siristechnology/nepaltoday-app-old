@@ -30,7 +30,7 @@ export const BottomTabScreen = ({ route }) => {
 			<Tab.Screen
 				name="Headline"
 				component={HeadlineScreen}
-				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'newspaper'} size={25} color={color} /> }}
+				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'newspaper'} size={25} color={color} />, tabBarTestID: 'categoryScreen' }}
 			/>
 			<Tab.Screen
 				name="Corona"
@@ -40,17 +40,17 @@ export const BottomTabScreen = ({ route }) => {
 			<Tab.Screen
 				name="Trending"
 				component={TrendingScreen}
-				options={{ tabBarIcon: ({ color }) => <SimpleLine name={'fire'} size={25} color={color} /> }}
+				options={{ tabBarIcon: ({ color }) => <SimpleLine name={'fire'} size={25} color={color} />, tabBarTestID: 'trendingScreen' }}
 			/>
 			<Tab.Screen
 				name="Twitter"
 				component={TwitterScreen}
-				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'twitter'} size={25} color={color} /> }}
+				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'twitter'} size={25} color={color} />, tabBarTestID: 'twitterScreen' }}
 			/>
 			<Tab.Screen
 				name="Radio"
 				component={RadioScreen}
-				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'headphones'} size={25} color={color} /> }}
+				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'headphones'} size={25} color={color} />, tabBarTestID: 'radioScreen' }}
 			/>
 		</Tab.Navigator>
 	)

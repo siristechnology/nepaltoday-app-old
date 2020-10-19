@@ -6,10 +6,10 @@ const CoronaSummary = (props) => {
 		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 	}
 
-	const Card = (title, number) => {
+	const Card = (title, number, test) => {
 		return (
 			<View style={styles.individualCard}>
-				<Text style={styles.valueText}>{getCommaAddedNumber(number)}</Text>
+				<Text testID={test} style={styles.valueText}>{getCommaAddedNumber(number)}</Text>
 				<Text style={styles.valueTitle}>{title}</Text>
 			</View>
 		)
@@ -18,12 +18,12 @@ const CoronaSummary = (props) => {
 	return (
 		<View>
 			<View style={styles.rowView}>
-				{Card('Total Cases', props.stats.totalCases)}
-				{Card('New Cases', props.stats.newCases)}
+				{Card('Total Cases', props.stats.totalCases, 'totalCase')}
+				{Card('New Cases', props.stats.newCases,'newCase')}
 			</View>
 			<View style={styles.rowView}>
-				{Card('Total Deaths', props.stats.totalDeaths)}
-				{Card('New Deaths', props.stats.newDeaths)}
+				{Card('Total Deaths', props.stats.totalDeaths,'totalDeath')}
+				{Card('New Deaths', props.stats.newDeaths,'newDeath')}
 			</View>
 		</View>
 	)

@@ -19,12 +19,13 @@ const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, 
 		onItemPress(article)
 	}
 
-	const renderItem = (info) => {
+	const renderItem = ({ item, index }) => {
 		return <ArticleListItem 
-			isRead={readArticles.includes(info.item._id)}
+			index={index}
+			isRead={readArticles.includes(item._id)}
 			style={themedStyle.item} 
-			article={info.item} 
-			onPress={() => _onItemPress(info.item)} 
+			article={item} 
+			onPress={() => _onItemPress(item)} 
 		/>
 	}
 

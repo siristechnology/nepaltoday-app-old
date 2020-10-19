@@ -22,6 +22,7 @@ const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, r
 
 	const renderItem = ({ item, index }) => {
 		return <ArticleListItem 
+			index={index}
 			isRead={readArticles.includes(item._id)}
 			style={themedStyle.item} 
 			article={item} 

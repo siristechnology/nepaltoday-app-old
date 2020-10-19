@@ -74,7 +74,7 @@ const Home = ({ navigation }) => {
 	return (
 		<AppLayout>
 			<View style={style.headerStyle}>
-				<Text style={style.nepaliDateStyle}>{nepaliDate}</Text>
+				<Text testID="nepaliDate" style={style.nepaliDateStyle}>{nepaliDate}</Text>
 				<Weather />
 			</View>
 			<ArticleListContainer

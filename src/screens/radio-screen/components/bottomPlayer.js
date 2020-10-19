@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5'
 const BottomPlayer = (props) => {
     const {currentChannel, isPlaying} = props
     return(
-        <View style={styles.playerContainer}>
+        <View testID="bottomPlayer" style={styles.playerContainer}>
             {currentChannel && currentChannel.artwork && <Image
                 source={{uri: currentChannel.artwork}}
                 style={styles.imageStyle}
@@ -38,6 +38,7 @@ const BottomPlayer = (props) => {
                         color="#000"
                         style={styles.icon}
                         onPress={()=>props.initSuccess && props.onStop()}
+                        testID="stopPlayer"
                     />
                     <Icon
                         name="fast-forward"
