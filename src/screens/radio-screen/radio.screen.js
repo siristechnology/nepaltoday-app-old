@@ -82,6 +82,7 @@ const RadioScreen = () => {
 
     const stop = async () => {
       await TrackPlayer.stop()
+      setCurrentChannelId('')
     }
 
     const skipNext = async () => {

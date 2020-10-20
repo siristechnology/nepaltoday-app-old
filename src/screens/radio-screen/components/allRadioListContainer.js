@@ -46,7 +46,6 @@ const RadioListContainer = (props) => {
     const sections = formatSections()
 
     const renderHeader = section => {
-        // console.log("rndering header", section)
         return (
             <View style={styles.provinceView}>
                 <Text style={styles.provinceText}>{section.title}</Text>

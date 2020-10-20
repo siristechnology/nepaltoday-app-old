@@ -1,6 +1,7 @@
 import React from 'react'
 import { Alert, DevSettings } from 'react-native'
 import crashlytics from '@react-native-firebase/crashlytics'
+import { removeAsync } from '../helper/cacheStorage'
 
 class ErrorBoundary extends React.Component {
 	constructor(props) {
@@ -13,6 +14,7 @@ class ErrorBoundary extends React.Component {
 	}
 
 	componentDidCatch(error, errorInfo) {
+		removeAsync()
 		if (this.state.hasError) {
 			error.message += `.  Caused by ${errorInfo.componentStack}`
 			crashlytics().recordError(error)
