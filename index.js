@@ -1,7 +1,6 @@
 import React from 'react'
 import { AppRegistry, LogBox } from 'react-native'
 import App from './app.js'
-import { Main } from './src/main'
 import { name as appName } from './app.json'
 import { ApolloProvider } from '@apollo/react-hooks'
 import GraphqlClient from './src/graphql/graphql-client'
@@ -14,7 +13,7 @@ const ApolloApp = () => (
 	<SafeAreaProvider>
 		<AppearanceProvider>
 			<ApolloProvider client={GraphqlClient}>
-				<Main />
+				<App />
 			</ApolloProvider>
 		</AppearanceProvider>
 	</SafeAreaProvider>

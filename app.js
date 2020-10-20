@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Provider } from 'react-redux'
+import { Provider as ReduxProvider } from 'react-redux'
 import { StatusBar } from 'react-native'
+import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper'
 import { ApplicationProvider } from 'react-native-ui-kitten'
 import { mapping, light as lightTheme } from '@eva-design/eva'
 
@@ -77,23 +78,29 @@ const App = () => {
 		}
 
 		addReadArticles()
-
 	}, [])
 
 	return (
-		<ApplicationProvider mapping={mapping} theme={lightTheme}>
-			<Provider store={store}>
-				<StatusBar barStyle="light-content" />
-				<ErrorBoundary>
-					{(loading && (
-						<AppLayout>
-							<CircularSpinner />
-						</AppLayout>
-					)) ||
-						loadAppContainer(article, clicked, coronaNotif)}
-				</ErrorBoundary>
-			</Provider>
-		</ApplicationProvider>
+		<PaperProvider
+			theme={{
+				...DefaultTheme,
+				colors: { ...DefaultTheme.colors, primary: '#1ba1f2' },
+			}}
+		>
+			<ApplicationProvider mapping={mapping} theme={lightTheme}>
+				<ReduxProvider store={store}>
+					<StatusBar barStyle="light-content" />
+					<ErrorBoundary>
+						{(loading && (
+							<AppLayout>
+								<CircularSpinner />
+							</AppLayout>
+						)) ||
+							loadAppContainer(article, clicked, coronaNotif)}
+					</ErrorBoundary>
+				</ReduxProvider>
+			</ApplicationProvider>
+		</PaperProvider>
 	)
 }
 

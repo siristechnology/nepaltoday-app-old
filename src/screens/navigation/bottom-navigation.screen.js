@@ -1,7 +1,10 @@
 import React from 'react'
+
 import FontAwesome from 'react-native-vector-icons/FontAwesome5'
 import SimpleLine from 'react-native-vector-icons/SimpleLineIcons'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 
 import HomeScreen from '../home-screen/home.screen'
 import TwitterScreen from '../twitter-screen/twitter.screen'
@@ -10,7 +13,7 @@ import CoronaScreen from '../corona-screen/corona.screen'
 import TrendingScreen from './../trending-screen/trending.screen'
 import RadioScreen from './../radio-screen/radio.screen'
 
-const Tab = createBottomTabNavigator()
+const Tab = createMaterialBottomTabNavigator()
 
 export const BottomTabScreen = ({ route }) => {
 	return (
@@ -25,7 +28,7 @@ export const BottomTabScreen = ({ route }) => {
 			<Tab.Screen
 				name="Home"
 				component={HomeScreen}
-				options={{ tabBarIcon: ({ color }) => <FontAwesome name={'home'} size={25} color={color} /> }}
+				options={{ tabBarIcon: ({ color }) => <MaterialCommunityIcons name={'home'} size={25} color={color} /> }}
 			/>
 			<Tab.Screen
 				name="Headline"
