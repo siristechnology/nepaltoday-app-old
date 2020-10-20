@@ -8,7 +8,7 @@ import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
 import crashlytics from '@react-native-firebase/crashlytics'
 import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
-import { HeadlineComponent } from './components/headline.component'
+import HeadlineComponent from './components/headline.component'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')

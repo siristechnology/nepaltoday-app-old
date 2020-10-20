@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Surface, Text, Avatar, useTheme } from 'react-native-paper'
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 import color from 'color'
 

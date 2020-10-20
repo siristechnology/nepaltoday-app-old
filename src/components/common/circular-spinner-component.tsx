@@ -1,11 +1,11 @@
 import React from 'react'
-import { StyleSheet } from 'react-native'
-import { Layout, Spinner } from 'react-native-ui-kitten/ui'
+import { View, StyleSheet } from 'react-native'
+import { ActivityIndicator, Colors } from 'react-native-paper'
 
 export const CircularSpinner = () => (
-	<Layout style={styles.container}>
-		<Spinner style={styles.spinner} />
-	</Layout>
+	<View style={styles.container}>
+		<ActivityIndicator animating={true} color={Colors.red800} />
+	</View>
 )
 
 const styles = StyleSheet.create({

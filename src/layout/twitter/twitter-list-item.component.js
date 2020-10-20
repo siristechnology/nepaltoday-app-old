@@ -1,15 +1,14 @@
 import React from 'react'
-import { View, TouchableOpacity, Linking } from 'react-native'
-import { Avatar, Text } from 'react-native-ui-kitten/ui'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { View, Text, TouchableOpacity, Linking, StyleSheet } from 'react-native'
+import { Avatar } from 'react-native-paper'
 
 import { textStyle } from '../../components/common'
 import { ArticleActivityBar } from '../../components/articles'
 import { ClockIconOutline } from '../../assets/icons'
 import { getRelativeTime } from '../../helper/time'
 
-const TwitterListItemComponent = (props) => {
-	const { themedStyle, tweet } = props
+const TwitterListItem = (props) => {
+	const { tweet } = props
 
 	const handleTwitterHandlePress = () => {
 		const handle = tweet.handle
@@ -23,7 +22,7 @@ const TwitterListItemComponent = (props) => {
 		<View style={[themedStyle.container]}>
 			<View style={themedStyle.tweetWrapper}>
 				<TouchableOpacity onPress={handleTwitterHandlePress} style={themedStyle.leftWrapper} activeOpacity={0.8}>
-					<Avatar source={{ uri: tweet.profileImage }} style={themedStyle.avatar} size="giant" />
+					<Avatar.Image source={{ uri: tweet.profileImage }} style={themedStyle.avatar} size="giant" />
 				</TouchableOpacity>
 				<View style={themedStyle.rightWrapper}>
 					<View style={themedStyle.headerWrapper}>
@@ -49,7 +48,7 @@ const TwitterListItemComponent = (props) => {
 	)
 }
 
-export const TwitterListItem = withStyles(TwitterListItemComponent, (theme) => ({
+const themedStyle = StyleSheet.create({
 	container: {
 		marginVertical: 0.5,
 		backgroundColor: '#FFFFFF',
@@ -102,6 +101,8 @@ export const TwitterListItem = withStyles(TwitterListItemComponent, (theme) => (
 		width: 12,
 		height: 12,
 		marginBottom: -1,
-		tintColor: theme['text-hint-color'],
+		// tintColor: theme['text-hint-color'],
 	},
-}))
+})
+
+export default TwitterListItem

@@ -1,7 +1,6 @@
 import React from 'react'
-import { ImageBackground, View, Share } from 'react-native'
-import { ThemedComponentProps, ThemeType, withStyles } from 'react-native-ui-kitten/theme'
-import { Avatar, Text, Button } from 'react-native-ui-kitten/ui'
+import { ImageBackground, View, Share, Text, Button, StyleSheet } from 'react-native'
+import { Avatar } from 'react-native-paper'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
 import { np } from '../../../lang/np'
@@ -16,11 +15,11 @@ interface ComponentProps {
 	navigation: any
 }
 
-export type ArticleDetailComponentProps = ThemedComponentProps & ComponentProps
+export type ArticleDetailComponentProps = ComponentProps
 
-class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentProps> {
+class ArticleDetail extends React.PureComponent<ArticleDetailComponentProps> {
 	public render(): React.ReactNode {
-		const { themedStyle, article } = this.props
+		const { article } = this.props
 		const { READ_MORE } = np.public
 		const BackIcon = (
 			<AntDesign
@@ -57,7 +56,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 						source={{ uri: article.imageLink }}
 						imageStyle={{ resizeMode: (article.category == 'cartoon' && 'stretch') || 'cover' }}
 					>
-						<Avatar style={themedStyle.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />
+						<Avatar.Image style={themedStyle.authorPhoto} size="large" source={{ uri: article.source.logoLink }} />
 					</ImageBackground>
 
 					{(article.category != 'cartoon' && (
@@ -127,13 +126,13 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 	}
 }
 
-export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeType) => ({
+const themedStyle = StyleSheet.create({
 	articleContainerView: {
 		flex: 1,
 	},
 	container: {
 		flex: 1,
-		backgroundColor: theme['background-basic-color-1'],
+		// backgroundColor: theme['background-basic-color-1'],
 	},
 	detailsContainer: {
 		paddingHorizontal: 24,
@@ -155,8 +154,8 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 		bottom: -32,
 		margin: 0,
 		borderWidth: 2,
-		backgroundColor: theme['background-basic-color-1'],
-		borderColor: theme['border-basic-color-4'],
+		// backgroundColor: theme['background-basic-color-1'],
+		// borderColor: theme['border-basic-color-4'],
 	},
 	titleLabel: {
 		marginTop: 30,
@@ -179,7 +178,7 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 		width: 13,
 		height: 13,
 		marginBottom: 2,
-		tintColor: theme['text-hint-color'],
+		// tintColor: theme['text-hint-color'],
 	},
 	dateLabel: {
 		marginLeft: 4,
@@ -205,4 +204,6 @@ export const ArticleDetail = withStyles(ArticleDetailComponent, (theme: ThemeTyp
 		alignItems: 'center',
 		marginVertical: 7,
 	},
-}))
+})
+
+export default ArticleDetail

@@ -1,32 +1,25 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, RefreshControl } from 'react-native'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { FlatList, RefreshControl, StyleSheet } from 'react-native'
 import { useScrollToTop } from '@react-navigation/native'
 
 import { ArticleListItem } from './article.component'
 import { getReadArticles } from '../../../../services/asyncStorageService'
 
-const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh, headerComponent }) => {
-	
+export const ArticleList = React.memo(({ articles, onItemPress, refreshing, handleRefresh, headerComponent }) => {
 	const [readArticles, setReadArticles] = useState([])
 
 	useEffect(() => {
-		getReadArticles().then(res=>{
+		getReadArticles().then((res) => {
 			setReadArticles(res)
-		})		
-	},[])
-	
+		})
+	}, [])
+
 	const _onItemPress = (article) => {
 		onItemPress(article)
 	}
 
 	const renderItem = ({ item, index }) => {
-		return <ArticleListItem 
-			isRead={readArticles.includes(item._id)}
-			style={themedStyle.item} 
-			article={item} 
-			onPress={() => _onItemPress(item)} 
-		/>
+		return <ArticleListItem isRead={readArticles.includes(item._id)} style={themedStyle.item} article={item} onPress={() => _onItemPress(item)} />
 	}
 
 	const ref = React.useRef(null)
@@ -45,16 +38,16 @@ const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, r
 	)
 })
 
-export const ArticleList = withStyles(ArticleListComponent, (theme) => ({
+const themedStyle = StyleSheet.create({
 	container: {
 		paddingHorizontal: 12,
 		paddingVertical: 4,
-		backgroundColor: theme['background-basic-color-1'],
+		// backgroundColor: theme['background-basic-color-1'],
 	},
 	item: {
 		marginVertical: 4,
-		backgroundColor: theme['background-basic-color-1'],
+		// backgroundColor: theme['background-basic-color-1'],
 		borderBottomWidth: 1,
 		borderBottomColor: '#F5F0F0',
 	},
-}))
+})

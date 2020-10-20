@@ -1,10 +1,9 @@
 import React from 'react'
-import { FlatList, RefreshControl } from 'react-native'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { FlatList, RefreshControl, StyleSheet } from 'react-native'
 import { useScrollToTop } from '@react-navigation/native'
 import { TwitterListItem } from './twitter-list-item.component'
 
-const TwitterListComponent = React.memo(({ tweets, themedStyle, refreshing, handleRefresh, header }) => {
+const TwitterList = React.memo(({ tweets, refreshing, handleRefresh, header }) => {
 	const renderItem = (info) => {
 		return <TwitterListItem style={themedStyle.item} tweet={info.item} />
 	}
@@ -25,12 +24,14 @@ const TwitterListComponent = React.memo(({ tweets, themedStyle, refreshing, hand
 	)
 })
 
-export const TwitterList = withStyles(TwitterListComponent, (theme) => ({
-	container: {
-		backgroundColor: theme['background-basic-color-4'],
-	},
-	item: {
-		marginVertical: 8,
-		backgroundColor: theme['background-basic-color-1'],
-	},
-}))
+const themedStyle = StyleSheet.create({
+	// container: {
+	// 	backgroundColor: theme['background-basic-color-4'],
+	// },
+	// item: {
+	// 	marginVertical: 8,
+	// 	backgroundColor: theme['background-basic-color-1'],
+	// },
+})
+
+export default TwitterList

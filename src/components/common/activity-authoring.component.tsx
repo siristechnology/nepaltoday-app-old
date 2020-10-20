@@ -1,8 +1,6 @@
 import React from 'react'
-import { ImageSourcePropType, View, ViewProps } from 'react-native'
-import { Text } from 'react-native-ui-kitten/ui'
-import { ThemedComponentProps, ThemeType, withStyles } from 'react-native-ui-kitten/theme'
-import { Avatar } from 'react-native-ui-kitten/ui'
+import { StyleSheet, ImageSourcePropType, View, ViewProps, Text } from 'react-native'
+import { Avatar } from 'react-native-paper'
 import { textStyle } from '../common/style'
 
 interface ComponentProps {
@@ -11,15 +9,15 @@ interface ComponentProps {
 	date: string
 }
 
-export type ActivitiAuthoringProps = ThemedComponentProps & ViewProps & ComponentProps
+export type ActivitiAuthoringProps = ViewProps & ComponentProps
 
-class ActivityAuthoringComponent extends React.Component<ActivitiAuthoringProps> {
+export class ActivityAuthoring extends React.Component<ActivitiAuthoringProps> {
 	public render(): React.ReactNode {
-		const { style, themedStyle, photo, name, date, ...restProps } = this.props
+		const { style, photo, name, date, ...restProps } = this.props
 
 		return (
 			<View {...restProps} style={[themedStyle.container, style]}>
-				<Avatar style={themedStyle.authorPhoto} source={photo} />
+				<Avatar.Image source={photo} size={24} style={themedStyle.authorPhoto} />
 				<View style={themedStyle.authorInfoContainer}>
 					<Text style={themedStyle.authorNameLabel}>{name}</Text>
 					<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
@@ -31,7 +29,7 @@ class ActivityAuthoringComponent extends React.Component<ActivitiAuthoringProps>
 	}
 }
 
-export const ActivityAuthoring = withStyles(ActivityAuthoringComponent, (theme: ThemeType) => ({
+const themedStyle = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
 		alignItems: 'center',
@@ -42,9 +40,9 @@ export const ActivityAuthoring = withStyles(ActivityAuthoringComponent, (theme: 
 	authorPhoto: {
 		margin: 0,
 		borderWidth: 2,
-		backgroundColor: theme['background-basic-color-1'],
-		borderColor: theme['border-basic-color-4'],
+		// backgroundColor: theme['background-basic-color-1'],
+		// borderColor: theme['border-basic-color-4'],
 	},
 	authorNameLabel: textStyle.subtitle,
 	dateLabel: textStyle.paragraph,
-}))
+})

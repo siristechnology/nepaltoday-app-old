@@ -1,11 +1,10 @@
 import React from 'react'
-import { FlatList, RefreshControl } from 'react-native'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { FlatList, RefreshControl, StyleSheet } from 'react-native'
 import { useScrollToTop } from '@react-navigation/native'
 
 import { ArticleListItem } from './article-list-item.component'
 
-const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh }) => {
+const ArticleList = React.memo(({ articles, onItemPress, refreshing, handleRefresh }) => {
 	const _onItemPress = (article) => {
 		onItemPress(article)
 	}
@@ -28,14 +27,16 @@ const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, r
 	)
 })
 
-export const ArticleList = withStyles(ArticleListComponent, (theme) => ({
+const themedStyle = StyleSheet.create({
 	container: {
 		paddingHorizontal: 16,
 		paddingVertical: 8,
-		backgroundColor: theme['background-basic-color-4'],
+		// backgroundColor: theme['background-basic-color-4'],
 	},
 	item: {
 		marginVertical: 8,
-		backgroundColor: theme['background-basic-color-1'],
+		// backgroundColor: theme['background-basic-color-1'],
 	},
-}))
+})
+
+export default ArticleList

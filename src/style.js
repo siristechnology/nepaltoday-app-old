@@ -1,6 +1,5 @@
 import styled from 'styled-components/native'
-import { Text } from 'react-native-ui-kitten'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 
 export const MutedText = styled(Text)`
 	font-weight: 200;

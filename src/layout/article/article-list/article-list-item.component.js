@@ -1,21 +1,24 @@
 import React from 'react'
-import { Text } from 'react-native-ui-kitten/ui'
-import { withStyles } from 'react-native-ui-kitten/theme'
-import { ImageBackground, View } from 'react-native'
+import { StyleSheet, ImageBackground, View, Text } from 'react-native'
 
 import { getRelativeTime } from '../../../helper/time'
 import { ArticleActivityBar } from '../../../components/articles'
 import { ActivityAuthoring, textStyle } from '../../../components/common'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const ArticleListItemComponent = React.memo((props) => {
-	const { style, themedStyle, article, isRead, ...restProps } = props
+export const ArticleListItem = React.memo((props) => {
+	const { style, article, isRead, ...restProps } = props
 	const onPress = () => {
 		props.onPress(article)
 	}
 
 	return (
-		<TouchableOpacity activeOpacity={0.8} {...restProps} style={[themedStyle.container, style, isRead && {backgroundColor:'#f5f5f5'}]} onPress={onPress}>
+		<TouchableOpacity
+			activeOpacity={0.8}
+			{...restProps}
+			style={[themedStyle.container, style, isRead && { backgroundColor: '#f5f5f5' }]}
+			onPress={onPress}
+		>
 			<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
 			<ArticleActivityBar style={themedStyle.activityContainer}>
 				<ActivityAuthoring
@@ -24,26 +27,28 @@ const ArticleListItemComponent = React.memo((props) => {
 					date={getRelativeTime(article.createdDate)}
 				/>
 			</ArticleActivityBar>
-			{article.category!='cartoon' && <View style={themedStyle.infoContainer}>
-				<Text style={themedStyle.titleLabel} category="h5">
-					{article.title}
-				</Text>
-				<Text style={themedStyle.descriptionLabel} appearance="hint" category="s1">
-					{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}
-				</Text>
-			</View>}
+			{article.category != 'cartoon' && (
+				<View style={themedStyle.infoContainer}>
+					<Text style={themedStyle.titleLabel} category="h5">
+						{article.title}
+					</Text>
+					<Text style={themedStyle.descriptionLabel} appearance="hint" category="s1">
+						{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}
+					</Text>
+				</View>
+			)}
 		</TouchableOpacity>
 	)
 })
 
-export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => ({
+const themedStyle = StyleSheet.create({
 	container: {
 		borderRadius: 8,
 	},
 	infoContainer: {
 		paddingHorizontal: 16,
 		paddingVertical: 8,
-		marginTop: -12
+		marginTop: -12,
 	},
 	activityContainer: {
 		paddingHorizontal: 16,
@@ -61,4 +66,4 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => (
 		marginTop: 2,
 		...textStyle.subtitle,
 	},
-}))
+})

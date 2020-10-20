@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { RefreshControl, FlatList } from 'react-native'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { RefreshControl, FlatList, StyleSheet } from 'react-native'
 import { useScrollToTop } from '@react-navigation/native'
 import { ArticleListItem } from '../../article/article-list/article-list-item.component'
 import { getReadArticles } from '../../../services/asyncStorageService'
 
-const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh }) => {
-	
+const HeadlineList = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh }) => {
 	const [readArticles, setReadArticles] = useState([])
 
 	useEffect(() => {
-		getReadArticles().then(res=>{
+		getReadArticles().then((res) => {
 			setReadArticles(res)
-		})		
-	},[])
-	
+		})
+	}, [])
+
 	const _onItemPress = (article) => {
 		onItemPress(article)
 	}
 
 	const renderItem = (info) => {
-		return <ArticleListItem 
-			isRead={readArticles.includes(info.item._id)}
-			style={themedStyle.item} 
-			article={info.item} 
-			onPress={() => _onItemPress(info.item)} 
-		/>
+		return (
+			<ArticleListItem
+				isRead={readArticles.includes(info.item._id)}
+				style={themedStyle.item}
+				article={info.item}
+				onPress={() => _onItemPress(info.item)}
+			/>
+		)
 	}
 
 	const ref = React.useRef(null)
@@ -33,7 +33,7 @@ const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, 
 
 	return (
 		<FlatList
-			contentContainerStyle={themedStyle.container}
+			contentContainerStyle={themeStyle.container}
 			data={articles}
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}
@@ -43,14 +43,16 @@ const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, 
 	)
 })
 
-export const HeadlineList = withStyles(HeadlineListComponent, (theme) => ({
+const themeStyle = StyleSheet.create({
 	container: {
 		paddingHorizontal: 16,
 		paddingVertical: 8,
-		backgroundColor: theme['background-basic-color-4'],
+		// backgroundColor: theme['background-basic-color-4'],
 	},
 	item: {
 		marginVertical: 8,
-		backgroundColor: theme['background-basic-color-1'],
+		// backgroundColor: theme['background-basic-color-1'],
 	},
-}))
+})
+
+export default HeadlineList

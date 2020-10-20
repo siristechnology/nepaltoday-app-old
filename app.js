@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Provider } from 'react-redux'
 import { StatusBar } from 'react-native'
-import { ApplicationProvider } from 'react-native-ui-kitten'
-import { mapping, light as lightTheme } from '@eva-design/eva'
+// import { PreferencesContext } from './src/context/preferencesContext'
+// import { ApplicationProvider } from 'react-native-ui-kitten'
+// import { mapping, light as lightTheme } from '@eva-design/eva'
+// import { Provider as PaperProvider, DefaultTheme } from 'react-native-paper'
+// import { useColorScheme } from 'react-native-appearance'
 
 import { store } from './src/store'
 import AppContainer from './src/frame/app-container'
@@ -22,6 +25,8 @@ const App = () => {
 	const [loading, setLoading] = useState(false)
 	const [article, setArticle] = useState({})
 	const [coronaNotif, setCoronaNotif] = useState(false)
+	// const colorScheme = useColorScheme()
+	// const [theme, setTheme] = (React.useState < 'light') | ('dark' > (colorScheme === 'dark' ? 'dark' : 'light'))
 
 	const onRegister = (token) => {
 		signInAnonymously().then(() => notificationHandler.register(auth().currentUser, token.token))
@@ -77,23 +82,20 @@ const App = () => {
 		}
 
 		addReadArticles()
-
 	}, [])
 
 	return (
-		<ApplicationProvider mapping={mapping} theme={lightTheme}>
-			<Provider store={store}>
-				<StatusBar barStyle="light-content" />
-				<ErrorBoundary>
-					{(loading && (
-						<AppLayout>
-							<CircularSpinner />
-						</AppLayout>
-					)) ||
-						loadAppContainer(article, clicked, coronaNotif)}
-				</ErrorBoundary>
-			</Provider>
-		</ApplicationProvider>
+		<Provider store={store}>
+			<StatusBar barStyle="light-content" />
+			<ErrorBoundary>
+				{(loading && (
+					<AppLayout>
+						<CircularSpinner />
+					</AppLayout>
+				)) ||
+					loadAppContainer(article, clicked, coronaNotif)}
+			</ErrorBoundary>
+		</Provider>
 	)
 }
 

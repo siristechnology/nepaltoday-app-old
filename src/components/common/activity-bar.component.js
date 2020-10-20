@@ -1,9 +1,8 @@
 import React from 'react'
-import { View } from 'react-native'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { StyleSheet, View } from 'react-native'
 
-const ActivityBarComponent = (props) => {
-	const { style, themedStyle, children, ...restProps } = props
+export const ActivityBar = (props) => {
+	const { style, children, ...restProps } = props
 
 	return (
 		<View style={[themedStyle.container, style]} {...restProps}>
@@ -12,10 +11,10 @@ const ActivityBarComponent = (props) => {
 	)
 }
 
-export const ActivityBar = withStyles(ActivityBarComponent, (theme) => ({
+const themedStyle = StyleSheet.create({
 	container: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
-}))
+})

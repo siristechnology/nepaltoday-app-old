@@ -1,15 +1,13 @@
 import React from 'react'
-import { Text } from 'react-native-ui-kitten/ui'
-import { withStyles } from 'react-native-ui-kitten/theme'
-import { ImageBackground, View } from 'react-native'
+import { ImageBackground, View, Text, StyleSheet } from 'react-native'
 
 import { getRelativeTime } from '../../../helper/time'
 import { ArticleActivityBar } from '../../../components/articles'
 import { ActivityAuthoring, textStyle } from '../../../components/common'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-const HeadlineItemComponent = React.memo((props) => {
-	const { style, themedStyle, article, ...restProps } = props
+const HeadlineComponent = React.memo((props) => {
+	const { style, article, ...restProps } = props
 	const onPress = () => {
 		props.onPress(article)
 	}
@@ -36,7 +34,7 @@ const HeadlineItemComponent = React.memo((props) => {
 	)
 })
 
-export const HeadlineComponent = withStyles(HeadlineItemComponent, (theme) => ({
+const themedStyle = StyleSheet.create({
 	container: {
 		borderRadius: 8,
 	},
@@ -63,4 +61,6 @@ export const HeadlineComponent = withStyles(HeadlineItemComponent, (theme) => ({
 		marginTop: 2,
 		...textStyle.subtitle,
 	},
-}))
+})
+
+export default HeadlineComponent

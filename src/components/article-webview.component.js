@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AppState, StyleSheet, View } from 'react-native'
-import { Layout, Spinner } from 'react-native-ui-kitten'
+import { ActivityIndicator, Colors } from 'react-native-paper'
 import { WebView } from 'react-native-webview'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 
@@ -37,9 +37,9 @@ export const ArticleWebviewComponent = ({ navigation, route }) => {
 				<View style={{ paddingLeft: 10 }}>{BackIcon}</View>
 				<WebView
 					renderLoading={() => (
-						<Layout style={styles.container}>
-							<Spinner />
-						</Layout>
+						<View style={styles.container}>
+							<ActivityIndicator animating={true} color={Colors.red800} />
+						</View>
 					)}
 					mediaPlaybackRequiresUserAction={true}
 					mixedContentMode="always"

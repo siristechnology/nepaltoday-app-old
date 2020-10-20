@@ -1,22 +1,21 @@
 import React from 'react'
-import { View, TouchableOpacity, ImageBackground } from 'react-native'
-import { Avatar, Text } from 'react-native-ui-kitten/ui'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { View, TouchableOpacity, ImageBackground, Text, StyleSheet } from 'react-native'
+import { Avatar } from 'react-native-paper'
 
 import { textStyle } from '../../../../components/common'
 import { ArticleActivityBar } from '../../../../components/articles'
 import { ClockIconOutline } from '../../../../assets/icons'
 import { getRelativeTime } from '../../../../helper/time'
 
-const ArticleListItemCompoent = (props) => {
-	const { article, themedStyle, style, isRead } = props
+export const ArticleListItem = (props) => {
+	const { article, style, isRead } = props
 	const onPress = () => {
 		props.onPress(article)
 	}
 
 	return (
-		<TouchableOpacity onPress={onPress} activeOpacity={0.8} style={[themedStyle.container, style, isRead && {backgroundColor:'#F5F5F5'}]}>
-			<View style={[themedStyle.container, isRead && {backgroundColor: '#F5F5F5'}]}>
+		<TouchableOpacity onPress={onPress} activeOpacity={0.8} style={themedStyle.container}>
+			<View style={[themedStyle.container, isRead && { backgroundColor: '#F5F5F5' }]}>
 				<View style={themedStyle.articleWrapper}>
 					<View style={themedStyle.leftWrapper}>
 						<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
@@ -32,7 +31,7 @@ const ArticleListItemCompoent = (props) => {
 				</View>
 				<ArticleActivityBar style={themedStyle.activityBar}>
 					<View style={themedStyle.activityBarContent}>
-						<Avatar source={{ uri: article.source.logoLink }} size="tiny" />
+						<Avatar.Image source={{ uri: article.source.logoLink }} size="tiny" />
 						<View style={themedStyle.articleSourceName}>
 							<Text appearance="hint">{article.source.name}</Text>
 						</View>
@@ -49,7 +48,7 @@ const ArticleListItemCompoent = (props) => {
 	)
 }
 
-export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
+const themedStyle = StyleSheet.create({
 	container: {
 		marginVertical: 4,
 		backgroundColor: '#FFFFFF',
@@ -101,6 +100,6 @@ export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 		width: 12,
 		height: 12,
 		marginBottom: -1,
-		tintColor: theme['text-hint-color'],
+		// tintColor: theme['text-hint-color'],
 	},
-}))
+})
