@@ -1,7 +1,6 @@
-// import { MaterialCommunityIcons } from '@expo/vector-icons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import { DrawerContentComponentProps, DrawerContentOptions, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
+import { DrawerContentComponentProps, DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer'
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Avatar, Caption, Drawer, Paragraph, Switch, Text, Title, TouchableRipple, useTheme } from 'react-native-paper'
@@ -13,7 +12,7 @@ type Props = DrawerContentComponentProps<DrawerNavigationProp>
 
 export function DrawerContent(props: Props) {
 	const paperTheme = useTheme()
-	const { rtl, theme, toggleRTL, toggleTheme } = React.useContext(PreferencesContext)
+	const { theme, toggleTheme } = React.useContext(PreferencesContext)
 
 	const translateX = Animated.interpolate(props.progress, {
 		inputRange: [0, 0.5, 0.7, 0.8, 1],
@@ -85,12 +84,10 @@ export function DrawerContent(props: Props) {
 							</View>
 						</View>
 					</TouchableRipple>
-					<TouchableRipple onPress={toggleRTL}>
+					<TouchableRipple>
 						<View style={styles.preference}>
 							<Text>RTL</Text>
-							<View pointerEvents="none">
-								<Switch value={rtl === 'right'} />
-							</View>
+							<View pointerEvents="none"></View>
 						</View>
 					</TouchableRipple>
 				</Drawer.Section>
