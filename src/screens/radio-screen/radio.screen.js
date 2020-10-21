@@ -118,6 +118,10 @@ const RadioScreen = () => {
         TrackPlayer.addEventListener('remote-previous',() => {
           skipPrevious()
         })
+
+        TrackPlayer.addEventListener('remote-duck',() => {
+          pause()
+        })
       })
     },[])
 

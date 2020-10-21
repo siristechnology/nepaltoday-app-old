@@ -9,7 +9,7 @@ const AllRadio = (props) => {
 
   let toShowList = []
   if(searchText){
-    toShowList = props.allFm && props.allFm.filter(x=> x.title.includes(searchText) || x.province.includes(searchText)) || []
+    toShowList = props.allFm && props.allFm.filter(x=> x.title.toLowerCase().includes(searchText.toLowerCase()) || x.province.toLowerCase().includes(searchText.toLowerCase())) || []
   }else{
     toShowList = props.allFm
   }
