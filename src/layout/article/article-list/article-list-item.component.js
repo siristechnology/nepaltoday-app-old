@@ -14,8 +14,6 @@ const ArticleListItemComponent = React.memo((props) => {
 		props.onPress(article)
 	}
 
-	console.log(index)
-
 	return (
 		<TouchableOpacity testID={'headlineArticle'+index} activeOpacity={0.8} {...restProps} style={[themedStyle.container, style, isRead && {backgroundColor:'#f5f5f5'}]} onPress={onPress}>
 			<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />

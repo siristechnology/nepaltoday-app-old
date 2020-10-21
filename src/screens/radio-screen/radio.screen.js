@@ -36,7 +36,7 @@ const RadioScreen = () => {
 
     const [isPlaying, setIsPlaying] = useState(false);
 
-    const [currentChannelId, setCurrentChannelId] = useState({})
+    const [currentChannelId, setCurrentChannelId] = useState('')
 
     const GET_FAVOURITE_FM_QUERY = gql`
         query fmScreenQuery{
@@ -82,6 +82,7 @@ const RadioScreen = () => {
 
     const stop = async () => {
       await TrackPlayer.stop()
+      setCurrentChannelId('')
     }
 
     const skipNext = async () => {
@@ -169,25 +170,7 @@ const RadioScreen = () => {
         </View>
         <Tabs tabBarUnderlineStyle={{ backgroundColor: '#ff0000' }}>
           <Tab
-            style={{ flex: 1, marginBottom: 125 }}
-            heading="Favorite FM"
-            tabStyle={{ backgroundColor: '#fff' }}
-            activeTabStyle={{ backgroundColor: '#fff' }}
-            textStyle={{ color: '#000' }}
-            activeTextStyle={{ color: '#000' }}
-          >
-            <FavoriteRadio 
-              onFMSelect={onFMSelect}
-              initSuccess={isTrackPlayerInit}
-              allFm={fmList}
-              refetchFavorite={refetch}
-              favoriteList={favoriteList}
-              currentChannelId={currentChannelId}
-              isPlaying={isPlaying}
-            />
-          </Tab>
-          <Tab
-            style={{ flex: 1, marginBottom: 67 }}
+            style={{ flex: 1, paddingBottom: currentChannelId && 126 || 60 }}
             heading="All FM"
             tabStyle={{ backgroundColor: '#fff' }}
             activeTabStyle={{ backgroundColor: '#fff' }}
@@ -204,8 +187,26 @@ const RadioScreen = () => {
               isPlaying={isPlaying}
             />
           </Tab>
+          <Tab
+            style={{ flex: 1, marginBottom: currentChannelId && 67 || 0 }}
+            heading="Favorite FM"
+            tabStyle={{ backgroundColor: '#fff' }}
+            activeTabStyle={{ backgroundColor: '#fff' }}
+            textStyle={{ color: '#000' }}
+            activeTextStyle={{ color: '#000' }}
+          >
+            <FavoriteRadio 
+              onFMSelect={onFMSelect}
+              initSuccess={isTrackPlayerInit}
+              allFm={fmList}
+              refetchFavorite={refetch}
+              favoriteList={favoriteList}
+              currentChannelId={currentChannelId}
+              isPlaying={isPlaying}
+            />
+          </Tab>
         </Tabs>
-        <BottomPlayer
+        {currentChannelId && <BottomPlayer
           isPlaying={isPlaying}
           initSuccess={isTrackPlayerInit}
           onSkipPrevious={skipPrevious}
@@ -214,7 +215,7 @@ const RadioScreen = () => {
           onStop={stop}
           onSkipNext={skipNext}
           currentChannel={currentChannel}
-        />
+        /> || <View/>}
       </Container>
     )
 }

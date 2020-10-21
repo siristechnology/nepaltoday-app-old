@@ -3,7 +3,6 @@ import { View, Text, StyleSheet } from 'react-native'
 import { formatCoronaNumber } from '../../../helper/numberFormatter'
 
 const DistrictCard = (props) => {
-	console.log(props)
 	const renderStatView = (text, number, test) => {
 		const formattedValue = formatCoronaNumber(number)
 

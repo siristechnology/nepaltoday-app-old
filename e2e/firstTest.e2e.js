@@ -57,8 +57,8 @@ describe('Example', () => {
 
 	it('should go to fm screen', async () => {
 		await element(by.id('radioScreen')).tap()
-		await element(by.text('All FM')).tap()
-		await element(by.text('Radio Kantipur')).tap()
+		await element(by.id('header1')).tap()
+		await element(by.id('content11')).tap()
 		await expect(element(by.id('bottomPlayer'))).toBeVisible()
 		await element(by.id('stopPlayer')).tap()
 	})

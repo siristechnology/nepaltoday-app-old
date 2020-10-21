@@ -22,6 +22,7 @@ const RadioCard = (props) => {
             style={styles.cardContainer}
             onPress={()=>props.onFMSelect(channel, fmList)}
             disabled={!props.initSuccess}
+            testID={props.index && props.index || ''}
         >
             <Image
                 source={{uri: channel.artwork}}
@@ -35,13 +36,16 @@ const RadioCard = (props) => {
                     {channel.artist}
                 </Text>
             </View>
+            <TouchableOpacity 
+                style={styles.favButton}
+                onPress={()=>onIconPress(isFavorite, channel)}
+            >
             <FAIcon
                 name={isFavorite && "heart" || "heart-o"}
                 color="#f44336"
                 size={23}
-                style={{position:'absolute',right:10}}
-                onPress={()=>onIconPress(isFavorite, channel)}
             />
+            </TouchableOpacity>
         </TouchableOpacity>
     )
 }
@@ -58,8 +62,8 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     imageStyle: {
-        width: 80,
-        height: 80
+        width: 55,
+        height: 55
     },
     textView:{
        marginLeft:12
@@ -72,6 +76,14 @@ const styles = StyleSheet.create({
         marginTop:5,
         fontSize:13,
         opacity: 0.7
+    },
+    favButton:{
+        position:'absolute',
+        right:10,
+        width:50,
+        height:50,
+        justifyContent:'center',
+        alignItems:'center'
     }
 })
 

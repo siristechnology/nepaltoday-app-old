@@ -22,4 +22,8 @@ const fetchfromAsync = () => {
 	})
 }
 
-export { storetoAsync, fetchfromAsync }
+const removeAsync = () => {
+	AsyncStorage.removeItem(ASYNC_NAME)
+}
+
+export { storetoAsync, fetchfromAsync, removeAsync }
