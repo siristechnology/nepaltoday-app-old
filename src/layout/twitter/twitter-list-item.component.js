@@ -9,7 +9,7 @@ import { ClockIconOutline } from '../../assets/icons'
 import { getRelativeTime } from '../../helper/time'
 
 const TwitterListItemComponent = (props) => {
-	const { themedStyle, tweet } = props
+	const { themedStyle, tweet, index } = props
 
 	const handleTwitterHandlePress = () => {
 		const handle = tweet.handle
@@ -21,7 +21,7 @@ const TwitterListItemComponent = (props) => {
 
 	return (
 		<View style={[themedStyle.container]}>
-			<View style={themedStyle.tweetWrapper}>
+			<View testID={"twitter"+index} style={themedStyle.tweetWrapper}>
 				<TouchableOpacity onPress={handleTwitterHandlePress} style={themedStyle.leftWrapper} activeOpacity={0.8}>
 					<Avatar source={{ uri: tweet.profileImage }} style={themedStyle.avatar} size="giant" />
 				</TouchableOpacity>

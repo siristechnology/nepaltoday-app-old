@@ -61,6 +61,7 @@ const HeadlineScreen = ({ navigation }) => {
 
 			return (
 				<Tab
+					// testID={"category"+idx}
 					style={{ flex: 1 }}
 					heading={localTabName}
 					key={idx}

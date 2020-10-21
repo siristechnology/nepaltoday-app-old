@@ -3,23 +3,23 @@ import { View, Text, StyleSheet } from 'react-native'
 import { formatCoronaNumber } from '../../../helper/numberFormatter'
 
 const DistrictCard = (props) => {
-	const renderStatView = (text, number) => {
+	const renderStatView = (text, number, test) => {
 		const formattedValue = formatCoronaNumber(number)
 
 		return (
 			<View style={styles.statView}>
-				<Text style={styles.valueText}>{formattedValue}</Text>
+				<Text testID={test+props.stat.name} style={styles.valueText}>{formattedValue}</Text>
 				<Text style={styles.valueTitle}>{text}</Text>
 			</View>
 		)
 	}
 
 	return (
-		<View style={styles.container}>
+		<View testID={"district"+props.index} style={styles.container}>
 			<Text style={styles.title}>{props.stat.nepaliName}</Text>
 			<View style={styles.statContainer}>
-				{renderStatView('Total Cases', props.stat.totalCases)}
-				{renderStatView('New Cases', props.stat.newCases)}
+				{renderStatView('Total Cases', props.stat.totalCases, 'districtTotal')}
+				{renderStatView('New Cases', props.stat.newCases, 'districtNew')}
 			</View>
 			<View style={styles.divider} />
 		</View>

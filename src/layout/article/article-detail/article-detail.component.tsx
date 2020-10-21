@@ -20,7 +20,7 @@ export type ArticleDetailComponentProps = ThemedComponentProps & ComponentProps
 
 class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentProps> {
 	public render(): React.ReactNode {
-		const { themedStyle, article } = this.props
+		const { themedStyle, article, index } = this.props
 		const { READ_MORE } = np.public
 		const BackIcon = (
 			<AntDesign
@@ -62,7 +62,7 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 
 					{(article.category != 'cartoon' && (
 						<View style={themedStyle.detailsContainer}>
-							<Text style={themedStyle.titleLabel} category="h5">
+							<Text testID={"articleDetail"+index} style={themedStyle.titleLabel} category="h5">
 								{article.title}
 							</Text>
 							<ArticleActivityBar>

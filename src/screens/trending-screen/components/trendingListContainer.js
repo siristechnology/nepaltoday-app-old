@@ -20,14 +20,14 @@ const TrendingListContainer = (props) => {
 		setShowDetail(false)
 	}
 
-	const renderCategory = (info) => {
+	const renderCategory = ({item, index}) => {
 		return (
-			<View style={styles.catCard}>
+			<View testID={"category"+index} style={styles.catCard}>
 				<View style={styles.textView}>
-					<Text style={styles.textStyle}>{info.item.category}</Text>
+					<Text style={styles.textStyle}>{item.category}</Text>
 				</View>
-				{info.item.counts.map((iItem, i) => (
-					<View key={i}>
+				{item.counts.map((iItem, i) => (
+					<View testID={"category"+index+""+i} key={i}>
 						<TrendingCard onCardClick={onCardClick} trending={iItem} />
 					</View>
 				))}

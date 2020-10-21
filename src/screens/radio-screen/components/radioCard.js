@@ -22,6 +22,7 @@ const RadioCard = (props) => {
             style={styles.cardContainer}
             onPress={()=>props.onFMSelect(channel, fmList)}
             disabled={!props.initSuccess}
+            testID={props.index && props.index || ''}
         >
             <Image
                 source={{uri: channel.artwork}}

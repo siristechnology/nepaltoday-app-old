@@ -22,6 +22,7 @@ const CoronaScreen = () => {
 					<DistrictList />
 				</Tab>
 				<Tab
+					testID="internationalCorona"
 					style={{ flex: 1 }}
 					heading="अन्तर्राष्ट्रिय"
 					tabStyle={{ backgroundColor: '#fff' }}

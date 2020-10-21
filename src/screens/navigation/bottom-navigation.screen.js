@@ -22,7 +22,10 @@ export const BottomTabScreen = ({ route }) => {
 			<Tab.Screen
 				name="Headline"
 				component={HeadlineScreen}
-				options={{ tabBarIcon: ({ color }) => <MaterialCommunityIcons name="newspaper-variant-multiple-outline" size={25} color={color} /> }}
+				options={{ 
+					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="newspaper-variant-multiple-outline" size={25} color={color} />, 
+					tabBarTestID: 'categoryScreen' 
+				}}
 			/>
 			<Tab.Screen
 				name="Corona"
@@ -35,17 +38,26 @@ export const BottomTabScreen = ({ route }) => {
 			<Tab.Screen
 				name="Trending"
 				component={TrendingScreen}
-				options={{ tabBarIcon: ({ color }) => <MaterialCommunityIcons name="trending-up" size={25} color={color} /> }}
+				options={{ 
+					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="trending-up" size={25} color={color} />,
+					tabBarTestID: 'trendingScreen' 
+				}}
 			/>
 			<Tab.Screen
 				name="Twitter"
 				component={TwitterScreen}
-				options={{ tabBarIcon: ({ color }) => <MaterialCommunityIcons name="twitter" size={25} color={color} /> }}
+				options={{ 
+					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="twitter" size={25} color={color} />, 
+					tabBarTestID: 'twitterScreen'
+				}}
 			/>
 			<Tab.Screen
 				name="Radio"
 				component={RadioScreen}
-				options={{ tabBarIcon: ({ color }) => <MaterialCommunityIcons name="radio" size={25} color={color} /> }}
+				options={{ 
+					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="radio" size={25} color={color} />, 
+					tabBarTestID: 'radioScreen'
+				}}
 			/>
 		</Tab.Navigator>
 	)

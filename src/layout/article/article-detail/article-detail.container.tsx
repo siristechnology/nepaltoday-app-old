@@ -32,7 +32,7 @@ export default class ArticleDetailContainer extends React.PureComponent<any, Sta
 			>
 				{slicedArticles.map((iArticle, i) => (
 					<View key={i}>
-						<ArticleDetail article={iArticle} navigation={this.props.navigation} />
+						<ArticleDetail index={i} article={iArticle} navigation={this.props.navigation} />
 					</View>
 				))}
 			</ViewPager>

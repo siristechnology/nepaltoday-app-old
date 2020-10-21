@@ -46,8 +46,9 @@ const RadioListContainer = (props) => {
     const sections = formatSections()
 
     const renderHeader = section => {
+        let index = sections.indexOf(section)
         return (
-            <View style={styles.provinceView}>
+            <View style={styles.provinceView} testID={"header"+index}>
                 <Text style={styles.provinceText}>{section.title}</Text>
                 {activeSections[0]==sections.indexOf(section) && (
                     <Icon
@@ -63,9 +64,11 @@ const RadioListContainer = (props) => {
     }
 
     const renderContent = section => {
+        let index = sections.indexOf(section)
         return (
             section.content.map((fm,j)=>(
                 <RadioCard 
+                    index={"content"+index+""+j}
                     key={j} 
                     isFavorite={checkFavorite(fm)}
                     channel={fm} 

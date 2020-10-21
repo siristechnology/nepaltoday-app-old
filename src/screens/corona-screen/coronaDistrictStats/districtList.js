@@ -37,7 +37,7 @@ const DistrictList = () => {
 	const lastUpdated = data && data.getDistrictCoronaStats && getRelativeTime(data.getDistrictCoronaStats.createdDate)
 
 	const renderItem = ({ item, index }) => {
-		return <DistrictCard key={index} stat={item} />
+		return <DistrictCard index={index} stat={item} />
 	}
 
 	if (loading) {
