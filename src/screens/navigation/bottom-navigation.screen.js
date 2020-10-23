@@ -1,6 +1,8 @@
 import React from 'react'
+import color from 'color'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
+import { useTheme } from 'react-native-paper'
 
 import HomeScreen from '../home-screen/home.screen'
 import TwitterScreen from '../twitter-screen/twitter.screen'
@@ -12,8 +14,20 @@ import RadioScreen from './../radio-screen/radio.screen'
 const Tab = createMaterialBottomTabNavigator()
 
 export const BottomTabScreen = ({ route }) => {
+	const theme = useTheme()
+	const tabBarColor = theme.colors.surface
+
 	return (
-		<Tab.Navigator initialRouteName={route.params.initialScreenName} shifting={false} labeled={false}>
+		<Tab.Navigator
+			initialRouteName={route.params.initialScreenName}
+			backBehavior="initialRoute"
+			shifting={false}
+			labeled={false}
+			activeColor={theme.colors.primary}
+			inactiveColor={color(theme.colors.text).alpha(0.6).rgb().string()}
+			sceneAnimationEnabled={false}
+			barStyle={{ backgroundColor: tabBarColor }}
+		>
 			<Tab.Screen
 				name="Home"
 				component={HomeScreen}
@@ -22,9 +36,9 @@ export const BottomTabScreen = ({ route }) => {
 			<Tab.Screen
 				name="Headline"
 				component={HeadlineScreen}
-				options={{ 
-					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="newspaper-variant-multiple-outline" size={25} color={color} />, 
-					tabBarTestID: 'categoryScreen' 
+				options={{
+					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="newspaper-variant-multiple-outline" size={25} color={color} />,
+					tabBarTestID: 'categoryScreen',
 				}}
 			/>
 			<Tab.Screen
@@ -38,25 +52,25 @@ export const BottomTabScreen = ({ route }) => {
 			<Tab.Screen
 				name="Trending"
 				component={TrendingScreen}
-				options={{ 
+				options={{
 					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="trending-up" size={25} color={color} />,
-					tabBarTestID: 'trendingScreen' 
+					tabBarTestID: 'trendingScreen',
 				}}
 			/>
 			<Tab.Screen
 				name="Twitter"
 				component={TwitterScreen}
-				options={{ 
-					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="twitter" size={25} color={color} />, 
-					tabBarTestID: 'twitterScreen'
+				options={{
+					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="twitter" size={25} color={color} />,
+					tabBarTestID: 'twitterScreen',
 				}}
 			/>
 			<Tab.Screen
 				name="Radio"
 				component={RadioScreen}
-				options={{ 
-					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="radio" size={25} color={color} />, 
-					tabBarTestID: 'radioScreen'
+				options={{
+					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="radio" size={25} color={color} />,
+					tabBarTestID: 'radioScreen',
 				}}
 			/>
 		</Tab.Navigator>

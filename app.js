@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Provider } from 'react-redux'
+import { Provider as ReduxProvider } from 'react-redux'
 import { StatusBar } from 'react-native'
 import { ApplicationProvider } from 'react-native-ui-kitten'
 import { mapping, light as lightTheme } from '@eva-design/eva'
@@ -77,12 +77,11 @@ const App = () => {
 		}
 
 		addReadArticles()
-
 	}, [])
 
 	return (
 		<ApplicationProvider mapping={mapping} theme={lightTheme}>
-			<Provider store={store}>
+			<ReduxProvider store={store}>
 				<StatusBar barStyle="light-content" />
 				<ErrorBoundary>
 					{(loading && (
@@ -92,7 +91,7 @@ const App = () => {
 					)) ||
 						loadAppContainer(article, clicked, coronaNotif)}
 				</ErrorBoundary>
-			</Provider>
+			</ReduxProvider>
 		</ApplicationProvider>
 	)
 }
