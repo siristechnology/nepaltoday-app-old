@@ -3,7 +3,7 @@
 PACKAGE_NAME="com.siristechnology.nepaltodayapp"
 APP_NAME="NepalToday"
 TIME_STAMP=$(date +%s)
-IC_LAUNCHER_BACKGROUND="#e7f3ff"
+IC_LAUNCHER_BACKGROUND="#E7F3FF"
 BUILD_GRADLE=./android/app/build.gradle
 ANDROID_STRINGS_FILE=./android/app/src/main/res/values/strings.xml
 ANDROID_MANIFEST_FILE=./android/app/src/main/AndroidManifest.xml
