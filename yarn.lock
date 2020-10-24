@@ -1924,22 +1924,12 @@
   resolved "https://registry.yarnpkg.com/@react-native-community/netinfo/-/netinfo-5.9.7.tgz#769c6b306ea6bbaa1c4a3fffdd183d0cfc30ed7e"
   integrity sha512-NAkkT68oF+M9o6El2xeUqZK7magPjG/tAcEbvCbqyhlh3yElKWnI1e1vpbVvFXzTefy67FwYFWOJqBN6U7Mnkg==
 
-"@react-native-community/push-notification-ios@^1.4.0", "@react-native-community/push-notification-ios@^1.5.0":
+"@react-native-community/push-notification-ios@^1.4.0":
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@react-native-community/push-notification-ios/-/push-notification-ios-1.5.0.tgz#b41802b58d2388c8cb76cd219bbeec9ac9a4c06d"
   integrity sha512-88Uwu6S8oRVnuMfBMGN+MtTyUjiVmMKwfObYrPmm+b2E2Aqk0WlZ4clfECukG8QIzv1pfELJZ5uZMVTYMI6klg==
   dependencies:
     invariant "^2.2.4"
-
-"@react-native-community/slider@^3.0.3":
-  version "3.0.3"
-  resolved "https://registry.yarnpkg.com/@react-native-community/slider/-/slider-3.0.3.tgz#830167fd757ba70ac638747ba3169b2dbae60330"
-  integrity sha512-8IeHfDwJ9/CTUwFs6x90VlobV3BfuPgNLjTgC6dRZovfCWigaZwVNIFFJnHBakK3pW2xErAPwhdvNR4JeNoYbw==
-
-"@react-native-community/toolbar-android@0.1.0-rc.2":
-  version "0.1.0-rc.2"
-  resolved "https://registry.yarnpkg.com/@react-native-community/toolbar-android/-/toolbar-android-0.1.0-rc.2.tgz#86cae655836afacc52d4063062cc59837d1a8640"
-  integrity sha512-UCblqsitOcoYxVc6QzcaqCKogeRnePPMw7cbGvW5GI/GXIwQel8Kge9d910W3MUPUzw3pFzhIZVug6U3W067Pg==
 
 "@react-native-community/viewpager@^4.0.0":
   version "4.1.6"
@@ -8467,13 +8457,6 @@ react-native-push-notification@^5.1.1:
   dependencies:
     "@react-native-community/push-notification-ios" "^1.4.0"
 
-react-native-reanimated@^1.13.1:
-  version "1.13.1"
-  resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-1.13.1.tgz#c370c32cc4d447ae896cb029bb9c6a2f7608c5b4"
-  integrity sha512-3sF46jts9MbktgIasf0sTM8uhOYO5a5Q3YyQ4X1jjSE82n/fY2nW3XTFsLGfLEpK2ir4XSDhQWVgFHazaXZTww==
-  dependencies:
-    fbjs "^1.0.0"
-
 react-native-safe-area-context@^3.1.8:
   version "3.1.8"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.1.8.tgz#7a9883aa0f38f9c77d4bef2b89e4e285bc1024a3"
@@ -8537,10 +8520,10 @@ react-native-vector-icons@^7.0.0, react-native-vector-icons@^7.1.0:
     prop-types "^15.7.2"
     yargs "^15.0.2"
 
-react-native-webview@^10.9.2:
-  version "10.9.2"
-  resolved "https://registry.yarnpkg.com/react-native-webview/-/react-native-webview-10.9.2.tgz#6dbfcfefb0684a6665e346c0eca8040cbdb5fb75"
-  integrity sha512-bEIHmD1uH3M95V8cZf45MWpSV/FdxKcrlOOpmfAO5arbA9Wd4CjrB2BYInYkMlY3SfHmUN9NTfz5HoQpIS6GTQ==
+react-native-webview@^10.9.3:
+  version "10.9.3"
+  resolved "https://devtools.devergage.com:4873/react-native-webview/-/react-native-webview-10.9.3.tgz#4828ce36a85bef038c6b686615ba69269f6ab9f8"
+  integrity sha512-50KVtsgJEdK4S3rzWQBDGosjFDct9O1ve9UWtf6ZX9FE2kLmq1K29aoJ7PL4xo3EusctfoQAf0bhiDx/EaAGNA==
   dependencies:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
