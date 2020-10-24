@@ -21,7 +21,7 @@ const TwitterListItemComponent = (props) => {
 
 	return (
 		<View style={[themedStyle.container]}>
-			<View testID={"twitter"+index} style={themedStyle.tweetWrapper}>
+			<View testID={'twitter' + index} style={themedStyle.tweetWrapper}>
 				<TouchableOpacity onPress={handleTwitterHandlePress} style={themedStyle.leftWrapper} activeOpacity={0.8}>
 					<Avatar source={{ uri: tweet.profileImage }} style={themedStyle.avatar} size="giant" />
 				</TouchableOpacity>
@@ -51,7 +51,7 @@ const TwitterListItemComponent = (props) => {
 
 export const TwitterListItem = withStyles(TwitterListItemComponent, (theme) => ({
 	container: {
-		marginVertical: 0.5,
+		marginVertical: 0.2,
 		backgroundColor: '#FFFFFF',
 	},
 	tweetWrapper: {

@@ -17,6 +17,7 @@ const ApolloApp = () => (
 			<PaperProvider
 				theme={{
 					...DefaultTheme,
+					borderWidth: 0.2,
 					colors: { ...DefaultTheme.colors, primary: '#1ba1f2' },
 				}}
 			>

@@ -5,7 +5,7 @@ const TrendingCard = (props) => {
 	return (
 		<TouchableOpacity activeOpacity={0.8} style={styles.container} onPress={() => props.onCardClick(props.trending)}>
 			<Image source={{ uri: props.trending.image }} style={styles.imageStyle} />
-			<View>
+			<View style={styles.titleWrapper}>
 				<Text style={styles.nameText}>{props.trending.name}</Text>
 				<Text style={styles.handleText}>{props.trending.handle}</Text>
 			</View>
@@ -17,13 +17,18 @@ export default TrendingCard
 
 const styles = StyleSheet.create({
 	container: {
-		borderRadius: 8,
-		padding: 12,
-		margin: 3,
+		borderRadius: 2,
+		padding: 8,
+		margin: 0.5,
 		backgroundColor: '#fff',
 		elevation: 0.9,
 		marginHorizontal: 6,
 		flexDirection: 'row',
+		alignItems: 'center',
+	},
+	titleWrapper: {
+		flexDirection: 'row',
+		flexWrap: 'wrap',
 		alignItems: 'center',
 	},
 	imageStyle: {
@@ -40,5 +45,6 @@ const styles = StyleSheet.create({
 	handleText: {
 		fontSize: 14,
 		opacity: 0.7,
+		marginLeft: 4,
 	},
 })

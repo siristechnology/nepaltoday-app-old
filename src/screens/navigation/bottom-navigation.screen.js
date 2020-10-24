@@ -15,7 +15,6 @@ const Tab = createMaterialBottomTabNavigator()
 
 export const BottomTabScreen = ({ route }) => {
 	const theme = useTheme()
-	const tabBarColor = theme.colors.surface
 
 	return (
 		<Tab.Navigator
@@ -26,7 +25,7 @@ export const BottomTabScreen = ({ route }) => {
 			activeColor={theme.colors.primary}
 			inactiveColor={color(theme.colors.text).alpha(0.6).rgb().string()}
 			sceneAnimationEnabled={false}
-			barStyle={{ backgroundColor: tabBarColor }}
+			barStyle={{ backgroundColor: theme.colors.surface, borderTopWidth: theme.borderWidth, borderTopColor: theme.colors.backdrop }}
 		>
 			<Tab.Screen
 				name="Home"
