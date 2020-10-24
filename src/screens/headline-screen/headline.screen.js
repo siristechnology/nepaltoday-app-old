@@ -35,13 +35,15 @@ const HeadlineScreen = ({ navigation }) => {
 		return <CircularSpinner />
 	}
 
+	const sortedArticles = data.getArticles.sort((a, b) => b.createdDate - a.createdDate)
+
 	const CategoryTabs = ({ articles, navigation }) => {
 		const tabNames = [NEWS, ENTERTAINMENT, SPORTS, CARTOON, BUSINESS, SOCIAL, HEALTH, TECHNOLOGY, SHARE, AGRICULTURE]
 
 		return tabNames.map((tabname, idx) => {
 			const localTabName = getLocalName(tabname)
 
-			const dataArr = articles.filter((a) => a.category === tabname).sort((a, b) => b.createdDate - a.createdDate)
+			const dataArr = articles.filter((a) => a.category === tabname)
 
 			if (dataArr.length <= 0) {
 				return (
@@ -83,7 +85,7 @@ const HeadlineScreen = ({ navigation }) => {
 				tabBarUnderlineStyle={{ backgroundColor: '#ff0000' }}
 				renderTabBar={() => <ScrollableTab tabsContainerStyle={{ backgroundColor: '#fff' }} />}
 			>
-				{CategoryTabs({ articles: data.getArticles, navigation })}
+				{CategoryTabs({ articles: sortedArticles, navigation })}
 				{/* <CategoryTabs articles={data.getArticles} navigation={navigation} /> */}
 			</Tabs>
 		</Container>
