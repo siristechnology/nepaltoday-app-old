@@ -41,7 +41,7 @@ const HeadlineScreen = ({ navigation }) => {
 		return tabNames.map((tabname, idx) => {
 			const localTabName = getLocalName(tabname)
 
-			const dataArr = articles.filter((a) => a.category === tabname)
+			const dataArr = articles.filter((a) => a.category === tabname).sort((a, b) => b.createdDate - a.createdDate)
 
 			if (dataArr.length <= 0) {
 				return (
