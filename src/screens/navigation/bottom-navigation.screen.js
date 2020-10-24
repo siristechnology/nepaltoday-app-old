@@ -25,7 +25,7 @@ export const BottomTabScreen = ({ route }) => {
 			activeColor={theme.colors.primary}
 			inactiveColor={color(theme.colors.text).alpha(0.6).rgb().string()}
 			sceneAnimationEnabled={false}
-			barStyle={{ backgroundColor: theme.colors.surface, borderTopWidth: theme.borderWidth, borderTopColor: theme.colors.backdrop }}
+			barStyle={{ backgroundColor: theme.colors.surface, borderTopWidth: theme.borderWidth, borderTopColor: theme.colors.disabled }}
 		>
 			<Tab.Screen
 				name="Home"
