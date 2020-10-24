@@ -12,7 +12,6 @@ import crashlytics from '@react-native-firebase/crashlytics'
 import auth from '@react-native-firebase/auth'
 import AppLayout from './src/frame/app-layout'
 import { CircularSpinner } from './src/components/common'
-import RNBootSplash from 'react-native-bootsplash'
 import PushNotification from 'react-native-push-notification'
 import { getReadArticles, clearOldArticles } from './src/services/asyncStorageService'
 import readArticlesService from './src/services/readArticles.service'
@@ -60,8 +59,6 @@ const App = () => {
 	}
 
 	useEffect(() => {
-		RNBootSplash.hide()
-
 		const configureNotification = async () => {
 			PushNotification.configure({
 				onRegister: onRegister,

@@ -1,12 +1,14 @@
-import { Text, StyleSheet, View } from 'react-native'
 import React, { useState, useEffect } from 'react'
+import { Text, StyleSheet, View } from 'react-native'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/react-hooks'
+import RNBootSplash from 'react-native-bootsplash'
+import crashlytics from '@react-native-firebase/crashlytics'
+
 import AppLayout from '../../frame/app-layout'
 import { ArticleListContainer } from './components'
 import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
-import crashlytics from '@react-native-firebase/crashlytics'
 import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { HeadlineComponent } from './components/headline.component'
 
@@ -36,6 +38,8 @@ const Home = ({ navigation }) => {
 	}
 
 	useEffect(() => {
+		RNBootSplash.hide()
+
 		getFormattedCurrentNepaliDate().then((npDate) => {
 			setNepaliDate(npDate)
 		})
