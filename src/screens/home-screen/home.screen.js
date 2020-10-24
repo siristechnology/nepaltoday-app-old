@@ -63,6 +63,12 @@ const Home = ({ navigation }) => {
 
 	const headerComponent = (
 		<View>
+			<View style={style.headerStyle}>
+				<Text testID="nepaliDate" style={style.nepaliDateStyle}>
+					{nepaliDate}
+				</Text>
+				<Weather />
+			</View>
 			<HeadlineComponent
 				article={topHeadline}
 				style={style.headline}
@@ -73,10 +79,6 @@ const Home = ({ navigation }) => {
 
 	return (
 		<AppLayout>
-			<View style={style.headerStyle}>
-				<Text testID="nepaliDate" style={style.nepaliDateStyle}>{nepaliDate}</Text>
-				<Weather />
-			</View>
 			<ArticleListContainer
 				headerComponent={headerComponent}
 				navigation={navigation}
@@ -128,8 +130,9 @@ const style = StyleSheet.create({
 		justifyContent: 'space-between',
 		flexDirection: 'row',
 		alignItems: 'center',
-		paddingHorizontal: 20,
 		paddingBottom: 10,
+		borderBottomWidth: 1,
+		borderBottomColor: '#F5F0F0',
 	},
 	nepaliDateStyle: {
 		fontWeight: 'bold',
