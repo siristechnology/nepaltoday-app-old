@@ -18,13 +18,21 @@
 <img src="assets/images/screenshot-2.png" alt="screenshot-2" width="300"/>
 </div>
 
-## How to Run locally
+## How to Run Android app locally
 
 -   Install Android Studio
 -   Install node (14.x), yarn (1.x)
 -   Run Android emulator. (from Android Studio or Genymotion)
 -   Run Metro bundler. `yarn start`
 -   Run Android app. `yarn android`
+
+## How to Run IOS app locally
+
+-   Install XCode
+-   Install node (14.x), yarn (1.x)
+-   Run Metro bundler. `yarn start`
+-   Install Pod depedencies. `pod install --repo-update`
+-   Run Android app. `yarn ios`
 
 ## How to Run Detox test on Android Emulator
 
