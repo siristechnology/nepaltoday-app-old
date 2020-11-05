@@ -4,6 +4,7 @@
 	"private": true,
 	"scripts": {
 		"android": "react-native run-android --variant unsigneddebug",
+		"ios": "react-native run-ios",
 		"start": "react-native start",
 		"log:android": "react-native log-android",
 		"refresh": "adb shell input keyevent 46 46",
@@ -21,6 +22,7 @@
 		"@react-native-community/async-storage": "^1.12.1",
 		"@react-native-community/masked-view": "^0.1.10",
 		"@react-native-community/netinfo": "^5.9.0",
+		"@react-native-community/push-notification-ios": "^1.7.1",
 		"@react-native-community/viewpager": "^4.0.0",
 		"@react-native-firebase/app": "^8.4.5",
 		"@react-native-firebase/auth": "^9.3.0",
