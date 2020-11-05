@@ -9,11 +9,14 @@ import { Container, Tab, Tabs, ScrollableTab } from 'native-base'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/react-hooks'
 import crashlytics from '@react-native-firebase/crashlytics'
+import { fetchCategoryArticlesfromAsync, storeCategoryArticlestoAsync } from '../../helper/cacheStorage'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE, SHARE, CARTOON } = en.menu
 
 const HeadlineScreen = ({ navigation }) => {
 	const [refreshing, setRefreshing] = useState(false)
+	const [localArticles, setLocalArticles] = useState({ getArticles: [] })
+	
 	const [fetchNews, { loading, data, refetch, error }] = useLazyQuery(GET_ARTICLES_QUERY, {
 		variables: {},
 	})
@@ -23,7 +26,19 @@ const HeadlineScreen = ({ navigation }) => {
 		refetch().then(() => setRefreshing(false))
 	}
 
+	const fetchArticlesFromAsyncStorage = async () => {
+		fetchCategoryArticlesfromAsync()
+			.then((res) => {
+				setLocalArticles({ getArticles: res })
+			})
+			.catch((err) => {
+				crashlytics().recordError(err)
+				setLocalArticles([])
+			})
+	}
+
 	useEffect(() => {
+		fetchArticlesFromAsyncStorage()
 		fetchNews()
 	}, [fetchNews])
 
@@ -31,11 +46,17 @@ const HeadlineScreen = ({ navigation }) => {
 		crashlytics().recordError(new Error(error))
 	}
 
-	if (loading || data == null) {
-		return <CircularSpinner />
+	if(!loading && data !=null && data.getArticles && data.getArticles.length){
+		storeCategoryArticlestoAsync(data.getArticles)
 	}
 
-	const sortedArticles = data.getArticles.sort((a, b) => b.createdDate - a.createdDate)
+	const dataArticles = (data && data.getArticles) || []
+	const categoryArticles = (dataArticles.length && dataArticles) || localArticles.getArticles
+	const sortedArticles = categoryArticles.sort((a, b) => b.createdDate - a.createdDate)
+
+	if (sortedArticles.length==0) {
+		return <CircularSpinner />
+	}
 
 	const CategoryTabs = ({ articles, navigation }) => {
 		const tabNames = [NEWS, ENTERTAINMENT, SPORTS, CARTOON, BUSINESS, SOCIAL, HEALTH, TECHNOLOGY, SHARE, AGRICULTURE]
@@ -63,7 +84,6 @@ const HeadlineScreen = ({ navigation }) => {
 
 			return (
 				<Tab
-					// testID={"category"+idx}
 					style={{ flex: 1 }}
 					heading={localTabName}
 					key={idx}
