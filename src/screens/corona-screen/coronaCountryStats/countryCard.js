@@ -16,14 +16,14 @@ const CountryCard = (props) => {
 
 	return (
 		<View style={styles.container}>
-			<Text style={styles.title}>{props.stat.country}</Text>
+			<Text style={styles.title}>{props.index+1}. {props.stat.country}</Text>
 			<View style={styles.statContainer}>
-				{renderStatView('Total Cases', props.stat.total_cases, 'worldTotalCase')}
-				{renderStatView('Total Deaths', props.stat.total_deaths)}
-				{renderStatView('New Cases', props.stat.new_cases)}
-				{renderStatView('New Deaths', props.stat.new_deaths)}
+				{renderStatView('कुल संक्रमित', props.stat.total_cases, 'worldTotalCase')}
+				{renderStatView('कुल मृत्यु', props.stat.total_deaths)}
+				{renderStatView('नयाँ संक्रमित', props.stat.new_cases)}
+				{renderStatView('नयाँ मृत्यु', props.stat.new_deaths)}
 			</View>
-			<View style={styles.divider} />
+			{/* <View style={styles.divider} /> */}
 		</View>
 	)
 }
@@ -33,8 +33,11 @@ export default CountryCard
 const styles = StyleSheet.create({
 	container: {
 		padding: 4,
-		margin: 5,
+		margin: 4,
 		marginHorizontal: 10,
+		elevation: 0.5,
+		backgroundColor: '#FAFAFA',
+		borderRadius: 5
 	},
 	title: {
 		fontSize: 18,
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
 	statContainer: {
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		paddingVertical: 5,
+		paddingVertical: 3,
 	},
 	statView: {
 		alignItems: 'center',

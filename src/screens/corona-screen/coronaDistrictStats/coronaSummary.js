@@ -18,12 +18,12 @@ const CoronaSummary = (props) => {
 	return (
 		<View>
 			<View style={styles.rowView}>
-				{Card('Total Cases', props.stats.totalCases, 'totalCase')}
-				{Card('New Cases', props.stats.newCases,'newCase')}
+				{Card('कुल संक्रमित', props.stats.totalCases, 'totalCase')}
+				{Card('नयाँ संक्रमित', props.stats.newCases,'newCase')}
 			</View>
 			<View style={styles.rowView}>
-				{Card('Total Deaths', props.stats.totalDeaths,'totalDeath')}
-				{Card('New Deaths', props.stats.newDeaths,'newDeath')}
+				{Card('कुल मृत्यु', props.stats.totalDeaths,'totalDeath')}
+				{Card('नयाँ मृत्यु', props.stats.newDeaths,'newDeath')}
 			</View>
 		</View>
 	)

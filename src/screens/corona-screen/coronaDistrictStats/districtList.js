@@ -65,7 +65,7 @@ const DistrictList = () => {
 							<Icon style={{ flex: 0.09 }} name="search" size={20} />
 							<TextInput
 								value={searchText}
-								placeholder="Search by district"
+								placeholder="Search"
 								style={{ flex: (searchText && 0.82) || 0.91, padding: 4, fontSize: 15 }}
 								onChangeText={(text) => setSearchText(text)}
 							/>
