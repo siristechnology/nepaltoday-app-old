@@ -29,6 +29,7 @@ const AllRadio = (props) => {
         )) || <View />}
       </View>
       <RadioListContainer
+        searchText={searchText}
         fmList={toShowList}
         favoriteList={props.favoriteList}
         onFMSelect={props.onFMSelect}
