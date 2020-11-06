@@ -89,8 +89,9 @@ const RadioListContainer = (props) => {
 	return (
 		<ScrollView ref={ref} style={{ paddingTop: 10}}>
             {props.fmList && props.fmList.length>0 && <Accordion
+                expandMultiple={props.searchText.length && true || false }
                 sections={sections}
-                activeSections={activeSections}
+                activeSections={props.searchText.length && Array.from({length: sections.length}, (x,i) => i) || activeSections}
                 renderHeader={renderHeader}
                 renderContent={renderContent}
                 onChange={updateSections}
