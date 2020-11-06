@@ -16,12 +16,12 @@ const DistrictCard = (props) => {
 
 	return (
 		<View testID={"district"+props.index} style={styles.container}>
-			<Text style={styles.title}>{props.stat.nepaliName}</Text>
+			<Text style={styles.title}>{props.index+1}. {props.stat.nepaliName}</Text>
 			<View style={styles.statContainer}>
-				{renderStatView('Total Cases', props.stat.totalCases, 'districtTotal')}
-				{renderStatView('New Cases', props.stat.newCases, 'districtNew')}
+				{renderStatView('कुल संक्रमित', props.stat.totalCases, 'districtTotal')}
+				{renderStatView('नयाँ संक्रमित', props.stat.newCases, 'districtNew')}
 			</View>
-			<View style={styles.divider} />
+			{/* <View style={styles.divider} /> */}
 		</View>
 	)
 }
@@ -31,8 +31,11 @@ export default DistrictCard
 const styles = StyleSheet.create({
 	container: {
 		padding: 4,
-		margin: 5,
+		margin: 4,
 		marginHorizontal: 10,
+		elevation: 0.5,
+		backgroundColor: '#FAFAFA',
+		borderRadius: 5
 	},
 	title: {
 		fontSize: 18,
@@ -47,7 +50,7 @@ const styles = StyleSheet.create({
 	statContainer: {
 		flexDirection: 'row',
 		justifyContent: 'space-evenly',
-		paddingVertical: 5,
+		paddingVertical: 3,
 	},
 	statView: {
 		alignItems: 'center',
