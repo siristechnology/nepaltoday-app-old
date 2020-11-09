@@ -11,6 +11,7 @@ import { getFormattedCurrentNepaliDate } from '../../helper/dateFormatter'
 import Weather from './components/weather.component'
 import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { HeadlineComponent } from './components/headline.component'
+import auth from '@react-native-firebase/auth'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -106,7 +107,8 @@ export const GET_ARTICLES_QUERY = gql`
 					{ name: "business", count: 5 }
 					{ name: "sports", count: 10 }
 					{ name: "social", count: 5 }
-				]
+				],
+				nid: "${auth().currentUser && auth().currentUser.uid || ''}"
 			}
 		) {
 			_id
