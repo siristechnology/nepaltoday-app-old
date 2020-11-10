@@ -22,7 +22,7 @@ const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, 
 	const renderItem = ({ item, index }) => {
 		return <ArticleListItem 
 			index={index}
-			isRead={readArticles.includes(item._id)}
+			isRead={readArticles.filter(x=>x.articleId==item._id).length}
 			style={themedStyle.item} 
 			article={item} 
 			onPress={() => _onItemPress(item)} 

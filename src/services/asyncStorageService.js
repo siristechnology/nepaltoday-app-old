@@ -10,7 +10,7 @@ const saveReadArticles = (article) => {
             articles.push(article)
             articles = articles.filter((thing, index, self) =>
                 index === self.findIndex((t) => (
-                    t.id === thing.id
+                    t.articleId === thing.articleId
                 ))
             )
             AsyncStorage.setItem(READ_ARTICLES, JSON.stringify(articles))
@@ -24,8 +24,7 @@ const saveReadArticles = (article) => {
 const getReadArticles = async () => {
     let readArticles = await AsyncStorage.getItem(READ_ARTICLES)
     readArticles = JSON.parse(readArticles) || []
-    let articles = readArticles.map(article=> article.id)
-    return articles
+    return readArticles
 }
 
 const clearOldArticles = async () => {

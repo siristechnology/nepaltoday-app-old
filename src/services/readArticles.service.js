@@ -3,14 +3,15 @@ import gql from 'graphql-tag'
 import crashlytics from '@react-native-firebase/crashlytics'
 
 class ReadArticleService{
-    saveReadArticle = async (nid, articleId) => {
+    saveReadArticle = async (nid, articles) => {
+        articles = articles.map(article=>{ return {articleId: article.articleId, category: article.category}})
         client
             .mutate({
                 mutation: SAVE_READ_ARTICLE,
                 variables: {
                     input: {
                         nid,
-                        articleId
+                        articles
                     }
                 } 
             })

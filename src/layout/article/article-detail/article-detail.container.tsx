@@ -14,7 +14,7 @@ interface State {
 export default class ArticleDetailContainer extends React.PureComponent<any, State> {
 	
 	onPageSelected = (article) => {
-		saveReadArticles({timeStamp: Date.now(), id: article._id})
+		saveReadArticles({timeStamp: Date.now(), articleId: article._id, category: article.category})
 	}
 
 	public render(): React.ReactNode {
