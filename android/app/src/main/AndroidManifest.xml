@@ -13,7 +13,7 @@
     <meta-data android:name="com.dieam.reactnativepushnotification.notification_foreground" android:value="false" />
     <meta-data android:name="com.dieam.reactnativepushnotification.channel_create_default" android:value="true" />
     <meta-data android:name="com.dieam.reactnativepushnotification.notification_color" android:resource="@color/white" />
-
+    <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@mipmap/ic_stat_notification" />
     <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationActions" />
     <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationPublisher" />
     <receiver android:name="com.dieam.reactnativepushnotification.modules.RNPushNotificationBootEventReceiver">
