@@ -62,24 +62,24 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     imageStyle: {
-        width: 55,
-        height: 55
+        width: 50,
+        height: 50
     },
     textView:{
        marginLeft:12
     },
     titleText: {
-       fontSize: 17,
+       fontSize: 15,
        opacity: 0.9 
     },
     artistText: {
         marginTop:5,
-        fontSize:13,
+        fontSize:12,
         opacity: 0.7
     },
     favButton:{
         position:'absolute',
-        right:10,
+        right:5,
         width:50,
         height:50,
         justifyContent:'center',
