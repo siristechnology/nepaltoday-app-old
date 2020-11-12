@@ -6,7 +6,7 @@ import { ImageBackground, View } from 'react-native'
 import { getRelativeTime } from '../../../helper/time'
 import { ArticleActivityBar } from '../../../components/articles'
 import { ActivityAuthoring, textStyle } from '../../../components/common'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { TouchableOpacity } from 'react-native'
 
 const ArticleListItemComponent = React.memo((props) => {
 	const { style, themedStyle, article, isRead, index, ...restProps } = props

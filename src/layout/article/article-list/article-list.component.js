@@ -18,7 +18,7 @@ const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, r
 
 	return (
 		<FlatList
-			contentContainerStyle={themedStyle.container}
+			contentContainerStyle={[themedStyle.container, articles.length==0 && {paddingVertical: 0}]}
 			data={articles}
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}

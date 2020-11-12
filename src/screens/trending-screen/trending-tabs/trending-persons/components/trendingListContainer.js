@@ -12,8 +12,7 @@ const TrendingListContainer = (props) => {
 	useScrollToTop(ref)
 
 	const onCardClick = (trending) => {
-		setClickedHandle(trending)
-		setShowDetail(true)
+		props.navigation.navigate('TrendingDetail',{trending})
 	}
 
 	const closeDetail = () => {
@@ -46,10 +45,14 @@ const TrendingListContainer = (props) => {
 	)
 
 	return (
-		<View style={{ marginBottom: 100 }}>
+		<View style={{ marginBottom: 3 }}>
 			{renderList()}
 			<Modal visible={showDetail} onRequestClose={closeDetail} transparent={false} animationType="slide">
-				<TrendingDetail trending={clickedHandle} closeDetail={closeDetail} />
+				<TrendingDetail 
+					navigation={props.navigation}
+					trending={clickedHandle} 
+					closeDetail={closeDetail} 
+				/>
 			</Modal>
 		</View>
 	)
