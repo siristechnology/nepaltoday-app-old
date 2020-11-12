@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import { View, Image, Text, StyleSheet, ActivityIndicator, RefreshControl } from 'react-native'
-import Icon from 'react-native-vector-icons/AntDesign'
+import { View, StyleSheet, ActivityIndicator, RefreshControl } from 'react-native'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { TwitterListContainer } from '../../../layout/twitter/twitter-list.container'
 
-const TrendingDetail = (props) => {
+const TrendingTweetDetail = (props) => {
 	const [refreshing, setRefreshing] = useState(false)
 
 	const GET_TWEETS_BY_HANDLE = gql`
@@ -35,11 +34,6 @@ const TrendingDetail = (props) => {
 
 	return (
 		<View style={{ flex: 1 }}>
-			<View style={styles.headerView}>
-				<Icon name="back" size={24} color="#000" onPress={props.closeDetail} />
-				<Text style={styles.headerText}>{props.trending.name}</Text>
-				<View />
-			</View>
 			<View refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} />}>
 				{(loading && (
 					<View style={styles.loaderContainer}>
@@ -48,12 +42,6 @@ const TrendingDetail = (props) => {
 				)) || (
 					<TwitterListContainer
 						tweets={data.getTweetByHandle}
-						header={
-							<View style={styles.imageContainer}>
-								<Image source={{ uri: props.trending.image }} style={styles.imageStyle} />
-								<Text style={{ marginTop: 10, fontSize: 14 }}>{props.trending.handle}</Text>
-							</View>
-						}
 					/>
 				)}
 			</View>
@@ -74,21 +62,10 @@ const styles = StyleSheet.create({
 		opacity: 0.8,
 		fontWeight: 'bold',
 	},
-	imageContainer: {
-		padding: 25,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#FAF9FE',
-	},
-	imageStyle: {
-		height: 75,
-		width: 75,
-		borderRadius: 40,
-	},
 	loaderContainer: {
 		marginTop: 30,
 		justifyContent: 'center',
 	},
 })
 
-export default TrendingDetail
+export default TrendingTweetDetail

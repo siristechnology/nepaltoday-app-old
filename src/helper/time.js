@@ -11,6 +11,10 @@ moment.updateLocale('en', {
 		hh: '%d घण्टा',
 		d: '1 दिन',
 		dd: '%d दिन',
+		M:  '1 महिना',
+        MM: '%d महिना',
+        y:  '1 बर्ष',
+        yy: '%d बर्ष'
 	},
 })
 export const getRelativeTime = (date) => {

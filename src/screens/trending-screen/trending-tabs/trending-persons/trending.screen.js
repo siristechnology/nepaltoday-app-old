@@ -1,13 +1,12 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import AppLayout from '../../frame/app-layout'
-import { CircularSpinner } from '../../components/common'
+import AppLayout from './../../../../frame/app-layout'
+import { CircularSpinner } from './../../../../components/common'
 import TrendingListContainer from './components/trendingListContainer'
 import crashlytics from '@react-native-firebase/crashlytics'
 
-const TrendingComponent = () => {
+const TrendingComponent = (props) => {
 	const [refreshing, setRefreshing] = useState(false)
 
 	const handleRefresh = () => {
@@ -35,29 +34,15 @@ const TrendingComponent = () => {
 
 	return (
 		<AppLayout>
-			<View style={style.headerStyle}>
-				<Text style={style.textStyle}>Trending Figures</Text>
-			</View>
-			<TrendingListContainer trending={trendings} refreshing={refreshing} onRefresh={handleRefresh} />
+			<TrendingListContainer 
+				navigation={props.navigation}
+				trending={trendings} 
+				refreshing={refreshing} 
+				onRefresh={handleRefresh} 
+			/>
 		</AppLayout>
 	)
 }
-
-const style = StyleSheet.create({
-	headerStyle: {
-		display: 'flex',
-		justifyContent: 'space-between',
-		flexDirection: 'row',
-		alignItems: 'center',
-		paddingHorizontal: 20,
-		paddingBottom: 10,
-	},
-	textStyle: {
-		fontWeight: 'bold',
-		fontSize: 26,
-		paddingTop: 5,
-	},
-})
 
 const GET_TRENDING = gql`
 	query TrendingScreenQuery {
@@ -67,6 +52,7 @@ const GET_TRENDING = gql`
 				category
 				counts {
 					name
+					nepaliName
 					handle
 					count
 					image

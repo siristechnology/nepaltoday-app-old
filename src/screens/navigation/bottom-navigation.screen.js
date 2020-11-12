@@ -5,10 +5,9 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import { useTheme } from 'react-native-paper'
 
 import HomeScreen from '../home-screen/home.screen'
-import TwitterScreen from '../twitter-screen/twitter.screen'
 import HeadlineScreen from '../headline-screen/headline.screen'
 import CoronaScreen from '../corona-screen/corona.screen'
-import TrendingScreen from './../trending-screen/trending.screen'
+import TrendingScreen from './../trending-screen'
 import RadioScreen from './../radio-screen/radio.screen'
 
 const Tab = createMaterialBottomTabNavigator()
@@ -54,14 +53,6 @@ export const BottomTabScreen = ({ route }) => {
 				options={{
 					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="trending-up" size={25} color={color} />,
 					tabBarTestID: 'trendingScreen',
-				}}
-			/>
-			<Tab.Screen
-				name="Twitter"
-				component={TwitterScreen}
-				options={{
-					tabBarIcon: ({ color }) => <MaterialCommunityIcons name="twitter" size={25} color={color} />,
-					tabBarTestID: 'twitterScreen',
 				}}
 			/>
 			<Tab.Screen
