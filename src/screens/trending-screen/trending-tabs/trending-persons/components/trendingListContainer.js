@@ -1,22 +1,14 @@
-import React, { useState } from 'react'
-import { FlatList, RefreshControl, View, Text, StyleSheet, Modal } from 'react-native'
+import React from 'react'
+import { FlatList, RefreshControl, View, Text, StyleSheet } from 'react-native'
 import { useScrollToTop } from '@react-navigation/native'
 import TrendingCard from './trendingCard'
-import TrendingDetail from './trendingDetail'
 
 const TrendingListContainer = (props) => {
-	const [showDetail, setShowDetail] = useState(false)
-	const [clickedHandle, setClickedHandle] = useState({})
-
 	const ref = React.useRef(null)
 	useScrollToTop(ref)
 
 	const onCardClick = (trending) => {
 		props.navigation.navigate('TrendingDetail',{trending})
-	}
-
-	const closeDetail = () => {
-		setShowDetail(false)
 	}
 
 	const renderCategory = ({item, index}) => {
@@ -47,13 +39,6 @@ const TrendingListContainer = (props) => {
 	return (
 		<View style={{ marginBottom: 3 }}>
 			{renderList()}
-			<Modal visible={showDetail} onRequestClose={closeDetail} transparent={false} animationType="slide">
-				<TrendingDetail 
-					navigation={props.navigation}
-					trending={clickedHandle} 
-					closeDetail={closeDetail} 
-				/>
-			</Modal>
 		</View>
 	)
 }
