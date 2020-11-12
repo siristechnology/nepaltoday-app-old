@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import AppLayout from '../../../../frame/app-layout'
