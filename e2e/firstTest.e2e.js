@@ -44,15 +44,18 @@ describe('Example', () => {
 		await expect(element(by.id('worldTotalCaseIndia'))).toBeVisible()
 	})
 
-	it('should go to trending screen', async () => {
+	it('should go to trending tweets screen', async () => {
 		await element(by.id('trendingScreen')).tap()
-		await expect(element(by.id('category1'))).toBeVisible()
-		await expect(element(by.id('category11'))).toBeVisible()
+		await expect(element(by.id('twitter1'))).toBeVisible()
 	})
 
-	it('should go to twitter screen', async () => {
-		await element(by.id('twitterScreen')).tap()
-		await expect(element(by.id('twitter1'))).toBeVisible()
+	it('should go to trending figures screen', async () => {
+		await element(by.id('trendingScreen')).tap()
+		await element(by.id('trendingFigures')).tap()
+		await expect(element(by.id('category1'))).toBeVisible()
+		await expect(element(by.id('category11'))).toBeVisible()
+		await element(by.id('category11')).tap()
+		await expect(element(by.text('समाचार'))).toBeVisible()
 	})
 
 	it('should go to fm screen', async () => {
