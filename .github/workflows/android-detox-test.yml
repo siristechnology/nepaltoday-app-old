@@ -29,7 +29,7 @@ jobs:
                   echo "no" | $ANDROID_HOME/tools/bin/avdmanager create avd --force --name emu --device "Nexus 5X" -k 'system-images;android-29;google_apis;x86'
                   $ANDROID_HOME/emulator/emulator -list-avds
               env:
-                ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+                ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
             - name: Yarn Install, Build, (Test)
               run: |
@@ -50,7 +50,7 @@ jobs:
                   $ANDROID_HOME/platform-tools/adb devices
                   echo "Emulator started"
               env:
-                ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
+                ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
             - name: Android Detox
               run: yarn start & yarn test-detox-android
