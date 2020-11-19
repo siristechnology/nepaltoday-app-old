@@ -86,7 +86,12 @@ module.exports = {
 	transform: {
 		'^.+\\.(js|jsx|mjs)$': '<rootDir>/node_modules/babel-jest',
 	},
-	transformIgnorePatterns: ['!node_modules/react-runtime'],
+	setupFiles: ['./node_modules/react-native-gesture-handler/jestSetup.js'],
+	setupFilesAfterEnv: ["@testing-library/jest-native/extend-expect"],
+	transformIgnorePatterns: [
+		'!node_modules/react-runtime',
+		'node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation)',
+	],
 	testPathIgnorePatterns: ['<rootDir>/node_modules/'],
 
 	// Run tests from one or more projects
