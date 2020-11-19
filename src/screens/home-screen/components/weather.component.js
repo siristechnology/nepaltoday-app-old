@@ -2,7 +2,7 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
 import { StyleSheet, View, Text } from 'react-native'
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { convertToNepaliDigit } from '../../../helper/utils'
 import crashlytics from '@react-native-firebase/crashlytics'
 
@@ -18,6 +18,23 @@ export const FETCH_WEATHER_INFO_QUERY = gql`
 `
 
 const Weather = () => {
+	
+	const getWeatherIcon = (condition) => {
+		if(condition=='Thunderstorm'){
+			return 'weather-lightning'
+		}else if(condition=='Drizzle' || condition=='Rain'){
+			return 'weather-rainy'
+		}else if(condition=='Snow'){
+			return 'weather-snowy'
+		}else if(condition=='Mist' || condition=='Smoke' || condition=='Haze' || condition=='Dust' || condition=='Fog' || condition=='Sand'){
+			return 'weather-fog'
+		}else if(condition=='Clouds'){
+			return 'weather-cloudy'
+		}else{
+			return 'weather-sunny'
+		}
+	}
+
 	const { loading, data, error } = useQuery(FETCH_WEATHER_INFO_QUERY, {
 		variables: {},
 	})
@@ -27,14 +44,17 @@ const Weather = () => {
 	}
 
 	if (!loading && !error && !!data.getWeatherInfo) {
-		let { temperature } = data.getWeatherInfo
+		let { temperature, condition } = data.getWeatherInfo
 		if (!temperature) return null
 
 		temperature = Math.ceil(temperature)
 
 		return (
 			<View testID="weatherComponent" style={styles.weatherContainerStyle}>
-				<FontAwesome name="cloud" size={20} />
+				<Icon 
+					name={getWeatherIcon(condition)} 
+					size={20} 
+				/>
 				<Text style={styles.weatherTextStyle}>{convertToNepaliDigit(temperature)} ˚C</Text>
 			</View>
 		)
