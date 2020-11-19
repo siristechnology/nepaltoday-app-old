@@ -25,6 +25,9 @@ const SwiperStory = (props) => {
                 <Text style={styles.storyText}>
                     {myArticle.title}
                 </Text>
+                <Text style={styles.shortDescription}>
+                    {myArticle.shortDescription ? myArticle.shortDescription.substring(0, 400) + '...' : ''}
+                </Text>
                 <Button style={styles.readMoreButton} onPress={()=>props.showArticleDetail(myArticle)}>
 					{READ_MORE}
 				</Button>
@@ -64,12 +67,20 @@ const styles = StyleSheet.create({
         resizeMode: 'stretch'
     },
     storyText: {
-        fontSize: 20,
+        fontSize: 22,
         marginTop: 40,
         marginHorizontal: 20,
         textAlign: 'center',
         color: '#fff',
         opacity: 0.9
+    },
+    shortDescription: {
+        fontSize: 16,
+        marginTop: 20,
+        marginHorizontal: 20,
+        textAlign: 'center',
+        color: '#fff',
+        opacity: 0.8
     },
     readMoreButton: {
         marginTop: 70,

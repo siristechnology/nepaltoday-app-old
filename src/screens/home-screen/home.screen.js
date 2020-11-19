@@ -60,10 +60,8 @@ const Home = ({ navigation }) => {
 
 	const dataArticles = (data && data.getArticles) || []
 	const homeArticles = (dataArticles.length && dataArticles) || localArticles.getArticles
-	console.log(homeArticles.length)
 	const topHeadline = homeArticles.find((a) => a.category === 'headline') || homeArticles[0]
 	const headlineArticles = homeArticles.filter(x => x.category == 'headline') || []
-	console.log(headlineArticles.length)
 	const topNews = homeArticles
 		.filter((a) => a._id !== topHeadline._id)
 		.sort((a, b) => b.totalWeight - a.totalWeight)
