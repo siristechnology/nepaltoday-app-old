@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Image, TouchableOpacity, View, Text } from 'react-native'
+import { StyleSheet, Image, TouchableOpacity, Text } from 'react-native'
 
 const RoundStory = (props) => {
     const article = props.article
