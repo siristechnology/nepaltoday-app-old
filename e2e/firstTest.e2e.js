@@ -51,7 +51,7 @@ describe('Example', () => {
 
 	it('should go to trending figures screen', async () => {
 		await element(by.id('trendingScreen')).tap()
-		await element(by.id('trendingFigures')).tap()
+		await element(by.text('ट्रेण्डिङ व्यक्तिहरु')).tap()
 		await expect(element(by.id('category1'))).toBeVisible()
 		await expect(element(by.id('category11'))).toBeVisible()
 		await element(by.id('category11')).tap()
