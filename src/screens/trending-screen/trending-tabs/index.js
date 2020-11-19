@@ -22,6 +22,7 @@ const TrendingScreen = (props) => {
 					<TrendingTweets />
 				</Tab>
 				<Tab
+					testID="trendingFigures"
 					style={{ flex: 1 }}
 					heading="ट्रेण्डिङ व्यक्तिहरु"
 					tabStyle={{ backgroundColor: '#fff' }}
