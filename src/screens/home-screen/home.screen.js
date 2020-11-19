@@ -12,6 +12,7 @@ import Weather from './components/weather.component'
 import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { HeadlineComponent } from './components/headline.component'
 import auth from '@react-native-firebase/auth'
+import StoryHeadline from './components/storyHeadline/storyHeadline'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -59,8 +60,10 @@ const Home = ({ navigation }) => {
 
 	const dataArticles = (data && data.getArticles) || []
 	const homeArticles = (dataArticles.length && dataArticles) || localArticles.getArticles
+	console.log(homeArticles.length)
 	const topHeadline = homeArticles.find((a) => a.category === 'headline') || homeArticles[0]
-
+	const headlineArticles = homeArticles.filter(x => x.category == 'headline') || []
+	console.log(headlineArticles.length)
 	const topNews = homeArticles
 		.filter((a) => a._id !== topHeadline._id)
 		.sort((a, b) => b.totalWeight - a.totalWeight)
@@ -74,6 +77,10 @@ const Home = ({ navigation }) => {
 				</Text>
 				<Weather />
 			</View>
+			<StoryHeadline
+				headlineArticles={headlineArticles}
+				onShowArticleDetail={(article, articles) => navigation.navigate('ArticleDetail', { article, articles })}
+			/>
 			<HeadlineComponent
 				article={topHeadline}
 				style={style.headline}
@@ -100,7 +107,7 @@ export const GET_ARTICLES_QUERY = gql`
 		getArticles(
 			criteria: {
 				categories: [
-					{ name: "headline", count: 5 }
+					{ name: "headline", count: 10 }
 					{ name: "politics", count: 10 }
 					{ name: "entertainment", count: 10 }
 					{ name: "news", count: 5 }
