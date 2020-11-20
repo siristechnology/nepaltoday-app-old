@@ -1,13 +1,15 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 import Swiper from 'react-native-swiper'
 import { Button } from 'react-native-ui-kitten/ui'
 import { IconButton } from 'react-native-paper'
 import { np } from '../../../../lang/np'
+import { getReadStory, storeReadStory } from './storyStorage'
 
 const SwiperStory = (props) => {
     const {article, articles} = props
     const { READ_MORE } = np.public
+
     const SingleStory = ({myArticle}) => {
         return(
             <View style={styles.container}>
@@ -43,6 +45,7 @@ const SwiperStory = (props) => {
             showsPagination={false}
             autoplayTimeout={5}
             index={articles.indexOf(article)}
+            onIndexChanged={(i)=> props.onNewStoryLoaded(articles[i], article)}
         >
             {articles.map((singleArticle,i)=>(
                 <SingleStory

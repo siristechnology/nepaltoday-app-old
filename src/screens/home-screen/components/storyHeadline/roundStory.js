@@ -10,7 +10,7 @@ const RoundStory = (props) => {
             onPress={()=>props.onShowStory(article)}
         >
             <Image 
-                style={styles.storyImage}
+                style={[styles.storyImage,{borderColor: props.isReadStory && '#000' || '#f00'}]}
                 source={{uri: article.imageLink}}
             />
             <Text style={styles.sourceText}>
