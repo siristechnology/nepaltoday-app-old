@@ -13,6 +13,7 @@ import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { HeadlineComponent } from './components/headline.component'
 import auth from '@react-native-firebase/auth'
 import StoryHeadline from './components/storyHeadline/storyHeadline'
+import NepaliEvent from './components/nepaliEvent.component'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -70,9 +71,12 @@ const Home = ({ navigation }) => {
 	const headerComponent = (
 		<View>
 			<View style={style.headerStyle}>
-				<Text testID="nepaliDate" style={style.nepaliDateStyle}>
-					{nepaliDate}
-				</Text>
+				<View>
+					<Text testID="nepaliDate" style={style.nepaliDateStyle}>
+						{nepaliDate}
+					</Text>
+					<NepaliEvent/>
+				</View>
 				<Weather />
 			</View>
 			<StoryHeadline
