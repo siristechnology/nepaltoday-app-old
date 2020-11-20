@@ -40,4 +40,12 @@ const getFormattedCurrentNepaliDate = async () => {
 	)}${convertNos(nepaliDateString.slice(9, 10))}`
 }
 
-export { getCurrentDayNameInNepali, getFormattedCurrentNepaliDate }
+const getNepaliDate = () => {
+	const currentDate = new Date()
+	let dateString = currentDate.toISOString()
+	dateString = dateString.slice(0, 10)
+	const nepaliDateString = AD2BS(dateString)
+	return nepaliDateString
+}
+
+export { getCurrentDayNameInNepali, getFormattedCurrentNepaliDate, getNepaliDate }
