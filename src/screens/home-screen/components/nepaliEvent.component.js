@@ -30,7 +30,7 @@ const NepaliEvent = () => {
 
 	if (!loading && !error && !!data.getNepaliEvent) {
 		let { isHoliday, tithi, event } = data.getNepaliEvent
-		if (!isHoliday) return null
+		if (!tithi) return null 
 
 		return (
 			<View testID="nepaliEventComponent" style={styles.containerStyle}>
