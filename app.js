@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 import { StatusBar } from 'react-native'
-import { ApplicationProvider } from 'react-native-ui-kitten'
-import { mapping, light as lightTheme } from '@eva-design/eva'
+import * as eva from '@eva-design/eva'
+import { ApplicationProvider } from '@ui-kitten/components'
 
 import { store } from './src/store'
 import AppContainer from './src/frame/app-container'
@@ -77,7 +77,7 @@ const App = () => {
 	}, [])
 
 	return (
-		<ApplicationProvider mapping={mapping} theme={lightTheme}>
+		<ApplicationProvider {...eva} theme={eva.light}>
 			<ReduxProvider store={store}>
 				<StatusBar barStyle="light-content" />
 				<ErrorBoundary>

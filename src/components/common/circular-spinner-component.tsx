@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
-import { Layout, Spinner } from 'react-native-ui-kitten/ui'
+import { Layout, Spinner } from '@ui-kitten/components'
 
 export const CircularSpinner = () => (
 	<Layout style={styles.container}>

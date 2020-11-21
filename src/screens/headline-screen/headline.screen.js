@@ -1,5 +1,5 @@
-import { Text } from 'react-native-ui-kitten/ui'
 import React, { useState, useEffect } from 'react'
+import { Text } from '@ui-kitten/components'
 import { en } from '../../lang/en'
 import { getLocalName } from '../../helper/text'
 import { OfflineNotice } from '../../components'

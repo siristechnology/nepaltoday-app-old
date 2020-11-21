@@ -1,16 +1,15 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
-import { Text } from 'react-native-ui-kitten/ui'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { Text, withStyles } from '@ui-kitten/components'
 
 import { HeartIconFill } from '../../assets/icons'
 
 const LikeButtonComponent = (props) => {
-	const { style, themedStyle, textStyle, children, ...restProps } = props
+	const { eva, style, textStyle, children, ...restProps } = props
 	return (
-		<TouchableOpacity style={[themedStyle.container, style]} {...restProps}>
-			{HeartIconFill(themedStyle.icon)}
-			<Text style={[themedStyle.valueLabel, textStyle]} category="p2">
+		<TouchableOpacity style={[eva.style.container, style]} {...restProps}>
+			{HeartIconFill(eva.style.icon)}
+			<Text style={[eva.style.valueLabel, textStyle]} category="p2">
 				{children}
 			</Text>
 		</TouchableOpacity>

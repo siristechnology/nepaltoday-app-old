@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import { FlatList, RefreshControl } from 'react-native'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { withStyles } from '@ui-kitten/components/theme'
 import { useScrollToTop } from '@react-navigation/native'
 
 import { ArticleListItem } from './article.component'
 import { getReadArticles } from '../../../../services/asyncStorageService'
 
-const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh, headerComponent }) => {
-	
+const ArticleListComponent = React.memo(({ eva, articles, onItemPress, refreshing, handleRefresh, headerComponent }) => {
 	const [readArticles, setReadArticles] = useState([])
 
 	useEffect(() => {
-		getReadArticles().then(res=>{
+		getReadArticles().then((res) => {
 			setReadArticles(res)
-		})		
-	},[])
-	
+		})
+	}, [])
+
 	const _onItemPress = (article) => {
 		onItemPress(article)
 	}
 
 	const renderItem = ({ item, index }) => {
-		return <ArticleListItem 
-			index={index}
-			isRead={readArticles.filter(x=>x.articleId==item._id).length}
-			style={themedStyle.item} 
-			article={item} 
-			onPress={() => _onItemPress(item)} 
-		/>
+		return (
+			<ArticleListItem
+				index={index}
+				isRead={readArticles.filter((x) => x.articleId == item._id).length}
+				style={eva.style.item}
+				article={item}
+				onPress={() => _onItemPress(item)}
+			/>
+		)
 	}
 
 	const ref = React.useRef(null)
@@ -35,7 +36,7 @@ const ArticleListComponent = React.memo(({ articles, onItemPress, themedStyle, r
 
 	return (
 		<FlatList
-			contentContainerStyle={themedStyle.container}
+			contentContainerStyle={eva.style.container}
 			data={articles}
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}

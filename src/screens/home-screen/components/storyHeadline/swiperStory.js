@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 import Swiper from 'react-native-swiper'
-import { Button } from 'react-native-ui-kitten/ui'
+import { Button } from '@ui-kitten/components'
 import { IconButton } from 'react-native-paper'
 import { np } from '../../../../lang/np'
 
