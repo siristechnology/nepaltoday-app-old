@@ -65,15 +65,16 @@ const App = () => {
 				onNotification: onNotif,
 			})
 		}
-		configureNotification()
 
 		const addReadArticles = async () => {
 			const readArticles = await getReadArticles()
-			readArticlesService.saveReadArticle(auth().currentUser.uid, readArticles)
+			auth().currentUser && readArticlesService.saveReadArticle(auth().currentUser.uid, readArticles)
 			clearOldArticles()
 		}
 
-		addReadArticles()
+		configureNotification().then(() => {
+			addReadArticles()
+		})
 	}, [])
 
 	return (
