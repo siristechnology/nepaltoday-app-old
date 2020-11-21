@@ -57,6 +57,19 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
+		<string>opensans-bold-italic.ttf</string>
+		<string>opensans-bold.ttf</string>
+		<string>opensans-extra-bold-italic.ttf</string>
+		<string>opensans-extra-bold.ttf</string>
+		<string>opensans-italic.ttf</string>
+		<string>opensans-light.ttf</string>
+		<string>opensans-lignt-italic.ttf</string>
+		<string>opensans-regular.ttf</string>
+		<string>opensans-semibold-italic.ttf</string>
+		<string>opensans-semibold.ttf</string>
+		<string>Roboto_medium.ttf</string>
+		<string>Roboto.ttf</string>
+		<string>rubicon-icon-font.ttf</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
