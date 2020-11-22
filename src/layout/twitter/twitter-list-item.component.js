@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, TouchableOpacity, Linking } from 'react-native'
-import { Avatar, Text } from 'react-native-ui-kitten/ui'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { Avatar, Text } from '@ui-kitten/components'
+import { withStyles } from '@ui-kitten/components/theme'
 
 import { textStyle } from '../../components/common'
 import { ArticleActivityBar } from '../../components/articles'
@@ -9,7 +9,7 @@ import { ClockIconOutline } from '../../assets/icons'
 import { getRelativeTime } from '../../helper/time'
 
 const TwitterListItemComponent = (props) => {
-	const { themedStyle, tweet, index } = props
+	const { eva, tweet, index } = props
 
 	const handleTwitterHandlePress = () => {
 		const handle = tweet.handle
@@ -20,25 +20,25 @@ const TwitterListItemComponent = (props) => {
 	}
 
 	return (
-		<View style={[themedStyle.container]}>
-			<View testID={'twitter' + index} style={themedStyle.tweetWrapper}>
-				<TouchableOpacity onPress={handleTwitterHandlePress} style={themedStyle.leftWrapper} activeOpacity={0.8}>
-					<Avatar source={{ uri: tweet.profileImage }} style={themedStyle.avatar} size="giant" />
+		<View style={[eva.style.container]}>
+			<View testID={'twitter' + index} style={eva.style.tweetWrapper}>
+				<TouchableOpacity onPress={handleTwitterHandlePress} style={eva.style.leftWrapper} activeOpacity={0.8}>
+					<Avatar source={{ uri: tweet.profileImage }} style={eva.style.avatar} size="giant" />
 				</TouchableOpacity>
-				<View style={themedStyle.rightWrapper}>
-					<View style={themedStyle.headerWrapper}>
-						<Text style={themedStyle.titleLabel} category="h6">
+				<View style={eva.style.rightWrapper}>
+					<View style={eva.style.headerWrapper}>
+						<Text style={eva.style.titleLabel} category="h6">
 							{tweet.name}
 						</Text>
-						<Text style={themedStyle.descriptionLabel} appearance="hint" category="s1">
+						<Text style={eva.style.descriptionLabel} appearance="hint" category="s1">
 							{tweet.handle}
 						</Text>
 					</View>
 					<Text>{tweet.text}</Text>
-					<ArticleActivityBar style={themedStyle.detailsContainer}>
-						<View style={themedStyle.dateContainer}>
-							{ClockIconOutline(themedStyle.dateIcon)}
-							<Text style={themedStyle.dateLabel} appearance="hint" category="p2">
+					<ArticleActivityBar style={eva.style.detailsContainer}>
+						<View style={eva.style.dateContainer}>
+							{ClockIconOutline(eva.style.dateIcon)}
+							<Text style={eva.style.dateLabel} appearance="hint" category="p2">
 								{getRelativeTime(tweet.publishedDate)}
 							</Text>
 						</View>

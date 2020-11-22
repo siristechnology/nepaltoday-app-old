@@ -13,6 +13,7 @@ import { fetchfromAsync, storetoAsync } from '../../helper/cacheStorage'
 import { HeadlineComponent } from './components/headline.component'
 import auth from '@react-native-firebase/auth'
 import StoryHeadline from './components/storyHeadline/storyHeadline'
+import NepaliEvent from './components/nepaliEvent.component'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -40,7 +41,7 @@ const Home = ({ navigation }) => {
 	}
 
 	useEffect(() => {
-		RNBootSplash.hide()
+		RNBootSplash.hide().catch((err) => crashlytics().recordError(err))
 
 		getFormattedCurrentNepaliDate().then((npDate) => {
 			setNepaliDate(npDate)
@@ -61,7 +62,7 @@ const Home = ({ navigation }) => {
 	const dataArticles = (data && data.getArticles) || []
 	const homeArticles = (dataArticles.length && dataArticles) || localArticles.getArticles
 	const topHeadline = homeArticles.find((a) => a.category === 'headline') || homeArticles[0]
-	const headlineArticles = homeArticles.filter(x => x.category == 'headline') || []
+	const headlineArticles = homeArticles.filter((x) => x.category == 'headline') || []
 	const topNews = homeArticles
 		.filter((a) => a._id !== topHeadline._id)
 		.sort((a, b) => b.totalWeight - a.totalWeight)
@@ -70,9 +71,12 @@ const Home = ({ navigation }) => {
 	const headerComponent = (
 		<View>
 			<View style={style.headerStyle}>
-				<Text testID="nepaliDate" style={style.nepaliDateStyle}>
-					{nepaliDate}
-				</Text>
+				<View>
+					<Text testID="nepaliDate" style={style.nepaliDateStyle}>
+						{nepaliDate}
+					</Text>
+					<NepaliEvent />
+				</View>
 				<Weather />
 			</View>
 			<StoryHeadline
@@ -113,7 +117,7 @@ export const GET_ARTICLES_QUERY = gql`
 					{ name: "sports", count: 10 }
 					{ name: "social", count: 5 }
 				],
-				nid: "${auth().currentUser && auth().currentUser.uid || ''}"
+				nid: "${(auth().currentUser && auth().currentUser.uid) || ''}"
 			}
 		) {
 			_id

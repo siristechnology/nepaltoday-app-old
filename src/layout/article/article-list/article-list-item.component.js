@@ -1,37 +1,44 @@
 import React from 'react'
-import { Text } from 'react-native-ui-kitten/ui'
-import { withStyles } from 'react-native-ui-kitten/theme'
-import { ImageBackground, View } from 'react-native'
+import { ImageBackground, View, TouchableOpacity } from 'react-native'
+import { Text } from '@ui-kitten/components'
+import { withStyles } from '@ui-kitten/components/theme'
 
 import { getRelativeTime } from '../../../helper/time'
 import { ArticleActivityBar } from '../../../components/articles'
 import { ActivityAuthoring, textStyle } from '../../../components/common'
-import { TouchableOpacity } from 'react-native'
 
 const ArticleListItemComponent = React.memo((props) => {
-	const { style, themedStyle, article, isRead, index, ...restProps } = props
+	const { eva, style, article, isRead, index, ...restProps } = props
 	const onPress = () => {
 		props.onPress(article)
 	}
 
 	return (
-		<TouchableOpacity testID={'headlineArticle'+index} activeOpacity={0.8} {...restProps} style={[themedStyle.container, style, isRead && {backgroundColor:'#f5f5f5'}]} onPress={onPress}>
-			<ImageBackground style={themedStyle.imageContainer} imageStyle={themedStyle.image} source={{ uri: article.imageLink }} />
-			<ArticleActivityBar style={themedStyle.activityContainer}>
+		<TouchableOpacity
+			testID={'headlineArticle' + index}
+			activeOpacity={0.8}
+			{...restProps}
+			style={[eva.style.container, style, isRead && { backgroundColor: '#f5f5f5' }]}
+			onPress={onPress}
+		>
+			<ImageBackground style={eva.style.imageContainer} imageStyle={eva.style.image} source={{ uri: article.imageLink }} />
+			<ArticleActivityBar style={eva.style.activityContainer}>
 				<ActivityAuthoring
 					photo={{ uri: article.source.logoLink }}
 					name={`${article.source.name}`}
 					date={getRelativeTime(article.createdDate)}
 				/>
 			</ArticleActivityBar>
-			{article.category!='cartoon' && <View style={themedStyle.infoContainer}>
-				<Text style={themedStyle.titleLabel} category="h5">
-					{article.title}
-				</Text>
-				<Text style={themedStyle.descriptionLabel} appearance="hint" category="s1">
-					{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}
-				</Text>
-			</View>}
+			{article.category != 'cartoon' && (
+				<View style={eva.style.infoContainer}>
+					<Text style={eva.style.titleLabel} category="h5">
+						{article.title}
+					</Text>
+					<Text style={eva.style.descriptionLabel} appearance="hint" category="s1">
+						{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}
+					</Text>
+				</View>
+			)}
 		</TouchableOpacity>
 	)
 })
@@ -43,7 +50,7 @@ export const ArticleListItem = withStyles(ArticleListItemComponent, (theme) => (
 	infoContainer: {
 		paddingHorizontal: 16,
 		paddingVertical: 8,
-		marginTop: -12
+		marginTop: -12,
 	},
 	activityContainer: {
 		paddingHorizontal: 16,

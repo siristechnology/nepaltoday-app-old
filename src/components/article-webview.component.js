@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { AppState, StyleSheet, View } from 'react-native'
-import { Layout, Spinner } from 'react-native-ui-kitten'
+import { Layout, Spinner } from '@ui-kitten/components'
 import { WebView } from 'react-native-webview'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 

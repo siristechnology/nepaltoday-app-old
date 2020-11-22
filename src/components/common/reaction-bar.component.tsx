@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, ViewProps } from 'react-native'
-import { ThemedComponentProps, withStyles } from 'react-native-ui-kitten/theme'
+import { ThemedComponentProps, withStyles } from '@ui-kitten/components/theme'
 
 type ChildElement = React.ReactElement<any>
 
@@ -12,9 +12,9 @@ export type ReactionBarProps = ThemedComponentProps & ViewProps & ComponentProps
 
 class ReactionBarComponent extends React.Component<ReactionBarProps> {
 	public render(): React.ReactNode {
-		const { themedStyle, style, ...restProps } = this.props
+		const { eva, style, ...restProps } = this.props
 
-		return <View {...restProps} style={[themedStyle.container, style]} />
+		return <View {...restProps} style={[eva.style.container, style]} />
 	}
 }
 

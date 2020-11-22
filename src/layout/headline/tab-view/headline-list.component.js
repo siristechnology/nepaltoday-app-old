@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { RefreshControl, FlatList } from 'react-native'
-import { withStyles } from 'react-native-ui-kitten/theme'
+import { withStyles } from '@ui-kitten/components/theme'
 import { useScrollToTop } from '@react-navigation/native'
 import { ArticleListItem } from '../../article/article-list/article-list-item.component'
 import { getReadArticles } from '../../../services/asyncStorageService'
 
-const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, refreshing, handleRefresh }) => {
+const HeadlineListComponent = React.memo(({ eva, articles, onItemPress, refreshing, handleRefresh }) => {
 	
 	const [readArticles, setReadArticles] = useState([])
 
@@ -23,7 +23,7 @@ const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, 
 		return <ArticleListItem 
 			index={index}
 			isRead={readArticles.filter(x=>x.articleId==item._id).length}
-			style={themedStyle.item} 
+			style={eva.style.item} 
 			article={item} 
 			onPress={() => _onItemPress(item)} 
 		/>
@@ -34,7 +34,7 @@ const HeadlineListComponent = React.memo(({ articles, onItemPress, themedStyle, 
 
 	return (
 		<FlatList
-			contentContainerStyle={themedStyle.container}
+			contentContainerStyle={eva.style.container}
 			data={articles}
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
-import { Modal, Layout } from 'react-native-ui-kitten'
+import { Modal, Layout } from '@ui-kitten/components'
 
 export const ModalComponent = ({ children, visible }) => {
 	return (
