@@ -3,6 +3,17 @@ import { StyleSheet, Image, TouchableOpacity, Text } from 'react-native'
 
 const RoundStory = (props) => {
     const article = props.article
+    const readStory = props.readStory || []
+
+    const checkReadStory = (article) => {
+        const filteredArr = readStory.filter(x=>x.title==article.title)
+        if(filteredArr.length>0){
+            return true
+        }else{
+            return false
+        }
+    }
+
     return (
         <TouchableOpacity
             activeOpacity={0.8}
@@ -10,7 +21,7 @@ const RoundStory = (props) => {
             onPress={()=>props.onShowStory(article)}
         >
             <Image 
-                style={styles.storyImage}
+                style={[styles.storyImage,{borderColor: checkReadStory(article) && '#BDBDBD' || '#e57373'}]}
                 source={{uri: article.imageLink}}
             />
             <Text style={styles.sourceText}>
@@ -25,8 +36,7 @@ const styles = StyleSheet.create({
         height: 70,
         width: 70,
         borderRadius: 40,
-        borderWidth: 3,
-        borderColor: '#e57373'
+        borderWidth: 3
     },
     storyView: {
         marginRight: 10,
