@@ -35,7 +35,7 @@ const NepaliEvent = () => {
 		return (
 			<View testID="nepaliEventComponent" style={styles.containerStyle}>
 				<Text style={[styles.eventTextStyle,{ color: isHoliday && '#e57373' || '#000'}]}>
-                    {event}, {tithi}
+                    {event!='--' && (event+', ') || ''}{tithi}
                 </Text>
 			</View>
 		)
