@@ -43,6 +43,7 @@ const SwiperStory = (props) => {
             showsPagination={false}
             autoplayTimeout={5}
             index={articles.indexOf(article)}
+            onIndexChanged={(i)=>props.onStorySwiped(articles[i])}
         >
             {articles.map((singleArticle,i)=>(
                 <SingleStory
