@@ -48,7 +48,7 @@ const Home = ({ navigation }) => {
 		})
 		fetchArticlesFromAsyncStorage()
 		fetchNews()
-	}, [fetchNews])
+	}, [])
 
 	if (!loading && data != null && data.getArticles && data.getArticles.length) {
 		const myArticles = data.getArticles
