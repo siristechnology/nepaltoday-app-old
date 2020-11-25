@@ -1,4 +1,4 @@
-import 'react-native'
+import { NativeModules } from 'react-native'
 import React from 'react'
 import ShallowRenderer from 'react-test-renderer/shallow'
 import HeadlineScreen from './headline.screen'

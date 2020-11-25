@@ -46,8 +46,9 @@ const Home = ({ navigation }) => {
 		getFormattedCurrentNepaliDate().then((npDate) => {
 			setNepaliDate(npDate)
 		})
-		fetchArticlesFromAsyncStorage()
-		fetchNews()
+		fetchArticlesFromAsyncStorage().then(() => {
+			fetchNews()
+		})
 	}, [fetchNews])
 
 	if (!loading && data != null && data.getArticles && data.getArticles.length) {

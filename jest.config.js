@@ -3,13 +3,10 @@
 
 module.exports = {
 	// All imported modules in your tests should be mocked automatically
-	// automock: false,
+	// automock: true,
 
 	// Stop running tests after `n` failures
 	// bail: 0,
-
-	// Respect "browser" field in package.json when resolving modules
-	browser: false,
 
 	// The directory where Jest should store its cached dependency information
 	// cacheDirectory: "/private/var/folders/47/b5vk0gl13_z5zc25m18nmwdchxcqf8/T/jest_9dzpoo",
@@ -66,7 +63,7 @@ module.exports = {
 	//   "node_modules"
 	// ],
 
-	moduleFileExtensions: ['js', 'json', 'jsx', 'ts', 'tsx'],
+	moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
 
 	// A map from regular expressions to module names that allow to stub out resources with a single module
 	// moduleNameMapper: {},
@@ -82,12 +79,45 @@ module.exports = {
 
 	// A preset that is used as a base for Jest's configuration
 	preset: 'react-native',
-	testEnvironment: 'node',
-	transform: {
-		'^.+\\.(js|jsx|mjs)$': '<rootDir>/node_modules/babel-jest',
-	},
-	transformIgnorePatterns: ['!node_modules/react-runtime'],
+	// testEnvironment: 'node',
+	setupFiles: ['./node_modules/react-native-gesture-handler/jestSetup.js', './jest/setup.js'],
+	setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
+	// transform: {
+	// 	'^.+\\.(js|jsx|mjs)$': '<rootDir>/node_modules/babel-jest',
+	// },
+	transformIgnorePatterns: [
+		'node_modules/(?!(jest-)?react-native' +
+			'|react-(native|universal|navigation)-(.*)' +
+			'|@react-native-community/(.*)' +
+			'|@react-navigation/(.*)' +
+			'|native-base' +
+			'|jest-runtime' +
+			'|react-runtime' +
+			'|@codler' +
+			'|@babel/(.*)' +
+			'|react-native-track-player' +
+			'|bs-platform)',
+	],
+	// transformIgnorePatterns: [
+	// 	'node_modules/(?!(react-native' +
+	// 		'|react-navigation-tabs' +
+	// 		'|react-native-splash-screen' +
+	// 		'|react-native-screens' +
+	// 		'|react-native-gesture-handler' +
+	// 		'|react-native-reanimated' +
+	// 		'|jest-runtime' +
+	// 		'|react-runtime' +
+	// 		'|@react-navigation/stack' +
+	// 		'|@react-native-community/' +
+	// 		')/)',
+	// ],
+	// transformIgnorePatterns: [
+	// 	'!node_modules/react-runtime',
+	// 	'node_modules/react-native-track-player',
+	// 	'node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation)',
+	// ],
 	testPathIgnorePatterns: ['<rootDir>/node_modules/'],
+	// transformIgnorePatterns: ['node_modules/(?!(jest-)?react-native|@react-native-community|@react-navigation)'],
 
 	// Run tests from one or more projects
 	// projects: null,
@@ -157,7 +187,7 @@ module.exports = {
 	// testURL: "http://localhost",
 
 	// Setting this value to "fake" allows the use of fake timers for functions such as "setTimeout"
-	// timers: "real",
+	timers: 'fake',
 
 	// A map from regular expressions to paths to transformers
 	// transform: null,
