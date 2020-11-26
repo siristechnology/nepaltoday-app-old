@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Modal, View } from 'react-native'
 import { CircularSpinner } from '../../../../components/common'
+import newsLikeServices from '../../../../services/newsLike.services'
+import auth from '@react-native-firebase/auth'
 
 import { ArticleList } from './article-list.component'
 import ShowMoreModal from './showMoreModal'
@@ -24,7 +26,49 @@ export const ArticleListContainer = (props) => {
 	}
 
 	const onArticleLiked = (article) => {
-		
+		const nid = auth().currentUser.uid
+		newsLikeServices.postLike(nid, article._id, article.category)
+		const articleIndex = articles.indexOf(article)
+		let likes = article.likes || []
+		likes.push({nid})
+		let dislikes = article.dislikes || []
+		dislikes = dislikes.filter(x=>x.nid!=nid) || []
+		article.dislikes = dislikes
+		article.likes = likes
+		articles[articleIndex] = article
+	}
+
+	const onLikeRemoved = (article) => {
+		const nid = auth().currentUser.uid
+		newsLikeServices.removeLike(nid, article._id)
+		const articleIndex = articles.indexOf(article)
+		let likes = article.likes || []
+		likes = likes.filter(x=>x.nid!=nid) || []
+		article.likes = likes
+		articles[articleIndex] = article 
+	}
+
+	const onArticleDisliked = (article) => {
+		const nid = auth().currentUser.uid
+		newsLikeServices.postDislike(nid, article._id, article.category)
+		const articleIndex = articles.indexOf(article)
+		let dislikes = article.dislikes || []
+		dislikes.push({nid})
+		let likes = article.likes || []
+		likes = likes.filter(x=>x.nid!=nid) || []
+		article.likes = likes
+		article.dislikes = dislikes
+		articles[articleIndex] = article 
+	}
+
+	const onDislikeRemoved = (article) => {
+		const nid = auth().currentUser.uid
+		newsLikeServices.removeDislike(nid, article._id)
+		const articleIndex = articles.indexOf(article)
+		let dislikes = article.dislikes || []
+		dislikes = dislikes.filter(x=>x.nid!=nid) || []
+		article.dislikes = dislikes
+		articles[articleIndex] = article
 	}
 
 	return <View>
@@ -43,6 +87,8 @@ export const ArticleListContainer = (props) => {
 		>
 			<ShowMoreModal
 				onArticleLiked={onArticleLiked}
+				onLikeRemoved={onLikeRemoved}
+				onDislikeRemoved={onDislikeRemoved}
 				onArticleDisliked={onArticleDisliked}
 				article={modalArticle}
 				onCloseShowMoreModal={onCloseShowMoreModal}

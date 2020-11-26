@@ -1,10 +1,84 @@
-import React from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View, Share } from 'react-native'
 import { Divider } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import auth from '@react-native-firebase/auth'
+import { NEPALTODAY_URL } from '../../../../layout/article/article-detail/article-detail.component'
 
 const ShowMoreModal = (props) => {
-    const {article} = props
+
+    const [article, setArticle] = useState(props.article)
+
+    const nid = auth().currentUser.uid
+    const checkLike = (myArticle) => {
+        const likes = myArticle.likes || []
+        const likeArr = likes.filter(x => x.nid==nid)
+        if(likeArr.length==0){
+            return false
+        }else{
+            return true
+        }
+    }
+
+    const checkDislike = (myArticle) => {
+        const dislikes = myArticle.dislikes || []
+        const dislikeArr = dislikes.filter(x => x.nid==nid)
+        if(dislikeArr.length==0){
+            return false
+        }else{
+            return true
+        }
+    }
+
+    const onArticleLiked = (myArticle)=> {
+        let clickArticle = {...myArticle}
+        let likes = clickArticle.likes || []
+        const check = checkLike(article)
+        if(check){
+            likes = likes.filter(x=>x.nid!=nid)
+            clickArticle.likes = likes
+            setArticle(clickArticle)
+            props.onLikeRemoved(myArticle)
+        }else{
+            likes.push({nid})
+            clickArticle.likes = likes
+            let dislikes = clickArticle.dislikes || []
+            dislikes = dislikes.filter(x=>x.nid!=nid)
+            clickArticle.dislikes = dislikes
+            setArticle(clickArticle)
+            props.onArticleLiked(myArticle)
+        }
+    }
+
+    const onArticleDisliked = (myArticle) => {
+        let clickArticle = {...myArticle}
+        let dislikes = clickArticle.dislikes || []
+        const check = checkDislike(article)
+        if(check){
+            dislikes = dislikes.filter(x=>x.nid!=nid)
+            clickArticle.dislikes = dislikes
+            setArticle(clickArticle)    
+            props.onDislikeRemoved(myArticle)
+        }else{
+            dislikes.push({nid})
+            clickArticle.dislikes = dislikes
+            let likes = clickArticle.likes || []
+            likes = likes.filter(x=>x.nid!=nid)
+            clickArticle.likes = likes
+            setArticle(clickArticle)
+            props.onArticleDisliked(myArticle)
+        }
+    }
+
+    const onShareClick = () => {
+		const { title, link } = article
+		Share.share({
+			message: title + '  ' + link + ' #NEPALTODAYAPP ' + NEPALTODAY_URL,
+			url: link,
+			title: title,
+		})
+	}
+
     return (
         <TouchableOpacity
             activeOpacity={1}
@@ -18,6 +92,7 @@ const ShowMoreModal = (props) => {
                 <TouchableOpacity 
                     activeOpacity={0.8}
                     style={styles.shareButton}
+                    onPress={onShareClick}
                 >
                     <Icon 
                         name="share-variant"
@@ -34,10 +109,10 @@ const ShowMoreModal = (props) => {
                     <TouchableOpacity
                         activeOpacity={0.9}
                         style={styles.likeButton}
-                        onPress={()=>props.onArticleLiked(article)}
+                        onPress={()=>onArticleLiked(article)}
                     >
                         <Icon
-                            name="thumb-up-outline"
+                            name={checkLike(article) && "thumb-up" || "thumb-up-outline"}
                             size={30}
                             style={styles.likeIcon}
                             color="#000"
@@ -50,10 +125,10 @@ const ShowMoreModal = (props) => {
                     <TouchableOpacity
                         activeOpacity={0.9}
                         style={styles.likeButton}
-                        onPress={()=>props.onArticleDisliked(article)}
+                        onPress={()=>onArticleDisliked(article)}
                     >
                         <Icon
-                            name="thumb-down-outline"
+                            name={checkDislike(article) && "thumb-down" || "thumb-down-outline"}
                             size={30}
                             style={styles.likeIcon}
                             color="#000"
