@@ -142,6 +142,12 @@ export const GET_ARTICLES_QUERY = gql`
 				name
 				logoLink
 			}
+			likes {
+				nid
+			}
+			dislikes {
+				nid
+			}
 		}
 	}
 `
