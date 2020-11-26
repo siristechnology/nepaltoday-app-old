@@ -1,16 +1,37 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ScrollView, StyleSheet, View, Modal } from 'react-native'
 import RoundStory from './roundStory'
+import { fetchfromAsync, storetoAsync } from './storyStorageservices'
 import SwiperStory from './swiperStory'
 
 const StoryHeadline = (props) => {
     const [showStory, setShowStory] = useState(false)
     const [storyArticle, setStoryArticle] = useState({})
     const headlineArticles = props.headlineArticles || []
+    const [readStory, setReadStory] = useState([])
+
+    useEffect(()=>{
+        fetchfromAsync().then(res=>{
+            setReadStory(res)
+        }).catch(err=>setReadStory([]))
+    },[])
+
+    const onStoryLoaded = (article) => {
+        let readStories = [...readStory]
+        readStories.push(article)
+        readStories = readStories.filter((thing, index, self) =>
+            index === self.findIndex((t) => (
+                t.title === thing.title
+            ))
+        )
+        setReadStory(readStories)
+        storetoAsync(readStories)
+    }
     
     const onShowStory = (article) => {
         setShowStory(true)
         setStoryArticle(article)
+        onStoryLoaded(article)
     }
 
     const onCloseStoryModal = () => {
@@ -21,6 +42,27 @@ const StoryHeadline = (props) => {
         setShowStory(false)
         props.onShowArticleDetail(article, headlineArticles)
     }
+
+    const getSortedStories = (arr1, arr2) => {
+        let commonArr = []
+        arr1.map(i=>{
+            let element = arr2.filter(x=> x.title==i.title)[0]
+            if(element && element.title){
+                commonArr.push(element)
+            }
+        })
+        let differenceArr = []
+        arr1.map(i=>{
+            let element = arr2.filter(x=> x.title==i.title)
+            if(element.length == 0){
+                differenceArr.push(i)
+            }
+        })
+        const allStories = differenceArr.concat(commonArr)
+        return allStories
+    }
+
+    const sortedStories = getSortedStories(headlineArticles, readStory)
     
     return (
         <ScrollView
@@ -28,11 +70,12 @@ const StoryHeadline = (props) => {
             showsHorizontalScrollIndicator={false}
         >
             <View style={styles.container}>
-                {headlineArticles.map((article, i)=>(
+                {sortedStories.map((article, i)=>(
                     <RoundStory
                         key={i}
                         article={article}
                         onShowStory={onShowStory}
+                        readStory={readStory}
                     />                
                 ))}
             </View>
@@ -46,6 +89,7 @@ const StoryHeadline = (props) => {
                     articles={headlineArticles}
                     onCloseStory={onCloseStoryModal}
                     showArticleDetail={onShowArticleDetail}
+                    onStorySwiped={onStoryLoaded}
                 />
             </Modal>
         </ScrollView>

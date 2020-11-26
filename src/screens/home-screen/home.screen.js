@@ -20,13 +20,22 @@ const Home = ({ navigation }) => {
 	const [refreshing, setRefreshing] = useState(false)
 	const [localArticles, setLocalArticles] = useState({ getArticles: [] })
 
-	const [fetchNews, { loading, data, refetch, error }] = useLazyQuery(GET_ARTICLES_QUERY, {
+	const [fetchNews, { loading, data, refetch, error, called }] = useLazyQuery(GET_ARTICLES_QUERY, {
 		variables: {},
 	})
 
 	const handleRefresh = () => {
 		setRefreshing(true)
-		refetch().then(() => setRefreshing(false))
+		if (called) {
+			refetch()
+				.then(() => {
+					setRefreshing(false)
+				})
+				.catch((err) => setRefreshing(false))
+		} else {
+			fetchNews()
+			setRefreshing(false)
+		}
 	}
 
 	const fetchArticlesFromAsyncStorage = async () => {
@@ -135,6 +144,12 @@ export const GET_ARTICLES_QUERY = gql`
 			source {
 				name
 				logoLink
+			}
+			likes {
+				nid
+			}
+			dislikes {
+				nid
 			}
 		}
 	}

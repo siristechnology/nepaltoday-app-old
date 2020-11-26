@@ -6,7 +6,7 @@ import { useScrollToTop } from '@react-navigation/native'
 import { ArticleListItem } from './article.component'
 import { getReadArticles } from '../../../../services/asyncStorageService'
 
-const ArticleListComponent = React.memo(({ eva, articles, onItemPress, refreshing, handleRefresh, headerComponent }) => {
+const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMoreModal, refreshing, handleRefresh, headerComponent }) => {
 	const [readArticles, setReadArticles] = useState([])
 
 	useEffect(() => {
@@ -26,6 +26,7 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, refreshin
 				isRead={readArticles.filter((x) => x.articleId == item._id).length}
 				style={eva.style.item}
 				article={item}
+				onShowMoreModal={onShowMoreModal}
 				onPress={() => _onItemPress(item)}
 			/>
 		)

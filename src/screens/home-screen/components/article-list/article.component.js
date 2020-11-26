@@ -7,11 +7,16 @@ import { textStyle } from '../../../../components/common'
 import { ArticleActivityBar } from '../../../../components/articles'
 import { ClockIconOutline } from '../../../../assets/icons'
 import { getRelativeTime } from '../../../../helper/time'
+import { IconButton } from 'react-native-paper'
 
 const ArticleListItemCompoent = (props) => {
 	const { eva, article, style, isRead, index } = props
 	const onPress = () => {
 		props.onPress(article)
+	}
+
+	const onMoreIconPress = (article) => {
+		props.onShowMoreModal(article)
 	}
 
 	return (
@@ -36,18 +41,25 @@ const ArticleListItemCompoent = (props) => {
 					</View>
 				</View>
 				<ArticleActivityBar style={eva.style.activityBar}>
-					<View style={eva.style.activityBarContent}>
-						<Avatar source={{ uri: article.source.logoLink }} size="tiny" />
-						<View style={eva.style.articleSourceName}>
-							<Text appearance="hint">{article.source.name}</Text>
+					<View style={eva.style.bottomRowView}>
+						<View style={eva.style.activityBarContent}>
+							<Avatar source={{ uri: article.source.logoLink }} size="tiny" />
+							<View style={eva.style.articleSourceName}>
+								<Text appearance="hint">{article.source.name}</Text>
+							</View>
+						</View>
+						<View style={eva.style.activityBarContent}>
+							{ClockIconOutline(eva.style.dateIcon)}
+							<Text style={eva.style.dateLabel} appearance="hint" category="p2">
+								{getRelativeTime(article.createdDate)}
+							</Text>
 						</View>
 					</View>
-					<View style={eva.style.activityBarContent}>
-						{ClockIconOutline(eva.style.dateIcon)}
-						<Text style={eva.style.dateLabel} appearance="hint" category="p2">
-							{getRelativeTime(article.createdDate)}
-						</Text>
-					</View>
+					<IconButton 
+						icon="dots-vertical"
+						size={22}
+						onPress={()=>onMoreIconPress(article)}
+					/>
 				</ArticleActivityBar>
 			</View>
 		</TouchableOpacity>
@@ -89,8 +101,12 @@ export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 		...textStyle.caption2,
 	},
 	activityBar: {
-		justifyContent: 'flex-start',
+		justifyContent: 'space-between',
 		marginTop: 8,
+	},
+	bottomRowView: {
+		alignItems: 'center',
+		flexDirection: 'row'
 	},
 	articleSourceName: { marginLeft: 4 },
 	activityBarContent: {
