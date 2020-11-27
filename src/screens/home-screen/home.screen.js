@@ -26,11 +26,13 @@ const Home = ({ navigation }) => {
 
 	const handleRefresh = () => {
 		setRefreshing(true)
-		if(called){
-			refetch().then(() => {
-				setRefreshing(false)
-			}).catch(err=>setRefreshing(false))
-		}else{
+		if (called) {
+			refetch()
+				.then(() => {
+					setRefreshing(false)
+				})
+				.catch((err) => setRefreshing(false))
+		} else {
 			fetchNews()
 			setRefreshing(false)
 		}
@@ -53,9 +55,10 @@ const Home = ({ navigation }) => {
 		getFormattedCurrentNepaliDate().then((npDate) => {
 			setNepaliDate(npDate)
 		})
-		fetchArticlesFromAsyncStorage()
-		fetchNews()
-	}, [])
+		fetchArticlesFromAsyncStorage().then(() => {
+			fetchNews()
+		})
+	}, [fetchNews])
 
 	if (!loading && data != null && data.getArticles && data.getArticles.length) {
 		const myArticles = data.getArticles
