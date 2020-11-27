@@ -1,4 +1,4 @@
-
+jest.mock('react-native-gesture-handler')
 jest.mock('react-native/Libraries/BatchedBridge/NativeModules')
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter')
