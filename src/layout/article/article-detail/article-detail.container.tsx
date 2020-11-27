@@ -20,7 +20,7 @@ export default class ArticleDetailContainer extends React.PureComponent<any, Sta
 	public render(): React.ReactNode {
 		const article = this.props.route.params.article
 		const articles = this.props.route.params.articles || [article]
-
+		const fromPage = this.props.route.params.fromPage
 		const articleIndex = articles.indexOf(article)
 		const slicedArticles = articles.slice((articleIndex - 5 > 0 && articleIndex - 5) || 0, articleIndex + 6)
 		return (
@@ -32,7 +32,7 @@ export default class ArticleDetailContainer extends React.PureComponent<any, Sta
 			>
 				{slicedArticles.map((iArticle, i) => (
 					<View key={i}>
-						<ArticleDetail index={i} article={iArticle} navigation={this.props.navigation} />
+						<ArticleDetail fromPage={fromPage} index={i} article={iArticle} navigation={this.props.navigation} />
 					</View>
 				))}
 			</ViewPager>
