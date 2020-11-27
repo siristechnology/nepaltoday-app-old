@@ -3,6 +3,9 @@ jest.mock('react-native/Libraries/BatchedBridge/NativeModules')
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter')
 
+import { NativeModules } from 'react-native'
+NativeModules.TrackPlayerModule = jest.fn()
+
 const mockLocalize = require('./__mocks__/react-native-localize')
 jest.mock('react-native-localize', () => mockLocalize)
 
