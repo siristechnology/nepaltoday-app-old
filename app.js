@@ -27,10 +27,10 @@ const App = () => {
 	}
 
 	const onNotif = (notif) => {
-		if (notif._id && notif.foreground === false) {
+		if (notif.data && notif.data._id && notif.foreground === false) {
 			setLoading(true)
 			notificationHandler
-				.handleNotificationClick(notif._id)
+				.handleNotificationClick(notif.data._id)
 				.then((res) => {
 					setArticle(res.data.getArticle)
 					setClicked(true)
@@ -40,7 +40,7 @@ const App = () => {
 					crashlytics().recordError(err)
 					setLoading(false)
 				})
-		} else if (notif.notifType === 'corona' && notif.foreground === false) {
+		} else if (notif.data && notif.data.notifType === 'corona' && notif.foreground === false) {
 			setLoading(true)
 			setClicked(true)
 			setCoronaNotif(true)

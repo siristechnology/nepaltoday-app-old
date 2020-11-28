@@ -20,14 +20,14 @@ export type ArticleDetailComponentProps = ThemedComponentProps & ComponentProps
 
 class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentProps> {
 	public render(): React.ReactNode {
-		const { eva, article, index } = this.props
+		const { eva, article, index, fromPage } = this.props
 		const { READ_MORE } = np.public
 		const BackIcon = (
 			<AntDesign
 				name="back"
 				size={24}
 				color="grey"
-				onPress={this.navigateBack}
+				onPress={()=>this.navigateBack(fromPage)}
 				style={{
 					padding: 8,
 				}}
@@ -108,8 +108,12 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 		)
 	}
 
-	private navigateBack = () => {
-		this.props.navigation.goBack()
+	private navigateBack = (fromPage) => {
+		if(fromPage && fromPage=='category'){
+			this.props.navigation.goBack()
+		}else{
+			this.props.navigation.navigate('Tab')
+		}
 	}
 
 	private shareButtonClick = () => {
