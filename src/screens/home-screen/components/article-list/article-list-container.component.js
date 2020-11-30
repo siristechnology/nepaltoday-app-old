@@ -6,6 +6,7 @@ import auth from '@react-native-firebase/auth'
 
 import { ArticleList } from './article-list.component'
 import ShowMoreModal from './showMoreModal'
+import { useTheme } from 'react-native-paper'
 
 export const ArticleListContainer = (props) => {
 	const [showMoreModal, setShowMoreModal] = useState(false)
@@ -71,7 +72,9 @@ export const ArticleListContainer = (props) => {
 		articles[articleIndex] = article
 	}
 
-	return <View>
+	const theme = useTheme()
+
+	return <View style={{backgroundColor: theme.colors.primary}}>
 		{((!articles || articles.length === 0) && 
 		<CircularSpinner />) || 
 		<ArticleList 

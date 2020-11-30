@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/react-hooks'
 import RNBootSplash from 'react-native-bootsplash'
@@ -14,6 +14,7 @@ import { HeadlineComponent } from './components/headline.component'
 import auth from '@react-native-firebase/auth'
 import StoryHeadline from './components/storyHeadline/storyHeadline'
 import NepaliEvent from './components/nepaliEvent.component'
+import { Text, IconButton } from 'react-native-paper'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -87,7 +88,15 @@ const Home = ({ navigation }) => {
 					</Text>
 					<NepaliEvent />
 				</View>
-				<Weather />
+				<View style={style.weatherView}>
+					<Weather />
+					<IconButton
+						icon="dots-vertical"
+						size={22}
+						color="#000"
+						onPress={()=>navigation.navigate('Settings')}
+					/>
+				</View>
 			</View>
 			<StoryHeadline
 				headlineArticles={headlineArticles}
@@ -167,7 +176,7 @@ const style = StyleSheet.create({
 	},
 	nepaliDateStyle: {
 		fontWeight: 'bold',
-		fontSize: 26,
+		fontSize: 24,
 		paddingTop: 5,
 	},
 	screenStyle: {
@@ -179,6 +188,10 @@ const style = StyleSheet.create({
 		borderBottomWidth: 1,
 		borderBottomColor: '#F5F0F0',
 	},
+	weatherView: {
+		flexDirection: 'row',
+		alignItems: 'center'
+	}
 })
 
 export default Home

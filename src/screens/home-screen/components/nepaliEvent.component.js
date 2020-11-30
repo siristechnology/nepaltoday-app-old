@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
         marginLeft: 3
 	},
 	eventTextStyle: {
-		fontSize: 13,
+		fontSize: 12,
     },
     tithiTextStyle: {
         fontSize: 12,

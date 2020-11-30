@@ -5,6 +5,7 @@ import { useScrollToTop } from '@react-navigation/native'
 
 import { ArticleListItem } from './article.component'
 import { getReadArticles } from '../../../../services/asyncStorageService'
+import { useTheme } from 'react-native-paper'
 
 const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMoreModal, refreshing, handleRefresh, headerComponent }) => {
 	const [readArticles, setReadArticles] = useState([])
@@ -34,10 +35,10 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 
 	const ref = React.useRef(null)
 	useScrollToTop(ref)
-
+	const theme = useTheme()
 	return (
 		<FlatList
-			contentContainerStyle={eva.style.container}
+			contentContainerStyle={[eva.style.container,{backgroundColor: theme.colors.background}]}
 			data={articles}
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}
@@ -52,7 +53,7 @@ export const ArticleList = withStyles(ArticleListComponent, (theme) => ({
 	container: {
 		paddingHorizontal: 12,
 		paddingVertical: 4,
-		backgroundColor: theme['background-basic-color-1'],
+		// backgroundColor: theme['background-basic-color-1'],
 	},
 	item: {
 		marginVertical: 4,

@@ -35,10 +35,16 @@ const Weather = () => {
 		}
 	}
 
-	const { loading, data, error } = useQuery(FETCH_WEATHER_INFO_QUERY, {
+	let { loading, data, error } = useQuery(FETCH_WEATHER_INFO_QUERY, {
 		variables: {},
 	})
 
+	data = {"getWeatherInfo": {
+		"temperature": 23.43,
+		"condition": "Clear",
+		"description": "clear sky"
+	  }
+	}
 	if (error) {
 		crashlytics().recordError(new Error('Weather Api error' + error.message))
 	}
@@ -53,7 +59,7 @@ const Weather = () => {
 			<View testID="weatherComponent" style={styles.weatherContainerStyle}>
 				<Icon 
 					name={getWeatherIcon(condition)} 
-					size={20} 
+					size={18} 
 				/>
 				<Text style={styles.weatherTextStyle}>{convertToNepaliDigit(temperature)} ˚C</Text>
 			</View>
@@ -71,7 +77,7 @@ const styles = StyleSheet.create({
 	},
 	weatherTextStyle: {
 		fontWeight: 'bold',
-		fontSize: 18,
+		fontSize: 16,
 		marginLeft: 3,
 	},
 })

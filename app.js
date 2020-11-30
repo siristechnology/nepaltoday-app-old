@@ -16,7 +16,7 @@ import PushNotification from 'react-native-push-notification'
 import { getReadArticles, clearOldArticles } from './src/services/asyncStorageService'
 import readArticlesService from './src/services/readArticles.service'
 
-const App = () => {
+const App = (props) => {
 	const [clicked, setClicked] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [article, setArticle] = useState({})
@@ -54,7 +54,10 @@ const App = () => {
 		} else if (clicked && coronaNotif) {
 			return <AppContainer initialScreenName="Corona" />
 		} else {
-			return <AppContainer />
+			return <AppContainer 
+				onModeChange={props.onModeChange}
+				darkMode={props.darkMode}
+			/>
 		}
 	}
 
