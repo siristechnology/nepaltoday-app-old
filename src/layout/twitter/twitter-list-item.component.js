@@ -7,6 +7,7 @@ import { textStyle } from '../../components/common'
 import { ArticleActivityBar } from '../../components/articles'
 import { ClockIconOutline } from '../../assets/icons'
 import { getRelativeTime } from '../../helper/time'
+import { useTheme } from 'react-native-paper'
 
 const TwitterListItemComponent = (props) => {
 	const { eva, tweet, index } = props
@@ -19,8 +20,10 @@ const TwitterListItemComponent = (props) => {
 		})
 	}
 
+	const theme = useTheme()
+
 	return (
-		<View style={[eva.style.container]}>
+		<View style={[eva.style.container,{backgroundColor: theme.colors.background}]}>
 			<View testID={'twitter' + index} style={eva.style.tweetWrapper}>
 				<TouchableOpacity onPress={handleTwitterHandlePress} style={eva.style.leftWrapper} activeOpacity={0.8}>
 					<Avatar source={{ uri: tweet.profileImage }} style={eva.style.avatar} size="giant" />
@@ -52,7 +55,7 @@ const TwitterListItemComponent = (props) => {
 export const TwitterListItem = withStyles(TwitterListItemComponent, (theme) => ({
 	container: {
 		marginVertical: 0.2,
-		backgroundColor: '#FFFFFF',
+		// backgroundColor: '#FFFFFF',
 	},
 	tweetWrapper: {
 		padding: 4,

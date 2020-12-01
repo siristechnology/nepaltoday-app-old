@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { Text } from '@ui-kitten/components'
 import { en } from '../../lang/en'
 import { getLocalName } from '../../helper/text'
 import { OfflineNotice } from '../../components'
@@ -10,12 +9,15 @@ import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/react-hooks'
 import crashlytics from '@react-native-firebase/crashlytics'
 import { fetchCategoryArticlesfromAsync, storeCategoryArticlestoAsync } from '../../helper/cacheStorage'
+import { useTheme, Text } from 'react-native-paper'
 
 const { NEWS, ENTERTAINMENT, BUSINESS, SOCIAL, SPORTS, HEALTH, TECHNOLOGY, AGRICULTURE, SHARE, CARTOON } = en.menu
 
 const HeadlineScreen = ({ navigation }) => {
 	const [refreshing, setRefreshing] = useState(false)
 	const [localArticles, setLocalArticles] = useState({ getArticles: [] })
+
+	const theme = useTheme()
 	
 	const [fetchNews, { loading, data, refetch, error }] = useLazyQuery(GET_ARTICLES_QUERY, {
 		variables: {},
@@ -72,10 +74,10 @@ const HeadlineScreen = ({ navigation }) => {
 						style={{ flex: 1 }}
 						heading={localTabName}
 						key={idx}
-						tabStyle={{ backgroundColor: '#fff' }}
-						activeTabStyle={{ backgroundColor: '#fff' }}
-						textStyle={{ color: '#000' }}
-						activeTextStyle={{ color: '#000' }}
+						tabStyle={{ backgroundColor: theme.colors.lightBackground }}
+						activeTabStyle={{ backgroundColor: theme.colors.background }}
+						textStyle={{ color: theme.colors.text }}
+						activeTextStyle={{ color: theme.colors.text }}
 					>
 						<Text>Not available</Text>
 					</Tab>
@@ -87,10 +89,10 @@ const HeadlineScreen = ({ navigation }) => {
 					style={{ flex: 1 }}
 					heading={localTabName}
 					key={idx}
-					tabStyle={{ backgroundColor: '#fff' }}
-					activeTabStyle={{ backgroundColor: '#fff' }}
-					textStyle={{ color: '#000' }}
-					activeTextStyle={{ color: '#000' }}
+					tabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					activeTabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					textStyle={{ color: theme.colors.text }}
+					activeTextStyle={{ color: theme.colors.text }}
 				>
 					<OfflineNotice />
 					<HealineListContainer articles={dataArr} refreshing={refreshing} handleRefresh={handleRefresh} navigation={navigation} />
@@ -100,7 +102,7 @@ const HeadlineScreen = ({ navigation }) => {
 	}
 
 	return (
-		<Container>
+		<Container style={{backgroundColor: theme.colors.lightBackground}}>
 			<Tabs
 				tabBarUnderlineStyle={{ backgroundColor: '#ff0000' }}
 				renderTabBar={() => <ScrollableTab tabsContainerStyle={{ backgroundColor: '#fff' }} />}

@@ -3,9 +3,12 @@ import { View, TextInput, StyleSheet } from 'react-native'
 import AppLayout from '../../frame/app-layout'
 import RadioListContainer from './components/allRadioListContainer'
 import Icon from 'react-native-vector-icons/MaterialIcons'
+import { useTheme } from 'react-native-paper'
 
 const AllRadio = (props) => {
   const [searchText, setSearchText] = useState('')
+
+  const theme = useTheme()
 
   let toShowList = []
   if(searchText){
@@ -16,16 +19,28 @@ const AllRadio = (props) => {
 
   return(
     <AppLayout>
-      <View style={styles.textInputView}>
-        <Icon style={{ flex: 0.09 }} name="search" size={20} />
+      <View style={[styles.textInputView,{backgroundColor: theme.colors.primary}]}>
+        <Icon 
+					style={{ flex: 0.09 }} 
+					name="search" 
+					size={20} 
+					color={theme.colors.secondary}
+				/>
         <TextInput
           value={searchText}
           placeholder="Search fm"
-          style={{ flex: (searchText && 0.82) || 0.91, padding: 4, fontSize: 15 }}
+          placeholderTextColor={theme.colors.secondary}
+          style={{ flex: (searchText && 0.82) || 0.91, padding: 4, fontSize: 13, backgroundColor: theme.colors.lightBackground, color: theme.colors.secondary }}
           onChangeText={(text) => setSearchText(text)}
         />
         {(searchText && (
-          <Icon style={{ flex: 0.09, zIndex: 111 }} name="close" size={20} onPress={() => setSearchText('')} />
+          <Icon 
+            style={{ flex: 0.09, zIndex: 111 }} 
+            name="close" 
+            size={20} 
+            onPress={() => setSearchText('')}
+            color={theme.colors.secondary} 
+          />
         )) || <View />}
       </View>
       <RadioListContainer
@@ -43,7 +58,7 @@ const AllRadio = (props) => {
 
 const styles = StyleSheet.create({
   textInputView: {
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: 5,

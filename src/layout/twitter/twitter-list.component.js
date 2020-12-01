@@ -3,6 +3,7 @@ import { FlatList, RefreshControl } from 'react-native'
 import { withStyles } from '@ui-kitten/components/theme'
 import { useScrollToTop } from '@react-navigation/native'
 import { TwitterListItem } from './twitter-list-item.component'
+import { useTheme } from 'react-native-paper'
 
 const TwitterListComponent = React.memo(({ eva, tweets, refreshing, handleRefresh, header }) => {
 	const renderItem = ({ item, index }) => {
@@ -12,10 +13,12 @@ const TwitterListComponent = React.memo(({ eva, tweets, refreshing, handleRefres
 	const ref = React.useRef(null)
 	useScrollToTop(ref)
 
+	const theme = useTheme()
+
 	return (
 		<FlatList
 			ListHeaderComponent={header}
-			contentContainerStyle={eva.style.container}
+			contentContainerStyle={[eva.style.container,{backgroundColor: theme.colors.lightBackground}]}
 			data={tweets}
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}
@@ -27,7 +30,7 @@ const TwitterListComponent = React.memo(({ eva, tweets, refreshing, handleRefres
 
 export const TwitterList = withStyles(TwitterListComponent, (theme) => ({
 	container: {
-		backgroundColor: theme['background-basic-color-4'],
+		// backgroundColor: theme['background-basic-color-4'],
 	},
 	item: {
 		marginVertical: 8,

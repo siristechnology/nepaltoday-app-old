@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import { ScrollView, Text, View, StyleSheet } from 'react-native'
+import { ScrollView, View, StyleSheet } from 'react-native'
 import RadioCard from './radioCard'
 import { useScrollToTop } from '@react-navigation/native'
 import Accordion from 'react-native-collapsible/Accordion';
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Text } from 'react-native-paper';
 
 const RadioListContainer = (props) => {
 

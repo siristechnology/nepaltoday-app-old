@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import NetInfo from '@react-native-community/netinfo'
-import { View, Text, Dimensions, StyleSheet } from 'react-native'
-
+import { View, Dimensions, StyleSheet } from 'react-native'
+import { Text } from 'react-native-paper'
 const { width } = Dimensions.get('window')
 
 const OfflineNotice = () => {
@@ -31,14 +31,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		width,
-	},
-	offlineText: { color: 'white' },
-	refreshIcon: {
-		alignSelf: 'center',
-		width: 30,
-		height: 30,
-		marginTop: 8,
-		color: 'white',
 	},
 })
 

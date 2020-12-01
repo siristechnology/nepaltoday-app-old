@@ -1,6 +1,7 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { formatCoronaNumber } from '../../../helper/numberFormatter'
+import { Text, useTheme } from 'react-native-paper'
 
 const CountryCard = (props) => {
 	const renderStatView = (text, number, test) => {
@@ -14,8 +15,12 @@ const CountryCard = (props) => {
 		)
 	}
 
+	const theme = useTheme()
+
 	return (
-		<View style={styles.container}>
+		<View 
+			style={[styles.container,{backgroundColor: theme.colors.primary}]}
+		>
 			<Text style={styles.title}>{props.index+1}. {props.stat.country}</Text>
 			<View style={styles.statContainer}>
 				{renderStatView('कुल संक्रमित', props.stat.total_cases, 'worldTotalCase')}

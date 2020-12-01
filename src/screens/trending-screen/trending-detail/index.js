@@ -1,14 +1,17 @@
 import React from 'react'
-import { View, Image, Text, StyleSheet, ActivityIndicator } from 'react-native'
+import { View, Image, StyleSheet, ActivityIndicator } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { Tab, Tabs } from 'native-base'
 import TrendingTweetDetail from './trendingTweetDetail'
 import TrendingNewsDetail from './trendingNewsDetail'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import { useTheme, Text } from 'react-native-paper'
 
 const TrendingDetail = (props) => {
 	const trending = props.route.params.trending
+
+	const theme = useTheme()
 
 	const GET_INDIVIDUAL_ARTICLES = gql`
         query trendingDetail{
@@ -57,28 +60,33 @@ const TrendingDetail = (props) => {
 	})
 	return (
 		<View style={{ flex: 1 }}>
-			<View style={styles.headerView}>
-				<Icon name="back" size={24} color="#000" onPress={()=>props.navigation.goBack()} />
+			<View style={[styles.headerView, {backgroundColor: theme.colors.background}]}>
+				<Icon 
+					name="back" 
+					size={24} 
+					color={theme.colors.secondary} 
+					onPress={()=>props.navigation.goBack()} 
+				/>
 				<Text style={styles.headerText}>{trending.name}</Text>
 				<View />
 			</View>
-            <View style={styles.imageContainer}>
+            <View style={[styles.imageContainer,{backgroundColor: theme.colors.lightBackground}]}>
 				<Image source={{ uri: trending.image }} style={styles.imageStyle} />
 				<Text style={{ marginTop: 10, fontSize: 14 }}>{trending.handle}</Text>
 			</View>
 			{(loading1 || loading2) &&
 				<View style={styles.loaderContainer}>
-					<ActivityIndicator size="large" color="#000" />
+					<ActivityIndicator size="large" color={theme.colors.secondary} />
 				</View>
 			||
             <Tabs tabBarUnderlineStyle={{ backgroundColor: '#ff0000' }}>
 				<Tab
 					style={{ flex: 1 }}
 					heading="ट्वीट्स"
-					tabStyle={{ backgroundColor: '#fff' }}
-					activeTabStyle={{ backgroundColor: '#fff' }}
-					textStyle={{ color: '#000' }}
-					activeTextStyle={{ color: '#000' }}
+					tabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					activeTabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					textStyle={{ color: theme.colors.text }}
+					activeTextStyle={{ color: theme.colors.text }}
 				>
 					<TrendingTweetDetail
 						data={data2}
@@ -89,10 +97,10 @@ const TrendingDetail = (props) => {
 					<Tab
 						style={{ flex: 1 }}
 						heading="समाचार"
-						tabStyle={{ backgroundColor: '#fff' }}
-						activeTabStyle={{ backgroundColor: '#fff' }}
-						textStyle={{ color: '#000' }}
-						activeTextStyle={{ color: '#000' }}
+						tabStyle={{ backgroundColor: theme.colors.lightBackground }}
+						activeTabStyle={{ backgroundColor: theme.colors.lightBackground }}
+						textStyle={{ color: theme.colors.text }}
+						activeTextStyle={{ color: theme.colors.text }}
 					>
 						<TrendingNewsDetail
 							navigation={props.navigation}
@@ -108,21 +116,18 @@ const TrendingDetail = (props) => {
 const styles = StyleSheet.create({
 	headerView: {
 		padding: 10,
-		backgroundColor: '#fff',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 	},
 	headerText: {
 		fontSize: 19,
-		color: '#000',
 		opacity: 0.8,
 		fontWeight: 'bold',
 	},
 	imageContainer: {
 		padding: 5,
 		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#FAF9FE',
+		alignItems: 'center'
 	},
 	imageStyle: {
 		height: 75,

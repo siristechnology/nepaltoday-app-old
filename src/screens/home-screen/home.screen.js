@@ -14,7 +14,7 @@ import { HeadlineComponent } from './components/headline.component'
 import auth from '@react-native-firebase/auth'
 import StoryHeadline from './components/storyHeadline/storyHeadline'
 import NepaliEvent from './components/nepaliEvent.component'
-import { Text, IconButton } from 'react-native-paper'
+import { Text, IconButton, useTheme } from 'react-native-paper'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -70,6 +70,8 @@ const Home = ({ navigation }) => {
 		crashlytics().recordError(new Error(error))
 	}
 
+	const theme = useTheme()
+
 	const dataArticles = (data && data.getArticles) || []
 	const homeArticles = (dataArticles.length && dataArticles) || localArticles.getArticles
 	const topHeadline = homeArticles.find((a) => a.category === 'headline') || homeArticles[0]
@@ -81,7 +83,7 @@ const Home = ({ navigation }) => {
 
 	const headerComponent = (
 		<View>
-			<View style={style.headerStyle}>
+			<View style={[style.headerStyle, {borderBottomColor: theme.colors.divider}]}>
 				<View>
 					<Text testID="nepaliDate" style={style.nepaliDateStyle}>
 						{nepaliDate}
@@ -93,7 +95,7 @@ const Home = ({ navigation }) => {
 					<IconButton
 						icon="dots-vertical"
 						size={22}
-						color="#000"
+						color={theme.colors.secondary}
 						onPress={()=>navigation.navigate('Settings')}
 					/>
 				</View>
@@ -172,7 +174,7 @@ const style = StyleSheet.create({
 		alignItems: 'center',
 		paddingBottom: 10,
 		borderBottomWidth: 1,
-		borderBottomColor: '#F5F0F0',
+		// borderBottomColor: '#F5F0F0',
 	},
 	nepaliDateStyle: {
 		fontWeight: 'bold',

@@ -81,7 +81,7 @@ const App = (props) => {
 	}, [])
 
 	return (
-		<ApplicationProvider {...eva} theme={eva.light}>
+		// <ApplicationProvider {...eva} theme={eva.light}>
 			<ReduxProvider store={store}>
 				<StatusBar barStyle="light-content" />
 				<ErrorBoundary>
@@ -93,7 +93,7 @@ const App = (props) => {
 						loadAppContainer(article, clicked, coronaNotif)}
 				</ErrorBoundary>
 			</ReduxProvider>
-		</ApplicationProvider>
+		// </ApplicationProvider>
 	)
 }
 

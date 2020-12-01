@@ -1,9 +1,10 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import crashlytics from '@react-native-firebase/crashlytics'
 import { getNepaliDate } from '../../../helper/dateFormatter'
+import { useTheme, Text } from 'react-native-paper'
 
 const NepaliEvent = () => {
     
@@ -28,13 +29,15 @@ const NepaliEvent = () => {
 		crashlytics().recordError(new Error('nepali event Api error' + error.message))
 	}
 
+	const theme = useTheme()
+
 	if (!loading && !error && !!data.getNepaliEvent) {
 		let { isHoliday, tithi, event } = data.getNepaliEvent
 		if (!tithi) return null 
 
 		return (
 			<View testID="nepaliEventComponent" style={styles.containerStyle}>
-				<Text style={[styles.eventTextStyle,{ color: isHoliday && '#e57373' || '#000'}]}>
+				<Text style={[styles.eventTextStyle,{ color: isHoliday && '#e57373' || theme.colors.secondary}]}>
                     {event!='--' && (event+', ') || ''}{tithi}
                 </Text>
 			</View>

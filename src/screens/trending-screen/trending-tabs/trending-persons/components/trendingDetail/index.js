@@ -1,16 +1,20 @@
 import React from 'react'
-import { View, Image, Text, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet } from 'react-native'
 import Icon from 'react-native-vector-icons/AntDesign'
 import { Tab, Tabs } from 'native-base'
 import TrendingTweetDetail from './trendingTweetDetail'
 import TrendingNewsDetail from './trendingNewsDetail'
+import { Text, useTheme } from 'react-native-paper'
 
 const TrendingDetail = (props) => {
+
+	const theme = useTheme()
+
 	return (
 		<View style={{ flex: 1 }}>
-			<View style={styles.headerView}>
+			<View style={[styles.headerView,{backgroundColor:theme.colors.header}]}>
 				<Icon name="back" size={24} color="#000" onPress={props.closeDetail} />
-				<Text style={styles.headerText}>{props.trending.name}</Text>
+				<Text style={styles.headerText}>kkkkkk{props.trending.name}</Text>
 				<View />
 			</View>
             <View style={styles.imageContainer}>
@@ -51,13 +55,12 @@ const TrendingDetail = (props) => {
 const styles = StyleSheet.create({
 	headerView: {
 		padding: 10,
-		backgroundColor: '#fff',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 	},
 	headerText: {
 		fontSize: 19,
-		color: '#000',
+		// color: '#000',
 		opacity: 0.8,
 		fontWeight: 'bold',
 	},
@@ -65,7 +68,7 @@ const styles = StyleSheet.create({
 		padding: 5,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#FAF9FE',
+		// backgroundColor: '#FAF9FE',
 	},
 	imageStyle: {
 		height: 75,
