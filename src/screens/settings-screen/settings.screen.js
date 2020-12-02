@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Divider, Switch, Text, useTheme } from 'react-native-paper'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons'
+
+const PlayStoreLink = 'https://play.google.com/store/apps/details?id=com.siristechnology.nepaltodayapp'
 
 const SettingsScreen = (props) => {
 
@@ -33,6 +35,10 @@ const SettingsScreen = (props) => {
             </Text>
         </View>
     )
+
+    const onRateClick = () => {
+        Linking.openURL(PlayStoreLink)
+    }
 
     return (
         <View style={styles.container}>
@@ -65,6 +71,7 @@ const SettingsScreen = (props) => {
             <TouchableOpacity
                 style={styles.options}
                 activeOpacity={0.6}
+                onPress={onRateClick}
             >
                 <MIcon
                     name='star-outline'
@@ -113,7 +120,6 @@ const styles = StyleSheet.create({
     },
     optionText: {
         fontSize: 17,
-        // color: '#000',
         opacity: 0.8,
         marginLeft: 25
     },

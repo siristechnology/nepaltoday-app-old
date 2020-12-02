@@ -37,6 +37,7 @@ export const ArticleListContainer = (props) => {
 		article.dislikes = dislikes
 		article.likes = likes
 		articles[articleIndex] = article
+		onCloseShowMoreModal()
 	}
 
 	const onLikeRemoved = (article) => {
@@ -46,7 +47,8 @@ export const ArticleListContainer = (props) => {
 		let likes = article.likes || []
 		likes = likes.filter(x=>x.nid!=nid) || []
 		article.likes = likes
-		articles[articleIndex] = article 
+		articles[articleIndex] = article
+		onCloseShowMoreModal() 
 	}
 
 	const onArticleDisliked = (article) => {
@@ -59,7 +61,8 @@ export const ArticleListContainer = (props) => {
 		likes = likes.filter(x=>x.nid!=nid) || []
 		article.likes = likes
 		article.dislikes = dislikes
-		articles[articleIndex] = article 
+		articles[articleIndex] = article
+		onCloseShowMoreModal() 
 	}
 
 	const onDislikeRemoved = (article) => {
@@ -70,6 +73,7 @@ export const ArticleListContainer = (props) => {
 		dislikes = dislikes.filter(x=>x.nid!=nid) || []
 		article.dislikes = dislikes
 		articles[articleIndex] = article
+		onCloseShowMoreModal()
 	}
 
 	const theme = useTheme()

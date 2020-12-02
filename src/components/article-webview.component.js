@@ -3,6 +3,7 @@ import { AppState, StyleSheet, View } from 'react-native'
 import { Layout, Spinner } from '@ui-kitten/components'
 import { WebView } from 'react-native-webview'
 import AntDesign from 'react-native-vector-icons/AntDesign'
+import { useTheme } from 'react-native-paper'
 
 export const ArticleWebviewComponent = ({ navigation, route }) => {
 	const link = route.params.link
@@ -31,13 +32,15 @@ export const ArticleWebviewComponent = ({ navigation, route }) => {
 		/>
 	)
 
+	const theme = useTheme()
+
 	if (appState == 'active') {
 		return (
 			<View style={{ flex: 1 }}>
 				<View style={{ paddingLeft: 10 }}>{BackIcon}</View>
 				<WebView
 					renderLoading={() => (
-						<Layout style={styles.container}>
+						<Layout style={[styles.container,{backgroundColor: theme.colors.lightBackground}]}>
 							<Spinner />
 						</Layout>
 					)}
@@ -50,6 +53,7 @@ export const ArticleWebviewComponent = ({ navigation, route }) => {
 						flex: 1,
 						alignItems: 'center',
 						justifyContent: 'center',
+						backgroundColor: theme.colors.lightBackground
 					}}
 				/>
 			</View>

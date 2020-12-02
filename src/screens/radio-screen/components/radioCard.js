@@ -1,8 +1,9 @@
 import React from 'react'
-import { TouchableOpacity, Text, StyleSheet, Image, View } from 'react-native'
+import { TouchableOpacity, StyleSheet, Image, View } from 'react-native'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
 import RadioService from './../radio.services'
 import auth from '@react-native-firebase/auth'
+import { useTheme, Text } from 'react-native-paper'
 
 const RadioCard = (props) => {
 
@@ -15,11 +16,13 @@ const RadioCard = (props) => {
         }
     } 
 
+    const theme = useTheme()
+
     const {channel, currentChannelId, fmList, isFavorite} = props
     return(
         <TouchableOpacity
             activeOpacity={0.9}
-            style={styles.cardContainer}
+            style={[styles.cardContainer,{backgroundColor: theme.colors.primary}]}
             onPress={()=>props.onFMSelect(channel, fmList)}
             disabled={!props.initSuccess}
             testID={props.index && props.index || ''}
@@ -52,7 +55,6 @@ const RadioCard = (props) => {
 
 const styles = StyleSheet.create({
     cardContainer: {
-        backgroundColor: '#fff',
         elevation: 1,
         borderRadius: 5,
         padding: 5,

@@ -10,7 +10,7 @@ const CoronaScreen = () => {
 	const theme = useTheme()
 
 	return (
-		<Container>
+		<Container style={{backgroundColor: theme.colors.lightBackground}}>
 			<View style={[style.headerStyle,{backgroundColor: theme.colors.background}]}>
 				<Text style={style.textStyle}>कोरोना तथ्याङ्क</Text>
 			</View>

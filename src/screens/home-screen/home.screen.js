@@ -106,7 +106,7 @@ const Home = ({ navigation }) => {
 			/>
 			<HeadlineComponent
 				article={topHeadline}
-				style={style.headline}
+				style={[style.headline,{borderBottomColor: theme.colors.lightBackground}]}
 				onPress={() => navigation.navigate('ArticleDetail', { article: topHeadline, articles: homeArticles })}
 			/>
 		</View>
@@ -188,7 +188,6 @@ const style = StyleSheet.create({
 	headline: {
 		marginVertical: 4,
 		borderBottomWidth: 1,
-		borderBottomColor: '#F5F0F0',
 	},
 	weatherView: {
 		flexDirection: 'row',

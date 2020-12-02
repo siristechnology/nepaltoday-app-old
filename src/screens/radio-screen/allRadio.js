@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
 import { View, TextInput, StyleSheet } from 'react-native'
-import AppLayout from '../../frame/app-layout'
 import RadioListContainer from './components/allRadioListContainer'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import { useTheme } from 'react-native-paper'
@@ -18,7 +17,7 @@ const AllRadio = (props) => {
   }
 
   return(
-    <AppLayout>
+    <View style={{flex:1, backgroundColor: theme.colors.primary}}>
       <View style={[styles.textInputView,{backgroundColor: theme.colors.primary}]}>
         <Icon 
 					style={{ flex: 0.09 }} 
@@ -52,7 +51,7 @@ const AllRadio = (props) => {
         currentChannelId={props.currentChannelId}
         refreshFav={props.refetchFavorite}
       />
-    </AppLayout>
+    </View>
   )
 }
 

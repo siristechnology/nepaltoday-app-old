@@ -171,7 +171,7 @@ const RadioScreen = () => {
 		<Container style={{backgroundColor: theme.colors.lightBackground}}>
 			<Tabs tabBarUnderlineStyle={{ backgroundColor: '#ff0000' }}>
 				<Tab
-					style={{ flex: 1, paddingBottom: (currentChannelId && 126) || 60 }}
+					style={{ flex: 1, paddingBottom: (currentChannelId && 70) || 0 }}
 					heading="All FM"
 					tabStyle={{ backgroundColor: theme.colors.lightBackground }}
 					activeTabStyle={{ backgroundColor: theme.colors.lightBackground }}

@@ -25,7 +25,7 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 			<ArticleListItem
 				index={index}
 				isRead={readArticles.filter((x) => x.articleId == item._id).length}
-				style={eva.style.item}
+				style={[eva.style.item,{borderBottomColor: theme.colors.lightBackground}]}
 				article={item}
 				onShowMoreModal={onShowMoreModal}
 				onPress={() => _onItemPress(item)}
@@ -59,6 +59,6 @@ export const ArticleList = withStyles(ArticleListComponent, (theme) => ({
 		marginVertical: 4,
 		backgroundColor: theme['background-basic-color-1'],
 		borderBottomWidth: 1,
-		borderBottomColor: '#F5F0F0',
+		// borderBottomColor: '#F5F0F0',
 	},
 }))
