@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, TextInput, RefreshControl, Text, StyleSheet, FlatList } from 'react-native'
+import { View, TextInput, RefreshControl, StyleSheet, FlatList } from 'react-native'
 import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import Icon from 'react-native-vector-icons/MaterialIcons'
@@ -11,6 +11,7 @@ import DistrictCard from './districtCard'
 import { CircularSpinner } from '../../../components/common'
 import AppLayout from '../../../frame/app-layout'
 import CoronaSummary from './coronaSummary'
+import { useTheme, Text } from 'react-native-paper'
 
 const DistrictList = () => {
 	const [refreshing, setRefreshing] = useState(false)
@@ -18,6 +19,8 @@ const DistrictList = () => {
 
 	const ref = React.useRef(null)
 	useScrollToTop(ref)
+
+	const theme = useTheme()
 
 	const handleRefresh = () => {
 		setRefreshing(true)
@@ -61,16 +64,28 @@ const DistrictList = () => {
 					<>
 						<Text style={styles.text}>अन्तिम अपडेट गरिएको : {lastUpdated}</Text>
 						<CoronaSummary stats={data && data.getDistrictCoronaStats && data.getDistrictCoronaStats.timeLine} />
-						<View style={styles.textInputView}>
-							<Icon style={{ flex: 0.09 }} name="search" size={20} />
+						<View style={[styles.textInputView,{backgroundColor: theme.colors.primary}]}>
+							<Icon 
+								style={{ flex: 0.09 }} 
+								name="search" 
+								size={20}
+								color={theme.colors.secondary} 
+							/>
 							<TextInput
 								value={searchText}
 								placeholder="Search"
-								style={{ flex: (searchText && 0.82) || 0.91, padding: 4, fontSize: 15 }}
+								placeholderTextColor={theme.colors.secondary}
+								style={{ flex: (searchText && 0.82) || 0.91, padding: 4, fontSize: 13, backgroundColor: theme.colors.lightBackground, color: theme.colors.secondary }}
 								onChangeText={(text) => setSearchText(text)}
 							/>
 							{(searchText && (
-								<Icon style={{ flex: 0.09, zIndex: 111 }} name="close" size={20} onPress={() => setSearchText('')} />
+								<Icon 
+									style={{ flex: 0.09, zIndex: 111 }} 
+									name="close" 
+									size={20} 
+									onPress={() => setSearchText('')}
+									color={theme.colors.secondary} 
+								/>
 							)) || <View />}
 						</View>
 					</>
@@ -78,7 +93,7 @@ const DistrictList = () => {
 				data={sortedData}
 				renderItem={renderItem}
 				keyExtractor={(item) => item.name}
-				contentContainerStyle={styles.container}
+				contentContainerStyle={{backgroundColor: theme.colors.background}}
 				ref={ref}
 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 				ListFooterComponent={
@@ -114,9 +129,6 @@ const GET_DISTRICT_CORONA_STATS = gql`
 `
 
 const styles = StyleSheet.create({
-	container: {
-		backgroundColor: '#FAFAFA',
-	},
 	text: {
 		padding: 5,
 		paddingTop: 10,
@@ -132,13 +144,13 @@ const styles = StyleSheet.create({
 		paddingBottom: 72,
 	},
 	textInputView: {
-		backgroundColor: '#fff',
+		// backgroundColor: '#fff',
 		flexDirection: 'row',
 		alignItems: 'center',
 		borderRadius: 5,
 		margin: 10,
 		elevation: 1,
-		padding: 5,
+		padding: 3,
 		paddingHorizontal: 7,
 	},
 })

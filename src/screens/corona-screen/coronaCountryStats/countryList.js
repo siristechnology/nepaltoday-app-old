@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, RefreshControl, TextInput, Text, StyleSheet, FlatList } from 'react-native'
+import { View, RefreshControl, TextInput, StyleSheet, FlatList } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import crashlytics from '@react-native-firebase/crashlytics'
 import { useQuery } from '@apollo/react-hooks'
@@ -11,6 +11,7 @@ import CountryCard from './countryCard'
 import { CircularSpinner } from '../../../components/common'
 import AppLayout from '../../../frame/app-layout'
 import CoronaSummary from '../coronaDistrictStats/coronaSummary'
+import { useTheme, Text } from 'react-native-paper'
 
 const CountryList = () => {
 	const [refreshing, setRefreshing] = useState(false)
@@ -18,6 +19,8 @@ const CountryList = () => {
 
 	const ref = React.useRef(null)
 	useScrollToTop(ref)
+
+	const theme = useTheme()
 
 	const handleRefresh = () => {
 		setRefreshing(true)
@@ -60,21 +63,33 @@ const CountryList = () => {
 					<>
 						<Text style={styles.text}>अन्तिम अपडेट गरिएको : {lastUpdated}</Text>
 						<CoronaSummary stats={data && data.getLatestCoronaStats && data.getLatestCoronaStats.worldSummary} />
-						<View style={styles.textInputView}>
-							<Icon style={{ flex: 0.09 }} name="search" size={20} />
+						<View style={[styles.textInputView,{backgroundColor: theme.colors.primary}]}>
+							<Icon 
+								style={{ flex: 0.09 }} 
+								name="search" 
+								size={20} 
+								color={theme.colors.secondary}
+							/>
 							<TextInput
 								value={searchText}
 								placeholder="Search"
-								style={{ flex: (searchText && 0.82) || 0.91, padding: 4, fontSize: 15 }}
+								placeholderTextColor={theme.colors.secondary}
+								style={{ flex: (searchText && 0.82) || 0.91, padding: 4, fontSize: 13, backgroundColor: theme.colors.lightBackground, color: theme.colors.secondary }}
 								onChangeText={(text) => setSearchText(text)}
 							/>
 							{(searchText && (
-								<Icon style={{ flex: 0.09, zIndex: 111 }} name="close" size={20} onPress={() => setSearchText('')} />
+								<Icon 
+									style={{ flex: 0.09, zIndex: 111 }} 
+									name="close" 
+									size={20} 
+									onPress={() => setSearchText('')} 
+									color={theme.colors.secondary} 
+								/>
 							)) || <View />}
 						</View>
 					</>
 				}
-				contentContainerStyle={styles.container}
+				contentContainerStyle={{backgroundColor: theme.colors.background}}
 				data={sortedData.filter((x) => x.country !== 'Nepal')}
 				renderItem={renderItem}
 				keyExtractor={(item) => item.country}

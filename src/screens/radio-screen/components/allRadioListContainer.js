@@ -1,16 +1,19 @@
 import React, { useState } from 'react'
-import { ScrollView, Text, View, StyleSheet } from 'react-native'
+import { ScrollView, View, StyleSheet } from 'react-native'
 import RadioCard from './radioCard'
 import { useScrollToTop } from '@react-navigation/native'
 import Accordion from 'react-native-collapsible/Accordion';
 import Icon from 'react-native-vector-icons/FontAwesome5'
+import { Text, useTheme } from 'react-native-paper';
 
 const RadioListContainer = (props) => {
 
     const [activeSections, setActiveSections] = useState([])
 	
 	const ref = React.useRef(null)
-	useScrollToTop(ref)
+    useScrollToTop(ref)
+    
+    const theme = useTheme()
 
 	const checkFavorite = (fm) => {
 		if(props.favoriteList.filter(x=> x.id == fm.id).length > 0){
@@ -48,16 +51,18 @@ const RadioListContainer = (props) => {
     const renderHeader = section => {
         let index = sections.indexOf(section)
         return (
-            <View style={styles.provinceView} testID={"header"+index}>
+            <View style={[styles.provinceView,{borderBottomColor: theme.colors.lightBackground}]} testID={"header"+index}>
                 <Text style={styles.provinceText}>{section.title}</Text>
                 {activeSections[0]==sections.indexOf(section) && (
                     <Icon
                         name="chevron-up"
                         size={15}
+                        color={theme.colors.secondary}
                     />
                 ) || <Icon
                     name="chevron-down"
                     size={15}
+                    color={theme.colors.secondary}
                 />}
             </View>
         );
@@ -95,7 +100,7 @@ const RadioListContainer = (props) => {
                 renderHeader={renderHeader}
                 renderContent={renderContent}
                 onChange={updateSections}
-                touchableProps={{underlayColor:'#F5F5F5'}}
+                touchableProps={{underlayColor:theme.colors.lightBackground}}
             />}
 		</ScrollView>
 	)
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
     provinceView: {
         borderBottomWidth:1,
         marginVertical:5,
-        borderBottomColor:"#F5F5F5",
+        // borderBottomColor:"#F5F5F5",
         paddingBottom:10,
         flexDirection: 'row',
         alignItems: 'center',

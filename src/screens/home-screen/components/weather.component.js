@@ -1,10 +1,11 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { useQuery } from '@apollo/react-hooks'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { convertToNepaliDigit } from '../../../helper/utils'
 import crashlytics from '@react-native-firebase/crashlytics'
+import { useTheme, Text } from 'react-native-paper'
 
 export const FETCH_WEATHER_INFO_QUERY = gql`
 	query getWeatherInfo {
@@ -43,6 +44,8 @@ const Weather = () => {
 		crashlytics().recordError(new Error('Weather Api error' + error.message))
 	}
 
+	const theme = useTheme()
+
 	if (!loading && !error && !!data.getWeatherInfo) {
 		let { temperature, condition } = data.getWeatherInfo
 		if (!temperature) return null
@@ -53,7 +56,8 @@ const Weather = () => {
 			<View testID="weatherComponent" style={styles.weatherContainerStyle}>
 				<Icon 
 					name={getWeatherIcon(condition)} 
-					size={20} 
+					size={18}
+					color={theme.colors.secondary} 
 				/>
 				<Text style={styles.weatherTextStyle}>{convertToNepaliDigit(temperature)} ˚C</Text>
 			</View>
@@ -71,7 +75,7 @@ const styles = StyleSheet.create({
 	},
 	weatherTextStyle: {
 		fontWeight: 'bold',
-		fontSize: 18,
+		fontSize: 16,
 		marginLeft: 3,
 	},
 })

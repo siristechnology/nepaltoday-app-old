@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import gql from 'graphql-tag'
 import { useLazyQuery } from '@apollo/react-hooks'
 import RNBootSplash from 'react-native-bootsplash'
@@ -14,6 +14,7 @@ import { HeadlineComponent } from './components/headline.component'
 import auth from '@react-native-firebase/auth'
 import StoryHeadline from './components/storyHeadline/storyHeadline'
 import NepaliEvent from './components/nepaliEvent.component'
+import { Text, IconButton, useTheme } from 'react-native-paper'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -69,6 +70,8 @@ const Home = ({ navigation }) => {
 		crashlytics().recordError(new Error(error))
 	}
 
+	const theme = useTheme()
+
 	const dataArticles = (data && data.getArticles) || []
 	const homeArticles = (dataArticles.length && dataArticles) || localArticles.getArticles
 	const topHeadline = homeArticles.find((a) => a.category === 'headline') || homeArticles[0]
@@ -80,14 +83,22 @@ const Home = ({ navigation }) => {
 
 	const headerComponent = (
 		<View>
-			<View style={style.headerStyle}>
+			<View style={[style.headerStyle, {borderBottomColor: theme.colors.divider}]}>
 				<View>
 					<Text testID="nepaliDate" style={style.nepaliDateStyle}>
 						{nepaliDate}
 					</Text>
 					<NepaliEvent />
 				</View>
-				<Weather />
+				<View style={style.weatherView}>
+					<Weather />
+					<IconButton
+						icon="dots-vertical"
+						size={22}
+						color={theme.colors.secondary}
+						onPress={()=>navigation.navigate('Settings')}
+					/>
+				</View>
 			</View>
 			<StoryHeadline
 				headlineArticles={headlineArticles}
@@ -95,7 +106,7 @@ const Home = ({ navigation }) => {
 			/>
 			<HeadlineComponent
 				article={topHeadline}
-				style={style.headline}
+				style={[style.headline,{borderBottomColor: theme.colors.lightBackground}]}
 				onPress={() => navigation.navigate('ArticleDetail', { article: topHeadline, articles: homeArticles })}
 			/>
 		</View>
@@ -163,11 +174,11 @@ const style = StyleSheet.create({
 		alignItems: 'center',
 		paddingBottom: 10,
 		borderBottomWidth: 1,
-		borderBottomColor: '#F5F0F0',
+		// borderBottomColor: '#F5F0F0',
 	},
 	nepaliDateStyle: {
 		fontWeight: 'bold',
-		fontSize: 26,
+		fontSize: 24,
 		paddingTop: 5,
 	},
 	screenStyle: {
@@ -177,8 +188,11 @@ const style = StyleSheet.create({
 	headline: {
 		marginVertical: 4,
 		borderBottomWidth: 1,
-		borderBottomColor: '#F5F0F0',
 	},
+	weatherView: {
+		flexDirection: 'row',
+		alignItems: 'center'
+	}
 })
 
 export default Home

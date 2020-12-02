@@ -6,6 +6,7 @@ import { withStyles } from '@ui-kitten/components/theme'
 import { getRelativeTime } from '../../../helper/time'
 import { ArticleActivityBar } from '../../../components/articles'
 import { ActivityAuthoring, textStyle } from '../../../components/common'
+import { useTheme } from 'react-native-paper'
 
 const ArticleListItemComponent = React.memo((props) => {
 	const { eva, style, article, isRead, index, ...restProps } = props
@@ -13,12 +14,14 @@ const ArticleListItemComponent = React.memo((props) => {
 		props.onPress(article)
 	}
 
+	const theme = useTheme()
+
 	return (
 		<TouchableOpacity
 			testID={'headlineArticle' + index}
 			activeOpacity={0.8}
 			{...restProps}
-			style={[eva.style.container, style, isRead && { backgroundColor: '#f5f5f5' }]}
+			style={[eva.style.container, style, isRead && { backgroundColor: theme.colors.lightBackground }]}
 			onPress={onPress}
 		>
 			<ImageBackground style={eva.style.imageContainer} imageStyle={eva.style.image} source={{ uri: article.imageLink }} />

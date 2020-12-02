@@ -1,7 +1,8 @@
 import React from 'react'
-import { FlatList, RefreshControl, View, Text, StyleSheet } from 'react-native'
+import { FlatList, RefreshControl, View, StyleSheet } from 'react-native'
 import { useScrollToTop } from '@react-navigation/native'
 import TrendingCard from './trendingCard'
+import { Text } from 'react-native-paper'
 
 const TrendingListContainer = (props) => {
 	const ref = React.useRef(null)

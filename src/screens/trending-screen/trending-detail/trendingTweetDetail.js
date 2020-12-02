@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { View } from 'react-native'
+import { useTheme } from 'react-native-paper'
 import { TwitterListContainer } from '../../../layout/twitter/twitter-list.container'
 
 const TrendingTweetDetail = (props) => {
@@ -11,8 +12,10 @@ const TrendingTweetDetail = (props) => {
 		refetch().then(() => setRefreshing(false))
 	}
 
+	const theme = useTheme()
+
 	return (
-		<View style={{ flex: 1 }}>
+		<View style={{ flex: 1, backgroundColor: theme.colors.lightBackground}}>
 			<TwitterListContainer
 				refreshing={refreshing} 
 				onRefresh={handleRefresh}

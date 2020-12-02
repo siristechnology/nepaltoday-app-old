@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 import { StatusBar } from 'react-native'
-import * as eva from '@eva-design/eva'
-import { ApplicationProvider } from '@ui-kitten/components'
 
 import { store } from './src/store'
 import AppContainer from './src/frame/app-container'
@@ -16,7 +14,7 @@ import PushNotification from 'react-native-push-notification'
 import { getReadArticles, clearOldArticles } from './src/services/asyncStorageService'
 import readArticlesService from './src/services/readArticles.service'
 
-const App = () => {
+const App = (props) => {
 	const [clicked, setClicked] = useState(false)
 	const [loading, setLoading] = useState(false)
 	const [article, setArticle] = useState({})
@@ -54,7 +52,10 @@ const App = () => {
 		} else if (clicked && coronaNotif) {
 			return <AppContainer initialScreenName="Corona" />
 		} else {
-			return <AppContainer />
+			return <AppContainer 
+				onModeChange={props.onModeChange}
+				darkMode={props.darkMode}
+			/>
 		}
 	}
 
@@ -78,7 +79,7 @@ const App = () => {
 	}, [])
 
 	return (
-		<ApplicationProvider {...eva} theme={eva.light}>
+		// <ApplicationProvider {...eva} theme={eva.light}>
 			<ReduxProvider store={store}>
 				<StatusBar barStyle="light-content" />
 				<ErrorBoundary>
@@ -90,7 +91,7 @@ const App = () => {
 						loadAppContainer(article, clicked, coronaNotif)}
 				</ErrorBoundary>
 			</ReduxProvider>
-		</ApplicationProvider>
+		// </ApplicationProvider>
 	)
 }
 

@@ -1,5 +1,6 @@
 import React from 'react'
-import { StyleSheet, Image, TouchableOpacity, Text } from 'react-native'
+import { StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { Text } from 'react-native-paper'
 
 const RoundStory = (props) => {
     const article = props.article
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
     },
     sourceText: {
         fontSize: 13,
-        color: '#000',
+        // color: '#000',
         opacity: 0.7
     }
 })

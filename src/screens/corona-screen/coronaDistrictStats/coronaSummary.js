@@ -1,14 +1,18 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import { Text, useTheme } from 'react-native-paper'
 
 const CoronaSummary = (props) => {
+
+	const theme = useTheme()
+
 	const getCommaAddedNumber = (number) => {
 		return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 	}
 
 	const Card = (title, number, test) => {
 		return (
-			<View style={styles.individualCard}>
+			<View style={[styles.individualCard, {backgroundColor: theme.colors.background}]}>
 				<Text testID={test} style={styles.valueText}>{getCommaAddedNumber(number)}</Text>
 				<Text style={styles.valueTitle}>{title}</Text>
 			</View>
@@ -37,7 +41,6 @@ const styles = StyleSheet.create({
 		marginBottom: 7,
 	},
 	individualCard: {
-		backgroundColor: '#fff',
 		elevation: 1,
 		alignItems: 'center',
 		justifyContent: 'center',

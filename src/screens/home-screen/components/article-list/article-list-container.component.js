@@ -6,6 +6,7 @@ import auth from '@react-native-firebase/auth'
 
 import { ArticleList } from './article-list.component'
 import ShowMoreModal from './showMoreModal'
+import { useTheme } from 'react-native-paper'
 
 export const ArticleListContainer = (props) => {
 	const [showMoreModal, setShowMoreModal] = useState(false)
@@ -36,6 +37,7 @@ export const ArticleListContainer = (props) => {
 		article.dislikes = dislikes
 		article.likes = likes
 		articles[articleIndex] = article
+		onCloseShowMoreModal()
 	}
 
 	const onLikeRemoved = (article) => {
@@ -45,7 +47,8 @@ export const ArticleListContainer = (props) => {
 		let likes = article.likes || []
 		likes = likes.filter(x=>x.nid!=nid) || []
 		article.likes = likes
-		articles[articleIndex] = article 
+		articles[articleIndex] = article
+		onCloseShowMoreModal() 
 	}
 
 	const onArticleDisliked = (article) => {
@@ -58,7 +61,8 @@ export const ArticleListContainer = (props) => {
 		likes = likes.filter(x=>x.nid!=nid) || []
 		article.likes = likes
 		article.dislikes = dislikes
-		articles[articleIndex] = article 
+		articles[articleIndex] = article
+		onCloseShowMoreModal() 
 	}
 
 	const onDislikeRemoved = (article) => {
@@ -69,9 +73,12 @@ export const ArticleListContainer = (props) => {
 		dislikes = dislikes.filter(x=>x.nid!=nid) || []
 		article.dislikes = dislikes
 		articles[articleIndex] = article
+		onCloseShowMoreModal()
 	}
 
-	return <View>
+	const theme = useTheme()
+
+	return <View style={{backgroundColor: theme.colors.primary}}>
 		{((!articles || articles.length === 0) && 
 		<CircularSpinner />) || 
 		<ArticleList 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View, Share } from 'react-native'
-import { Divider } from 'react-native-paper'
+import { StyleSheet, TouchableOpacity, View, Share } from 'react-native'
+import { Divider, Text, useTheme } from 'react-native-paper'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import auth from '@react-native-firebase/auth'
 import { NEPALTODAY_URL } from '../../../../layout/article/article-detail/article-detail.component'
@@ -77,7 +77,9 @@ const ShowMoreModal = (props) => {
 			url: link,
 			title: title,
 		})
-	}
+    }
+    
+    const theme = useTheme()
 
     return (
         <TouchableOpacity
@@ -87,7 +89,7 @@ const ShowMoreModal = (props) => {
         >
             <TouchableOpacity
                 activeOpacity={1}
-                style={styles.modalView}
+                style={[styles.modalView,{backgroundColor: theme.colors.background}]}
             >
                 <TouchableOpacity 
                     activeOpacity={0.8}
@@ -97,7 +99,7 @@ const ShowMoreModal = (props) => {
                     <Icon 
                         name="share-variant"
                         size={20}
-                        color="#000"
+                        color={theme.colors.secondary}
                         style={styles.shareIcon}
                     />
                     <Text style={styles.text}>
@@ -115,7 +117,7 @@ const ShowMoreModal = (props) => {
                             name={checkLike(article) && "thumb-up" || "thumb-up-outline"}
                             size={30}
                             style={styles.likeIcon}
-                            color="#000"
+                            color={theme.colors.secondary}
                         />
                         <Text style={styles.text}>
                             Like
@@ -131,7 +133,7 @@ const ShowMoreModal = (props) => {
                             name={checkDislike(article) && "thumb-down" || "thumb-down-outline"}
                             size={30}
                             style={styles.likeIcon}
-                            color="#000"
+                            color={theme.colors.secondary}
                         />
                         <Text style={styles.text}>
                             Dislike
@@ -150,7 +152,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(0,0,0,0.8)'
     },
     modalView: {
-        backgroundColor: '#fff',
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         padding: 10
@@ -189,7 +190,6 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 16,
-        color: '#000',
         opacity: 0.8
     },
     verticalLine: {

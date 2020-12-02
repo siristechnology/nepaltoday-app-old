@@ -7,7 +7,7 @@ import { textStyle } from '../../../../components/common'
 import { ArticleActivityBar } from '../../../../components/articles'
 import { ClockIconOutline } from '../../../../assets/icons'
 import { getRelativeTime } from '../../../../helper/time'
-import { IconButton } from 'react-native-paper'
+import { IconButton, useTheme } from 'react-native-paper'
 
 const ArticleListItemCompoent = (props) => {
 	const { eva, article, style, isRead, index } = props
@@ -19,14 +19,16 @@ const ArticleListItemCompoent = (props) => {
 		props.onShowMoreModal(article)
 	}
 
+	const theme = useTheme()
+
 	return (
 		<TouchableOpacity
 			testID={'homeArticle' + index}
 			onPress={onPress}
 			activeOpacity={0.8}
-			style={[eva.style.container, style, isRead && { backgroundColor: '#F5F5F5' }]}
+			style={[eva.style.container, style, { backgroundColor: isRead && theme.colors.lightBackground || theme.colors.primary }]}
 		>
-			<View style={[eva.style.container, isRead && { backgroundColor: '#F5F5F5' }]}>
+			<View style={[eva.style.container, { backgroundColor: isRead &&  theme.colors.lightBackground || theme.colors.primary }]}>
 				<View style={eva.style.articleWrapper}>
 					<View style={eva.style.leftWrapper}>
 						<ImageBackground style={eva.style.imageContainer} imageStyle={eva.style.image} source={{ uri: article.imageLink }} />
@@ -69,7 +71,6 @@ const ArticleListItemCompoent = (props) => {
 export const ArticleListItem = withStyles(ArticleListItemCompoent, (theme) => ({
 	container: {
 		marginVertical: 4,
-		backgroundColor: '#FFFFFF',
 	},
 	articleWrapper: {
 		flexDirection: 'row',

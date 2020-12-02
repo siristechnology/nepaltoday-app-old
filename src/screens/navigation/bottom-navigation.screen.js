@@ -21,8 +21,8 @@ export const BottomTabScreen = ({ route }) => {
 			backBehavior="initialRoute"
 			shifting={false}
 			labeled={false}
-			activeColor={theme.colors.primary}
-			inactiveColor={color(theme.colors.text).alpha(0.6).rgb().string()}
+			activeColor={theme.colors.secondary}
+			inactiveColor={color(theme.colors.text).alpha(0.4).rgb().string()}
 			sceneAnimationEnabled={false}
 			barStyle={{ backgroundColor: theme.colors.surface, borderTopWidth: theme.borderWidth, borderTopColor: theme.colors.disabled }}
 		>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
 import AppLayout from '../../frame/app-layout'
 import { CircularSpinner } from './../../components/common'
 import gql from 'graphql-tag'
@@ -11,6 +11,7 @@ import { useTrackPlayerEvents } from 'react-native-track-player/lib/hooks'
 import BottomPlayer from './components/bottomPlayer'
 import FavoriteRadio from './favoriteRadio'
 import AllRadio from './allRadio'
+import { useTheme } from 'react-native-paper'
 
 const trackPlayerInit = async () => {
 	await TrackPlayer.setupPlayer()
@@ -33,6 +34,8 @@ const RadioScreen = () => {
 	const [isPlaying, setIsPlaying] = useState(false)
 
 	const [currentChannelId, setCurrentChannelId] = useState('')
+
+	const theme = useTheme()
 
 	const GET_FAVOURITE_FM_QUERY = gql`
         query fmScreenQuery{
@@ -165,15 +168,15 @@ const RadioScreen = () => {
 	const currentChannel = fmList.filter((x) => x.id === currentChannelId)[0]
 
 	return (
-		<Container>
+		<Container style={{backgroundColor: theme.colors.lightBackground}}>
 			<Tabs tabBarUnderlineStyle={{ backgroundColor: '#ff0000' }}>
 				<Tab
-					style={{ flex: 1, paddingBottom: (currentChannelId && 126) || 60 }}
+					style={{ flex: 1, paddingBottom: (currentChannelId && 70) || 0 }}
 					heading="All FM"
-					tabStyle={{ backgroundColor: '#fff' }}
-					activeTabStyle={{ backgroundColor: '#fff' }}
-					textStyle={{ color: '#000' }}
-					activeTextStyle={{ color: '#000' }}
+					tabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					activeTabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					textStyle={{ color: theme.colors.text }}
+					activeTextStyle={{ color: theme.colors.text }}
 				>
 					<AllRadio
 						allFm={fmList}
@@ -188,10 +191,10 @@ const RadioScreen = () => {
 				<Tab
 					style={{ flex: 1, marginBottom: (currentChannelId && 67) || 0 }}
 					heading="Favorite FM"
-					tabStyle={{ backgroundColor: '#fff' }}
-					activeTabStyle={{ backgroundColor: '#fff' }}
-					textStyle={{ color: '#000' }}
-					activeTextStyle={{ color: '#000' }}
+					tabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					activeTabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					textStyle={{ color: theme.colors.text }}
+					activeTextStyle={{ color: theme.colors.text }}
 				>
 					<FavoriteRadio
 						onFMSelect={onFMSelect}

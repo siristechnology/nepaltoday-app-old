@@ -1,23 +1,27 @@
 import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Container, Tab, Tabs } from 'native-base'
 import TrendingPerson from './trending-persons/trending.screen'
 import TrendingTweets from './trending-tweets/twitter.screen'
+import { useTheme, Text } from 'react-native-paper'
 
 const TrendingScreen = (props) => {
+
+	const theme = useTheme()
+
     return (
-		<Container>
-			<View style={style.headerStyle}>
+		<Container style={{backgroundColor: theme.colors.lightBackground}}>
+			<View style={[style.headerStyle,{backgroundColor: theme.colors.background}]}>
 				<Text style={style.textStyle}>ट्रेण्डिङ</Text>
 			</View>
 			<Tabs tabBarUnderlineStyle={{ backgroundColor: '#ff0000' }}>
 				<Tab
 					style={{ flex: 1 }}
 					heading="ट्रेण्डिङ ट्वीट्स"
-					tabStyle={{ backgroundColor: '#fff' }}
-					activeTabStyle={{ backgroundColor: '#fff' }}
-					textStyle={{ color: '#000' }}
-					activeTextStyle={{ color: '#000' }}
+					tabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					activeTabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					textStyle={{ color: theme.colors.text }}
+					activeTextStyle={{ color: theme.colors.text }}
 				>
 					<TrendingTweets />
 				</Tab>
@@ -25,10 +29,10 @@ const TrendingScreen = (props) => {
 					testID="trendingFigures"
 					style={{ flex: 1 }}
 					heading="ट्रेण्डिङ व्यक्तिहरु"
-					tabStyle={{ backgroundColor: '#fff' }}
-					activeTabStyle={{ backgroundColor: '#fff' }}
-					textStyle={{ color: '#000' }}
-					activeTextStyle={{ color: '#000' }}
+					tabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					activeTabStyle={{ backgroundColor: theme.colors.lightBackground }}
+					textStyle={{ color: theme.colors.text }}
+					activeTextStyle={{ color: theme.colors.text }}
 				>
 					<TrendingPerson 
 						navigation={props.navigation}
