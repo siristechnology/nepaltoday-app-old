@@ -36,16 +36,10 @@ const Weather = () => {
 		}
 	}
 
-	let { loading, data, error } = useQuery(FETCH_WEATHER_INFO_QUERY, {
+	const { loading, data, error } = useQuery(FETCH_WEATHER_INFO_QUERY, {
 		variables: {},
 	})
 
-	data = {"getWeatherInfo": {
-		"temperature": 23.43,
-		"condition": "Clear",
-		"description": "clear sky"
-	  }
-	}
 	if (error) {
 		crashlytics().recordError(new Error('Weather Api error' + error.message))
 	}

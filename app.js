@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Provider as ReduxProvider } from 'react-redux'
 import { StatusBar } from 'react-native'
-import * as eva from '@eva-design/eva'
-import { ApplicationProvider } from '@ui-kitten/components'
 
 import { store } from './src/store'
 import AppContainer from './src/frame/app-container'
