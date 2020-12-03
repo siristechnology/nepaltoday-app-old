@@ -29,13 +29,14 @@ const StoryHeadline = (props) => {
     }
     
     const onShowStory = (article) => {
-        setShowStory(true)
         setStoryArticle(article)
+        setShowStory(true)
         onStoryLoaded(article)
     }
 
     const onCloseStoryModal = () => {
         setShowStory(false)
+        setStoryArticle({})
     }
 
     const onShowArticleDetail = (article) => {
