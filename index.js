@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AppRegistry, LogBox } from 'react-native'
 import { 
 	Provider as PaperProvider, 
@@ -20,6 +20,7 @@ import { name as appName } from './app.json'
 import { ApolloProvider } from '@apollo/react-hooks'
 import GraphqlClient from './src/graphql/graphql-client'
 import { SafeAreaProvider } from 'react-native-safe-area-context'
+import { getMode, setMode } from './src/services/asyncStorageService.js'
 
 LogBox.ignoreLogs(['Warning: componentWillMount is deprecated', 'Warning: componentWillReceiveProps is deprecated', 'Module RCTImageLoader requires'])
 
@@ -27,8 +28,15 @@ const ApolloApp = () => {
 
 	const [darkMode, setDarkMode] = useState(false)
 
+	useEffect(()=> {
+		getMode().then(mode=>{
+			setDarkMode(mode)
+		})
+	},[])
+
 	const onModeChange = (mode) => {
 		setDarkMode(mode)
+		setMode(mode)
 	}
 
 	return (<SafeAreaProvider>

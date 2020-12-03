@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage'
 const READ_ARTICLES = "READ_ARTICLES"
+const DARK_MODE = 'DARK_MODE'
 
 const saveReadArticles = (article) => {
     AsyncStorage.getItem(READ_ARTICLES).then(res=>{
@@ -40,8 +41,20 @@ const clearOldArticles = async () => {
     AsyncStorage.setItem(READ_ARTICLES, JSON.stringify(newArticles))
 }
 
+const setMode = (mode) => {
+    AsyncStorage.setItem(DARK_MODE, JSON.stringify({mode}))
+}
+
+const getMode = async () => {
+    let mode = await AsyncStorage.getItem(DARK_MODE)
+    mode = JSON.parse(mode) || {mode: false}
+    return mode.mode
+}
+
 export {
     saveReadArticles,
     getReadArticles,
-    clearOldArticles
+    clearOldArticles,
+    setMode,
+    getMode
 }

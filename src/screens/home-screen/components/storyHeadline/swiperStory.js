@@ -35,6 +35,11 @@ const SwiperStory = (props) => {
         )  
     }
 
+    const getArticleIndex = () => {
+        let myArticle = articles.filter(x=>x.title == article.title)[0]
+        return articles.indexOf(myArticle)
+    }
+
     return (
         <Swiper 
             showsButtons={true} 
@@ -42,8 +47,10 @@ const SwiperStory = (props) => {
             loop={false}
             showsPagination={false}
             autoplayTimeout={5}
-            index={articles.indexOf(article)}
+            index={getArticleIndex()}
             onIndexChanged={(i)=>props.onStorySwiped(articles[i])}
+            removeClippedSubviews={false}
+            scrollEnabled={false}
         >
             {articles.map((singleArticle,i)=>(
                 <SingleStory
