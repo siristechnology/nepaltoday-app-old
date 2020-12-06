@@ -1,15 +1,15 @@
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const ASYNC_NAME = 'LOCAL_ARTICLES'
 const CATEGORY_ASYNC_NAME = 'CATEGORY_LOCAL_ARTICLES'
 
 const storetoAsync = (articles) => {
-	if(articles){
+	if (articles) {
 		AsyncStorage.setItem(ASYNC_NAME, JSON.stringify(articles))
 	}
 }
 
 const storeCategoryArticlestoAsync = (articles) => {
-	if(articles){
+	if (articles) {
 		AsyncStorage.setItem(CATEGORY_ASYNC_NAME, JSON.stringify(articles))
 	}
 }
@@ -48,10 +48,10 @@ const removeAsync = () => {
 	AsyncStorage.removeItem(ASYNC_NAME)
 }
 
-export { 
-	storetoAsync, 
+export {
+	storetoAsync,
 	storeCategoryArticlestoAsync,
-	fetchfromAsync, 
+	fetchfromAsync,
 	fetchCategoryArticlesfromAsync,
 	removeAsync,
 }

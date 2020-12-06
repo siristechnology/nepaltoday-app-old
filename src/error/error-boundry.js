@@ -15,6 +15,10 @@ class ErrorBoundary extends React.Component {
 
 	componentDidCatch(error, errorInfo) {
 		removeAsync()
+
+		console.log('printing error', error)
+		console.log('printing errorInfo', errorInfo)
+
 		if (this.state.hasError) {
 			error.message += `.  Caused by ${errorInfo.componentStack}`
 			crashlytics().recordError(error)
