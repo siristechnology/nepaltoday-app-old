@@ -28,7 +28,7 @@ LogBox.ignoreLogs([
 	'Module RCTImageLoader requires',
 ])
 
-const ApolloApp = () => {
+export const ApolloApp = () => {
 	const [darkMode, setDarkMode] = useState(false)
 
 	useEffect(() => {
