@@ -37,16 +37,26 @@ const RadioScreen = () => {
 
 	const theme = useTheme()
 
-	const GET_FAVOURITE_FM_QUERY = gql`
+	const GET_FM_QUERY = gql`
         query fmScreenQuery{
-          getMyFavoriteFm(nid: "${auth().currentUser.uid}") {
-            id
-            title
-            url
-            artist
-            artwork
-            province
-          }
+			getMyFm(nid: "${auth().currentUser.uid}") {
+				allFm{
+					id
+					title
+					url
+					artist
+					artwork
+					province
+				}
+				favoriteFm{
+					id
+					title
+					url
+					artist
+					artwork
+					province
+				}
+          	}
         }
     `
 
@@ -135,17 +145,13 @@ const RadioScreen = () => {
 		startPlayer()
 	}, [])
 
-	const { data, loading, error } = useQuery(GET_FM_QUERY, {
+	const { data, loading, error, refetch } = useQuery(GET_FM_QUERY, {
 		variables: {},
 	})
 
-	const { data: data1, refetch, loading: loading2, error: error2 } = useQuery(GET_FAVOURITE_FM_QUERY, {
-		variables: {},
-	})
+	const favoriteList = (data && data.getMyFm.favoriteFm) || []
 
-	const favoriteList = (data1 && data1.getMyFavoriteFm) || []
-
-	const fmList = (data && data.getFmList) || []
+	const fmList = (data && data.getMyFm.allFm) || []
 
 	useTrackPlayerEvents([TrackPlayerEvents.PLAYBACK_STATE], (event) => {
 		if (event.state === STATE_PLAYING) {
@@ -155,13 +161,13 @@ const RadioScreen = () => {
 		}
 	})
 
-	if (loading || loading2) {
+	if (loading) {
 		return (
 			<AppLayout>
 				<CircularSpinner />
 			</AppLayout>
 		)
-	} else if (error || error2) {
+	} else if (error) {
 		return <AppLayout />
 	}
 
@@ -223,17 +229,5 @@ const RadioScreen = () => {
 	)
 }
 
-export const GET_FM_QUERY = gql`
-	query fmScreenQuery {
-		getFmList {
-			id
-			title
-			url
-			artist
-			artwork
-			province
-		}
-	}
-`
 
 export default RadioScreen
