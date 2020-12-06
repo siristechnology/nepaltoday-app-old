@@ -1,9 +1,8 @@
 import React from 'react'
 import { TouchableOpacity, StyleSheet, Image, View } from 'react-native'
-import FAIcon from 'react-native-vector-icons/FontAwesome'
 import RadioService from './../radio.services'
 import auth from '@react-native-firebase/auth'
-import { useTheme, Text } from 'react-native-paper'
+import { useTheme, Text, IconButton } from 'react-native-paper'
 
 const RadioCard = (props) => {
 
@@ -39,16 +38,13 @@ const RadioCard = (props) => {
                     {channel.artist}
                 </Text>
             </View>
-            <TouchableOpacity 
-                style={styles.favButton}
-                onPress={()=>onIconPress(isFavorite, channel)}
-            >
-            <FAIcon
-                name={isFavorite && "heart" || "heart-o"}
+            <IconButton
+                icon={isFavorite && "heart" || "heart-outline"}
+                size={25}
                 color="#f44336"
-                size={23}
+                onPress={()=>onIconPress(isFavorite, channel)}
+                style={styles.favButton}
             />
-            </TouchableOpacity>
         </TouchableOpacity>
     )
 }
@@ -82,8 +78,6 @@ const styles = StyleSheet.create({
     favButton:{
         position:'absolute',
         right:5,
-        width:50,
-        height:50,
         justifyContent:'center',
         alignItems:'center'
     }
