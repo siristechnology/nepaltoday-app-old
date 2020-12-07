@@ -16,16 +16,18 @@ class ErrorBoundary extends React.Component {
 	componentDidCatch(error, errorInfo) {
 		removeAsync()
 
-		console.log('printing error', error)
-		console.log('printing errorInfo', errorInfo)
-
 		if (this.state.hasError) {
 			error.message += `.  Caused by ${errorInfo.componentStack}`
 			crashlytics().recordError(error)
 
-			Alert.alert('Error!!', 'Something went wrong. Please close & reopen your app !!', [{ text: 'OK', onPress: () => DevSettings.reload() }], {
-				cancelable: true,
-			})
+			Alert.alert(
+				'Error!!',
+				'Something went wrong. Please close & reopen your app !!',
+				[{ text: 'OK', onPress: () => DevSettings.reload() }],
+				{
+					cancelable: true,
+				},
+			)
 		}
 	}
 
