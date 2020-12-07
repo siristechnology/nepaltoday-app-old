@@ -21,7 +21,9 @@ const App = (props) => {
 	const [coronaNotif, setCoronaNotif] = useState(false)
 
 	const onRegister = (token) => {
-		signInAnonymously().then(() => notificationHandler.register(auth().currentUser, token.token))
+		signInAnonymously().then(() =>
+			notificationHandler.register(auth().currentUser, token.token),
+		)
 	}
 
 	const onNotif = (notif) => {
@@ -52,10 +54,7 @@ const App = (props) => {
 		} else if (clicked && coronaNotif) {
 			return <AppContainer initialScreenName="Corona" />
 		} else {
-			return <AppContainer 
-				onModeChange={props.onModeChange}
-				darkMode={props.darkMode}
-			/>
+			return <AppContainer onModeChange={props.onModeChange} darkMode={props.darkMode} />
 		}
 	}
 
@@ -69,7 +68,8 @@ const App = (props) => {
 
 		const addReadArticles = async () => {
 			const readArticles = await getReadArticles()
-			auth().currentUser && readArticlesService.saveReadArticle(auth().currentUser.uid, readArticles)
+			auth().currentUser &&
+				readArticlesService.saveReadArticle(auth().currentUser.uid, readArticles)
 			clearOldArticles()
 		}
 
@@ -80,17 +80,17 @@ const App = (props) => {
 
 	return (
 		// <ApplicationProvider {...eva} theme={eva.light}>
-			<ReduxProvider store={store}>
-				<StatusBar barStyle="light-content" />
-				<ErrorBoundary>
-					{(loading && (
-						<AppLayout>
-							<CircularSpinner />
-						</AppLayout>
-					)) ||
-						loadAppContainer(article, clicked, coronaNotif)}
-				</ErrorBoundary>
-			</ReduxProvider>
+		<ReduxProvider store={store}>
+			<StatusBar barStyle="light-content" />
+			<ErrorBoundary>
+				{(loading && (
+					<AppLayout>
+						<CircularSpinner />
+					</AppLayout>
+				)) ||
+					loadAppContainer(article, clicked, coronaNotif)}
+			</ErrorBoundary>
+		</ReduxProvider>
 		// </ApplicationProvider>
 	)
 }

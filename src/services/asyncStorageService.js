@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 const READ_ARTICLES = "READ_ARTICLES"
 const DARK_MODE = 'DARK_MODE'
 

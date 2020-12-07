@@ -13,12 +13,24 @@ const Container = ({ initialScreenName, initialParams, onModeChange, darkMode })
 	const initialRoute = initialScreenName === 'ArticleDetail' ? 'ArticleDetail' : 'Tab'
 
 	return (
-			<Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
-				<Stack.Screen name="Tab" component={BottomTabScreen} initialParams={{ initialScreenName }} />
-				<Stack.Screen name="ArticleDetail" component={ArticleDetailScreen} initialParams={initialParams} />
-				<Stack.Screen name="Article" component={ArticleWebviewComponent} />
-				<Stack.Screen name="Settings" component={SettingsScreen} initialParams={{onModeChange, darkMode}} />
-			</Stack.Navigator>
+		<Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
+			<Stack.Screen
+				name="Tab"
+				component={BottomTabScreen}
+				initialParams={{ initialScreenName }}
+			/>
+			<Stack.Screen
+				name="ArticleDetail"
+				component={ArticleDetailScreen}
+				initialParams={initialParams}
+			/>
+			<Stack.Screen name="Article" component={ArticleWebviewComponent} />
+			<Stack.Screen
+				name="Settings"
+				component={SettingsScreen}
+				initialParams={{ onModeChange, darkMode }}
+			/>
+		</Stack.Navigator>
 	)
 }
 

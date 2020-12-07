@@ -3,6 +3,9 @@ jest.mock('react-native/Libraries/BatchedBridge/NativeModules')
 jest.mock('react-native/Libraries/Animated/src/NativeAnimatedHelper')
 jest.mock('react-native/Libraries/EventEmitter/NativeEventEmitter')
 
+import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock'
+jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage);
+
 import { NativeModules } from 'react-native'
 NativeModules.TrackPlayerModule = jest.fn()
 
@@ -19,11 +22,11 @@ jest.mock('@react-native-firebase/crashlytics', () => {
     })
 })
 
-jest.mock('@react-native-community/async-storage', () => ({
-    getItem: jest.fn(),
-    setItem: jest.fn()
-}))
-
 jest.mock('@react-native-community/netinfo', () => ({
     fetch: jest.fn()
+}))
+
+jest.mock('react-native-appearance', () => ({
+	theme: jest.fn(),
+	AppearanceProvider: jest.fn(),
 }))
