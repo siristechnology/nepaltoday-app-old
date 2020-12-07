@@ -116,7 +116,7 @@ const HeadlineScreen = ({ navigation }) => {
 
 export default HeadlineScreen
 
-const GET_ARTICLES_QUERY = gql`
+export const GET_ARTICLES_QUERY = gql`
 	query headlineScreenQuery {
 		getArticles {
 			_id
