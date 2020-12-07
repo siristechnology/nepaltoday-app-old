@@ -38,7 +38,7 @@ const TwitterComponent = () => {
 	)
 }
 
-const GET_TWEETS_QUERY = gql`
+export const GET_TWEETS_QUERY = gql`
 	query twitterScreenQuery {
 		getTweets {
 			_id
