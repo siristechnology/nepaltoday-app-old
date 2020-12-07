@@ -44,7 +44,7 @@ const TrendingComponent = (props) => {
 	)
 }
 
-const GET_TRENDING = gql`
+export const GET_TRENDING = gql`
 	query TrendingScreenQuery {
 		getTrending {
 			createdAt

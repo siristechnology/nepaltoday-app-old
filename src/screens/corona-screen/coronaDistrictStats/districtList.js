@@ -104,7 +104,7 @@ const DistrictList = () => {
 	)
 }
 
-const GET_DISTRICT_CORONA_STATS = gql`
+export const GET_DISTRICT_CORONA_STATS = gql`
 	query coronaScreenQuery {
 		getDistrictCoronaStats {
 			createdDate
