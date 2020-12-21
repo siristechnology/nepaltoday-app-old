@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, act } from '@testing-library/react-native'
+import { render } from '@testing-library/react-native'
 import { ApplicationProvider } from '@ui-kitten/components'
 import * as eva from '@eva-design/eva'
 import HomeScreen, { GET_ARTICLES_QUERY } from './home.screen'
@@ -11,7 +11,6 @@ import { FETCH_WEATHER_INFO_QUERY } from './components/weather.component'
 
 describe('home.screen', () => {
 	it('home screen renders properly', async () => {
-		const promise = Promise.resolve()
 		const navigation = { navigate: jest.fn(), state: {} }
         const FETCH_NEPALI_EVENT = gql`
             query getNepaliEvent {
@@ -75,7 +74,7 @@ describe('home.screen', () => {
             }
 		]
 
-		render(
+		const { getAllByTestId} = render(
 			<ApplicationProvider {...eva} theme={eva.light}>
 				<ErrorBoundary>
 					<MockedProvider mocks={mocks} addTypename={false}>
@@ -85,6 +84,11 @@ describe('home.screen', () => {
 			</ApplicationProvider>,
 		)
 
-		await act(() => promise)
+        await new Promise(resolve => setTimeout(resolve, 0));
+
+        const tests = await getAllByTestId('homeArticle0')
+        console.log(tests)
+        expect(tests.length).toBeGreaterThan(1)
+
 	})
 })
