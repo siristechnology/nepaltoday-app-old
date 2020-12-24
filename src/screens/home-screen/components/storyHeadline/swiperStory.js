@@ -50,7 +50,7 @@ const SwiperStory = (props) => {
             index={getArticleIndex()}
             onIndexChanged={(i)=>props.onStorySwiped(articles[i])}
             removeClippedSubviews={false}
-            scrollEnabled={false}
+            scrollEnabled={true}
         >
             {articles.map((singleArticle,i)=>(
                 <SingleStory

@@ -14,8 +14,17 @@ const fetchfromAsync = () => {
     })
 }
 
-const storetoAsync = (articles) => {
-    AsyncStorage.setItem(ASYNC_NAME, JSON.stringify(articles))
+const storetoAsync = (article) => {
+    fetchfromAsync().then(res=>{
+        let readStories = [...res]
+        readStories.push(article)
+        readStories = readStories.filter((thing, index, self) =>
+            index === self.findIndex((t) => (
+                t.title === thing.title
+            ))
+        )
+        AsyncStorage.setItem(ASYNC_NAME, JSON.stringify(readStories))
+    })
 } 
 
 export {
