@@ -17,15 +17,7 @@ const StoryHeadline = (props) => {
     },[])
 
     const onStoryLoaded = (article) => {
-        let readStories = [...readStory]
-        readStories.push(article)
-        readStories = readStories.filter((thing, index, self) =>
-            index === self.findIndex((t) => (
-                t.title === thing.title
-            ))
-        )
-        setReadStory(readStories)
-        storetoAsync(readStories)
+        storetoAsync(article)
     }
     
     const onShowStory = (article) => {
