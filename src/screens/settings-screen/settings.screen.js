@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Linking, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { Linking, Share, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Divider, Switch, Text, useTheme } from 'react-native-paper'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import MIcon from 'react-native-vector-icons/MaterialCommunityIcons'
@@ -38,6 +38,14 @@ const SettingsScreen = (props) => {
 
     const onRateClick = () => {
         Linking.openURL(PlayStoreLink)
+    }
+
+    const onShareClick = () => {
+        Share.share({
+           title: '#NEPALTODAYAPP',
+           url: PlayStoreLink,
+           message: PlayStoreLink
+        })
     }
 
     return (
@@ -83,6 +91,24 @@ const SettingsScreen = (props) => {
                     style={styles.optionText}
                 >
                     Rate our app
+                </Text>
+            </TouchableOpacity>
+            <Divider style={styles.divider}/>
+            <TouchableOpacity
+                style={styles.options}
+                activeOpacity={0.6}
+                onPress={onShareClick}
+            >
+                <MIcon
+                    name='share-variant'
+                    size={20}
+                    color={theme.colors.secondary}
+                    style={styles.optionIcon}
+                />
+                <Text
+                    style={styles.optionText}
+                >
+                    Share our app
                 </Text>
             </TouchableOpacity>
             <Divider style={styles.divider}/>
