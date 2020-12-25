@@ -84,13 +84,13 @@ const Home = ({ navigation }) => {
 	const headerComponent = (
 		<View>
 			<View style={[style.headerStyle, {borderBottomColor: theme.colors.divider}]}>
-				<View>
+				<View style={{flex:0.75}}>
 					<Text testID="nepaliDate" style={style.nepaliDateStyle}>
 						{nepaliDate}
 					</Text>
 					<NepaliEvent />
 				</View>
-				<View style={style.weatherView}>
+				<View style={[style.weatherView,{flex: 0.25}]}>
 					<Weather />
 					<IconButton
 						icon="dots-vertical"
@@ -174,7 +174,6 @@ const style = StyleSheet.create({
 		alignItems: 'center',
 		paddingBottom: 10,
 		borderBottomWidth: 1,
-		// borderBottomColor: '#F5F0F0',
 	},
 	nepaliDateStyle: {
 		fontWeight: 'bold',
@@ -191,7 +190,8 @@ const style = StyleSheet.create({
 	},
 	weatherView: {
 		flexDirection: 'row',
-		alignItems: 'center'
+		alignItems: 'center',
+		justifyContent: 'center'
 	}
 })
 
