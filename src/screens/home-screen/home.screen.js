@@ -15,6 +15,7 @@ import auth from '@react-native-firebase/auth'
 import StoryHeadline from './components/storyHeadline/storyHeadline'
 import NepaliEvent from './components/nepaliEvent.component'
 import { Text, IconButton, useTheme } from 'react-native-paper'
+import TrendingTag from './components/trendingTag.component'
 
 const Home = ({ navigation }) => {
 	const [nepaliDate, setNepaliDate] = useState('')
@@ -103,6 +104,9 @@ const Home = ({ navigation }) => {
 			<StoryHeadline
 				headlineArticles={headlineArticles}
 				onShowArticleDetail={(article, articles) => navigation.navigate('ArticleDetail', { article, articles })}
+			/>
+			<TrendingTag
+				navigation={navigation}
 			/>
 			<HeadlineComponent
 				article={topHeadline}

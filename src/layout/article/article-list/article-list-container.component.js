@@ -4,7 +4,7 @@ import { ArticleList } from './article-list.component'
 
 export const ArticleListContainer = ({ navigation, articles, refreshing, handleRefresh }) => {
 	const onItemPress = (article) => {
-		navigation.navigate('ArticleDetail', { article, articles })
+		navigation.navigate('ArticleDetail', { article, articles, fromPage: 'default' })
 	}
 
 	return (
