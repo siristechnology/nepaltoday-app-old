@@ -6,6 +6,7 @@ import { BottomTabScreen } from '../screens/navigation/bottom-navigation.screen'
 import ArticleDetailScreen from '../layout/article/article-detail/article-detail.container'
 import { ArticleWebviewComponent } from '../components'
 import SettingsScreen from '../screens/settings-screen/settings.screen'
+import TagArticleScreen from '../screens/tagArticle-screen/tagArticle.screen'
 
 const Stack = createStackNavigator()
 
@@ -29,6 +30,11 @@ const Container = ({ initialScreenName, initialParams, onModeChange, darkMode })
 				name="Settings"
 				component={SettingsScreen}
 				initialParams={{ onModeChange, darkMode }}
+			/>
+			<Stack.Screen
+				name="TagArticle"
+				component={TagArticleScreen}
+				initialParams={initialParams}
 			/>
 		</Stack.Navigator>
 	)

@@ -120,6 +120,8 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 	private navigateBack = (fromPage) => {
 		if(fromPage && fromPage=='category'){
 			this.props.navigation.navigate('Tab', {screen: 'Headline'})
+		}else if(fromPage && fromPage=='default'){
+			this.props.navigation.goBack()
 		}else{
 			this.props.navigation.navigate('Tab')
 		}
