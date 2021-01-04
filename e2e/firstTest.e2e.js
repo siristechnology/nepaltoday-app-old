@@ -14,7 +14,7 @@ describe('Example', () => {
 	})
 
 	it('should load article in home', async () => {
-		await expect(element(by.id('homeArticle'))).toBeVisible()
+		await expect(element(by.text('Shiva'))).toBeVisible()
 	})
 
 	it('should show article detail', async () => {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, RefreshControl } from 'react-native'
+import { FlatList, RefreshControl, Text } from 'react-native'
 import { withStyles } from '@ui-kitten/components/theme'
 import { useScrollToTop } from '@react-navigation/native'
 
@@ -22,14 +22,15 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 
 	const renderItem = ({ item, index }) => {
 		return (
-			<ArticleListItem
-				index={index}
-				isRead={readArticles.filter((x) => x.articleId == item._id).length}
-				style={[eva.style.item,{borderBottomColor: theme.colors.lightBackground}]}
-				article={item}
-				onShowMoreModal={onShowMoreModal}
-				onPress={() => _onItemPress(item)}
-			/>
+			// <ArticleListItem
+			// 	index={index}
+			// 	isRead={readArticles.filter((x) => x.articleId == item._id).length}
+			// 	style={[eva.style.item,{borderBottomColor: theme.colors.lightBackground}]}
+			// 	article={item}
+			// 	onShowMoreModal={onShowMoreModal}
+			// 	onPress={() => _onItemPress(item)}
+			// />
+			<Text>Shiva</Text>
 		)
 	}
 
