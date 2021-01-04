@@ -1,3 +1,5 @@
+jest.setTimeout(20000)
+
 describe('Example', () => {
 	beforeEach(async () => {
 		await device.reloadReactNative()

@@ -21,6 +21,8 @@ const ArticleListItemCompoent = (props) => {
 
 	const theme = useTheme()
 
+	console.log('homeArticle' + index)
+
 	return (
 		<TouchableOpacity
 			testID={'homeArticle' + index}

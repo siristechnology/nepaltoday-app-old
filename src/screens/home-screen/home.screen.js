@@ -75,7 +75,7 @@ const Home = ({ navigation }) => {
 
 	const dataArticles = (data && data.getArticles) || []
 
-	console.log("data articles here", dataArticles)
+	console.log("data articles here", dataArticles.length)
 
 	const homeArticles = (dataArticles.length && dataArticles) || localArticles.getArticles
 	const topHeadline = homeArticles.find((a) => a.category === 'headline') || homeArticles[0]
