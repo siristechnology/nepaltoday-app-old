@@ -1,4 +1,4 @@
-jest.setTimeout(70000)
+jest.setTimeout(100000)
 
 describe('Example', () => {
 	beforeEach(async () => {
