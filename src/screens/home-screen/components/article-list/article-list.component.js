@@ -22,15 +22,14 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 
 	const renderItem = ({ item, index }) => {
 		return (
-			// <ArticleListItem
-			// 	index={index}
-			// 	isRead={readArticles.filter((x) => x.articleId == item._id).length}
-			// 	style={[eva.style.item,{borderBottomColor: theme.colors.lightBackground}]}
-			// 	article={item}
-			// 	onShowMoreModal={onShowMoreModal}
-			// 	onPress={() => _onItemPress(item)}
-			// />
-			<Text>Shiva</Text>
+			<ArticleListItem
+				index={index}
+				isRead={readArticles.filter((x) => x.articleId == item._id).length}
+				style={[eva.style.item,{borderBottomColor: theme.colors.lightBackground}]}
+				article={item}
+				onShowMoreModal={onShowMoreModal}
+				onPress={() => _onItemPress(item)}
+			/>
 		)
 	}
 
@@ -38,15 +37,16 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 	useScrollToTop(ref)
 	const theme = useTheme()
 	return (
-		<FlatList
-			contentContainerStyle={[eva.style.container,{backgroundColor: theme.colors.background}]}
-			data={articles}
-			renderItem={renderItem}
-			keyExtractor={(item) => item._id}
-			ref={ref}
-			ListHeaderComponent={headerComponent}
-			refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
-		/>
+		// <FlatList
+		// 	contentContainerStyle={[eva.style.container,{backgroundColor: theme.colors.background}]}
+		// 	data={articles}
+		// 	renderItem={renderItem}
+		// 	keyExtractor={(item) => item._id}
+		// 	ref={ref}
+		// 	ListHeaderComponent={headerComponent}
+		// 	refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
+		// />
+		<Text>Shiva</Text>
 	)
 })
 
