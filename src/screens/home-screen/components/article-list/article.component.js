@@ -24,8 +24,9 @@ const ArticleListItemCompoent = (props) => {
 	console.log('homeArticle' + index)
 
 	return (
+		<View testID='homeArticle'>
 		<TouchableOpacity
-			testID='homeArticle'
+			// testID='homeArticle'
 			onPress={onPress}
 			activeOpacity={0.8}
 			style={[eva.style.container, style, { backgroundColor: isRead && theme.colors.lightBackground || theme.colors.primary }]}
@@ -67,6 +68,7 @@ const ArticleListItemCompoent = (props) => {
 				</ArticleActivityBar>
 			</View>
 		</TouchableOpacity>
+		</View>
 	)
 }
 
