@@ -25,7 +25,7 @@ const ArticleListItemCompoent = (props) => {
 
 	return (
 		<TouchableOpacity
-			testID={'homeArticle' + index}
+			testID='homeArticle'
 			onPress={onPress}
 			activeOpacity={0.8}
 			style={[eva.style.container, style, { backgroundColor: isRead && theme.colors.lightBackground || theme.colors.primary }]}
