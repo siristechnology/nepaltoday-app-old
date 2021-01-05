@@ -51,7 +51,7 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 			"url": null,
 			"category": null,
 			"link": null,
-			"logoLink": "http://localhost:8080/assets/logos/kantipur.jpg"
+			"logoLink": "https://assets-cdn-api.kantipurdaily.com/thumb.php?src=https://assets-cdn-np.kantipurdaily.com/uploads/source/news/kantipur/2020/politics/ashthalaxmishakyancpleader02-3072020031013-1000x0.jpg&w=1000&h=0"
 		  },
 		  "category": "headline",
 		  "publishedDate": "1609324463806",
@@ -79,7 +79,7 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 			"url": null,
 			"category": null,
 			"link": null,
-			"logoLink": "http://localhost:8080/assets/logos/kantipur.jpg"
+			"logoLink": "https://assets-cdn-api.kantipurdaily.com/thumb.php?src=https://assets-cdn-np.kantipurdaily.com/uploads/source/news/kantipur/2020/politics/ashthalaxmishakyancpleader02-3072020031013-1000x0.jpg&w=1000&h=0"
 		  },
 		  "category": "headline",
 		  "publishedDate": "1609324463806",
@@ -100,7 +100,7 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}
 			ref={ref}
-			ListHeaderComponent={headerComponent}
+			// ListHeaderComponent={headerComponent}
 			refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 		/>
 	)
