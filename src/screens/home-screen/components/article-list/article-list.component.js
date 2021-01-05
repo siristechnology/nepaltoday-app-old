@@ -40,7 +40,7 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 	return (
 		<FlatList
 			contentContainerStyle={[eva.style.container,{backgroundColor: theme.colors.background}]}
-			data={[{_id:1, _id:2}]}
+			data={[{_id:1},{ _id:2}]}
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}
 			ref={ref}
