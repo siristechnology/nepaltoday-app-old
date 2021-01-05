@@ -13,9 +13,9 @@ describe('Example', () => {
 	// 	await expect(element(by.id('nepaliDate'))).toBeVisible()
 	// })
 
-	it('should load article in home', async () => {
+	it('should load headline article in home', async () => {
 		// await element(by.id('headline')).swipe('up', 'fast', 0.9);
-		await expect(element(by.id('headline'))).toBeVisible()
+		await expect(element(by.id('headlineTitle'))).toBeVisible()
 	})
 
 	it('should show article detail', async () => {

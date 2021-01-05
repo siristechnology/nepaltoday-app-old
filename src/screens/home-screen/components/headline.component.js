@@ -15,7 +15,7 @@ const HeadlineItemComponent = React.memo((props) => {
 	}
 
 	return (
-		<View 
+		<TouchableOpacity
 			testID="headline"
 			activeOpacity={0.8} 
 			{...restProps} 
@@ -31,14 +31,14 @@ const HeadlineItemComponent = React.memo((props) => {
 				/>
 			</ArticleActivityBar>
 			<View style={eva.style.infoContainer}>
-				<Text style={eva.style.titleLabel} category="h5">
+				<Text testID="headlineTitle" style={eva.style.titleLabel} category="h5">
 					{article.title}
 				</Text>
 				<Text style={eva.style.descriptionLabel} appearance="hint" category="s1">
 					{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}
 				</Text>
 			</View>
-		</View>
+		</TouchableOpacity>
 	)
 })
 
