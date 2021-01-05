@@ -30,7 +30,7 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 			// 	onShowMoreModal={onShowMoreModal}
 			// 	onPress={() => _onItemPress(item)}
 			// />
-			<Text>Shiva</Text>
+			<Text>Shiva{index}</Text>
 		)
 	}
 
@@ -100,7 +100,7 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 			renderItem={renderItem}
 			keyExtractor={(item) => item._id}
 			ref={ref}
-			// ListHeaderComponent={headerComponent}
+			ListHeaderComponent={headerComponent}
 			refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} colors={['#0000ff', '#689F38']} />}
 		/>
 	)
