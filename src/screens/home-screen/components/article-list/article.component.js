@@ -21,11 +21,8 @@ const ArticleListItemCompoent = (props) => {
 
 	const theme = useTheme()
 
-	console.log('homeArticle' + index)
-
 	return (
 		<TouchableOpacity
-			testID={'homeArticle' + index}
 			onPress={onPress}
 			activeOpacity={0.8}
 			style={[eva.style.container, style, { backgroundColor: isRead && theme.colors.lightBackground || theme.colors.primary }]}
@@ -37,7 +34,7 @@ const ArticleListItemCompoent = (props) => {
 					</View>
 					<View style={eva.style.rightWrapper}>
 						<View style={eva.style.headerWrapper}>
-							<Text style={eva.style.titleLabel} category="h6">
+							<Text testID={'homeArticle' + index} style={eva.style.titleLabel} category="h6">
 								{article.title}
 							</Text>
 						</View>

@@ -5,17 +5,20 @@ describe('Example', () => {
 		await device.reloadReactNative()
 	})
 
-	// it('should have weather component', async () => {
-	// 	await expect(element(by.id('weatherComponent'))).toBeVisible()
-	// })
+	it('should have weather component', async () => {
+		await expect(element(by.id('weatherComponent'))).toBeVisible()
+	})
 
-	// it('should have nepali date', async () => {
-	// 	await expect(element(by.id('nepaliDate'))).toBeVisible()
-	// })
+	it('should have nepali date', async () => {
+		await expect(element(by.id('nepaliDate'))).toBeVisible()
+	})
 
 	it('should load headline article in home', async () => {
-		// await element(by.id('headline')).swipe('up', 'fast', 0.9);
 		await expect(element(by.id('headlineTitle'))).toBeVisible()
+	})
+
+	it('should load article in home', async () => {
+		await expect(element(by.id('homeArticle1'))).toBeVisible()
 	})
 
 	it('should show article detail', async () => {

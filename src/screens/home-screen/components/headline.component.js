@@ -16,7 +16,6 @@ const HeadlineItemComponent = React.memo((props) => {
 
 	return (
 		<TouchableOpacity
-			testID="headline"
 			activeOpacity={0.8} 
 			{...restProps} 
 			style={[eva.style.container, style]} 
