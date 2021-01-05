@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { FlatList, RefreshControl, Text } from 'react-native'
+import { FlatList, RefreshControl } from 'react-native'
 import { withStyles } from '@ui-kitten/components/theme'
 import { useScrollToTop } from '@react-navigation/native'
 
@@ -30,7 +30,6 @@ const ArticleListComponent = React.memo(({ eva, articles, onItemPress, onShowMor
 				onShowMoreModal={onShowMoreModal}
 				onPress={() => _onItemPress(item)}
 			/>
-			// <Text>Shiva{index}</Text>
 		)
 	}
 
