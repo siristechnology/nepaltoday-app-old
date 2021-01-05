@@ -22,48 +22,49 @@ const ArticleListItemCompoent = (props) => {
 	const theme = useTheme()
 
 	return (
-		<TouchableOpacity
-			onPress={onPress}
-			activeOpacity={0.8}
-			style={[eva.style.container, style, { backgroundColor: isRead && theme.colors.lightBackground || theme.colors.primary }]}
-		>
-			<View style={[eva.style.container, { backgroundColor: isRead &&  theme.colors.lightBackground || theme.colors.primary }]}>
-				<View style={eva.style.articleWrapper}>
-					<View style={eva.style.leftWrapper}>
-						<ImageBackground style={eva.style.imageContainer} imageStyle={eva.style.image} source={{ uri: article.imageLink }} />
-					</View>
-					<View style={eva.style.rightWrapper}>
-						<View style={eva.style.headerWrapper}>
-							<Text testID={'homeArticle' + index} style={eva.style.titleLabel} category="h6">
-								{article.title}
-							</Text>
-						</View>
-						<Text appearance="hint">{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}</Text>
-					</View>
-				</View>
-				<ArticleActivityBar style={eva.style.activityBar}>
-					<View style={eva.style.bottomRowView}>
-						<View style={eva.style.activityBarContent}>
-							<Avatar source={{ uri: article.source.logoLink }} size="tiny" />
-							<View style={eva.style.articleSourceName}>
-								<Text appearance="hint">{article.source.name}</Text>
-							</View>
-						</View>
-						<View style={eva.style.activityBarContent}>
-							{ClockIconOutline(eva.style.dateIcon)}
-							<Text style={eva.style.dateLabel} appearance="hint" category="p2">
-								{getRelativeTime(article.createdDate)}
-							</Text>
-						</View>
-					</View>
-					<IconButton 
-						icon="dots-vertical"
-						size={22}
-						onPress={()=>onMoreIconPress(article)}
-					/>
-				</ArticleActivityBar>
-			</View>
-		</TouchableOpacity>
+		<Text>Shiva{index}</Text>
+		// <TouchableOpacity
+		// 	onPress={onPress}
+		// 	activeOpacity={0.8}
+		// 	style={[eva.style.container, style, { backgroundColor: isRead && theme.colors.lightBackground || theme.colors.primary }]}
+		// >
+		// 	<View style={[eva.style.container, { backgroundColor: isRead &&  theme.colors.lightBackground || theme.colors.primary }]}>
+		// 		<View style={eva.style.articleWrapper}>
+		// 			<View style={eva.style.leftWrapper}>
+		// 				<ImageBackground style={eva.style.imageContainer} imageStyle={eva.style.image} source={{ uri: article.imageLink }} />
+		// 			</View>
+		// 			<View style={eva.style.rightWrapper}>
+		// 				<View style={eva.style.headerWrapper}>
+		// 					<Text testID={'homeArticle' + index} style={eva.style.titleLabel} category="h6">
+		// 						{article.title}
+		// 					</Text>
+		// 				</View>
+		// 				<Text appearance="hint">{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}</Text>
+		// 			</View>
+		// 		</View>
+		// 		<ArticleActivityBar style={eva.style.activityBar}>
+		// 			<View style={eva.style.bottomRowView}>
+		// 				<View style={eva.style.activityBarContent}>
+		// 					<Avatar source={{ uri: article.source.logoLink }} size="tiny" />
+		// 					<View style={eva.style.articleSourceName}>
+		// 						<Text appearance="hint">{article.source.name}</Text>
+		// 					</View>
+		// 				</View>
+		// 				<View style={eva.style.activityBarContent}>
+		// 					{ClockIconOutline(eva.style.dateIcon)}
+		// 					<Text style={eva.style.dateLabel} appearance="hint" category="p2">
+		// 						{getRelativeTime(article.createdDate)}
+		// 					</Text>
+		// 				</View>
+		// 			</View>
+		// 			<IconButton 
+		// 				icon="dots-vertical"
+		// 				size={22}
+		// 				onPress={()=>onMoreIconPress(article)}
+		// 			/>
+		// 		</ArticleActivityBar>
+		// 	</View>
+		// </TouchableOpacity>
 	)
 }
 
