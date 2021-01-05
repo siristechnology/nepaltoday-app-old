@@ -15,30 +15,31 @@ const HeadlineItemComponent = React.memo((props) => {
 	}
 
 	return (
-		<TouchableOpacity 
-			testID="headline"
-			activeOpacity={0.8} 
-			{...restProps} 
-			style={[eva.style.container, style]} 
-			onPress={onPress}
-		>
-			<ImageBackground style={eva.style.imageContainer} imageStyle={eva.style.image} source={{ uri: article.imageLink }} />
-			<ArticleActivityBar style={eva.style.activityContainer}>
-				<ActivityAuthoring
-					photo={{ uri: article.source.logoLink }}
-					name={`${article.source.name}`}
-					date={getRelativeTime(article.createdDate)}
-				/>
-			</ArticleActivityBar>
-			<View style={eva.style.infoContainer}>
-				<Text style={eva.style.titleLabel} category="h5">
-					{article.title}
-				</Text>
-				<Text style={eva.style.descriptionLabel} appearance="hint" category="s1">
-					{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}
-				</Text>
-			</View>
-		</TouchableOpacity>
+		// <TouchableOpacity 
+		// 	testID="headline"
+		// 	activeOpacity={0.8} 
+		// 	{...restProps} 
+		// 	style={[eva.style.container, style]} 
+		// 	onPress={onPress}
+		// >
+		// 	<ImageBackground style={eva.style.imageContainer} imageStyle={eva.style.image} source={{ uri: article.imageLink }} />
+		// 	<ArticleActivityBar style={eva.style.activityContainer}>
+		// 		<ActivityAuthoring
+		// 			photo={{ uri: article.source.logoLink }}
+		// 			name={`${article.source.name}`}
+		// 			date={getRelativeTime(article.createdDate)}
+		// 		/>
+		// 	</ArticleActivityBar>
+		// 	<View style={eva.style.infoContainer}>
+		// 		<Text style={eva.style.titleLabel} category="h5">
+		// 			{article.title}
+		// 		</Text>
+		// 		<Text style={eva.style.descriptionLabel} appearance="hint" category="s1">
+		// 			{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}
+		// 		</Text>
+		// 	</View>
+		// </TouchableOpacity>
+		<Text testID="headline" >Shiva</Text>
 	)
 })
 
