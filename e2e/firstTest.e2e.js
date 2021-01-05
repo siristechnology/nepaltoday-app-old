@@ -18,6 +18,7 @@ describe('Example', () => {
 	})
 
 	it('should load article in home', async () => {
+		// await element(by.id('headline')).swipe('up', 'fast', 0.9);
 		await expect(element(by.text('Shiva1'))).toBeVisible()
 	})
 
