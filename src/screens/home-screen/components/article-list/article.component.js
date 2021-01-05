@@ -21,8 +21,10 @@ const ArticleListItemCompoent = (props) => {
 
 	const theme = useTheme()
 
+	console.log('homeArticle' + index)
+
 	return (
-		<View
+		<TouchableOpacity
 			testID={'homeArticle' + index}
 			onPress={onPress}
 			activeOpacity={0.8}
@@ -64,7 +66,7 @@ const ArticleListItemCompoent = (props) => {
 					/>
 				</ArticleActivityBar>
 			</View>
-		</View>
+		</TouchableOpacity>
 	)
 }
 

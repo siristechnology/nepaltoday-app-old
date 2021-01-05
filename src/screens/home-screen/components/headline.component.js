@@ -15,7 +15,13 @@ const HeadlineItemComponent = React.memo((props) => {
 	}
 
 	return (
-		<TouchableOpacity activeOpacity={0.8} {...restProps} style={[eva.style.container, style]} onPress={onPress}>
+		<View 
+			testID="headline"
+			activeOpacity={0.8} 
+			{...restProps} 
+			style={[eva.style.container, style]} 
+			onPress={onPress}
+		>
 			<ImageBackground style={eva.style.imageContainer} imageStyle={eva.style.image} source={{ uri: article.imageLink }} />
 			<ArticleActivityBar style={eva.style.activityContainer}>
 				<ActivityAuthoring
@@ -32,7 +38,7 @@ const HeadlineItemComponent = React.memo((props) => {
 					{article.shortDescription ? article.shortDescription.substring(0, 100) + '...' : ''}
 				</Text>
 			</View>
-		</TouchableOpacity>
+		</View>
 	)
 })
 
