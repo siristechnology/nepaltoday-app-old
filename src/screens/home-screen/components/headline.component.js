@@ -15,7 +15,12 @@ const HeadlineItemComponent = React.memo((props) => {
 	}
 
 	return (
-		<TouchableOpacity activeOpacity={0.8} {...restProps} style={[eva.style.container, style]} onPress={onPress}>
+		<TouchableOpacity
+			activeOpacity={0.8} 
+			{...restProps} 
+			style={[eva.style.container, style]} 
+			onPress={onPress}
+		>
 			<ImageBackground style={eva.style.imageContainer} imageStyle={eva.style.image} source={{ uri: article.imageLink }} />
 			<ArticleActivityBar style={eva.style.activityContainer}>
 				<ActivityAuthoring
@@ -25,7 +30,7 @@ const HeadlineItemComponent = React.memo((props) => {
 				/>
 			</ArticleActivityBar>
 			<View style={eva.style.infoContainer}>
-				<Text style={eva.style.titleLabel} category="h5">
+				<Text testID="headlineTitle" style={eva.style.titleLabel} category="h5">
 					{article.title}
 				</Text>
 				<Text style={eva.style.descriptionLabel} appearance="hint" category="s1">
