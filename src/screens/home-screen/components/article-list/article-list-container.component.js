@@ -78,8 +78,6 @@ export const ArticleListContainer = (props) => {
 
 	const theme = useTheme()
 
-	console.log("In container", articles.length)
-
 	return <View style={{backgroundColor: theme.colors.primary}}>
 		{((!articles || articles.length === 0) && 
 		<CircularSpinner />) || 
