@@ -75,8 +75,6 @@ const Home = ({ navigation }) => {
 
 	const dataArticles = (data && data.getArticles) || []
 
-	console.log("data articles here", dataArticles.length)
-
 	const homeArticles = (dataArticles.length && dataArticles) || localArticles.getArticles
 	const topHeadline = homeArticles.find((a) => a.category === 'headline') || homeArticles[0]
 	const headlineArticles = homeArticles.filter((x) => x.category == 'headline') || []
@@ -106,7 +104,7 @@ const Home = ({ navigation }) => {
 			</View>
 			<StoryHeadline
 				headlineArticles={headlineArticles}
-				onShowArticleDetail={(article, articles) => navigation.navigate('ArticleDetail', { article, articles })}
+				onShowArticleDetail={(article, articles) => navigation.navigate('ArticleDetail', { article, articles, fromPage: 'home' })}
 			/>
 			<TrendingTag
 				navigation={navigation}
