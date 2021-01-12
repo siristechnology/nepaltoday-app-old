@@ -12,18 +12,18 @@ interface State {
 }
 
 export default class ArticleDetailContainer extends React.PureComponent<any, State> {
-	
+
 	onPageSelected = (article) => {
 		saveReadArticles({timeStamp: Date.now(), articleId: article._id, category: article.category})
 	}
 
 	public render(): React.ReactNode {
 		const article = this.props.route.params.article
-		// const articles = this.props.route.params.articles || [article]
+		const articles = this.props.route.params.articles || [article]
 		const fromPage = this.props.route.params.fromPage
-		// const articleIndex = articles.indexOf(article)
-		// const slicedArticles = articles.slice((articleIndex - 5 > 0 && articleIndex - 5) || 0, articleIndex + 6)
-		const slicedArticles = [article]
+		const initialRoute = this.props.route.params.initialRoute
+		const articleIndex = articles.indexOf(article)
+		const slicedArticles = initialRoute=='ArticleDetail' && [article] || articles.slice((articleIndex - 5 > 0 && articleIndex - 5) || 0, articleIndex + 6)
 		return (
 			<ViewPager 
 				style={{ flex: 1 }} 
