@@ -23,7 +23,7 @@ const Container = ({ initialScreenName, initialParams, onModeChange, darkMode })
 			<Stack.Screen
 				name="ArticleDetail"
 				component={ArticleDetailScreen}
-				initialParams={initialParams}
+				initialParams={{...initialParams,initialRoute}}
 			/>
 			<Stack.Screen name="Article" component={ArticleWebviewComponent} />
 			<Stack.Screen
