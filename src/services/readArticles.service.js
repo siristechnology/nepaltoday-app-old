@@ -4,7 +4,13 @@ import crashlytics from '@react-native-firebase/crashlytics'
 
 class ReadArticleService{
     saveReadArticle = async (nid, articles) => {
-        articles = articles.map(article=>{ return {articleId: article.articleId, category: article.category}})
+        articles = articles.map(article=>{
+            return {
+                articleId: article.articleId, 
+                category: article.category,
+                createdDate: new Date()
+            }
+        })
         client
             .mutate({
                 mutation: SAVE_READ_ARTICLE,
