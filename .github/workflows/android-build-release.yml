@@ -43,12 +43,3 @@ jobs:
                   automatic_release_tag: 'latest'
                   title: 'Nepaltoday - Beta Build'
                   prerelease: false
-
-            - name: Publish Android Bundle to Google Play Store
-              uses: r0adkll/upload-google-play@v1
-              if: github.ref == 'refs/heads/master'
-              with:
-                  serviceAccountJsonPlainText: ${{ secrets.SERVICE_ACCOUNT_JSON_PLAIN_TEXT }}
-                  packageName: 'com.siristechnology.nepaltodayapp.beta'
-                  releaseFile: android/app/build/outputs/bundle/signedRelease/app-signed-release.aab
-                  track: production
