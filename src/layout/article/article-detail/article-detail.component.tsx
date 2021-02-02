@@ -1,5 +1,5 @@
 import React from 'react'
-import { ImageBackground, View, Share, BackHandler } from 'react-native'
+import { ImageBackground, View, Share } from 'react-native'
 import { ThemedComponentProps, ThemeType, withStyles } from '@ui-kitten/components/theme'
 import { Avatar, Text, Button } from '@ui-kitten/components'
 import AntDesign from 'react-native-vector-icons/AntDesign'
