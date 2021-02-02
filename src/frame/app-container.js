@@ -10,15 +10,15 @@ import TagArticleScreen from '../screens/tagArticle-screen/tagArticle.screen'
 
 const Stack = createStackNavigator()
 
-const Container = ({ initialScreenName, initialParams, onModeChange, darkMode }) => {
-	const initialRoute = initialScreenName === 'ArticleDetail' ? 'ArticleDetail' : 'Tab'
+const Container = ({ initialParams, onModeChange, darkMode, clicked, coronaNotif, article }) => {
+	const initialRoute = 'Tab'
 
 	return (
 		<Stack.Navigator initialRouteName={initialRoute} screenOptions={{ headerShown: false }}>
 			<Stack.Screen
 				name="Tab"
 				component={BottomTabScreen}
-				initialParams={{ initialScreenName }}
+				initialParams={{ clicked, coronaNotif, article }}
 			/>
 			<Stack.Screen
 				name="ArticleDetail"
