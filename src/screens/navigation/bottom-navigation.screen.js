@@ -17,7 +17,7 @@ export const BottomTabScreen = ({ route }) => {
 
 	return (
 		<Tab.Navigator
-			initialRouteName={route.params.initialScreenName}
+			initialRouteName="Home"
 			backBehavior="initialRoute"
 			shifting={false}
 			labeled={false}
@@ -27,6 +27,7 @@ export const BottomTabScreen = ({ route }) => {
 			barStyle={{ backgroundColor: theme.colors.surface, borderTopWidth: theme.borderWidth, borderTopColor: theme.colors.disabled }}
 		>
 			<Tab.Screen
+				initialParams={route}
 				name="Home"
 				component={HomeScreen}
 				options={{ tabBarIcon: ({ color }) => <MaterialCommunityIcons name="home-outline" size={25} color={color} /> }}

@@ -1,5 +1,5 @@
 import React from 'react'
-import { ImageBackground, View, Share, BackHandler } from 'react-native'
+import { ImageBackground, View, Share } from 'react-native'
 import { ThemedComponentProps, ThemeType, withStyles } from '@ui-kitten/components/theme'
 import { Avatar, Text, Button } from '@ui-kitten/components'
 import AntDesign from 'react-native-vector-icons/AntDesign'
@@ -20,23 +20,15 @@ export type ArticleDetailComponentProps = ThemedComponentProps & ComponentProps
 
 class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentProps> {
 
-	componentDidMount(){
-		this.backHandler = BackHandler.addEventListener('hardwareBackPress',()=>this.navigateBack(this.props.fromPage))
-	}
-
-	componentWillUnmount(){
-        this.backHandler.remove()
-    }
-
 	public render(): React.ReactNode {
-		const { eva, article, index, fromPage } = this.props
+		const { eva, article, index } = this.props
 		const { READ_MORE } = np.public
 		const BackIcon = (
 			<AntDesign
 				name="back"
 				size={24}
 				color="grey"
-				onPress={()=>this.navigateBack(fromPage)}
+				onPress={this.navigateBack}
 				style={{
 					padding: 8,
 				}}
@@ -117,15 +109,8 @@ class ArticleDetailComponent extends React.PureComponent<ArticleDetailComponentP
 		)
 	}
 
-	private navigateBack = (fromPage) => {
-		if(fromPage && fromPage=='category'){
-			this.props.navigation.navigate('Tab', {screen: 'Headline'})
-		}else if(fromPage && fromPage=='default'){
-			this.props.navigation.goBack()
-		}else{
-			this.props.navigation.navigate('Tab')
-		}
-		return true
+	private navigateBack = () => {
+		this.props.navigation.goBack()
 	}
 
 	private shareButtonClick = () => {

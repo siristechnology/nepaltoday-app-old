@@ -49,13 +49,14 @@ const App = (props) => {
 	}
 
 	const loadAppContainer = (article, clicked, coronaNotif) => {
-		if (clicked && article._id) {
-			return <AppContainer initialScreenName="ArticleDetail" initialParams={{ article }} />
-		} else if (clicked && coronaNotif) {
-			return <AppContainer initialScreenName="Corona" />
-		} else {
-			return <AppContainer onModeChange={props.onModeChange} darkMode={props.darkMode} />
-		}
+		return <AppContainer 
+			onModeChange={props.onModeChange}
+			darkMode={props.darkMode}
+			initialParams={{ article }}
+			article={article}
+			clicked={clicked}
+			coronaNotif={coronaNotif}
+		/> 
 	}
 
 	useEffect(() => {

@@ -17,7 +17,7 @@ import NepaliEvent from './components/nepaliEvent.component'
 import { Text, IconButton, useTheme } from 'react-native-paper'
 import TrendingTag from './components/trendingTag.component'
 
-const Home = ({ navigation }) => {
+const Home = (props) => {
 	const [nepaliDate, setNepaliDate] = useState('')
 	const [refreshing, setRefreshing] = useState(false)
 	const [localArticles, setLocalArticles] = useState({ getArticles: [] })
@@ -59,6 +59,13 @@ const Home = ({ navigation }) => {
 		})
 		fetchArticlesFromAsyncStorage().then(() => {
 			fetchNews()
+		}).then(() => {
+			const { coronaNotif, article } = props.route.params.params
+			if(coronaNotif){
+				props.navigation.navigate('Tab', { screen: 'Corona'})
+			}else if(article && article.source){
+				props.navigation.navigate('ArticleDetail', {article, articles: [article]})
+			}
 		})
 	}, [fetchNews])
 
@@ -98,21 +105,21 @@ const Home = ({ navigation }) => {
 						icon="dots-vertical"
 						size={22}
 						color={theme.colors.secondary}
-						onPress={()=>navigation.navigate('Settings')}
+						onPress={()=>props.navigation.navigate('Settings')}
 					/>
 				</View>
 			</View>
 			<StoryHeadline
 				headlineArticles={headlineArticles}
-				onShowArticleDetail={(article, articles) => navigation.navigate('ArticleDetail', { article, articles, fromPage: 'home' })}
+				onShowArticleDetail={(article, articles) => props.navigation.navigate('ArticleDetail', { article, articles })}
 			/>
 			<TrendingTag
-				navigation={navigation}
+				navigation={props.navigation}
 			/>
 			<HeadlineComponent
 				article={topHeadline}
 				style={[style.headline,{borderBottomColor: theme.colors.lightBackground}]}
-				onPress={() => navigation.navigate('ArticleDetail', { article: topHeadline, articles: homeArticles })}
+				onPress={() => props.navigation.navigate('ArticleDetail', { article: topHeadline, articles: homeArticles })}
 			/>
 		</View>
 	)
@@ -121,7 +128,7 @@ const Home = ({ navigation }) => {
 		<AppLayout>
 			<ArticleListContainer
 				headerComponent={headerComponent}
-				navigation={navigation}
+				navigation={props.navigation}
 				articles={topNews}
 				refreshing={refreshing}
 				handleRefresh={handleRefresh}
