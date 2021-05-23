@@ -9,15 +9,15 @@ jobs:
     build:
         runs-on: macos-latest
         env:
-          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+            ACTIONS_ALLOW_UNSECURE_COMMANDS: true
         steps:
             - uses: actions/checkout@v1
-            
+
             - name: Use specific Java version for sdkmanager to work
               uses: joschi/setup-jdk@v1
               with:
-                java-version: 'openjdk8'
-                architecture: 'x64'
+                  java-version: 'openjdk8'
+                  architecture: 'x64'
 
             - name: Use Node.js 14.11.0
               uses: actions/setup-node@v1
