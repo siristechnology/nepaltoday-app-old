@@ -7,10 +7,11 @@ import { getNepaliDate } from '../../../helper/dateFormatter'
 import { useTheme, Text } from 'react-native-paper'
 
 const NepaliEvent = () => {
-    
-    const FETCH_NEPALI_EVENT = gql`
+	const nepaliDate = getNepaliDate()
+
+	const FETCH_NEPALI_EVENT = gql`
         query getNepaliEvent {
-            getNepaliEvent(date:"${getNepaliDate()}"){
+            getNepaliEvent(date:"${nepaliDate}"){
                 isHoliday
                 tithi
                 event
@@ -24,6 +25,7 @@ const NepaliEvent = () => {
 	const { loading, data, error } = useQuery(FETCH_NEPALI_EVENT, {
 		variables: {},
 	})
+	console.log('printing loading, data, error:   ', loading, data, error)
 
 	if (error) {
 		crashlytics().recordError(new Error('nepali event Api error' + error.message))
@@ -33,13 +35,14 @@ const NepaliEvent = () => {
 
 	if (!loading && !error && !!data.getNepaliEvent) {
 		let { isHoliday, tithi, event } = data.getNepaliEvent
-		if (!tithi) return null 
+		if (!tithi) return null
 
 		return (
 			<View testID="nepaliEventComponent" style={styles.containerStyle}>
-				<Text style={[styles.eventTextStyle,{ color: isHoliday && '#e57373' || theme.colors.secondary}]}>
-                    {event!='--' && (event+', ') || ''}{tithi}
-                </Text>
+				<Text style={[styles.eventTextStyle, { color: (isHoliday && '#e57373') || theme.colors.secondary }]}>
+					{(event != '--' && event + ', ') || ''}
+					{tithi}
+				</Text>
 			</View>
 		)
 	} else {
@@ -50,14 +53,14 @@ const NepaliEvent = () => {
 const styles = StyleSheet.create({
 	containerStyle: {
 		display: 'flex',
-        marginLeft: 3
+		marginLeft: 3,
 	},
 	eventTextStyle: {
 		fontSize: 12,
-    },
-    tithiTextStyle: {
-        fontSize: 12,
-    }
+	},
+	tithiTextStyle: {
+		fontSize: 12,
+	},
 })
 
 export default NepaliEvent

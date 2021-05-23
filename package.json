@@ -6,6 +6,7 @@
 		"android": "react-native run-android --variant unsigneddebug",
 		"ios": "react-native run-ios",
 		"start": "react-native start",
+		"start:fresh": "react-native start --reset-cache",
 		"log:android": "react-native log-android",
 		"refresh": "adb shell input keyevent 46 46",
 		"reset": "react-native start --reset-cache",
