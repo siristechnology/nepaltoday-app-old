@@ -23,7 +23,7 @@ jobs:
 
             - name: Yarn Install, Build, (Test)
               run: |
-                  sh prepare_beta.sh
+                  sh prepare_qa.sh
                   yarn install --frozen-lockfile
                   yarn build
                   yarn bundle
