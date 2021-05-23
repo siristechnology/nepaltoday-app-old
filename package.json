@@ -59,7 +59,7 @@
 		"react-native-swiper": "^1.6.0",
 		"react-native-track-player": "^1.2.3",
 		"react-native-vector-icons": "^7.1.0",
-		"react-native-webview": "^10.10.2",
+		"react-native-webview": "^11.0.0",
 		"react-redux": "^7.2.2",
 		"redux": "^4.0.5",
 		"redux-logger": "^3.0.6",
