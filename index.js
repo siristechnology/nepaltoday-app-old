@@ -5,7 +5,6 @@ import {
 	DefaultTheme as PaperDefaultTheme,
 	DarkTheme as PaperDarkTheme,
 } from 'react-native-paper'
-import { AppearanceProvider } from 'react-native-appearance'
 import {
 	NavigationContainer,
 	DarkTheme as NavigationDarkTheme,
@@ -44,47 +43,45 @@ export const ApolloApp = () => {
 
 	return (
 		<SafeAreaProvider>
-			<AppearanceProvider>
-				<ApplicationProvider
-					{...eva}
-					theme={(darkMode && { ...eva.dark, 'background-basic-color-1': '#121212' }) || eva.light}
-				>
-					<NavigationContainer theme={(darkMode && NavigationDarkTheme) || NavigationDefaultTheme}>
-						<PaperProvider
-							theme={
-								(darkMode && {
-									...PaperDarkTheme,
-									dark: true,
-									borderWidth: 0.2,
-									colors: {
-										...PaperDarkTheme.colors,
-										primary: '#121212',
-										secondary: '#F5F5F5',
-										header: '#424242',
-										divider: '#616161',
-										lightBackground: '#212121',
-									},
-								}) || {
-									...PaperDefaultTheme,
-									borderWidth: 0.2,
-									colors: {
-										...PaperDefaultTheme.colors,
-										primary: '#fcfcfc',
-										secondary: '#212121',
-										header: '#EEEEEE',
-										divider: '#EEEEEE',
-										lightBackground: '#F5F5F5',
-									},
-								}
+			<ApplicationProvider
+				{...eva}
+				theme={(darkMode && { ...eva.dark, 'background-basic-color-1': '#121212' }) || eva.light}
+			>
+				<NavigationContainer theme={(darkMode && NavigationDarkTheme) || NavigationDefaultTheme}>
+					<PaperProvider
+						theme={
+							(darkMode && {
+								...PaperDarkTheme,
+								dark: true,
+								borderWidth: 0.2,
+								colors: {
+									...PaperDarkTheme.colors,
+									primary: '#121212',
+									secondary: '#F5F5F5',
+									header: '#424242',
+									divider: '#616161',
+									lightBackground: '#212121',
+								},
+							}) || {
+								...PaperDefaultTheme,
+								borderWidth: 0.2,
+								colors: {
+									...PaperDefaultTheme.colors,
+									primary: '#fcfcfc',
+									secondary: '#212121',
+									header: '#EEEEEE',
+									divider: '#EEEEEE',
+									lightBackground: '#F5F5F5',
+								},
 							}
-						>
-							<ApolloProvider client={GraphqlClient}>
-								<App onModeChange={(mode) => onModeChange(mode)} darkMode={darkMode} />
-							</ApolloProvider>
-						</PaperProvider>
-					</NavigationContainer>
-				</ApplicationProvider>
-			</AppearanceProvider>
+						}
+					>
+						<ApolloProvider client={GraphqlClient}>
+							<App onModeChange={(mode) => onModeChange(mode)} darkMode={darkMode} />
+						</ApolloProvider>
+					</PaperProvider>
+				</NavigationContainer>
+			</ApplicationProvider>
 		</SafeAreaProvider>
 	)
 }

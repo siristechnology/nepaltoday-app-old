@@ -25,8 +25,3 @@ jest.mock('@react-native-firebase/crashlytics', () => {
 jest.mock('@react-native-community/netinfo', () => ({
     fetch: jest.fn()
 }))
-
-jest.mock('react-native-appearance', () => ({
-	theme: jest.fn(),
-	AppearanceProvider: jest.fn(),
-}))
