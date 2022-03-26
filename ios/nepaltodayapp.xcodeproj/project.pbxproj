@@ -43,7 +43,7 @@
 		00E356EE1AD99517003FC87E /* nepaltodayappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = nepaltodayappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* nepaltodayappTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = nepaltodayappTests.m; sourceTree = "<group>"; };
-		05EDB1853DAB49019BFE61FA /* opensans-semibold-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-semibold-italic.ttf"; path = "../src/assets/fonts/opensans-semibold-italic.ttf"; sourceTree = "<group>"; };
+		05EDB1853DAB49019BFE61FA /* opensans-semibold-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-semibold-italic.ttf"; path = "../src/assets/fonts/opensans-semibold-italic.ttf"; sourceTree = "<group>"; };
 		08EB3461311E1251A4031EE1 /* Pods-nepaltodayapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nepaltodayapp.release.xcconfig"; path = "Target Support Files/Pods-nepaltodayapp/Pods-nepaltodayapp.release.xcconfig"; sourceTree = "<group>"; };
 		0B8C6FBF388B770D69B689DE /* Pods-nepaltodayapp-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nepaltodayapp-tvOS.release.xcconfig"; path = "Target Support Files/Pods-nepaltodayapp-tvOS/Pods-nepaltodayapp-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		0BFDCFC4B5C1032B93A83EF4 /* Pods-nepaltodayapp-nepaltodayappTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nepaltodayapp-nepaltodayappTests.debug.xcconfig"; path = "Target Support Files/Pods-nepaltodayapp-nepaltodayappTests/Pods-nepaltodayapp-nepaltodayappTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -54,10 +54,10 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = nepaltodayapp/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = nepaltodayapp/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = nepaltodayapp/main.m; sourceTree = "<group>"; };
-		191EEE31166E4AFDAFF3E296 /* opensans-semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-semibold.ttf"; path = "../src/assets/fonts/opensans-semibold.ttf"; sourceTree = "<group>"; };
+		191EEE31166E4AFDAFF3E296 /* opensans-semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-semibold.ttf"; path = "../src/assets/fonts/opensans-semibold.ttf"; sourceTree = "<group>"; };
 		4464682614FDD7A7833350FE /* libPods-nepaltodayapp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nepaltodayapp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		49F7A49DCACC4322AA1CCCCB /* opensans-light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-light.ttf"; path = "../src/assets/fonts/opensans-light.ttf"; sourceTree = "<group>"; };
-		59B40D42F9784AD086594B0A /* opensans-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-italic.ttf"; path = "../src/assets/fonts/opensans-italic.ttf"; sourceTree = "<group>"; };
+		49F7A49DCACC4322AA1CCCCB /* opensans-light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-light.ttf"; path = "../src/assets/fonts/opensans-light.ttf"; sourceTree = "<group>"; };
+		59B40D42F9784AD086594B0A /* opensans-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-italic.ttf"; path = "../src/assets/fonts/opensans-italic.ttf"; sourceTree = "<group>"; };
 		5A52E501667F9CA2AFE7E419 /* libPods-nepaltodayapp-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nepaltodayapp-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C3D308B25695DA300BED51D /* nepaltodayapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "nepaltodayapp-Bridging-Header.h"; sourceTree = "<group>"; };
 		5C3D309425695F8A00BED51D /* Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empty.swift; sourceTree = "<group>"; };
@@ -66,14 +66,14 @@
 		80EB291AD7A7D2B57AAF0055 /* Pods-nepaltodayapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nepaltodayapp.debug.xcconfig"; path = "Target Support Files/Pods-nepaltodayapp/Pods-nepaltodayapp.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = nepaltodayapp/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		914314D040156E7011711634 /* Pods-nepaltodayapp-nepaltodayappTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nepaltodayapp-nepaltodayappTests.release.xcconfig"; path = "Target Support Files/Pods-nepaltodayapp-nepaltodayappTests/Pods-nepaltodayapp-nepaltodayappTests.release.xcconfig"; sourceTree = "<group>"; };
-		91E4C25A070B424191D8303F /* opensans-bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-bold.ttf"; path = "../src/assets/fonts/opensans-bold.ttf"; sourceTree = "<group>"; };
+		91E4C25A070B424191D8303F /* opensans-bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-bold.ttf"; path = "../src/assets/fonts/opensans-bold.ttf"; sourceTree = "<group>"; };
 		97E308D258934DB4209C0664 /* Pods-nepaltodayapp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nepaltodayapp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-nepaltodayapp-tvOSTests/Pods-nepaltodayapp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
-		9DDCC313C63B464499C60C7D /* opensans-extra-bold-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-extra-bold-italic.ttf"; path = "../src/assets/fonts/opensans-extra-bold-italic.ttf"; sourceTree = "<group>"; };
-		A59A3F8552BA419C9DA88D9A /* opensans-bold-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-bold-italic.ttf"; path = "../src/assets/fonts/opensans-bold-italic.ttf"; sourceTree = "<group>"; };
-		BC2157D0BEB447DAB5084044 /* opensans-regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-regular.ttf"; path = "../src/assets/fonts/opensans-regular.ttf"; sourceTree = "<group>"; };
+		9DDCC313C63B464499C60C7D /* opensans-extra-bold-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-extra-bold-italic.ttf"; path = "../src/assets/fonts/opensans-extra-bold-italic.ttf"; sourceTree = "<group>"; };
+		A59A3F8552BA419C9DA88D9A /* opensans-bold-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-bold-italic.ttf"; path = "../src/assets/fonts/opensans-bold-italic.ttf"; sourceTree = "<group>"; };
+		BC2157D0BEB447DAB5084044 /* opensans-regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-regular.ttf"; path = "../src/assets/fonts/opensans-regular.ttf"; sourceTree = "<group>"; };
 		BD25873B42996221FC6B42C8 /* Pods-nepaltodayapp-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-nepaltodayapp-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-nepaltodayapp-tvOSTests/Pods-nepaltodayapp-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C33885DF5FBF4661B9DC246D /* opensans-lignt-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-lignt-italic.ttf"; path = "../src/assets/fonts/opensans-lignt-italic.ttf"; sourceTree = "<group>"; };
-		E07567E36B444EC3B4D152FA /* opensans-extra-bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-extra-bold.ttf"; path = "../src/assets/fonts/opensans-extra-bold.ttf"; sourceTree = "<group>"; };
+		C33885DF5FBF4661B9DC246D /* opensans-lignt-italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-lignt-italic.ttf"; path = "../src/assets/fonts/opensans-lignt-italic.ttf"; sourceTree = "<group>"; };
+		E07567E36B444EC3B4D152FA /* opensans-extra-bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "opensans-extra-bold.ttf"; path = "../src/assets/fonts/opensans-extra-bold.ttf"; sourceTree = "<group>"; };
 		E2C2546EA4531FD761E7CC81 /* libPods-nepaltodayapp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-nepaltodayapp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
@@ -262,7 +262,7 @@
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1210;
+				LastUpgradeCheck = 1330;
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
@@ -695,7 +695,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
@@ -749,7 +749,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "/usr/lib/swift $(inherited)";
 				LIBRARY_SEARCH_PATHS = (
 					"\"$(TOOLCHAIN_DIR)/usr/lib/swift/$(PLATFORM_NAME)\"",
@@ -758,6 +758,7 @@
 				);
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
