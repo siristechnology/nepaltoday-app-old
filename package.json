@@ -42,7 +42,7 @@
 		"graphql": "^15.4.0",
 		"graphql-tag": "^2.10.3",
 		"moment": "^2.29.1",
-		"native-base": "Healthyco/NativeBase#feature/fix-request-animation",
+		"native-base": "^2.15.2",
 		"node-fetch": "^2.6.0",
 		"react": "^17.0.1",
 		"react-native": "0.63.3",
